@@ -1,25 +1,35 @@
 ## 第三章 jQuery中的DOM操作
  - 查找`DOM`节点
- ```javascript
- var $li = $('ul li:eq(1)'); //获取<ul>里的第二个<li>节点
- ```
+
+    ```javascript
+    var $li = $('ul li:eq(1)'); //获取<ul>里的第二个<li>节点
+    ```
+
  - 查找属性节点
- ```javascript
- var $para = $('p'); 
- var p_txt = $para.attr('title');
- ```
+
+    ```javascript
+    var $para = $('p'); 
+    var p_txt = $para.attr('title');
+    ```
+
  - 创建元素节点
- ```javascript
- var $li = $('<li></li>');
- ```
+
+    ```javascript
+    var $li = $('<li></li>');
+    ```
+
  - 创建文本节点
- ```javascript
- var $li = $('<li>香蕉</li>');
- ```
+
+    ```javascript
+    var $li = $('<li>香蕉</li>');
+    ```
+
  - 创建属性节点
- ```javascript
- var $li = $('<li title="香蕉">香蕉</li>');
- ```
+
+    ```javascript
+    var $li = $('<li title="香蕉">香蕉</li>');
+    ```
+    
  - 插入节点的方法
     - append 追加元素。$('p').append($("&lt;b>你好&lt;/b>"))，A.append(B)之后，A和B是父子关系。
     - appendTo 跟append相反，A.append(B) 相当于 B.appendTo(A)
