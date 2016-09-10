@@ -9,6 +9,8 @@ title: 锋利的jQeury 第四章-笔记
 - $(window).load(function(){})可以调用多次，都会执行，而window.onload只会调用最后一次赋予的函数。
 - $(document).ready(function() {})可以简写为$(function() {});
 
+<!--more-->
+
 ### 事件绑定 
 - bind(type [, data], fn);第1个参数是事件类型，包括focus、load、click、dbclik等。，第2个参数可选，作为event.data传递，第3个参数是回调函数。示例：
 ```javascript

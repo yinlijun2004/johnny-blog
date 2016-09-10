@@ -9,6 +9,8 @@ title: 锋利的jQeury 第三章-笔记
     var $li = $('ul li:eq(1)'); //获取<ul>里的第二个<li>节点
     ```
 
+<!--more-->
+
  - 查找属性节点
 
     ```javascript

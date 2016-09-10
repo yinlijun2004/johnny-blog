@@ -12,6 +12,8 @@ title: 锋利的jQeury 第二章-笔记
 - `*` 匹配所有元素, `$('*')`
 - `selector1, select2,...,selectN` 匹配集合，如$('div, span, p.myClass')
 
+<!--more-->
+
 ### 层次选择器
 
 - `$('ancestor decendant')` 选择后代元素
