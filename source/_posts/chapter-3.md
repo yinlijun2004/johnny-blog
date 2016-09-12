@@ -15,6 +15,7 @@ title: 锋利的jQeury 第三章-笔记
     var $para = $('p'); 
     var p_txt = $para.attr('title');
     ```
+<!--more-->
 
  - 创建元素节点
 
