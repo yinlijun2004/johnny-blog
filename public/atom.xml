@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-09-12T05:28:18.605Z</updated>
+  <updated>2016-09-13T06:30:13.344Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,165 +16,24 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>高性能Javscript - 笔记</title>
-    <link href="http://yoursite.com/2016/09/12/High-Performance-Javascript/"/>
-    <id>http://yoursite.com/2016/09/12/High-Performance-Javascript/</id>
-    <published>2016-09-12T05:28:18.605Z</published>
-    <updated>2016-09-12T05:28:18.605Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h2><h3 id="减少Javascript加载对性能的影响"><a href="#减少Javascript加载对性能的影响" class="headerlink" title="减少Javascript加载对性能的影响"></a>减少Javascript加载对性能的影响</h3><ul>
-<li>&lt;/body&gt;闭合标签之前，将所有&lt;javascript&gt;标签放到页面底部。这能确保在脚本执行前页面已经完成了渲染</li>
-<li>合并脚本，减少&lt;javascript&gt;标签</li>
-<li>使用&lt;javascript&gt;标签的defer属性<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">'text/javascript'</span> src=<span class="string">'file1.js'</span> defer&gt;&lt;/script&gt;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<a id="more"></a>
-<ul>
-<li><p>利用动态创建的&lt;javascript&gt;元素来下载并执行代码</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> script = <span class="built_in">document</span>.createElemnet(<span class="string">'script'</span>);</div><div class="line">script.type = <span class="string">'text/javascript'</span>;</div><div class="line">script.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    alert(<span class="string">'Script loaded!'</span>);</div><div class="line">&#125;</div><div class="line">script.src = <span class="string">'file1.js'</span>;</div><div class="line"><span class="built_in">document</span>.getElementByTagName(<span class="string">'head'</span>)[<span class="number">0</span>].appendChild(script);</div></pre></td></tr></table></figure>
-</li>
-<li><p>使用XHR对象下载Javascript代码并注入页面中</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">xhr.open(<span class="string">'get'</span>, <span class="string">'file1.js'</span>, <span class="literal">true</span>);</div><div class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span>(xhr.readyState == <span class="number">4</span>) &#123;</div><div class="line">        <span class="keyword">if</span>(xhr.status &gt;= <span class="number">200</span> &amp;&amp; xhr.status &lt; <span class="number">300</span> || xhr.status === <span class="number">304</span>) &#123;</div><div class="line">            <span class="keyword">var</span> script = <span class="built_in">document</span>.createElemnet(<span class="string">'script'</span>);</div><div class="line">            script.type = <span class="string">'text/javascript'</span>;</div><div class="line">            script.text = xhr.responseText;</div><div class="line">            <span class="built_in">document</span>.body.appendChild(script);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="几种类库加载js的方式"><a href="#几种类库加载js的方式" class="headerlink" title="几种类库加载js的方式"></a>几种类库加载js的方式</h3><ul>
-<li><p>YUI3</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">'text/javascript'</span> src=<span class="string">'http://yui.yahooapis.com/combo?3.0.0/build/yui/yui-min.js'</span>&gt;&lt;/script&gt;</div><div class="line">&lt;script type=<span class="string">'text/javascript'</span>&gt;</div><div class="line">    YUI().use(<span class="string">'dom'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">Y</span>) </span>&#123;</div><div class="line">        Y.DOM.addClass(<span class="built_in">document</span>.body, <span class="string">'loaded'</span>);</div><div class="line">    &#125;)</div><div class="line">&lt;<span class="regexp">/script&gt;</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>LazyLoad</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">'text/javascript'</span> src=<span class="string">'lazyload-min.js'</span>&gt;&lt;/script&gt;</div><div class="line">&lt;script type=<span class="string">'text/javascript'</span>&gt;</div><div class="line">    LazyLoad.js(<span class="string">'the-rest.js'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        Applicationn.init();</div><div class="line">    &#125;)</div><div class="line">&lt;<span class="regexp">/script&gt;</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>LABjs</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">'text/javascript'</span> src=<span class="string">'lab.js'</span>&gt;&lt;/script&gt;</div><div class="line">&lt;script type=<span class="string">'text/javascript'</span>&gt; </div><div class="line">    $LAB.script(<span class="string">'first-file.js'</span>)</div><div class="line">        .wait()</div><div class="line">        .script(<span class="string">'the-rest.js'</span>)</div><div class="line">        .wait(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            Applicationn.init();</div><div class="line">        &#125;)</div></pre></td></tr></table></figure></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;第一章&quot;&gt;&lt;a href=&quot;#第一章&quot; class=&quot;headerlink&quot; title=&quot;第一章&quot;&gt;&lt;/a&gt;第一章&lt;/h2&gt;&lt;h3 id=&quot;减少Javascript加载对性能的影响&quot;&gt;&lt;a href=&quot;#减少Javascript加载对性能的影响&quot; class=&quot;headerlink&quot; title=&quot;减少Javascript加载对性能的影响&quot;&gt;&lt;/a&gt;减少Javascript加载对性能的影响&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&amp;lt;/body&amp;gt;闭合标签之前，将所有&amp;lt;javascript&amp;gt;标签放到页面底部。这能确保在脚本执行前页面已经完成了渲染&lt;/li&gt;
-&lt;li&gt;合并脚本，减少&amp;lt;javascript&amp;gt;标签&lt;/li&gt;
-&lt;li&gt;使用&amp;lt;javascript&amp;gt;标签的defer属性&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;script type=&lt;span class=&quot;string&quot;&gt;&#39;text/javascript&#39;&lt;/span&gt; src=&lt;span class=&quot;string&quot;&gt;&#39;file1.js&#39;&lt;/span&gt; defer&amp;gt;&amp;lt;/script&amp;gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>锋利的jQeury 第二章-笔记</title>
-    <link href="http://yoursite.com/2016/09/12/chapter-2/"/>
-    <id>http://yoursite.com/2016/09/12/chapter-2/</id>
-    <published>2016-09-12T02:13:38.890Z</published>
-    <updated>2016-09-12T02:13:38.890Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="第二章-jQuery选择器"><a href="#第二章-jQuery选择器" class="headerlink" title="第二章 jQuery选择器"></a>第二章 jQuery选择器</h2><h3 id="基本选择器"><a href="#基本选择器" class="headerlink" title="基本选择器"></a>基本选择器</h3><ul>
-<li><code>#id</code> 匹配id,  <code>$(&#39;#test&#39;)</code></li>
-<li><code>.class</code> 匹配类, <code>$(&#39;.test&#39;)</code></li>
-<li><code>element</code> 匹配标签, <code>$(&#39;div&#39;)</code></li>
-<li><code>*</code> 匹配所有元素, <code>$(&#39;*&#39;)</code></li>
-<li><code>selector1, select2,...,selectN</code> 匹配集合，如$(‘div, span, p.myClass’)</li>
-</ul>
-<a id="more"></a>
-<h3 id="层次选择器"><a href="#层次选择器" class="headerlink" title="层次选择器"></a>层次选择器</h3><ul>
-<li><code>$(&#39;ancestor decendant&#39;)</code> 选择后代元素</li>
-<li><code>$(&#39;parent &gt; child&#39;)</code> 选择子元素</li>
-<li><code>$(&#39;prev + next&#39;)</code> 选择紧接在<code>prev</code>后的<code>next</code>元素，如: <code>$(&#39;.one + div&#39;)</code>，选择<code>one</code>之后的下个一个<code>div</code>同辈元素</li>
-<li><code>$(&#39;prev ~ siblings&#39;)</code> 选择prev后的所有siblings元素，如<code>$(&#39;#two ~ div&#39;)</code>选择<code>two</code>之后的所有<code>div</code>同辈元素</li>
-</ul>
-<h3 id="过滤选择器"><a href="#过滤选择器" class="headerlink" title="过滤选择器"></a>过滤选择器</h3><ul>
-<li><code>:first</code> 选取第一个元素，它只返回一个元素。 如<code>$(&#39;div:first&#39;)</code>选取第一个div元素。</li>
-<li><code>:last</code> 选取最后一个元素，它只返回一个元素。</li>
-<li><code>:not(selector)</code> 取出所有给定选择器匹配的元素，如<code>$(&#39;input:not(.myClass)&#39;)</code>,选取<code>class</code>不是<code>myClass</code>的<code>input</code>元素</li>
-<li><code>:even</code> 选取索引为偶数的元素，索引从<strong>0</strong>开始</li>
-<li><code>:odd</code> 选取奇数索引元素</li>
-<li><code>:eq(index)</code> 选取指定索引元素</li>
-<li><code>:gt(index)</code> 选取大于索引的元素</li>
-<li><code>:lt(index)</code> 选取小于索引的元素</li>
-<li><code>:header</code> 选取所有标题元素 如<code>$(&#39;:header&#39;)</code>，选取网页中所有<code>&amp;lt;h1&gt;,&amp;lt;h2&gt;,&amp;lt;h3&gt;;....</code></li>
-<li><code>:animated</code> 选取所有正在执行动画的元素 如：<code>$(&#39;div:animated&#39;)</code>选取正在执行动画的所有<code>div</code>元素</li>
-<li><code>:focus</code> 选取当前获取焦点的元素 如<code>$(&#39;:focus&#39;)</code>，获取当前获取焦点的元素</li>
-</ul>
-<h3 id="内容过滤选择器"><a href="#内容过滤选择器" class="headerlink" title="内容过滤选择器"></a>内容过滤选择器</h3><ul>
-<li><code>:contains(text)</code> 选取文本内容含有text的元素, 如<code>$(&#39;div:contains(&quot;我&quot;)&#39;)</code>,选取文本含有<code>我</code>的<code>div</code>元素</li>
-<li><code>:empty</code> 选取不包含子元素或者文本为空的元素, 如<code>$(&#39;div:empty&#39;)</code>选取不包含子元素的<code>div</code>元素</li>
-<li><code>:has(selector)</code> 选取含有选择器的所匹配的元素的元素，如<code>$(&#39;div:has(p)&#39;)</code>，选取含有<code>p</code>元素的<code>div</code>元素</li>
-<li><code>:parent</code> 选取含有子元素或文本的元素 如<code>$(&#39;div:parent&#39;)</code>,选取拥有子元素的<code>div</code>元素</li>
-</ul>
-<h3 id="可见性过滤器"><a href="#可见性过滤器" class="headerlink" title="可见性过滤器"></a>可见性过滤器</h3><ul>
-<li><code>:hidden</code> 选取所有不可见元素, 如<code>$(&#39;:hidden&#39;)</code>, 选取所有不可见元素，<code>$(&#39;input:hidden&#39;)</code>选取所有不可见的input元素</li>
-<li><code>:visible</code> 选取所有可见元素</li>
-</ul>
-<h3 id="属性过滤选择器"><a href="#属性过滤选择器" class="headerlink" title="属性过滤选择器"></a>属性过滤选择器</h3><ul>
-<li><code>[attr]</code> 选取拥有此属性的元素, 如<code>$(&#39;div[id]&#39;)</code>, 选取拥有属性<code>id</code>的元素</li>
-<li><code>[attr=val]</code> 选取<code>attr</code>属性为<code>val</code>的元素如, <code>$(&#39;div[title=test]&#39;)</code>选取<code>title</code>为<code>test</code>的<code>div</code>元素</li>
-<li><code>[attr!=val]</code> 选取<code>attr</code>的值不为<code>val</code>的元素</li>
-<li><code>[attr^=val]</code> 选取<code>attr</code>的值以<code>val</code>开始的元素</li>
-<li><code>[attr$=val]</code> 选取<code>attr</code>的值以<code>val</code>结束的元素</li>
-<li><code>[attr*=val]</code> 选取<code>attr</code>的值包含<code>val</code>的元素</li>
-<li><code>[attr|=val]</code> 选取<code>attr</code>的值为<code>val</code>或以<code>val-</code>开始的元素</li>
-<li><code>[attr~=val]</code> 选取<code>attr</code>的值包含<code>&#39; val&#39;</code>的元素（注意val前面要有空格）</li>
-<li><code>[attr1][attr2][attrN]</code> 选取同时满足几个条件的元素，如<code>$(&#39;div[id][title$=&quot;test&quot;]&#39;)</code>，选取拥有属性id，并且属性title以test结束的div元素</li>
-</ul>
-<h3 id="子元素过滤选择器"><a href="#子元素过滤选择器" class="headerlink" title="子元素过滤选择器"></a>子元素过滤选择器</h3><ul>
-<li><code>:nth-child(index/even/odd/equation)</code> 选取每个父元素下的第<code>index</code>个或者奇偶子元素</li>
-<li><code>:first-child</code> 选取每个父元素的第一个子元素，如<code>$(&#39;ul li:first-child&#39;)</code>, 选择ul的第一个li元素</li>
-<li><code>:last-child</code> 选取每个父元素的子元素</li>
-<li><code>:only-child</code> 如果父控件一个子元素，那么匹配到，否则不被匹配。<code>$(&#39;ul li:only-child&#39;)</code>返回只有一个子元素且为li的li元素</li>
-</ul>
-<h3 id="表单对象属性过滤选择器"><a href="#表单对象属性过滤选择器" class="headerlink" title="表单对象属性过滤选择器"></a>表单对象属性过滤选择器</h3><ul>
-<li><code>:enabled</code> 选取所有可用元素。<code>$(&#39;#form1 :enabled&#39;)</code>,选取<code>id</code>为<code>form1</code>的表单内的所有可用元素。</li>
-<li><code>:disbaled</code> 选取所有不可用元素。</li>
-<li><code>:checked</code> 选取所有被选中元素(单选框，复选框)。<code>$(&#39;input:checked&#39;)</code>,选取所有被选中的<code>input</code>元素</li>
-<li><code>:selected</code> 选取所有被选中的选项元素（下拉列表）。<code>$(&#39;select option:seleted&#39;)</code></li>
-</ul>
-<h3 id="表单选择器"><a href="#表单选择器" class="headerlink" title="表单选择器"></a>表单选择器</h3><ul>
-<li><code>:input</code> 选取所有<code>&amp;lt;input&gt;,&amp;lt;textarea&gt;,&amp;lt;select&gt;,&amp;lt;button&gt;</code>元素。如<code>$(&#39;#form1 :input&#39;)</code></li>
-<li><code>:text</code> 选取所有单行文本框。</li>
-<li><code>:password</code> 选取所有密码框</li>
-<li><code>:radio</code> 选取所有单选框</li>
-<li><code>:submit</code> 选取所有提交按钮</li>
-<li><code>:image</code> 选取所有的图像按钮</li>
-<li><code>:reset</code> 选取所有的重置按钮</li>
-<li><code>:button</code> 选取所有的按钮</li>
-<li><code>:file</code> 选取所有的上川域</li>
-<li><code>:hidden</code> 选取所有不可见元素</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;第二章-jQuery选择器&quot;&gt;&lt;a href=&quot;#第二章-jQuery选择器&quot; class=&quot;headerlink&quot; title=&quot;第二章 jQuery选择器&quot;&gt;&lt;/a&gt;第二章 jQuery选择器&lt;/h2&gt;&lt;h3 id=&quot;基本选择器&quot;&gt;&lt;a href=&quot;#基本选择器&quot; class=&quot;headerlink&quot; title=&quot;基本选择器&quot;&gt;&lt;/a&gt;基本选择器&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;#id&lt;/code&gt; 匹配id,  &lt;code&gt;$(&amp;#39;#test&amp;#39;)&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;.class&lt;/code&gt; 匹配类, &lt;code&gt;$(&amp;#39;.test&amp;#39;)&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;element&lt;/code&gt; 匹配标签, &lt;code&gt;$(&amp;#39;div&amp;#39;)&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;*&lt;/code&gt; 匹配所有元素, &lt;code&gt;$(&amp;#39;*&amp;#39;)&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;selector1, select2,...,selectN&lt;/code&gt; 匹配集合，如$(‘div, span, p.myClass’)&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
     <title>锋利的jQeury 第三章-笔记</title>
-    <link href="http://yoursite.com/2016/09/12/chapter-3/"/>
-    <id>http://yoursite.com/2016/09/12/chapter-3/</id>
-    <published>2016-09-12T02:13:32.210Z</published>
-    <updated>2016-09-12T02:13:32.210Z</updated>
+    <link href="http://yoursite.com/2016/09/13/chapter-3/"/>
+    <id>http://yoursite.com/2016/09/13/chapter-3/</id>
+    <published>2016-09-13T06:30:13.344Z</published>
+    <updated>2016-09-13T06:30:13.344Z</updated>
     
     <content type="html"><![CDATA[<h2 id="第三章-jQuery中的DOM操作"><a href="#第三章-jQuery中的DOM操作" class="headerlink" title="第三章 jQuery中的DOM操作"></a>第三章 jQuery中的DOM操作</h2><ul>
 <li><p>查找<code>DOM</code>节点</p>
  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> $li = $(<span class="string">'ul li:eq(1)'</span>); <span class="comment">//获取&lt;ul&gt;里的第二个&lt;li&gt;节点</span></div></pre></td></tr></table></figure>
 </li>
+</ul>
+<a id="more"></a>
+<ul>
 <li><p>查找属性节点</p>
  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> $para = $(<span class="string">'p'</span>); </div><div class="line"><span class="keyword">var</span> p_txt = $para.attr(<span class="string">'title'</span>);</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<a id="more"></a>
+<!--more-->
 <ul>
 <li><p>创建元素节点</p>
  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> $li = $(<span class="string">'&lt;li&gt;&lt;/li&gt;'</span>);</div></pre></td></tr></table></figure>
@@ -299,9 +158,160 @@
 &lt;li&gt;&lt;p&gt;查找&lt;code&gt;DOM&lt;/code&gt;节点&lt;/p&gt;
  &lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; $li = $(&lt;span class=&quot;string&quot;&gt;&#39;ul li:eq(1)&#39;&lt;/span&gt;); &lt;span class=&quot;comment&quot;&gt;//获取&amp;lt;ul&amp;gt;里的第二个&amp;lt;li&amp;gt;节点&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;p&gt;查找属性节点&lt;/p&gt;
- &lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; $para = $(&lt;span class=&quot;string&quot;&gt;&#39;p&#39;&lt;/span&gt;); &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; p_txt = $para.attr(&lt;span class=&quot;string&quot;&gt;&#39;title&#39;&lt;/span&gt;);&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>高性能Javscript - 笔记</title>
+    <link href="http://yoursite.com/2016/09/13/High-Performance-Javascript/"/>
+    <id>http://yoursite.com/2016/09/13/High-Performance-Javascript/</id>
+    <published>2016-09-13T06:29:27.735Z</published>
+    <updated>2016-09-13T06:29:27.735Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h2><h3 id="减少Javascript加载对性能的影响"><a href="#减少Javascript加载对性能的影响" class="headerlink" title="减少Javascript加载对性能的影响"></a>减少Javascript加载对性能的影响</h3><ul>
+<li>&lt;/body&gt;闭合标签之前，将所有&lt;javascript&gt;标签放到页面底部。这能确保在脚本执行前页面已经完成了渲染</li>
+<li>合并脚本，减少&lt;javascript&gt;标签</li>
+<li>使用&lt;javascript&gt;标签的defer属性<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">'text/javascript'</span> src=<span class="string">'file1.js'</span> defer&gt;&lt;/script&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li><p>利用动态创建的&lt;javascript&gt;元素来下载并执行代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> script = <span class="built_in">document</span>.createElemnet(<span class="string">'script'</span>);</div><div class="line">script.type = <span class="string">'text/javascript'</span>;</div><div class="line">script.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    alert(<span class="string">'Script loaded!'</span>);</div><div class="line">&#125;</div><div class="line">script.src = <span class="string">'file1.js'</span>;</div><div class="line"><span class="built_in">document</span>.getElementByTagName(<span class="string">'head'</span>)[<span class="number">0</span>].appendChild(script);</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用XHR对象下载Javascript代码并注入页面中</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">xhr.open(<span class="string">'get'</span>, <span class="string">'file1.js'</span>, <span class="literal">true</span>);</div><div class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span>(xhr.readyState == <span class="number">4</span>) &#123;</div><div class="line">        <span class="keyword">if</span>(xhr.status &gt;= <span class="number">200</span> &amp;&amp; xhr.status &lt; <span class="number">300</span> || xhr.status === <span class="number">304</span>) &#123;</div><div class="line">            <span class="keyword">var</span> script = <span class="built_in">document</span>.createElemnet(<span class="string">'script'</span>);</div><div class="line">            script.type = <span class="string">'text/javascript'</span>;</div><div class="line">            script.text = xhr.responseText;</div><div class="line">            <span class="built_in">document</span>.body.appendChild(script);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="几种类库加载js的方式"><a href="#几种类库加载js的方式" class="headerlink" title="几种类库加载js的方式"></a>几种类库加载js的方式</h3><ul>
+<li><p>YUI3</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">'text/javascript'</span> src=<span class="string">'http://yui.yahooapis.com/combo?3.0.0/build/yui/yui-min.js'</span>&gt;&lt;/script&gt;</div><div class="line">&lt;script type=<span class="string">'text/javascript'</span>&gt;</div><div class="line">    YUI().use(<span class="string">'dom'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">Y</span>) </span>&#123;</div><div class="line">        Y.DOM.addClass(<span class="built_in">document</span>.body, <span class="string">'loaded'</span>);</div><div class="line">    &#125;)</div><div class="line">&lt;<span class="regexp">/script&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>LazyLoad</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">'text/javascript'</span> src=<span class="string">'lazyload-min.js'</span>&gt;&lt;/script&gt;</div><div class="line">&lt;script type=<span class="string">'text/javascript'</span>&gt;</div><div class="line">    LazyLoad.js(<span class="string">'the-rest.js'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        Applicationn.init();</div><div class="line">    &#125;)</div><div class="line">&lt;<span class="regexp">/script&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>LABjs</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">'text/javascript'</span> src=<span class="string">'lab.js'</span>&gt;&lt;/script&gt;</div><div class="line">&lt;script type=<span class="string">'text/javascript'</span>&gt; </div><div class="line">    $LAB.script(<span class="string">'first-file.js'</span>)</div><div class="line">        .wait()</div><div class="line">        .script(<span class="string">'the-rest.js'</span>)</div><div class="line">        .wait(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            Applicationn.init();</div><div class="line">        &#125;)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h2><p>在Javascript中，数据存储的位置会对代码整体性能产成重大影响。数据存储共有4中方式：字面量、变量、数组项、对象成员。它们有着各自的性能特点。</p>
+<ul>
+<li>访问字面量和局部变量的速度最快，相反，访问数组元素和对象成员相对较慢。</li>
+<li>由于局部变量存在于作用域链的起始位置，因此访问局部变量比访问跨作用域变量更快。变量在作用域中的位置越深，访问所需时间就越长。由于全局变量总处在作用域的最末端，因此访问速度时最慢的。</li>
+<li>避免使用with语句。</li>
+<li>嵌套的对象成员会明显影响性能，尽量少用。</li>
+<li>属性或方法在原型链中的位置越深，访问它的速度也越慢。</li>
+<li>通常来说，你可以通过把常用的对象成员、数组元素、跨域变量保存在局部变量中来改善Javascript性能，因为局部变量访问速度更快。</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;第一章&quot;&gt;&lt;a href=&quot;#第一章&quot; class=&quot;headerlink&quot; title=&quot;第一章&quot;&gt;&lt;/a&gt;第一章&lt;/h2&gt;&lt;h3 id=&quot;减少Javascript加载对性能的影响&quot;&gt;&lt;a href=&quot;#减少Javascript加载对性能的影响&quot; class=&quot;headerlink&quot; title=&quot;减少Javascript加载对性能的影响&quot;&gt;&lt;/a&gt;减少Javascript加载对性能的影响&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&amp;lt;/body&amp;gt;闭合标签之前，将所有&amp;lt;javascript&amp;gt;标签放到页面底部。这能确保在脚本执行前页面已经完成了渲染&lt;/li&gt;
+&lt;li&gt;合并脚本，减少&amp;lt;javascript&amp;gt;标签&lt;/li&gt;
+&lt;li&gt;使用&amp;lt;javascript&amp;gt;标签的defer属性&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;script type=&lt;span class=&quot;string&quot;&gt;&#39;text/javascript&#39;&lt;/span&gt; src=&lt;span class=&quot;string&quot;&gt;&#39;file1.js&#39;&lt;/span&gt; defer&amp;gt;&amp;lt;/script&amp;gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>锋利的jQeury 第二章-笔记</title>
+    <link href="http://yoursite.com/2016/09/12/chapter-2/"/>
+    <id>http://yoursite.com/2016/09/12/chapter-2/</id>
+    <published>2016-09-12T02:13:38.890Z</published>
+    <updated>2016-09-12T02:13:38.890Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="第二章-jQuery选择器"><a href="#第二章-jQuery选择器" class="headerlink" title="第二章 jQuery选择器"></a>第二章 jQuery选择器</h2><h3 id="基本选择器"><a href="#基本选择器" class="headerlink" title="基本选择器"></a>基本选择器</h3><ul>
+<li><code>#id</code> 匹配id,  <code>$(&#39;#test&#39;)</code></li>
+<li><code>.class</code> 匹配类, <code>$(&#39;.test&#39;)</code></li>
+<li><code>element</code> 匹配标签, <code>$(&#39;div&#39;)</code></li>
+<li><code>*</code> 匹配所有元素, <code>$(&#39;*&#39;)</code></li>
+<li><code>selector1, select2,...,selectN</code> 匹配集合，如$(‘div, span, p.myClass’)</li>
+</ul>
+<a id="more"></a>
+<h3 id="层次选择器"><a href="#层次选择器" class="headerlink" title="层次选择器"></a>层次选择器</h3><ul>
+<li><code>$(&#39;ancestor decendant&#39;)</code> 选择后代元素</li>
+<li><code>$(&#39;parent &gt; child&#39;)</code> 选择子元素</li>
+<li><code>$(&#39;prev + next&#39;)</code> 选择紧接在<code>prev</code>后的<code>next</code>元素，如: <code>$(&#39;.one + div&#39;)</code>，选择<code>one</code>之后的下个一个<code>div</code>同辈元素</li>
+<li><code>$(&#39;prev ~ siblings&#39;)</code> 选择prev后的所有siblings元素，如<code>$(&#39;#two ~ div&#39;)</code>选择<code>two</code>之后的所有<code>div</code>同辈元素</li>
+</ul>
+<h3 id="过滤选择器"><a href="#过滤选择器" class="headerlink" title="过滤选择器"></a>过滤选择器</h3><ul>
+<li><code>:first</code> 选取第一个元素，它只返回一个元素。 如<code>$(&#39;div:first&#39;)</code>选取第一个div元素。</li>
+<li><code>:last</code> 选取最后一个元素，它只返回一个元素。</li>
+<li><code>:not(selector)</code> 取出所有给定选择器匹配的元素，如<code>$(&#39;input:not(.myClass)&#39;)</code>,选取<code>class</code>不是<code>myClass</code>的<code>input</code>元素</li>
+<li><code>:even</code> 选取索引为偶数的元素，索引从<strong>0</strong>开始</li>
+<li><code>:odd</code> 选取奇数索引元素</li>
+<li><code>:eq(index)</code> 选取指定索引元素</li>
+<li><code>:gt(index)</code> 选取大于索引的元素</li>
+<li><code>:lt(index)</code> 选取小于索引的元素</li>
+<li><code>:header</code> 选取所有标题元素 如<code>$(&#39;:header&#39;)</code>，选取网页中所有<code>&amp;lt;h1&gt;,&amp;lt;h2&gt;,&amp;lt;h3&gt;;....</code></li>
+<li><code>:animated</code> 选取所有正在执行动画的元素 如：<code>$(&#39;div:animated&#39;)</code>选取正在执行动画的所有<code>div</code>元素</li>
+<li><code>:focus</code> 选取当前获取焦点的元素 如<code>$(&#39;:focus&#39;)</code>，获取当前获取焦点的元素</li>
+</ul>
+<h3 id="内容过滤选择器"><a href="#内容过滤选择器" class="headerlink" title="内容过滤选择器"></a>内容过滤选择器</h3><ul>
+<li><code>:contains(text)</code> 选取文本内容含有text的元素, 如<code>$(&#39;div:contains(&quot;我&quot;)&#39;)</code>,选取文本含有<code>我</code>的<code>div</code>元素</li>
+<li><code>:empty</code> 选取不包含子元素或者文本为空的元素, 如<code>$(&#39;div:empty&#39;)</code>选取不包含子元素的<code>div</code>元素</li>
+<li><code>:has(selector)</code> 选取含有选择器的所匹配的元素的元素，如<code>$(&#39;div:has(p)&#39;)</code>，选取含有<code>p</code>元素的<code>div</code>元素</li>
+<li><code>:parent</code> 选取含有子元素或文本的元素 如<code>$(&#39;div:parent&#39;)</code>,选取拥有子元素的<code>div</code>元素</li>
+</ul>
+<h3 id="可见性过滤器"><a href="#可见性过滤器" class="headerlink" title="可见性过滤器"></a>可见性过滤器</h3><ul>
+<li><code>:hidden</code> 选取所有不可见元素, 如<code>$(&#39;:hidden&#39;)</code>, 选取所有不可见元素，<code>$(&#39;input:hidden&#39;)</code>选取所有不可见的input元素</li>
+<li><code>:visible</code> 选取所有可见元素</li>
+</ul>
+<h3 id="属性过滤选择器"><a href="#属性过滤选择器" class="headerlink" title="属性过滤选择器"></a>属性过滤选择器</h3><ul>
+<li><code>[attr]</code> 选取拥有此属性的元素, 如<code>$(&#39;div[id]&#39;)</code>, 选取拥有属性<code>id</code>的元素</li>
+<li><code>[attr=val]</code> 选取<code>attr</code>属性为<code>val</code>的元素如, <code>$(&#39;div[title=test]&#39;)</code>选取<code>title</code>为<code>test</code>的<code>div</code>元素</li>
+<li><code>[attr!=val]</code> 选取<code>attr</code>的值不为<code>val</code>的元素</li>
+<li><code>[attr^=val]</code> 选取<code>attr</code>的值以<code>val</code>开始的元素</li>
+<li><code>[attr$=val]</code> 选取<code>attr</code>的值以<code>val</code>结束的元素</li>
+<li><code>[attr*=val]</code> 选取<code>attr</code>的值包含<code>val</code>的元素</li>
+<li><code>[attr|=val]</code> 选取<code>attr</code>的值为<code>val</code>或以<code>val-</code>开始的元素</li>
+<li><code>[attr~=val]</code> 选取<code>attr</code>的值包含<code>&#39; val&#39;</code>的元素（注意val前面要有空格）</li>
+<li><code>[attr1][attr2][attrN]</code> 选取同时满足几个条件的元素，如<code>$(&#39;div[id][title$=&quot;test&quot;]&#39;)</code>，选取拥有属性id，并且属性title以test结束的div元素</li>
+</ul>
+<h3 id="子元素过滤选择器"><a href="#子元素过滤选择器" class="headerlink" title="子元素过滤选择器"></a>子元素过滤选择器</h3><ul>
+<li><code>:nth-child(index/even/odd/equation)</code> 选取每个父元素下的第<code>index</code>个或者奇偶子元素</li>
+<li><code>:first-child</code> 选取每个父元素的第一个子元素，如<code>$(&#39;ul li:first-child&#39;)</code>, 选择ul的第一个li元素</li>
+<li><code>:last-child</code> 选取每个父元素的子元素</li>
+<li><code>:only-child</code> 如果父控件一个子元素，那么匹配到，否则不被匹配。<code>$(&#39;ul li:only-child&#39;)</code>返回只有一个子元素且为li的li元素</li>
+</ul>
+<h3 id="表单对象属性过滤选择器"><a href="#表单对象属性过滤选择器" class="headerlink" title="表单对象属性过滤选择器"></a>表单对象属性过滤选择器</h3><ul>
+<li><code>:enabled</code> 选取所有可用元素。<code>$(&#39;#form1 :enabled&#39;)</code>,选取<code>id</code>为<code>form1</code>的表单内的所有可用元素。</li>
+<li><code>:disbaled</code> 选取所有不可用元素。</li>
+<li><code>:checked</code> 选取所有被选中元素(单选框，复选框)。<code>$(&#39;input:checked&#39;)</code>,选取所有被选中的<code>input</code>元素</li>
+<li><code>:selected</code> 选取所有被选中的选项元素（下拉列表）。<code>$(&#39;select option:seleted&#39;)</code></li>
+</ul>
+<h3 id="表单选择器"><a href="#表单选择器" class="headerlink" title="表单选择器"></a>表单选择器</h3><ul>
+<li><code>:input</code> 选取所有<code>&amp;lt;input&gt;,&amp;lt;textarea&gt;,&amp;lt;select&gt;,&amp;lt;button&gt;</code>元素。如<code>$(&#39;#form1 :input&#39;)</code></li>
+<li><code>:text</code> 选取所有单行文本框。</li>
+<li><code>:password</code> 选取所有密码框</li>
+<li><code>:radio</code> 选取所有单选框</li>
+<li><code>:submit</code> 选取所有提交按钮</li>
+<li><code>:image</code> 选取所有的图像按钮</li>
+<li><code>:reset</code> 选取所有的重置按钮</li>
+<li><code>:button</code> 选取所有的按钮</li>
+<li><code>:file</code> 选取所有的上川域</li>
+<li><code>:hidden</code> 选取所有不可见元素</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;第二章-jQuery选择器&quot;&gt;&lt;a href=&quot;#第二章-jQuery选择器&quot; class=&quot;headerlink&quot; title=&quot;第二章 jQuery选择器&quot;&gt;&lt;/a&gt;第二章 jQuery选择器&lt;/h2&gt;&lt;h3 id=&quot;基本选择器&quot;&gt;&lt;a href=&quot;#基本选择器&quot; class=&quot;headerlink&quot; title=&quot;基本选择器&quot;&gt;&lt;/a&gt;基本选择器&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;#id&lt;/code&gt; 匹配id,  &lt;code&gt;$(&amp;#39;#test&amp;#39;)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.class&lt;/code&gt; 匹配类, &lt;code&gt;$(&amp;#39;.test&amp;#39;)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;element&lt;/code&gt; 匹配标签, &lt;code&gt;$(&amp;#39;div&amp;#39;)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;*&lt;/code&gt; 匹配所有元素, &lt;code&gt;$(&amp;#39;*&amp;#39;)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;selector1, select2,...,selectN&lt;/code&gt; 匹配集合，如$(‘div, span, p.myClass’)&lt;/li&gt;
 &lt;/ul&gt;
     
     </summary>

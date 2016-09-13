@@ -92,13 +92,13 @@
 使用&amp;lt;javascript&amp;gt;标签的defer属性1&amp;lt;script type=&apos;text/javascript&apos; src=&apos;file1.js">
 <meta property="og:type" content="article">
 <meta property="og:title" content="高性能Javscript - 笔记">
-<meta property="og:url" content="http://yoursite.com/2016/09/12/High-Performance-Javascript/index.html">
+<meta property="og:url" content="http://yoursite.com/2016/09/13/High-Performance-Javascript/index.html">
 <meta property="og:site_name" content="Johnny">
 <meta property="og:description" content="第一章减少Javascript加载对性能的影响
 &amp;lt;/body&amp;gt;闭合标签之前，将所有&amp;lt;javascript&amp;gt;标签放到页面底部。这能确保在脚本执行前页面已经完成了渲染
 合并脚本，减少&amp;lt;javascript&amp;gt;标签
 使用&amp;lt;javascript&amp;gt;标签的defer属性1&amp;lt;script type=&apos;text/javascript&apos; src=&apos;file1.js">
-<meta property="og:updated_time" content="2016-09-12T05:28:18.605Z">
+<meta property="og:updated_time" content="2016-09-13T06:29:27.735Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="高性能Javscript - 笔记">
 <meta name="twitter:description" content="第一章减少Javascript加载对性能的影响
@@ -125,7 +125,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/09/12/High-Performance-Javascript/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/09/13/High-Performance-Javascript/"/>
 
   <title> 高性能Javscript - 笔记 | Johnny </title>
 </head>
@@ -289,8 +289,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-12T13:28:18+08:00" content="2016-09-12">
-              2016-09-12
+            <time itemprop="dateCreated" datetime="2016-09-13T14:29:27+08:00" content="2016-09-13">
+              2016-09-13
             </time>
           </span>
 
@@ -340,7 +340,17 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">'text/javascript'</span> src=<span class="string">'lazyload-min.js'</span>&gt;&lt;/script&gt;</div><div class="line">&lt;script type=<span class="string">'text/javascript'</span>&gt;</div><div class="line">    LazyLoad.js(<span class="string">'the-rest.js'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        Applicationn.init();</div><div class="line">    &#125;)</div><div class="line">&lt;<span class="regexp">/script&gt;</span></div></pre></td></tr></table></figure>
 </li>
 <li><p>LABjs</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">'text/javascript'</span> src=<span class="string">'lab.js'</span>&gt;&lt;/script&gt;</div><div class="line">&lt;script type=<span class="string">'text/javascript'</span>&gt; </div><div class="line">    $LAB.script(<span class="string">'first-file.js'</span>)</div><div class="line">        .wait()</div><div class="line">        .script(<span class="string">'the-rest.js'</span>)</div><div class="line">        .wait(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            Applicationn.init();</div><div class="line">        &#125;)</div></pre></td></tr></table></figure></li>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">'text/javascript'</span> src=<span class="string">'lab.js'</span>&gt;&lt;/script&gt;</div><div class="line">&lt;script type=<span class="string">'text/javascript'</span>&gt; </div><div class="line">    $LAB.script(<span class="string">'first-file.js'</span>)</div><div class="line">        .wait()</div><div class="line">        .script(<span class="string">'the-rest.js'</span>)</div><div class="line">        .wait(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            Applicationn.init();</div><div class="line">        &#125;)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h2><p>在Javascript中，数据存储的位置会对代码整体性能产成重大影响。数据存储共有4中方式：字面量、变量、数组项、对象成员。它们有着各自的性能特点。</p>
+<ul>
+<li>访问字面量和局部变量的速度最快，相反，访问数组元素和对象成员相对较慢。</li>
+<li>由于局部变量存在于作用域链的起始位置，因此访问局部变量比访问跨作用域变量更快。变量在作用域中的位置越深，访问所需时间就越长。由于全局变量总处在作用域的最末端，因此访问速度时最慢的。</li>
+<li>避免使用with语句。</li>
+<li>嵌套的对象成员会明显影响性能，尽量少用。</li>
+<li>属性或方法在原型链中的位置越深，访问它的速度也越慢。</li>
+<li>通常来说，你可以通过把常用的对象成员、数组元素、跨域变量保存在局部变量中来改善Javascript性能，因为局部变量访问速度更快。</li>
 </ul>
 
       
@@ -374,6 +384,10 @@
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/13/chapter-3/" rel="prev" title="锋利的jQeury 第三章-笔记">
+                锋利的jQeury 第三章-笔记 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -480,7 +494,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一章"><span class="nav-number">1.</span> <span class="nav-text">第一章</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#减少Javascript加载对性能的影响"><span class="nav-number">1.1.</span> <span class="nav-text">减少Javascript加载对性能的影响</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#几种类库加载js的方式"><span class="nav-number">1.2.</span> <span class="nav-text">几种类库加载js的方式</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一章"><span class="nav-number">1.</span> <span class="nav-text">第一章</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#减少Javascript加载对性能的影响"><span class="nav-number">1.1.</span> <span class="nav-text">减少Javascript加载对性能的影响</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#几种类库加载js的方式"><span class="nav-number">1.2.</span> <span class="nav-text">几种类库加载js的方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二章"><span class="nav-number">2.</span> <span class="nav-text">第二章</span></a></li></ol></div>
             
           </div>
         </section>
