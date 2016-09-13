@@ -86,40 +86,25 @@
 
 
 
-<meta name="description" content="第三章 jQuery中的DOM操作
-查找DOM节点
- 1var $li = $(&apos;ul li:eq(1)&apos;); //获取&amp;lt;ul&amp;gt;里的第二个&amp;lt;li&amp;gt;节点
-
-查找属性节点
- 12var $para = $(&apos;p&apos;); var p_txt = $para.attr(&apos;title&apos;);
-
-创建元素节点
- 1var $li = $(&apos;&amp;lt;li&amp;gt;&amp;lt;/li&amp;gt;&apos;);">
+<meta name="description" content="第一章减少Javascript加载对性能的影响
+&amp;lt;/body&amp;gt;闭合标签之前，将所有&amp;lt;javascript&amp;gt;标签放到页面底部。这能确保在脚本执行前页面已经完成了渲染
+合并脚本，减少&amp;lt;javascript&amp;gt;标签
+使用&amp;lt;javascript&amp;gt;标签的defer属性1&amp;lt;script type=&apos;text/javascript&apos; src=&apos;file1.js">
 <meta property="og:type" content="article">
-<meta property="og:title" content="锋利的jQeury 第三章-笔记">
-<meta property="og:url" content="http://yoursite.com/2016/09/09/chapter-3/index.html">
+<meta property="og:title" content="高性能Javscript - 笔记">
+<meta property="og:url" content="http://yoursite.com/2016/09/12/High-Performance-Javascript/index.html">
 <meta property="og:site_name" content="Johnny">
-<meta property="og:description" content="第三章 jQuery中的DOM操作
-查找DOM节点
- 1var $li = $(&apos;ul li:eq(1)&apos;); //获取&amp;lt;ul&amp;gt;里的第二个&amp;lt;li&amp;gt;节点
-
-查找属性节点
- 12var $para = $(&apos;p&apos;); var p_txt = $para.attr(&apos;title&apos;);
-
-创建元素节点
- 1var $li = $(&apos;&amp;lt;li&amp;gt;&amp;lt;/li&amp;gt;&apos;);">
-<meta property="og:updated_time" content="2016-09-09T04:16:52.994Z">
+<meta property="og:description" content="第一章减少Javascript加载对性能的影响
+&amp;lt;/body&amp;gt;闭合标签之前，将所有&amp;lt;javascript&amp;gt;标签放到页面底部。这能确保在脚本执行前页面已经完成了渲染
+合并脚本，减少&amp;lt;javascript&amp;gt;标签
+使用&amp;lt;javascript&amp;gt;标签的defer属性1&amp;lt;script type=&apos;text/javascript&apos; src=&apos;file1.js">
+<meta property="og:updated_time" content="2016-09-12T05:28:18.605Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="锋利的jQeury 第三章-笔记">
-<meta name="twitter:description" content="第三章 jQuery中的DOM操作
-查找DOM节点
- 1var $li = $(&apos;ul li:eq(1)&apos;); //获取&amp;lt;ul&amp;gt;里的第二个&amp;lt;li&amp;gt;节点
-
-查找属性节点
- 12var $para = $(&apos;p&apos;); var p_txt = $para.attr(&apos;title&apos;);
-
-创建元素节点
- 1var $li = $(&apos;&amp;lt;li&amp;gt;&amp;lt;/li&amp;gt;&apos;);">
+<meta name="twitter:title" content="高性能Javscript - 笔记">
+<meta name="twitter:description" content="第一章减少Javascript加载对性能的影响
+&amp;lt;/body&amp;gt;闭合标签之前，将所有&amp;lt;javascript&amp;gt;标签放到页面底部。这能确保在脚本执行前页面已经完成了渲染
+合并脚本，减少&amp;lt;javascript&amp;gt;标签
+使用&amp;lt;javascript&amp;gt;标签的defer属性1&amp;lt;script type=&apos;text/javascript&apos; src=&apos;file1.js">
 
 
 
@@ -140,9 +125,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/09/09/chapter-3/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/09/12/High-Performance-Javascript/"/>
 
-  <title> 锋利的jQeury 第三章-笔记 | Johnny </title>
+  <title> 高性能Javscript - 笔记 | Johnny </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -292,7 +277,7 @@
             
             
               
-                锋利的jQeury 第三章-笔记
+                高性能Javscript - 笔记
               
             
           </h1>
@@ -304,8 +289,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-09T12:16:52+08:00" content="2016-09-09">
-              2016-09-09
+            <time itemprop="dateCreated" datetime="2016-09-12T13:28:18+08:00" content="2016-09-12">
+              2016-09-12
             </time>
           </span>
 
@@ -332,127 +317,30 @@
       
 
       
-        <h2 id="第三章-jQuery中的DOM操作"><a href="#第三章-jQuery中的DOM操作" class="headerlink" title="第三章 jQuery中的DOM操作"></a>第三章 jQuery中的DOM操作</h2><ul>
-<li><p>查找<code>DOM</code>节点</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> $li = $(<span class="string">'ul li:eq(1)'</span>); <span class="comment">//获取&lt;ul&gt;里的第二个&lt;li&gt;节点</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>查找属性节点</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> $para = $(<span class="string">'p'</span>); </div><div class="line"><span class="keyword">var</span> p_txt = $para.attr(<span class="string">'title'</span>);</div></pre></td></tr></table></figure>
-</li>
-<li><p>创建元素节点</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> $li = $(<span class="string">'&lt;li&gt;&lt;/li&gt;'</span>);</div></pre></td></tr></table></figure>
-</li>
-<li><p>创建文本节点</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> $li = $(<span class="string">'&lt;li&gt;香蕉&lt;/li&gt;'</span>);</div></pre></td></tr></table></figure>
-</li>
-<li><p>创建属性节点</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> $li = $(<span class="string">'&lt;li title="香蕉"&gt;香蕉&lt;/li&gt;'</span>);</div></pre></td></tr></table></figure>
+        <h2 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h2><h3 id="减少Javascript加载对性能的影响"><a href="#减少Javascript加载对性能的影响" class="headerlink" title="减少Javascript加载对性能的影响"></a>减少Javascript加载对性能的影响</h3><ul>
+<li>&lt;/body&gt;闭合标签之前，将所有&lt;javascript&gt;标签放到页面底部。这能确保在脚本执行前页面已经完成了渲染</li>
+<li>合并脚本，减少&lt;javascript&gt;标签</li>
+<li>使用&lt;javascript&gt;标签的defer属性<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">'text/javascript'</span> src=<span class="string">'file1.js'</span> defer&gt;&lt;/script&gt;</div></pre></td></tr></table></figure>
 </li>
 </ul>
+<a id="more"></a>
 <ul>
-<li>插入节点的方法<ul>
-<li>append 追加元素。$(‘p’).append($(“&lt;b&gt;你好&lt;/b&gt;”))，A.append(B)之后，A和B是父子关系。</li>
-<li>appendTo 跟append相反，A.append(B) 相当于 B.appendTo(A)</li>
-<li>prepend 插入到前面</li>
-<li>prependTo 跟prepend相反</li>
-<li>after 在每个匹配元素之后插入内容，A.after(B)之后，A与B是兄弟元素</li>
-<li>intertAfter跟after相反，A.after(B)相当于B.instertAfter(A)</li>
-<li>before，跟after相反</li>
-<li>insertBefore，A.before(B)相当于B.insertBefore(A)</li>
-<li>删除节点的方法</li>
-<li>remove 删除匹配的元素 $(‘ul li:eq(1)’).remove()，删除第二个li元素，remove返回值是删除的元素</li>
-<li>detach 与remove不同，detach会保留所有该元素绑定的事件，附加的数据等。</li>
-<li>empty 清空节点</li>
-</ul>
+<li><p>利用动态创建的&lt;javascript&gt;元素来下载并执行代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> script = <span class="built_in">document</span>.createElemnet(<span class="string">'script'</span>);</div><div class="line">script.type = <span class="string">'text/javascript'</span>;</div><div class="line">script.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    alert(<span class="string">'Script loaded!'</span>);</div><div class="line">&#125;</div><div class="line">script.src = <span class="string">'file1.js'</span>;</div><div class="line"><span class="built_in">document</span>.getElementByTagName(<span class="string">'head'</span>)[<span class="number">0</span>].appendChild(script);</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用XHR对象下载Javascript代码并注入页面中</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">xhr.open(<span class="string">'get'</span>, <span class="string">'file1.js'</span>, <span class="literal">true</span>);</div><div class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span>(xhr.readyState == <span class="number">4</span>) &#123;</div><div class="line">        <span class="keyword">if</span>(xhr.status &gt;= <span class="number">200</span> &amp;&amp; xhr.status &lt; <span class="number">300</span> || xhr.status === <span class="number">304</span>) &#123;</div><div class="line">            <span class="keyword">var</span> script = <span class="built_in">document</span>.createElemnet(<span class="string">'script'</span>);</div><div class="line">            script.type = <span class="string">'text/javascript'</span>;</div><div class="line">            script.text = xhr.responseText;</div><div class="line">            <span class="built_in">document</span>.body.appendChild(script);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<ul>
-<li><p>复制节点 clone，可以传入一个boolean参数表示是否同时复制元素中所绑定的事件。</p>
+<h3 id="几种类库加载js的方式"><a href="#几种类库加载js的方式" class="headerlink" title="几种类库加载js的方式"></a>几种类库加载js的方式</h3><ul>
+<li><p>YUI3</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">'text/javascript'</span> src=<span class="string">'http://yui.yahooapis.com/combo?3.0.0/build/yui/yui-min.js'</span>&gt;&lt;/script&gt;</div><div class="line">&lt;script type=<span class="string">'text/javascript'</span>&gt;</div><div class="line">    YUI().use(<span class="string">'dom'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">Y</span>) </span>&#123;</div><div class="line">        Y.DOM.addClass(<span class="built_in">document</span>.body, <span class="string">'loaded'</span>);</div><div class="line">    &#125;)</div><div class="line">&lt;<span class="regexp">/script&gt;</span></div></pre></td></tr></table></figure>
 </li>
-<li><p>替换节点</p>
-<ul>
-<li>replaceWith， A.replaceWith(B)，用B替换A</li>
-<li>replaceAll 跟replaceWith相反，A.replaceWith(B)相当于B.replaceAll(A)</li>
-</ul>
+<li><p>LazyLoad</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">'text/javascript'</span> src=<span class="string">'lazyload-min.js'</span>&gt;&lt;/script&gt;</div><div class="line">&lt;script type=<span class="string">'text/javascript'</span>&gt;</div><div class="line">    LazyLoad.js(<span class="string">'the-rest.js'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        Applicationn.init();</div><div class="line">    &#125;)</div><div class="line">&lt;<span class="regexp">/script&gt;</span></div></pre></td></tr></table></figure>
 </li>
-<li><p>包裹节点</p>
-<ul>
-<li>wrap $(‘strong’).wrap(‘&lt;b&gt;&lt;/b&gt;’) 用&lt;b&gt;标签将&lt;strong&gt;标签包起来，如果有多个匹配，则每个元素单独包裹。</li>
-<li>wrapAll，将所有的元素用一个元素来包裹。如果匹配的节点之间有其他节点，其他节点会被放到包裹元素之后。</li>
-<li>wrapInner 将子内容（包括文本节点）包裹起来。</li>
-</ul>
-</li>
-<li><p>获取属性，$(‘p’).atter(‘title’)</p>
-</li>
-<li><p>设置属性</p>
-<ul>
-<li><p>$(‘p’).attr(‘title’, ‘your title’) 设置单个属性</p>
-</li>
-<li><p>$(‘p’).attr({‘title’, ‘your title’, ‘name’: ‘test’})，设置多个属性</p>
-</li>
-</ul>
-</li>
-<li><p>删除属性 $(‘p’).removeAttr(‘title’);</p>
-</li>
-<li><p>获取样式 $(‘p’).attr(‘class’)获取&lt;p&gt;元素的class</p>
-</li>
-<li><p>设置样式 $(‘p’).attr(‘class’, ‘high’) 设置样式</p>
-</li>
-<li><p>追加样式 $(‘p’).addClass(‘another’)</p>
-</li>
-<li><p>移除样式</p>
-<ul>
-<li><p>$(‘p’).removeClass(‘another’) 移除一个样式</p>
-</li>
-<li><p>$(‘p’).removeClass(‘another high’) 移除多个样式</p>
-</li>
-</ul>
-</li>
-<li><p>切换样式 $(‘p’).toggleClass(‘another’)，如果another类名不存在则添加之，否则删除之</p>
-</li>
-<li><p>判断是否含有某个样式 $(‘p’).hasClass(‘another’)</p>
-</li>
-<li>html()方法 获取或设置html内容，相当于javascript的innerHTML属性</li>
-<li><p>text() 获取或设置文本内容，相当于javascript的innerText属性</p>
-<ul>
-<li><p>获取: var text = $(‘p’).text()</p>
-</li>
-<li><p>设置 $(‘p’).text(‘你喜欢的水果是’)</p>
-</li>
-</ul>
-</li>
-<li><p>val()方法 获取或设置value，相当于javascript的value属性</p>
-</li>
-<li><p>遍历节点</p>
-<ul>
-<li>children() 返回子节点（DOM原声节点，非jQuery节点）</li>
-<li>next()方法，获取紧临的同辈元素，也就是返回下一个兄弟节点。</li>
-<li>prev()，跟next相反，返回上一个兄弟节点</li>
-<li>siblings()返回前后所有的同辈元素。</li>
-<li>closest() 取得最近的匹配元素，往父控件追溯。如$(e.target).closest(‘li’).css(‘color’, ‘red’);给点击的目标元素附近的li元素添加颜色。</li>
-<li>parents() 获得集合中每个匹配元素的祖先元素。</li>
-<li>parent() 获得集合中每个匹配元素的父级元素。</li>
-<li>find() / filter() / nextAll() / prevAll() 等。</li>
-</ul>
-</li>
-<li><p>获取样式 $(‘p’).css(‘color’) 获取&lt;p&gt;的样式颜色</p>
-</li>
-<li><p>设置样式</p>
-<ul>
-<li><p>$(‘p’).css(‘color’, ‘red’);</p>
-</li>
-<li><p>$(‘p’).css({“fontSize”: “30px”, “backgroundColor”: “#888888”‘});</p>
-</li>
-<li><p>元素定位</p>
-<ul>
-<li>offset()，获取元素在当前视窗中的相对偏移。</li>
-<li>position() 获取元素相对于最近的一个position样式为relative或absolute（为啥）的父节点的相对偏移。</li>
-</ul>
-</li>
-<li>scrollLeft() 获取或设置水平滚动条的位置</li>
-<li>scrollRight() 获取或设置垂直滚动条的位置。</li>
-</ul>
-</li>
+<li><p>LABjs</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">'text/javascript'</span> src=<span class="string">'lab.js'</span>&gt;&lt;/script&gt;</div><div class="line">&lt;script type=<span class="string">'text/javascript'</span>&gt; </div><div class="line">    $LAB.script(<span class="string">'first-file.js'</span>)</div><div class="line">        .wait()</div><div class="line">        .script(<span class="string">'the-rest.js'</span>)</div><div class="line">        .wait(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            Applicationn.init();</div><div class="line">        &#125;)</div></pre></td></tr></table></figure></li>
 </ul>
 
       
@@ -479,17 +367,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/09/09/chapter-2/" rel="next" title="锋利的jQeury 第二章-笔记">
+              <a href="/2016/09/12/chapter-2/" rel="next" title="锋利的jQeury 第二章-笔记">
                 <i class="fa fa-chevron-left"></i> 锋利的jQeury 第二章-笔记
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/09/09/chapter-4/" rel="prev" title="锋利的jQeury 第四章-笔记">
-                锋利的jQeury 第四章-笔记 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -557,7 +441,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-count">5</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -596,7 +480,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第三章-jQuery中的DOM操作"><span class="nav-number">1.</span> <span class="nav-text">第三章 jQuery中的DOM操作</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一章"><span class="nav-number">1.</span> <span class="nav-text">第一章</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#减少Javascript加载对性能的影响"><span class="nav-number">1.1.</span> <span class="nav-text">减少Javascript加载对性能的影响</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#几种类库加载js的方式"><span class="nav-number">1.2.</span> <span class="nav-text">几种类库加载js的方式</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
