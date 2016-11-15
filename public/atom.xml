@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-09-13T06:30:13.344Z</updated>
+  <updated>2016-11-15T10:10:05.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,149 +16,123 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>锋利的jQeury 第三章-笔记</title>
-    <link href="http://yoursite.com/2016/09/13/chapter-3/"/>
-    <id>http://yoursite.com/2016/09/13/chapter-3/</id>
-    <published>2016-09-13T06:30:13.344Z</published>
-    <updated>2016-09-13T06:30:13.344Z</updated>
+    <title>Ubuntu 12.04 生成桌面图标</title>
+    <link href="http://yoursite.com/2016/11/15/make-ubutun-desktop/"/>
+    <id>http://yoursite.com/2016/11/15/make-ubutun-desktop/</id>
+    <published>2016-11-15T10:04:19.000Z</published>
+    <updated>2016-11-15T10:10:05.000Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="第三章-jQuery中的DOM操作"><a href="#第三章-jQuery中的DOM操作" class="headerlink" title="第三章 jQuery中的DOM操作"></a>第三章 jQuery中的DOM操作</h2><ul>
-<li><p>查找<code>DOM</code>节点</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> $li = $(<span class="string">'ul li:eq(1)'</span>); <span class="comment">//获取&lt;ul&gt;里的第二个&lt;li&gt;节点</span></div></pre></td></tr></table></figure>
+    <content type="html"><![CDATA[<p>在Ubuntu上从网上下载压缩包版本（非.deb包）的应用程序之后，是不生成桌面图表的，比如网上下载的<a href="http://www.android-studio.org/" target="_blank" rel="external">Android Studio</a>, 所以需要自己做一个桌面图标。</p>
+<ol>
+<li><p>进入到/usr/share/applications/目录下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /usr/share/applications/</div></pre></td></tr></table></figure>
 </li>
-</ul>
-<a id="more"></a>
-<ul>
-<li><p>查找属性节点</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> $para = $(<span class="string">'p'</span>); </div><div class="line"><span class="keyword">var</span> p_txt = $para.attr(<span class="string">'title'</span>);</div></pre></td></tr></table></figure>
+<li><p>新建一个android-studio.desktop文件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim android-studio.desktop</div></pre></td></tr></table></figure>
 </li>
-</ul>
-<!--more-->
-<ul>
-<li><p>创建元素节点</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> $li = $(<span class="string">'&lt;li&gt;&lt;/li&gt;'</span>);</div></pre></td></tr></table></figure>
+<li><p>输入一下内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Version=2.2</div><div class="line">Name=Android Studio</div><div class="line">GenericName=Android IDE</div><div class="line">Comment=Android Development</div><div class="line">Exec=/home/yinlijun/android_toolchain/android-studio/bin/studio.sh %U</div><div class="line">Terminal=<span class="literal">false</span></div><div class="line">Icon=/home/yinlijun/android_toolchain/android-studio/bin/studio.png</div><div class="line">Type=Application</div><div class="line">Categories=Android;IDE;</div></pre></td></tr></table></figure>
 </li>
-<li><p>创建文本节点</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> $li = $(<span class="string">'&lt;li&gt;香蕉&lt;/li&gt;'</span>);</div></pre></td></tr></table></figure>
-</li>
-<li><p>创建属性节点</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> $li = $(<span class="string">'&lt;li title="香蕉"&gt;香蕉&lt;/li&gt;'</span>);</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li>插入节点的方法<ul>
-<li>append 追加元素。$(‘p’).append($(“&lt;b&gt;你好&lt;/b&gt;”))，A.append(B)之后，A和B是父子关系。</li>
-<li>appendTo 跟append相反，A.append(B) 相当于 B.appendTo(A)</li>
-<li>prepend 插入到前面</li>
-<li>prependTo 跟prepend相反</li>
-<li>after 在每个匹配元素之后插入内容，A.after(B)之后，A与B是兄弟元素</li>
-<li>intertAfter跟after相反，A.after(B)相当于B.instertAfter(A)</li>
-<li>before，跟after相反</li>
-<li>insertBefore，A.before(B)相当于B.insertBefore(A)</li>
-<li>删除节点的方法</li>
-<li>remove 删除匹配的元素 $(‘ul li:eq(1)’).remove()，删除第二个li元素，remove返回值是删除的元素</li>
-<li>detach 与remove不同，detach会保留所有该元素绑定的事件，附加的数据等。</li>
-<li>empty 清空节点</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>复制节点 clone，可以传入一个boolean参数表示是否同时复制元素中所绑定的事件。</p>
-</li>
-<li><p>替换节点</p>
-<ul>
-<li>replaceWith， A.replaceWith(B)，用B替换A</li>
-<li>replaceAll 跟replaceWith相反，A.replaceWith(B)相当于B.replaceAll(A)</li>
-</ul>
-</li>
-<li><p>包裹节点</p>
-<ul>
-<li>wrap $(‘strong’).wrap(‘&lt;b&gt;&lt;/b&gt;’) 用&lt;b&gt;标签将&lt;strong&gt;标签包起来，如果有多个匹配，则每个元素单独包裹。</li>
-<li>wrapAll，将所有的元素用一个元素来包裹。如果匹配的节点之间有其他节点，其他节点会被放到包裹元素之后。</li>
-<li>wrapInner 将子内容（包括文本节点）包裹起来。</li>
-</ul>
-</li>
-<li><p>获取属性，$(‘p’).atter(‘title’)</p>
-</li>
-<li><p>设置属性</p>
-<ul>
-<li><p>$(‘p’).attr(‘title’, ‘your title’) 设置单个属性</p>
-</li>
-<li><p>$(‘p’).attr({‘title’, ‘your title’, ‘name’: ‘test’})，设置多个属性</p>
-</li>
-</ul>
-</li>
-<li><p>删除属性 $(‘p’).removeAttr(‘title’);</p>
-</li>
-<li><p>获取样式 $(‘p’).attr(‘class’)获取&lt;p&gt;元素的class</p>
-</li>
-<li><p>设置样式 $(‘p’).attr(‘class’, ‘high’) 设置样式</p>
-</li>
-<li><p>追加样式 $(‘p’).addClass(‘another’)</p>
-</li>
-<li><p>移除样式</p>
-<ul>
-<li><p>$(‘p’).removeClass(‘another’) 移除一个样式</p>
-</li>
-<li><p>$(‘p’).removeClass(‘another high’) 移除多个样式</p>
-</li>
-</ul>
-</li>
-<li><p>切换样式 $(‘p’).toggleClass(‘another’)，如果another类名不存在则添加之，否则删除之</p>
-</li>
-<li><p>判断是否含有某个样式 $(‘p’).hasClass(‘another’)</p>
-</li>
-<li>html()方法 获取或设置html内容，相当于javascript的innerHTML属性</li>
-<li><p>text() 获取或设置文本内容，相当于javascript的innerText属性</p>
-<ul>
-<li><p>获取: var text = $(‘p’).text()</p>
-</li>
-<li><p>设置 $(‘p’).text(‘你喜欢的水果是’)</p>
-</li>
-</ul>
-</li>
-<li><p>val()方法 获取或设置value，相当于javascript的value属性</p>
-</li>
-<li><p>遍历节点</p>
-<ul>
-<li>children() 返回子节点（DOM原声节点，非jQuery节点）</li>
-<li>next()方法，获取紧临的同辈元素，也就是返回下一个兄弟节点。</li>
-<li>prev()，跟next相反，返回上一个兄弟节点</li>
-<li>siblings()返回前后所有的同辈元素。</li>
-<li>closest() 取得最近的匹配元素，往父控件追溯。如$(e.target).closest(‘li’).css(‘color’, ‘red’);给点击的目标元素附近的li元素添加颜色。</li>
-<li>parents() 获得集合中每个匹配元素的祖先元素。</li>
-<li>parent() 获得集合中每个匹配元素的父级元素。</li>
-<li>find() / filter() / nextAll() / prevAll() 等。</li>
-</ul>
-</li>
-<li><p>获取样式 $(‘p’).css(‘color’) 获取&lt;p&gt;的样式颜色</p>
-</li>
-<li><p>设置样式</p>
-<ul>
-<li><p>$(‘p’).css(‘color’, ‘red’);</p>
-</li>
-<li><p>$(‘p’).css({“fontSize”: “30px”, “backgroundColor”: “#888888”‘});</p>
-</li>
-<li><p>元素定位</p>
-<ul>
-<li>offset()，获取元素在当前视窗中的相对偏移。</li>
-<li>position() 获取元素相对于最近的一个position样式为relative或absolute（为啥）的父节点的相对偏移。</li>
-</ul>
-</li>
-<li>scrollLeft() 获取或设置水平滚动条的位置</li>
-<li>scrollRight() 获取或设置垂直滚动条的位置。</li>
-</ul>
-</li>
-</ul>
+</ol>
+<p>保存退出之后，在应用程序里面就可以找到，绑定了图标的应用程序，可以将其固定到启动器上。</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;第三章-jQuery中的DOM操作&quot;&gt;&lt;a href=&quot;#第三章-jQuery中的DOM操作&quot; class=&quot;headerlink&quot; title=&quot;第三章 jQuery中的DOM操作&quot;&gt;&lt;/a&gt;第三章 jQuery中的DOM操作&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;查找&lt;code&gt;DOM&lt;/code&gt;节点&lt;/p&gt;
- &lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; $li = $(&lt;span class=&quot;string&quot;&gt;&#39;ul li:eq(1)&#39;&lt;/span&gt;); &lt;span class=&quot;comment&quot;&gt;//获取&amp;lt;ul&amp;gt;里的第二个&amp;lt;li&amp;gt;节点&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+      &lt;p&gt;在Ubuntu上从网上下载压缩包版本（非.deb包）的应用程序之后，是不生成桌面图表的，比如网上下载的&lt;a href=&quot;http://www.android-studio.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Android Studio
+    
+    </summary>
+    
+    
+      <category term="ubuntu, android studio" scheme="http://yoursite.com/tags/ubuntu-android-studio/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>git配置user.name和user.email</title>
+    <link href="http://yoursite.com/2016/11/15/git%E9%85%8D%E7%BD%AEuser-name%E5%92%8Cuser-email/"/>
+    <id>http://yoursite.com/2016/11/15/git配置user-name和user-email/</id>
+    <published>2016-11-15T10:02:54.000Z</published>
+    <updated>2016-11-15T10:09:23.008Z</updated>
+    
+    <content type="html"><![CDATA[<p>github在统计提交的时候，会判断邮箱是否跟github的登陆邮箱匹配，不匹配则不计算活跃度，即不生成小绿块。</p>
+<p>获取配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">yinlijun@yinlijun:~/personal_github/johnny-blog$ git config user.email</div><div class="line">aaa@aaa.com</div><div class="line">yinlijun@yinlijun:~/personal_github/johnny-blog$ git config user.name</div><div class="line">aaa</div></pre></td></tr></table></figure></p>
+<p>设置当前仓库的user.name/user.email<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yinlijun@yinlijun:~/personal_github/johnny-blog$ git config user.email aaa</div><div class="line">yinlijun@yinlijun:~/personal_github/johnny-blog$ git config user.email aaa@aaa.com</div></pre></td></tr></table></figure></p>
+<p>设置全局user.name/user.email<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yinlijun@yinlijun:~/personal_github/johnny-blog$ git config --global user.name yinlijun</div><div class="line">yinlijun@yinlijun:~/personal_github/johnny-blog$ git config --global user.email yinlijun2004@gmail.com</div></pre></td></tr></table></figure></p>
+<p>如果当前仓库未设置user.name/user.email则采用全局的user.name/user.email，否则当前仓库的user.name/user.email会覆盖全局的user.name/user.email。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;github在统计提交的时候，会判断邮箱是否跟github的登陆邮箱匹配，不匹配则不计算活跃度，即不生成小绿块。&lt;/p&gt;
+&lt;p&gt;获取配置&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pr
+    
+    </summary>
+    
+    
+      <category term="git" scheme="http://yoursite.com/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>windows配置mongdb记录</title>
+    <link href="http://yoursite.com/2016/11/09/windows%E9%85%8D%E7%BD%AEmongdb%E8%AE%B0%E5%BD%95/"/>
+    <id>http://yoursite.com/2016/11/09/windows配置mongdb记录/</id>
+    <published>2016-11-09T09:55:51.000Z</published>
+    <updated>2016-11-15T09:58:52.100Z</updated>
+    
+    <content type="html"><![CDATA[<p>刚给windows电脑配置了mongdb记录一下。</p>
+<ul>
+<li><p>前往<a href="https://www.mongodb.com/download-center" target="_blank" rel="external">官网</a>下载合适的安装包，我选择的是msi安装包，也可以选择下载zip包。</p>
+</li>
+<li><p>运行msi安装包（默认安装在C盘，没找到在哪里可以修改盘符）。</p>
+</li>
+<li><p>在D:\下创建好相关文件夹<br><img src="http://img.blog.csdn.net/20161109194149759" alt="这里写图片描述"></p>
+</li>
+<li><p>打开命令提示符，进入到mongodb安装文件夹下的bin目录<br><img src="http://img.blog.csdn.net/20161109194331090" alt="这里写图片描述"></p>
+</li>
+<li><p>输入如下命令，注册MongoDB服务 </p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mongod.exe --logpath D:\MongoDB\data\<span class="built_in">log</span>\MongoDB.log --logappend --dbpath D:\MongoDB\data\db --directoryperdb --storageEngin=mmappv1 --serviceName MongoDB --install</div></pre></td></tr></table></figure>
+<p><img src="http://img.blog.csdn.net/20161109194436279" alt="这里写图片描述"></p>
+<ul>
+<li>启动MongoDB服务</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">net start MongoDB</div></pre></td></tr></table></figure>
+<p><img src="http://img.blog.csdn.net/20161109194520874" alt="这里写图片描述"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;刚给windows电脑配置了mongdb记录一下。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;前往&lt;a href=&quot;https://www.mongodb.com/download-center&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;官网&lt;/a&gt;下载合适的安
+    
+    </summary>
+    
+    
+      <category term="windows, mongodb" scheme="http://yoursite.com/tags/windows-mongodb/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>windows下文件路径太深，无法删除解决办法</title>
+    <link href="http://yoursite.com/2016/11/08/windows%E4%B8%8B%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84%E5%A4%AA%E6%B7%B1%EF%BC%8C%E6%97%A0%E6%B3%95%E5%88%A0%E9%99%A4%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/"/>
+    <id>http://yoursite.com/2016/11/08/windows下文件路径太深，无法删除解决办法/</id>
+    <published>2016-11-08T10:02:04.000Z</published>
+    <updated>2016-11-15T10:06:34.692Z</updated>
+    
+    <content type="html"><![CDATA[<p>windows下npm开发时，有时候node_modules/下的目录嵌套太深，导致无法删除项目。</p>
+<p>npm社区贡献了一个工具<a href="https://www.npmjs.com/package/windows-node-deps-deleter" target="_blank" rel="external">windows-node-deps-deleter</a>可供删除这样的目录。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">E:\vscode&gt;npm install -g windows-node-deps-deleter</div><div class="line">C:\Users\xx\AppData\Roaming\npm\wnddel -&gt; C:\Users\xx\AppData\Roaming\npm\no</div><div class="line">de_modules\windows-node-deps-deleter\wnddel.js</div><div class="line">windows-node-deps-deleter@0.1.1 C:\Users\xx\AppData\Roaming\npm\node_modules\w</div><div class="line">indows-node-deps-deleter</div><div class="line">└── fs-extra@0.13.0 (ncp@1.0.1, jsonfile@2.4.0, rimraf@2.5.4)</div><div class="line"></div><div class="line">E:\vscode&gt;wnddel react-todo-list</div><div class="line">Deleting &quot;react-todo-list&quot; ...</div><div class="line">&quot;react-todo-list&quot; deleted.</div></pre></td></tr></table></figure>
+<p>参考：<a href="https://www.npmjs.com/package/windows-node-deps-deleter#readme" target="_blank" rel="external">windows-node-deps-delete</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;windows下npm开发时，有时候node_modules/下的目录嵌套太深，导致无法删除项目。&lt;/p&gt;
+&lt;p&gt;npm社区贡献了一个工具&lt;a href=&quot;https://www.npmjs.com/package/windows-node-deps-deleter&quot; ta
     
     </summary>
     
@@ -166,13 +140,68 @@
   </entry>
   
   <entry>
-    <title>高性能Javscript - 笔记</title>
-    <link href="http://yoursite.com/2016/09/13/High-Performance-Javascript/"/>
-    <id>http://yoursite.com/2016/09/13/High-Performance-Javascript/</id>
-    <published>2016-09-13T06:29:27.735Z</published>
-    <updated>2016-09-13T06:29:27.735Z</updated>
+    <title>.gitignore无效，不能过滤某些文件</title>
+    <link href="http://yoursite.com/2016/11/06/gitignore%E6%97%A0%E6%95%88%EF%BC%8C%E4%B8%8D%E8%83%BD%E8%BF%87%E6%BB%A4%E6%9F%90%E4%BA%9B%E6%96%87%E4%BB%B6/"/>
+    <id>http://yoursite.com/2016/11/06/gitignore无效，不能过滤某些文件/</id>
+    <published>2016-11-06T10:03:31.000Z</published>
+    <updated>2016-11-15T10:06:33.016Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h2><h3 id="减少Javascript加载对性能的影响"><a href="#减少Javascript加载对性能的影响" class="headerlink" title="减少Javascript加载对性能的影响"></a>减少Javascript加载对性能的影响</h3><ul>
+    <content type="html"><![CDATA[<p>利用.gitignore过滤文件，如编译过程中的中间文件，等等，这些文件不需要被追踪管理。</p>
+<p>现象：</p>
+<p>在.gitignore添加file1文件，以过滤该文件，但是通过Git status查看仍显示file1文件的状态。</p>
+<p>原因：</p>
+<p>在git库中已存在了这个文件，之前push提交过该文件。</p>
+<p>.gitignore文件只对还没有加入版本管理的文件起作用，如果之前已经用git把这些文件纳入了版本库，就不起作用了</p>
+<p>解决：</p>
+<p>需要在git库中删除该文件，并更新。</p>
+<p>然后再次git status查看状态，file1文件不再显示状态。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;利用.gitignore过滤文件，如编译过程中的中间文件，等等，这些文件不需要被追踪管理。&lt;/p&gt;
+&lt;p&gt;现象：&lt;/p&gt;
+&lt;p&gt;在.gitignore添加file1文件，以过滤该文件，但是通过Git status查看仍显示file1文件的状态。&lt;/p&gt;
+&lt;p&gt;原因：&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="git,.gitignore" scheme="http://yoursite.com/tags/git-gitignore/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>android studio编译错误: *** 目标模式不含有“%”。 停止。</title>
+    <link href="http://yoursite.com/2016/11/05/android-studio%E7%BC%96%E8%AF%91%E9%94%99%E8%AF%AF-%E7%9B%AE%E6%A0%87%E6%A8%A1%E5%BC%8F%E4%B8%8D%E5%90%AB%E6%9C%89%E2%80%9C-%E2%80%9D%E3%80%82-%E5%81%9C%E6%AD%A2%E3%80%82/"/>
+    <id>http://yoursite.com/2016/11/05/android-studio编译错误-目标模式不含有“-”。-停止。/</id>
+    <published>2016-11-05T10:04:19.000Z</published>
+    <updated>2016-11-15T10:07:57.388Z</updated>
+    
+    <content type="html"><![CDATA[<p>Android Studio NDK编译出现如下错误：<br><strong><em> target pattern contains no `%’. Stop<br>中文：
+</em></strong> 目标模式不含有“%”。 停止。<br>可能是obj目录的问题，需要删掉。<br>在工程目录下find所有的obj目录<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find . -name obj</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Android Studio NDK编译出现如下错误：&lt;br&gt;&lt;strong&gt;&lt;em&gt; target pattern contains no `%’. Stop&lt;br&gt;中文：
+&lt;/em&gt;&lt;/strong&gt; 目标模式不含有“%”。 停止。&lt;br&gt;可能是obj目录的问题，需要删
+    
+    </summary>
+    
+    
+      <category term="android studio" scheme="http://yoursite.com/tags/android-studio/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>高性能Javscript - 笔记</title>
+    <link href="http://yoursite.com/2016/11/05/High-Performance-Javascript/"/>
+    <id>http://yoursite.com/2016/11/05/High-Performance-Javascript/</id>
+    <published>2016-11-05T10:04:19.000Z</published>
+    <updated>2016-11-15T10:09:41.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="第一章-加载和执行"><a href="#第一章-加载和执行" class="headerlink" title="第一章 加载和执行"></a>第一章 加载和执行</h2><h3 id="减少Javascript加载对性能的影响"><a href="#减少Javascript加载对性能的影响" class="headerlink" title="减少Javascript加载对性能的影响"></a>减少Javascript加载对性能的影响</h3><ul>
 <li>&lt;/body&gt;闭合标签之前，将所有&lt;javascript&gt;标签放到页面底部。这能确保在脚本执行前页面已经完成了渲染</li>
 <li>合并脚本，减少&lt;javascript&gt;标签</li>
 <li>使用&lt;javascript&gt;标签的defer属性<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">'text/javascript'</span> src=<span class="string">'file1.js'</span> defer&gt;&lt;/script&gt;</div></pre></td></tr></table></figure>
@@ -198,7 +227,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">'text/javascript'</span> src=<span class="string">'lab.js'</span>&gt;&lt;/script&gt;</div><div class="line">&lt;script type=<span class="string">'text/javascript'</span>&gt; </div><div class="line">    $LAB.script(<span class="string">'first-file.js'</span>)</div><div class="line">        .wait()</div><div class="line">        .script(<span class="string">'the-rest.js'</span>)</div><div class="line">        .wait(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            Applicationn.init();</div><div class="line">        &#125;)</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h2><p>在Javascript中，数据存储的位置会对代码整体性能产成重大影响。数据存储共有4中方式：字面量、变量、数组项、对象成员。它们有着各自的性能特点。</p>
+<h2 id="第二章-数据存取"><a href="#第二章-数据存取" class="headerlink" title="第二章 数据存取"></a>第二章 数据存取</h2><p>在Javascript中，数据存储的位置会对代码整体性能产成重大影响。数据存储共有4中方式：字面量、变量、数组项、对象成员。它们有着各自的性能特点。</p>
 <ul>
 <li>访问字面量和局部变量的速度最快，相反，访问数组元素和对象成员相对较慢。</li>
 <li>由于局部变量存在于作用域链的起始位置，因此访问局部变量比访问跨作用域变量更快。变量在作用域中的位置越深，访问所需时间就越长。由于全局变量总处在作用域的最末端，因此访问速度时最慢的。</li>
@@ -207,11 +236,21 @@
 <li>属性或方法在原型链中的位置越深，访问它的速度也越慢。</li>
 <li>通常来说，你可以通过把常用的对象成员、数组元素、跨域变量保存在局部变量中来改善Javascript性能，因为局部变量访问速度更快。</li>
 </ul>
+<h2 id="第三章-DOM编程"><a href="#第三章-DOM编程" class="headerlink" title="第三章 DOM编程"></a>第三章 DOM编程</h2><p>访问和操作DOM时现在Web应用的重要部分。但每次穿越链接ECMAScript和DOM都会有性能消耗，为了减少DOM编程带来的消耗，请记住以下几点：</p>
+<ul>
+<li>最小化DOM访问次数，尽可能在Javascript端处理。</li>
+<li>如果需要多次访问某个DOM节点，请使用局部变量存储它的引用。</li>
+<li>小心处理HTML集合，把集合的长度缓存到一个变量中，并在迭代中使用它。如果需要经常操作集合，建议把它靠背到一个数组中。</li>
+<li>如果可能的话，使用速度更快的API，比如querySelecetAll()和firstElementChild。</li>
+<li>要留意重排和重绘，批量修改样式时，离线操作DOM树，使用缓存，并减少布局信息的次数。</li>
+<li>动画中使用绝对定位，使用拖放代理。</li>
+<li>使用事件委托来减少事件处理器的数量。</li>
+</ul>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;第一章&quot;&gt;&lt;a href=&quot;#第一章&quot; class=&quot;headerlink&quot; title=&quot;第一章&quot;&gt;&lt;/a&gt;第一章&lt;/h2&gt;&lt;h3 id=&quot;减少Javascript加载对性能的影响&quot;&gt;&lt;a href=&quot;#减少Javascript加载对性能的影响&quot; class=&quot;headerlink&quot; title=&quot;减少Javascript加载对性能的影响&quot;&gt;&lt;/a&gt;减少Javascript加载对性能的影响&lt;/h3&gt;&lt;ul&gt;
+      &lt;h2 id=&quot;第一章-加载和执行&quot;&gt;&lt;a href=&quot;#第一章-加载和执行&quot; class=&quot;headerlink&quot; title=&quot;第一章 加载和执行&quot;&gt;&lt;/a&gt;第一章 加载和执行&lt;/h2&gt;&lt;h3 id=&quot;减少Javascript加载对性能的影响&quot;&gt;&lt;a href=&quot;#减少Javascript加载对性能的影响&quot; class=&quot;headerlink&quot; title=&quot;减少Javascript加载对性能的影响&quot;&gt;&lt;/a&gt;减少Javascript加载对性能的影响&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&amp;lt;/body&amp;gt;闭合标签之前，将所有&amp;lt;javascript&amp;gt;标签放到页面底部。这能确保在脚本执行前页面已经完成了渲染&lt;/li&gt;
 &lt;li&gt;合并脚本，减少&amp;lt;javascript&amp;gt;标签&lt;/li&gt;
 &lt;li&gt;使用&amp;lt;javascript&amp;gt;标签的defer属性&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;script type=&lt;span class=&quot;string&quot;&gt;&#39;text/javascript&#39;&lt;/span&gt; src=&lt;span class=&quot;string&quot;&gt;&#39;file1.js&#39;&lt;/span&gt; defer&amp;gt;&amp;lt;/script&amp;gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
@@ -221,214 +260,16 @@
     </summary>
     
     
-  </entry>
-  
-  <entry>
-    <title>锋利的jQeury 第二章-笔记</title>
-    <link href="http://yoursite.com/2016/09/12/chapter-2/"/>
-    <id>http://yoursite.com/2016/09/12/chapter-2/</id>
-    <published>2016-09-12T02:13:38.890Z</published>
-    <updated>2016-09-12T02:13:38.890Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="第二章-jQuery选择器"><a href="#第二章-jQuery选择器" class="headerlink" title="第二章 jQuery选择器"></a>第二章 jQuery选择器</h2><h3 id="基本选择器"><a href="#基本选择器" class="headerlink" title="基本选择器"></a>基本选择器</h3><ul>
-<li><code>#id</code> 匹配id,  <code>$(&#39;#test&#39;)</code></li>
-<li><code>.class</code> 匹配类, <code>$(&#39;.test&#39;)</code></li>
-<li><code>element</code> 匹配标签, <code>$(&#39;div&#39;)</code></li>
-<li><code>*</code> 匹配所有元素, <code>$(&#39;*&#39;)</code></li>
-<li><code>selector1, select2,...,selectN</code> 匹配集合，如$(‘div, span, p.myClass’)</li>
-</ul>
-<a id="more"></a>
-<h3 id="层次选择器"><a href="#层次选择器" class="headerlink" title="层次选择器"></a>层次选择器</h3><ul>
-<li><code>$(&#39;ancestor decendant&#39;)</code> 选择后代元素</li>
-<li><code>$(&#39;parent &gt; child&#39;)</code> 选择子元素</li>
-<li><code>$(&#39;prev + next&#39;)</code> 选择紧接在<code>prev</code>后的<code>next</code>元素，如: <code>$(&#39;.one + div&#39;)</code>，选择<code>one</code>之后的下个一个<code>div</code>同辈元素</li>
-<li><code>$(&#39;prev ~ siblings&#39;)</code> 选择prev后的所有siblings元素，如<code>$(&#39;#two ~ div&#39;)</code>选择<code>two</code>之后的所有<code>div</code>同辈元素</li>
-</ul>
-<h3 id="过滤选择器"><a href="#过滤选择器" class="headerlink" title="过滤选择器"></a>过滤选择器</h3><ul>
-<li><code>:first</code> 选取第一个元素，它只返回一个元素。 如<code>$(&#39;div:first&#39;)</code>选取第一个div元素。</li>
-<li><code>:last</code> 选取最后一个元素，它只返回一个元素。</li>
-<li><code>:not(selector)</code> 取出所有给定选择器匹配的元素，如<code>$(&#39;input:not(.myClass)&#39;)</code>,选取<code>class</code>不是<code>myClass</code>的<code>input</code>元素</li>
-<li><code>:even</code> 选取索引为偶数的元素，索引从<strong>0</strong>开始</li>
-<li><code>:odd</code> 选取奇数索引元素</li>
-<li><code>:eq(index)</code> 选取指定索引元素</li>
-<li><code>:gt(index)</code> 选取大于索引的元素</li>
-<li><code>:lt(index)</code> 选取小于索引的元素</li>
-<li><code>:header</code> 选取所有标题元素 如<code>$(&#39;:header&#39;)</code>，选取网页中所有<code>&amp;lt;h1&gt;,&amp;lt;h2&gt;,&amp;lt;h3&gt;;....</code></li>
-<li><code>:animated</code> 选取所有正在执行动画的元素 如：<code>$(&#39;div:animated&#39;)</code>选取正在执行动画的所有<code>div</code>元素</li>
-<li><code>:focus</code> 选取当前获取焦点的元素 如<code>$(&#39;:focus&#39;)</code>，获取当前获取焦点的元素</li>
-</ul>
-<h3 id="内容过滤选择器"><a href="#内容过滤选择器" class="headerlink" title="内容过滤选择器"></a>内容过滤选择器</h3><ul>
-<li><code>:contains(text)</code> 选取文本内容含有text的元素, 如<code>$(&#39;div:contains(&quot;我&quot;)&#39;)</code>,选取文本含有<code>我</code>的<code>div</code>元素</li>
-<li><code>:empty</code> 选取不包含子元素或者文本为空的元素, 如<code>$(&#39;div:empty&#39;)</code>选取不包含子元素的<code>div</code>元素</li>
-<li><code>:has(selector)</code> 选取含有选择器的所匹配的元素的元素，如<code>$(&#39;div:has(p)&#39;)</code>，选取含有<code>p</code>元素的<code>div</code>元素</li>
-<li><code>:parent</code> 选取含有子元素或文本的元素 如<code>$(&#39;div:parent&#39;)</code>,选取拥有子元素的<code>div</code>元素</li>
-</ul>
-<h3 id="可见性过滤器"><a href="#可见性过滤器" class="headerlink" title="可见性过滤器"></a>可见性过滤器</h3><ul>
-<li><code>:hidden</code> 选取所有不可见元素, 如<code>$(&#39;:hidden&#39;)</code>, 选取所有不可见元素，<code>$(&#39;input:hidden&#39;)</code>选取所有不可见的input元素</li>
-<li><code>:visible</code> 选取所有可见元素</li>
-</ul>
-<h3 id="属性过滤选择器"><a href="#属性过滤选择器" class="headerlink" title="属性过滤选择器"></a>属性过滤选择器</h3><ul>
-<li><code>[attr]</code> 选取拥有此属性的元素, 如<code>$(&#39;div[id]&#39;)</code>, 选取拥有属性<code>id</code>的元素</li>
-<li><code>[attr=val]</code> 选取<code>attr</code>属性为<code>val</code>的元素如, <code>$(&#39;div[title=test]&#39;)</code>选取<code>title</code>为<code>test</code>的<code>div</code>元素</li>
-<li><code>[attr!=val]</code> 选取<code>attr</code>的值不为<code>val</code>的元素</li>
-<li><code>[attr^=val]</code> 选取<code>attr</code>的值以<code>val</code>开始的元素</li>
-<li><code>[attr$=val]</code> 选取<code>attr</code>的值以<code>val</code>结束的元素</li>
-<li><code>[attr*=val]</code> 选取<code>attr</code>的值包含<code>val</code>的元素</li>
-<li><code>[attr|=val]</code> 选取<code>attr</code>的值为<code>val</code>或以<code>val-</code>开始的元素</li>
-<li><code>[attr~=val]</code> 选取<code>attr</code>的值包含<code>&#39; val&#39;</code>的元素（注意val前面要有空格）</li>
-<li><code>[attr1][attr2][attrN]</code> 选取同时满足几个条件的元素，如<code>$(&#39;div[id][title$=&quot;test&quot;]&#39;)</code>，选取拥有属性id，并且属性title以test结束的div元素</li>
-</ul>
-<h3 id="子元素过滤选择器"><a href="#子元素过滤选择器" class="headerlink" title="子元素过滤选择器"></a>子元素过滤选择器</h3><ul>
-<li><code>:nth-child(index/even/odd/equation)</code> 选取每个父元素下的第<code>index</code>个或者奇偶子元素</li>
-<li><code>:first-child</code> 选取每个父元素的第一个子元素，如<code>$(&#39;ul li:first-child&#39;)</code>, 选择ul的第一个li元素</li>
-<li><code>:last-child</code> 选取每个父元素的子元素</li>
-<li><code>:only-child</code> 如果父控件一个子元素，那么匹配到，否则不被匹配。<code>$(&#39;ul li:only-child&#39;)</code>返回只有一个子元素且为li的li元素</li>
-</ul>
-<h3 id="表单对象属性过滤选择器"><a href="#表单对象属性过滤选择器" class="headerlink" title="表单对象属性过滤选择器"></a>表单对象属性过滤选择器</h3><ul>
-<li><code>:enabled</code> 选取所有可用元素。<code>$(&#39;#form1 :enabled&#39;)</code>,选取<code>id</code>为<code>form1</code>的表单内的所有可用元素。</li>
-<li><code>:disbaled</code> 选取所有不可用元素。</li>
-<li><code>:checked</code> 选取所有被选中元素(单选框，复选框)。<code>$(&#39;input:checked&#39;)</code>,选取所有被选中的<code>input</code>元素</li>
-<li><code>:selected</code> 选取所有被选中的选项元素（下拉列表）。<code>$(&#39;select option:seleted&#39;)</code></li>
-</ul>
-<h3 id="表单选择器"><a href="#表单选择器" class="headerlink" title="表单选择器"></a>表单选择器</h3><ul>
-<li><code>:input</code> 选取所有<code>&amp;lt;input&gt;,&amp;lt;textarea&gt;,&amp;lt;select&gt;,&amp;lt;button&gt;</code>元素。如<code>$(&#39;#form1 :input&#39;)</code></li>
-<li><code>:text</code> 选取所有单行文本框。</li>
-<li><code>:password</code> 选取所有密码框</li>
-<li><code>:radio</code> 选取所有单选框</li>
-<li><code>:submit</code> 选取所有提交按钮</li>
-<li><code>:image</code> 选取所有的图像按钮</li>
-<li><code>:reset</code> 选取所有的重置按钮</li>
-<li><code>:button</code> 选取所有的按钮</li>
-<li><code>:file</code> 选取所有的上川域</li>
-<li><code>:hidden</code> 选取所有不可见元素</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;第二章-jQuery选择器&quot;&gt;&lt;a href=&quot;#第二章-jQuery选择器&quot; class=&quot;headerlink&quot; title=&quot;第二章 jQuery选择器&quot;&gt;&lt;/a&gt;第二章 jQuery选择器&lt;/h2&gt;&lt;h3 id=&quot;基本选择器&quot;&gt;&lt;a href=&quot;#基本选择器&quot; class=&quot;headerlink&quot; title=&quot;基本选择器&quot;&gt;&lt;/a&gt;基本选择器&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;#id&lt;/code&gt; 匹配id,  &lt;code&gt;$(&amp;#39;#test&amp;#39;)&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;.class&lt;/code&gt; 匹配类, &lt;code&gt;$(&amp;#39;.test&amp;#39;)&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;element&lt;/code&gt; 匹配标签, &lt;code&gt;$(&amp;#39;div&amp;#39;)&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;*&lt;/code&gt; 匹配所有元素, &lt;code&gt;$(&amp;#39;*&amp;#39;)&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;selector1, select2,...,selectN&lt;/code&gt; 匹配集合，如$(‘div, span, p.myClass’)&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>锋利的jQeury 第四章-笔记</title>
-    <link href="http://yoursite.com/2016/09/12/chapter-4/"/>
-    <id>http://yoursite.com/2016/09/12/chapter-4/</id>
-    <published>2016-09-12T02:13:21.831Z</published>
-    <updated>2016-09-12T02:13:21.831Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="第四章-jQuery中的事件和动画"><a href="#第四章-jQuery中的事件和动画" class="headerlink" title="第四章 jQuery中的事件和动画"></a>第四章 jQuery中的事件和动画</h2><ul>
-<li>window.onload方法，相当于<code>jQuery</code>中的$(window).load(function(){})方法。都是等文档中的所有元素加载完成时调用，包括关联css文件和javascript文件。</li>
-<li>$(document).ready(function() {})则不会等待关联文件下载完，在DOM准备好之后就会调用。</li>
-<li>$(window).load(function(){})可以调用多次，都会执行，而window.onload只会调用最后一次赋予的函数。</li>
-<li>$(document).ready(function() {})可以简写为$(function() {});</li>
-</ul>
-<a id="more"></a>
-<h3 id="事件绑定"><a href="#事件绑定" class="headerlink" title="事件绑定"></a>事件绑定</h3><ul>
-<li><p>bind(type [, data], fn);第1个参数是事件类型，包括focus、load、click、dbclik等。，第2个参数可选，作为event.data传递，第3个参数是回调函数。示例：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    $(<span class="string">'#panel h5.head'</span>).bind(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">        $(<span class="keyword">this</span>).next().show();</div><div class="line">    &#125;)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-</li>
-<li><p>bind函数可以级联，如</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'#panel h5.head'</span>).bind(<span class="string">'mouseover'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">    $(<span class="keyword">this</span>).next().show();</div><div class="line">&#125;).bind(<span class="string">'mouseout'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">    $(<span class="keyword">this</span>).next().hide();</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-</li>
-<li><p>bind可以简写，如</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'#panel h5.head'</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">    $(<span class="keyword">this</span>).next().toggle();</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-</li>
-<li><p>合成事件</p>
-<p>  <code>jQuery</code>有两个合成事件，hover()和toggle(),都有两个回调函数作为参数，可以看成是语法糖。hover表示移入移出两个事件，toggle表示前后两次点击事件，如</p>
-  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'#panel h5.head'</span>).hover(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    $(<span class="keyword">this</span>).next().show(); <span class="comment">//划过时显示下一个元素</span></div><div class="line">&#125;, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    $(<span class="keyword">this</span>).next().hide(); <span class="comment">//划出隐藏下一个元素</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'#panel h5.head'</span>).toggle(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    $(<span class="keyword">this</span>).next().show(); <span class="comment">//点击时显示下一个元素</span></div><div class="line">&#125;, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    $(<span class="keyword">this</span>).next().hide(); <span class="comment">//再次点击时隐藏下一个元素</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-</li>
-<li><p>事件对象的属性</p>
-<ul>
-<li>event.type 事件类型，字符串格式，如’click’, ‘dbclick’, ‘load’等。</li>
-<li>event.preventDefault()阻止默认行为，可以用return false代替。</li>
-<li>event.stopProgagation()组织事件冒泡，可以用return false代替。</li>
-<li>event.target 触发事件的元素。</li>
-<li>event.pageX event.pageY,相对于页面的x，y坐标。</li>
-<li>event.which 不同事件含义不同，鼠标事件表示那个键，键盘事件表示键值。</li>
-<li>event.metaKey ctl键是否按下。</li>
-</ul>
-</li>
-<li>移除事件 unbind([type],[data]) <ul>
-<li>如果没有参数，表示删除所有事件。</li>
-<li>如果只提供type，表示移除所有type对应的事件回调。</li>
-<li>如果传递了2个参数，表示对应的处理函数会被删除。</li>
-</ul>
-</li>
-<li>单次事件 one(type, [data], fn);执行一次后，事件回被移除。</li>
-<li><p>事件模拟</p>
-<ul>
-<li>原生事件 $(‘#btn’).trigger(‘click’)或者$(‘#btn’).click();</li>
-<li>自定义事件<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'#btn'</span>).bind(<span class="string">'myClick'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    $(<span class="string">'#test'</span>).append(<span class="string">'&amp;lt;p&gt;我的自定义事件&amp;lt;/p&gt;'</span>)</div><div class="line">&#125;);</div><div class="line"></div><div class="line">$(<span class="string">'#btn'</span>).trigger(<span class="string">'myClick'</span>); <span class="comment">//触发事件。</span></div><div class="line"><span class="string">``</span><span class="string">`    </span></div><div class="line">- 传递数据</div><div class="line">`<span class="string">``</span>javascript</div><div class="line">$(<span class="string">'#btn'</span>).bind(<span class="string">'myClick'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event, msg1, msg2</span>)</span>&#123;</div><div class="line">    $(<span class="string">'#test'</span>).append(<span class="string">'&amp;lt;p&gt;我的自定义事件&amp;lt;/p&gt;'</span>)</div><div class="line">&#125;);</div><div class="line"></div><div class="line">$(<span class="string">'#btn'</span>).trigger(<span class="string">'myClick'</span>. [<span class="string">'参数1'</span>，<span class="string">'参数2'</span>]); <span class="comment">//触发事件。</span></div><div class="line"><span class="string">``</span><span class="string">`   </span></div><div class="line">- 执行默认操作 triggerHandler，例如，只触发focus事件，但是不获取焦点（浏览器默认行为）</div><div class="line">`<span class="string">``</span>javascript</div><div class="line">$(<span class="string">'input'</span>).triggerHandler(<span class="string">'focus'</span>);</div></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>事件命名空间</p>
-<ul>
-<li>添加命名空间<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'#div'</span>).bind(<span class="string">'mouseover.plugin'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line"></div><div class="line">&#125;)</div><div class="line">$(<span class="string">'#btn'</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    $(<span class="string">'#div'</span>).unbind(<span class="string">'.plugin'</span>); <span class="comment">//移除上面的事件。</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h2><ul>
-<li>show(duration) 显示元素，duration不为0时，表示显示动画。将元素display属性从’none‘设置为原来的值</li>
-<li>hide(duration) 隐藏元素，duration不为0时，表示隐藏动画。将元素display属性设置为’none’</li>
-<li>fadeIn(duration) 与show一样，但是不改变display样式。</li>
-<li>fadeOut(duration) 与hide一样，但是不改变display样式。</li>
-<li>slideUp(duration)和slideDown(duration)，只改变高度。</li>
-<li><p>animate(param, speed, callback)</p>
-<ul>
-<li>param 包含样式属性值，如{left: ‘400px’, top: ‘400px’}，可累加或累减，如{left: ‘+=400px’}</li>
-<li>speed 动画时间</li>
-<li><p>callback 动画完成回调<br>-累加动画</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'#panel'</span>).animate(&#123;left:<span class="string">'400px'</span>, height:<span class="string">'200px'</span>, opacity:<span class="number">1</span>&#125;, <span class="number">3000</span>)</div><div class="line">    .animate(&#123;top:<span class="string">'200px'</span>, width:<span class="string">'200px'</span>&#125;, <span class="number">3000</span>， <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        consle.log(<span class="string">'animate done'</span>);</div><div class="line">    &#125;)</div><div class="line">    .fadeOut(<span class="string">'slow'</span>);</div></pre></td></tr></table></figure>
-</li>
-<li><p>停止动画stop([clearQueue], [gotoEnd])</p>
-</li>
-<li>判断是否处于动画状态 $(element).is(‘:animated’)</li>
-<li>延迟动画delay(duration),延迟一段时间开始动画，$(this).animate({left:’400px’}).delay(200);</li>
-<li>其他动画方法<ul>
-<li>toggle(speed, [callback]) 显示/隐藏元素</li>
-<li>slideToggle(speed, [easing], [callback])通过改变高度来显示/隐藏元素</li>
-<li>fadeTo(speed, opacity, [callback]) 通过改变不透明度来显示/隐藏元素</li>
-<li>fadeToggle(speed, [easing], [callback]) 通过不透明度来显示/隐藏元素。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;第四章-jQuery中的事件和动画&quot;&gt;&lt;a href=&quot;#第四章-jQuery中的事件和动画&quot; class=&quot;headerlink&quot; title=&quot;第四章 jQuery中的事件和动画&quot;&gt;&lt;/a&gt;第四章 jQuery中的事件和动画&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;window.onload方法，相当于&lt;code&gt;jQuery&lt;/code&gt;中的$(window).load(function(){})方法。都是等文档中的所有元素加载完成时调用，包括关联css文件和javascript文件。&lt;/li&gt;
-&lt;li&gt;$(document).ready(function() {})则不会等待关联文件下载完，在DOM准备好之后就会调用。&lt;/li&gt;
-&lt;li&gt;$(window).load(function(){})可以调用多次，都会执行，而window.onload只会调用最后一次赋予的函数。&lt;/li&gt;
-&lt;li&gt;$(document).ready(function() {})可以简写为$(function() {});&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
+      <category term="javascript" scheme="http://yoursite.com/tags/javascript/"/>
     
   </entry>
   
   <entry>
     <title>CSS权威值南-笔记</title>
-    <link href="http://yoursite.com/2016/09/09/CSS-The-Definitive-Guide/"/>
-    <id>http://yoursite.com/2016/09/09/CSS-The-Definitive-Guide/</id>
-    <published>2016-09-09T04:17:17.159Z</published>
-    <updated>2016-09-09T04:17:17.155Z</updated>
+    <link href="http://yoursite.com/2016/09/06/CSS-The-Definitive-Guide/"/>
+    <id>http://yoursite.com/2016/09/06/CSS-The-Definitive-Guide/</id>
+    <published>2016-09-06T10:04:19.000Z</published>
+    <updated>2016-11-15T10:09:13.424Z</updated>
     
     <content type="html"><![CDATA[<h2 id="第一章-css和文档"><a href="#第一章-css和文档" class="headerlink" title="第一章 css和文档"></a>第一章 css和文档</h2><ul>
 <li><p>文档内定义样式</p>
@@ -864,6 +705,364 @@
     
     </summary>
     
+    
+      <category term="css" scheme="http://yoursite.com/tags/css/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>锋利的jQeury 第四章-笔记</title>
+    <link href="http://yoursite.com/2016/09/05/chapter-4/"/>
+    <id>http://yoursite.com/2016/09/05/chapter-4/</id>
+    <published>2016-09-05T10:04:19.000Z</published>
+    <updated>2016-11-15T10:08:44.328Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="第四章-jQuery中的事件和动画"><a href="#第四章-jQuery中的事件和动画" class="headerlink" title="第四章 jQuery中的事件和动画"></a>第四章 jQuery中的事件和动画</h2><ul>
+<li>window.onload方法，相当于<code>jQuery</code>中的$(window).load(function(){})方法。都是等文档中的所有元素加载完成时调用，包括关联css文件和javascript文件。</li>
+<li>$(document).ready(function() {})则不会等待关联文件下载完，在DOM准备好之后就会调用。</li>
+<li>$(window).load(function(){})可以调用多次，都会执行，而window.onload只会调用最后一次赋予的函数。</li>
+<li>$(document).ready(function() {})可以简写为$(function() {});</li>
+</ul>
+<a id="more"></a>
+<h3 id="事件绑定"><a href="#事件绑定" class="headerlink" title="事件绑定"></a>事件绑定</h3><ul>
+<li><p>bind(type [, data], fn);第1个参数是事件类型，包括focus、load、click、dbclik等。，第2个参数可选，作为event.data传递，第3个参数是回调函数。示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    $(<span class="string">'#panel h5.head'</span>).bind(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">        $(<span class="keyword">this</span>).next().show();</div><div class="line">    &#125;)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+</li>
+<li><p>bind函数可以级联，如</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'#panel h5.head'</span>).bind(<span class="string">'mouseover'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">    $(<span class="keyword">this</span>).next().show();</div><div class="line">&#125;).bind(<span class="string">'mouseout'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">    $(<span class="keyword">this</span>).next().hide();</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+</li>
+<li><p>bind可以简写，如</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'#panel h5.head'</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">    $(<span class="keyword">this</span>).next().toggle();</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+</li>
+<li><p>合成事件</p>
+<p>  <code>jQuery</code>有两个合成事件，hover()和toggle(),都有两个回调函数作为参数，可以看成是语法糖。hover表示移入移出两个事件，toggle表示前后两次点击事件，如</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'#panel h5.head'</span>).hover(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    $(<span class="keyword">this</span>).next().show(); <span class="comment">//划过时显示下一个元素</span></div><div class="line">&#125;, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    $(<span class="keyword">this</span>).next().hide(); <span class="comment">//划出隐藏下一个元素</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'#panel h5.head'</span>).toggle(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    $(<span class="keyword">this</span>).next().show(); <span class="comment">//点击时显示下一个元素</span></div><div class="line">&#125;, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    $(<span class="keyword">this</span>).next().hide(); <span class="comment">//再次点击时隐藏下一个元素</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+</li>
+<li><p>事件对象的属性</p>
+<ul>
+<li>event.type 事件类型，字符串格式，如’click’, ‘dbclick’, ‘load’等。</li>
+<li>event.preventDefault()阻止默认行为，可以用return false代替。</li>
+<li>event.stopProgagation()组织事件冒泡，可以用return false代替。</li>
+<li>event.target 触发事件的元素。</li>
+<li>event.pageX event.pageY,相对于页面的x，y坐标。</li>
+<li>event.which 不同事件含义不同，鼠标事件表示那个键，键盘事件表示键值。</li>
+<li>event.metaKey ctl键是否按下。</li>
+</ul>
+</li>
+<li>移除事件 unbind([type],[data]) <ul>
+<li>如果没有参数，表示删除所有事件。</li>
+<li>如果只提供type，表示移除所有type对应的事件回调。</li>
+<li>如果传递了2个参数，表示对应的处理函数会被删除。</li>
+</ul>
+</li>
+<li>单次事件 one(type, [data], fn);执行一次后，事件回被移除。</li>
+<li><p>事件模拟</p>
+<ul>
+<li>原生事件 $(‘#btn’).trigger(‘click’)或者$(‘#btn’).click();</li>
+<li>自定义事件<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'#btn'</span>).bind(<span class="string">'myClick'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    $(<span class="string">'#test'</span>).append(<span class="string">'&amp;lt;p&gt;我的自定义事件&amp;lt;/p&gt;'</span>)</div><div class="line">&#125;);</div><div class="line"></div><div class="line">$(<span class="string">'#btn'</span>).trigger(<span class="string">'myClick'</span>); <span class="comment">//触发事件。</span></div><div class="line"><span class="string">``</span><span class="string">`    </span></div><div class="line">- 传递数据</div><div class="line">`<span class="string">``</span>javascript</div><div class="line">$(<span class="string">'#btn'</span>).bind(<span class="string">'myClick'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event, msg1, msg2</span>)</span>&#123;</div><div class="line">    $(<span class="string">'#test'</span>).append(<span class="string">'&amp;lt;p&gt;我的自定义事件&amp;lt;/p&gt;'</span>)</div><div class="line">&#125;);</div><div class="line"></div><div class="line">$(<span class="string">'#btn'</span>).trigger(<span class="string">'myClick'</span>. [<span class="string">'参数1'</span>，<span class="string">'参数2'</span>]); <span class="comment">//触发事件。</span></div><div class="line"><span class="string">``</span><span class="string">`   </span></div><div class="line">- 执行默认操作 triggerHandler，例如，只触发focus事件，但是不获取焦点（浏览器默认行为）</div><div class="line">`<span class="string">``</span>javascript</div><div class="line">$(<span class="string">'input'</span>).triggerHandler(<span class="string">'focus'</span>);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>事件命名空间</p>
+<ul>
+<li>添加命名空间<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'#div'</span>).bind(<span class="string">'mouseover.plugin'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line"></div><div class="line">&#125;)</div><div class="line">$(<span class="string">'#btn'</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    $(<span class="string">'#div'</span>).unbind(<span class="string">'.plugin'</span>); <span class="comment">//移除上面的事件。</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h2><ul>
+<li>show(duration) 显示元素，duration不为0时，表示显示动画。将元素display属性从’none‘设置为原来的值</li>
+<li>hide(duration) 隐藏元素，duration不为0时，表示隐藏动画。将元素display属性设置为’none’</li>
+<li>fadeIn(duration) 与show一样，但是不改变display样式。</li>
+<li>fadeOut(duration) 与hide一样，但是不改变display样式。</li>
+<li>slideUp(duration)和slideDown(duration)，只改变高度。</li>
+<li><p>animate(param, speed, callback)</p>
+<ul>
+<li>param 包含样式属性值，如{left: ‘400px’, top: ‘400px’}，可累加或累减，如{left: ‘+=400px’}</li>
+<li>speed 动画时间</li>
+<li><p>callback 动画完成回调<br>-累加动画</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'#panel'</span>).animate(&#123;left:<span class="string">'400px'</span>, height:<span class="string">'200px'</span>, opacity:<span class="number">1</span>&#125;, <span class="number">3000</span>)</div><div class="line">    .animate(&#123;top:<span class="string">'200px'</span>, width:<span class="string">'200px'</span>&#125;, <span class="number">3000</span>， <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        consle.log(<span class="string">'animate done'</span>);</div><div class="line">    &#125;)</div><div class="line">    .fadeOut(<span class="string">'slow'</span>);</div></pre></td></tr></table></figure>
+</li>
+<li><p>停止动画stop([clearQueue], [gotoEnd])</p>
+</li>
+<li>判断是否处于动画状态 $(element).is(‘:animated’)</li>
+<li>延迟动画delay(duration),延迟一段时间开始动画，$(this).animate({left:’400px’}).delay(200);</li>
+<li>其他动画方法<ul>
+<li>toggle(speed, [callback]) 显示/隐藏元素</li>
+<li>slideToggle(speed, [easing], [callback])通过改变高度来显示/隐藏元素</li>
+<li>fadeTo(speed, opacity, [callback]) 通过改变不透明度来显示/隐藏元素</li>
+<li>fadeToggle(speed, [easing], [callback]) 通过不透明度来显示/隐藏元素。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;第四章-jQuery中的事件和动画&quot;&gt;&lt;a href=&quot;#第四章-jQuery中的事件和动画&quot; class=&quot;headerlink&quot; title=&quot;第四章 jQuery中的事件和动画&quot;&gt;&lt;/a&gt;第四章 jQuery中的事件和动画&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;window.onload方法，相当于&lt;code&gt;jQuery&lt;/code&gt;中的$(window).load(function(){})方法。都是等文档中的所有元素加载完成时调用，包括关联css文件和javascript文件。&lt;/li&gt;
+&lt;li&gt;$(document).ready(function() {})则不会等待关联文件下载完，在DOM准备好之后就会调用。&lt;/li&gt;
+&lt;li&gt;$(window).load(function(){})可以调用多次，都会执行，而window.onload只会调用最后一次赋予的函数。&lt;/li&gt;
+&lt;li&gt;$(document).ready(function() {})可以简写为$(function() {});&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="jQuery" scheme="http://yoursite.com/tags/jQuery/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>锋利的jQeury 第三章-笔记</title>
+    <link href="http://yoursite.com/2016/09/03/chapter-3/"/>
+    <id>http://yoursite.com/2016/09/03/chapter-3/</id>
+    <published>2016-09-03T10:04:19.000Z</published>
+    <updated>2016-11-15T10:09:02.672Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="第三章-jQuery中的DOM操作"><a href="#第三章-jQuery中的DOM操作" class="headerlink" title="第三章 jQuery中的DOM操作"></a>第三章 jQuery中的DOM操作</h2><ul>
+<li><p>查找<code>DOM</code>节点</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> $li = $(<span class="string">'ul li:eq(1)'</span>); <span class="comment">//获取&lt;ul&gt;里的第二个&lt;li&gt;节点</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li><p>查找属性节点</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> $para = $(<span class="string">'p'</span>); </div><div class="line"><span class="keyword">var</span> p_txt = $para.attr(<span class="string">'title'</span>);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<!--more-->
+<ul>
+<li><p>创建元素节点</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> $li = $(<span class="string">'&lt;li&gt;&lt;/li&gt;'</span>);</div></pre></td></tr></table></figure>
+</li>
+<li><p>创建文本节点</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> $li = $(<span class="string">'&lt;li&gt;香蕉&lt;/li&gt;'</span>);</div></pre></td></tr></table></figure>
+</li>
+<li><p>创建属性节点</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> $li = $(<span class="string">'&lt;li title="香蕉"&gt;香蕉&lt;/li&gt;'</span>);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>插入节点的方法<ul>
+<li>append 追加元素。$(‘p’).append($(“&lt;b&gt;你好&lt;/b&gt;”))，A.append(B)之后，A和B是父子关系。</li>
+<li>appendTo 跟append相反，A.append(B) 相当于 B.appendTo(A)</li>
+<li>prepend 插入到前面</li>
+<li>prependTo 跟prepend相反</li>
+<li>after 在每个匹配元素之后插入内容，A.after(B)之后，A与B是兄弟元素</li>
+<li>intertAfter跟after相反，A.after(B)相当于B.instertAfter(A)</li>
+<li>before，跟after相反</li>
+<li>insertBefore，A.before(B)相当于B.insertBefore(A)</li>
+<li>删除节点的方法</li>
+<li>remove 删除匹配的元素 $(‘ul li:eq(1)’).remove()，删除第二个li元素，remove返回值是删除的元素</li>
+<li>detach 与remove不同，detach会保留所有该元素绑定的事件，附加的数据等。</li>
+<li>empty 清空节点</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>复制节点 clone，可以传入一个boolean参数表示是否同时复制元素中所绑定的事件。</p>
+</li>
+<li><p>替换节点</p>
+<ul>
+<li>replaceWith， A.replaceWith(B)，用B替换A</li>
+<li>replaceAll 跟replaceWith相反，A.replaceWith(B)相当于B.replaceAll(A)</li>
+</ul>
+</li>
+<li><p>包裹节点</p>
+<ul>
+<li>wrap $(‘strong’).wrap(‘&lt;b&gt;&lt;/b&gt;’) 用&lt;b&gt;标签将&lt;strong&gt;标签包起来，如果有多个匹配，则每个元素单独包裹。</li>
+<li>wrapAll，将所有的元素用一个元素来包裹。如果匹配的节点之间有其他节点，其他节点会被放到包裹元素之后。</li>
+<li>wrapInner 将子内容（包括文本节点）包裹起来。</li>
+</ul>
+</li>
+<li><p>获取属性，$(‘p’).atter(‘title’)</p>
+</li>
+<li><p>设置属性</p>
+<ul>
+<li><p>$(‘p’).attr(‘title’, ‘your title’) 设置单个属性</p>
+</li>
+<li><p>$(‘p’).attr({‘title’, ‘your title’, ‘name’: ‘test’})，设置多个属性</p>
+</li>
+</ul>
+</li>
+<li><p>删除属性 $(‘p’).removeAttr(‘title’);</p>
+</li>
+<li><p>获取样式 $(‘p’).attr(‘class’)获取&lt;p&gt;元素的class</p>
+</li>
+<li><p>设置样式 $(‘p’).attr(‘class’, ‘high’) 设置样式</p>
+</li>
+<li><p>追加样式 $(‘p’).addClass(‘another’)</p>
+</li>
+<li><p>移除样式</p>
+<ul>
+<li><p>$(‘p’).removeClass(‘another’) 移除一个样式</p>
+</li>
+<li><p>$(‘p’).removeClass(‘another high’) 移除多个样式</p>
+</li>
+</ul>
+</li>
+<li><p>切换样式 $(‘p’).toggleClass(‘another’)，如果another类名不存在则添加之，否则删除之</p>
+</li>
+<li><p>判断是否含有某个样式 $(‘p’).hasClass(‘another’)</p>
+</li>
+<li>html()方法 获取或设置html内容，相当于javascript的innerHTML属性</li>
+<li><p>text() 获取或设置文本内容，相当于javascript的innerText属性</p>
+<ul>
+<li><p>获取: var text = $(‘p’).text()</p>
+</li>
+<li><p>设置 $(‘p’).text(‘你喜欢的水果是’)</p>
+</li>
+</ul>
+</li>
+<li><p>val()方法 获取或设置value，相当于javascript的value属性</p>
+</li>
+<li><p>遍历节点</p>
+<ul>
+<li>children() 返回子节点（DOM原声节点，非jQuery节点）</li>
+<li>next()方法，获取紧临的同辈元素，也就是返回下一个兄弟节点。</li>
+<li>prev()，跟next相反，返回上一个兄弟节点</li>
+<li>siblings()返回前后所有的同辈元素。</li>
+<li>closest() 取得最近的匹配元素，往父控件追溯。如$(e.target).closest(‘li’).css(‘color’, ‘red’);给点击的目标元素附近的li元素添加颜色。</li>
+<li>parents() 获得集合中每个匹配元素的祖先元素。</li>
+<li>parent() 获得集合中每个匹配元素的父级元素。</li>
+<li>find() / filter() / nextAll() / prevAll() 等。</li>
+</ul>
+</li>
+<li><p>获取样式 $(‘p’).css(‘color’) 获取&lt;p&gt;的样式颜色</p>
+</li>
+<li><p>设置样式</p>
+<ul>
+<li><p>$(‘p’).css(‘color’, ‘red’);</p>
+</li>
+<li><p>$(‘p’).css({“fontSize”: “30px”, “backgroundColor”: “#888888”‘});</p>
+</li>
+<li><p>元素定位</p>
+<ul>
+<li>offset()，获取元素在当前视窗中的相对偏移。</li>
+<li>position() 获取元素相对于最近的一个position样式为relative或absolute（为啥）的父节点的相对偏移。</li>
+</ul>
+</li>
+<li>scrollLeft() 获取或设置水平滚动条的位置</li>
+<li>scrollRight() 获取或设置垂直滚动条的位置。</li>
+</ul>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;第三章-jQuery中的DOM操作&quot;&gt;&lt;a href=&quot;#第三章-jQuery中的DOM操作&quot; class=&quot;headerlink&quot; title=&quot;第三章 jQuery中的DOM操作&quot;&gt;&lt;/a&gt;第三章 jQuery中的DOM操作&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;查找&lt;code&gt;DOM&lt;/code&gt;节点&lt;/p&gt;
+ &lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; $li = $(&lt;span class=&quot;string&quot;&gt;&#39;ul li:eq(1)&#39;&lt;/span&gt;); &lt;span class=&quot;comment&quot;&gt;//获取&amp;lt;ul&amp;gt;里的第二个&amp;lt;li&amp;gt;节点&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="jQuery" scheme="http://yoursite.com/tags/jQuery/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>锋利的jQeury 第二章-笔记</title>
+    <link href="http://yoursite.com/2016/09/02/chapter-2/"/>
+    <id>http://yoursite.com/2016/09/02/chapter-2/</id>
+    <published>2016-09-02T10:04:19.000Z</published>
+    <updated>2016-11-15T10:08:51.376Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="第二章-jQuery选择器"><a href="#第二章-jQuery选择器" class="headerlink" title="第二章 jQuery选择器"></a>第二章 jQuery选择器</h2><h3 id="基本选择器"><a href="#基本选择器" class="headerlink" title="基本选择器"></a>基本选择器</h3><ul>
+<li><code>#id</code> 匹配id,  <code>$(&#39;#test&#39;)</code></li>
+<li><code>.class</code> 匹配类, <code>$(&#39;.test&#39;)</code></li>
+<li><code>element</code> 匹配标签, <code>$(&#39;div&#39;)</code></li>
+<li><code>*</code> 匹配所有元素, <code>$(&#39;*&#39;)</code></li>
+<li><code>selector1, select2,...,selectN</code> 匹配集合，如$(‘div, span, p.myClass’)</li>
+</ul>
+<a id="more"></a>
+<h3 id="层次选择器"><a href="#层次选择器" class="headerlink" title="层次选择器"></a>层次选择器</h3><ul>
+<li><code>$(&#39;ancestor decendant&#39;)</code> 选择后代元素</li>
+<li><code>$(&#39;parent &gt; child&#39;)</code> 选择子元素</li>
+<li><code>$(&#39;prev + next&#39;)</code> 选择紧接在<code>prev</code>后的<code>next</code>元素，如: <code>$(&#39;.one + div&#39;)</code>，选择<code>one</code>之后的下个一个<code>div</code>同辈元素</li>
+<li><code>$(&#39;prev ~ siblings&#39;)</code> 选择prev后的所有siblings元素，如<code>$(&#39;#two ~ div&#39;)</code>选择<code>two</code>之后的所有<code>div</code>同辈元素</li>
+</ul>
+<h3 id="过滤选择器"><a href="#过滤选择器" class="headerlink" title="过滤选择器"></a>过滤选择器</h3><ul>
+<li><code>:first</code> 选取第一个元素，它只返回一个元素。 如<code>$(&#39;div:first&#39;)</code>选取第一个div元素。</li>
+<li><code>:last</code> 选取最后一个元素，它只返回一个元素。</li>
+<li><code>:not(selector)</code> 取出所有给定选择器匹配的元素，如<code>$(&#39;input:not(.myClass)&#39;)</code>,选取<code>class</code>不是<code>myClass</code>的<code>input</code>元素</li>
+<li><code>:even</code> 选取索引为偶数的元素，索引从<strong>0</strong>开始</li>
+<li><code>:odd</code> 选取奇数索引元素</li>
+<li><code>:eq(index)</code> 选取指定索引元素</li>
+<li><code>:gt(index)</code> 选取大于索引的元素</li>
+<li><code>:lt(index)</code> 选取小于索引的元素</li>
+<li><code>:header</code> 选取所有标题元素 如<code>$(&#39;:header&#39;)</code>，选取网页中所有<code>&amp;lt;h1&gt;,&amp;lt;h2&gt;,&amp;lt;h3&gt;;....</code></li>
+<li><code>:animated</code> 选取所有正在执行动画的元素 如：<code>$(&#39;div:animated&#39;)</code>选取正在执行动画的所有<code>div</code>元素</li>
+<li><code>:focus</code> 选取当前获取焦点的元素 如<code>$(&#39;:focus&#39;)</code>，获取当前获取焦点的元素</li>
+</ul>
+<h3 id="内容过滤选择器"><a href="#内容过滤选择器" class="headerlink" title="内容过滤选择器"></a>内容过滤选择器</h3><ul>
+<li><code>:contains(text)</code> 选取文本内容含有text的元素, 如<code>$(&#39;div:contains(&quot;我&quot;)&#39;)</code>,选取文本含有<code>我</code>的<code>div</code>元素</li>
+<li><code>:empty</code> 选取不包含子元素或者文本为空的元素, 如<code>$(&#39;div:empty&#39;)</code>选取不包含子元素的<code>div</code>元素</li>
+<li><code>:has(selector)</code> 选取含有选择器的所匹配的元素的元素，如<code>$(&#39;div:has(p)&#39;)</code>，选取含有<code>p</code>元素的<code>div</code>元素</li>
+<li><code>:parent</code> 选取含有子元素或文本的元素 如<code>$(&#39;div:parent&#39;)</code>,选取拥有子元素的<code>div</code>元素</li>
+</ul>
+<h3 id="可见性过滤器"><a href="#可见性过滤器" class="headerlink" title="可见性过滤器"></a>可见性过滤器</h3><ul>
+<li><code>:hidden</code> 选取所有不可见元素, 如<code>$(&#39;:hidden&#39;)</code>, 选取所有不可见元素，<code>$(&#39;input:hidden&#39;)</code>选取所有不可见的input元素</li>
+<li><code>:visible</code> 选取所有可见元素</li>
+</ul>
+<h3 id="属性过滤选择器"><a href="#属性过滤选择器" class="headerlink" title="属性过滤选择器"></a>属性过滤选择器</h3><ul>
+<li><code>[attr]</code> 选取拥有此属性的元素, 如<code>$(&#39;div[id]&#39;)</code>, 选取拥有属性<code>id</code>的元素</li>
+<li><code>[attr=val]</code> 选取<code>attr</code>属性为<code>val</code>的元素如, <code>$(&#39;div[title=test]&#39;)</code>选取<code>title</code>为<code>test</code>的<code>div</code>元素</li>
+<li><code>[attr!=val]</code> 选取<code>attr</code>的值不为<code>val</code>的元素</li>
+<li><code>[attr^=val]</code> 选取<code>attr</code>的值以<code>val</code>开始的元素</li>
+<li><code>[attr$=val]</code> 选取<code>attr</code>的值以<code>val</code>结束的元素</li>
+<li><code>[attr*=val]</code> 选取<code>attr</code>的值包含<code>val</code>的元素</li>
+<li><code>[attr|=val]</code> 选取<code>attr</code>的值为<code>val</code>或以<code>val-</code>开始的元素</li>
+<li><code>[attr~=val]</code> 选取<code>attr</code>的值包含<code>&#39; val&#39;</code>的元素（注意val前面要有空格）</li>
+<li><code>[attr1][attr2][attrN]</code> 选取同时满足几个条件的元素，如<code>$(&#39;div[id][title$=&quot;test&quot;]&#39;)</code>，选取拥有属性id，并且属性title以test结束的div元素</li>
+</ul>
+<h3 id="子元素过滤选择器"><a href="#子元素过滤选择器" class="headerlink" title="子元素过滤选择器"></a>子元素过滤选择器</h3><ul>
+<li><code>:nth-child(index/even/odd/equation)</code> 选取每个父元素下的第<code>index</code>个或者奇偶子元素</li>
+<li><code>:first-child</code> 选取每个父元素的第一个子元素，如<code>$(&#39;ul li:first-child&#39;)</code>, 选择ul的第一个li元素</li>
+<li><code>:last-child</code> 选取每个父元素的子元素</li>
+<li><code>:only-child</code> 如果父控件一个子元素，那么匹配到，否则不被匹配。<code>$(&#39;ul li:only-child&#39;)</code>返回只有一个子元素且为li的li元素</li>
+</ul>
+<h3 id="表单对象属性过滤选择器"><a href="#表单对象属性过滤选择器" class="headerlink" title="表单对象属性过滤选择器"></a>表单对象属性过滤选择器</h3><ul>
+<li><code>:enabled</code> 选取所有可用元素。<code>$(&#39;#form1 :enabled&#39;)</code>,选取<code>id</code>为<code>form1</code>的表单内的所有可用元素。</li>
+<li><code>:disbaled</code> 选取所有不可用元素。</li>
+<li><code>:checked</code> 选取所有被选中元素(单选框，复选框)。<code>$(&#39;input:checked&#39;)</code>,选取所有被选中的<code>input</code>元素</li>
+<li><code>:selected</code> 选取所有被选中的选项元素（下拉列表）。<code>$(&#39;select option:seleted&#39;)</code></li>
+</ul>
+<h3 id="表单选择器"><a href="#表单选择器" class="headerlink" title="表单选择器"></a>表单选择器</h3><ul>
+<li><code>:input</code> 选取所有<code>&amp;lt;input&gt;,&amp;lt;textarea&gt;,&amp;lt;select&gt;,&amp;lt;button&gt;</code>元素。如<code>$(&#39;#form1 :input&#39;)</code></li>
+<li><code>:text</code> 选取所有单行文本框。</li>
+<li><code>:password</code> 选取所有密码框</li>
+<li><code>:radio</code> 选取所有单选框</li>
+<li><code>:submit</code> 选取所有提交按钮</li>
+<li><code>:image</code> 选取所有的图像按钮</li>
+<li><code>:reset</code> 选取所有的重置按钮</li>
+<li><code>:button</code> 选取所有的按钮</li>
+<li><code>:file</code> 选取所有的上川域</li>
+<li><code>:hidden</code> 选取所有不可见元素</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;第二章-jQuery选择器&quot;&gt;&lt;a href=&quot;#第二章-jQuery选择器&quot; class=&quot;headerlink&quot; title=&quot;第二章 jQuery选择器&quot;&gt;&lt;/a&gt;第二章 jQuery选择器&lt;/h2&gt;&lt;h3 id=&quot;基本选择器&quot;&gt;&lt;a href=&quot;#基本选择器&quot; class=&quot;headerlink&quot; title=&quot;基本选择器&quot;&gt;&lt;/a&gt;基本选择器&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;#id&lt;/code&gt; 匹配id,  &lt;code&gt;$(&amp;#39;#test&amp;#39;)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.class&lt;/code&gt; 匹配类, &lt;code&gt;$(&amp;#39;.test&amp;#39;)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;element&lt;/code&gt; 匹配标签, &lt;code&gt;$(&amp;#39;div&amp;#39;)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;*&lt;/code&gt; 匹配所有元素, &lt;code&gt;$(&amp;#39;*&amp;#39;)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;selector1, select2,...,selectN&lt;/code&gt; 匹配集合，如$(‘div, span, p.myClass’)&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="jQuery" scheme="http://yoursite.com/tags/jQuery/"/>
     
   </entry>
   

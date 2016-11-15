@@ -1,5 +1,7 @@
 ---
 title: 锋利的jQeury 第四章-笔记 
+date: 2016-9-5 18:04:19
+tags: jQuery
 ---
 
 ## 第四章 jQuery中的事件和动画

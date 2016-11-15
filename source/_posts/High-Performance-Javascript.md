@@ -1,5 +1,7 @@
 ---
 title: 高性能Javscript - 笔记
+date: 2016-11-5 18:04:19
+tags: javascript
 ---
 
 ## 第一章 加载和执行
