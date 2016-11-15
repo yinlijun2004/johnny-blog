@@ -11,6 +11,8 @@ update-alternatives: 警告: /etc/alternatives/java has been changed (manually o
 yinlijun@sj:~$ sudo update-alternatives --install /usr/bin/javac javac /opt/jdk1.8.0_101/bin/javac 100
 ```
 
+<!--more-->
+
 然后，选择默认的JDK版本：
 ```bash
 yinlijun@sj:~$ sudo update-alternatives --config java

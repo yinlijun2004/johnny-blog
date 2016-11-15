@@ -10,6 +10,8 @@ tags: git,.gitignore
 
 在.gitignore添加file1文件，以过滤该文件，但是通过Git status查看仍显示file1文件的状态。
 
+<!--more-->
+
 原因：
 
 在git库中已存在了这个文件，之前push提交过该文件。

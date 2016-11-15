@@ -8,6 +8,8 @@ windows下npm开发时，有时候node_modules/下的目录嵌套太深，导致
 
 npm社区贡献了一个工具[windows-node-deps-deleter](https://www.npmjs.com/package/windows-node-deps-deleter)可供删除这样的目录。
 
+<!--more-->
+
 ```
 E:\vscode>npm install -g windows-node-deps-deleter
 C:\Users\xx\AppData\Roaming\npm\wnddel -> C:\Users\xx\AppData\Roaming\npm\no

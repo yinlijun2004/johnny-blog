@@ -13,6 +13,7 @@ aaa@aaa.com
 yinlijun@yinlijun:~/personal_github/johnny-blog$ git config user.name
 aaa
 ```
+<!--more-->
 
 设置当前仓库的user.name/user.email
 ```

@@ -278,6 +278,128 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/15/how-to-download-openjdk/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Johnny">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://tva3.sinaimg.cn/crop.0.0.180.180.180/7d92e765jw1e8qgp5bmzyj2050050aa8.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Johnny">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Johnny" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/11/15/how-to-download-openjdk/" itemprop="url">
+                  如何下载安装openJDK
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-15T20:04:44+08:00">
+                2016-11-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="JDK-8"><a href="#JDK-8" class="headerlink" title="JDK 8"></a>JDK 8</h2><h3 id="Debian-Ubuntu"><a href="#Debian-Ubuntu" class="headerlink" title="Debian, Ubuntu"></a><strong>Debian, Ubuntu</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install openjdk-8-jre</div></pre></td></tr></table></figure>
+<p>openjdk-8-jre只包含运行时环境(Java Runtime Environment）。如果你想开发java程序，请安装openjdk-8-jdk。</p>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/15/how-to-download-openjdk/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/15/ubuntu利用update-alternatives配置java/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -355,11 +477,14 @@
 
       
         
-          
-            <p>利用Android Studio开发，经常会碰到JDK版本的切换问题，安装好新版本的<a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank" rel="external">jdk</a>之后，需要先配置到可选项。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">yinlijun@sj:~$ sudo update-alternatives --install /usr/bin/java java /opt/jdk1.8.0_101/bin/java 100</div><div class="line">update-alternatives: 警告: /etc/alternatives/java has been changed (manually or by a script); switching to manual updates only</div><div class="line">yinlijun@sj:~$ sudo update-alternatives --install /usr/bin/javac javac /opt/jdk1.8.0_101/bin/javac 100</div></pre></td></tr></table></figure></p>
-<p>然后，选择默认的JDK版本：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">yinlijun@sj:~$ sudo update-alternatives --config java</div><div class="line">有 3 个候选项可用于替换 java (提供 /usr/bin/java)。</div><div class="line"></div><div class="line">  选择       路径                                          优先级  状态</div><div class="line">------------------------------------------------------------</div><div class="line">  0            /opt/jdk1.6.0_37/bin/java                        10000     自动模式</div><div class="line">  1            /opt/jdk1.6.0_37/bin/java                        10000     手动模式</div><div class="line">  2            /opt/jdk1.8.0_101/bin/java                       100       手动模式</div><div class="line">  3            /usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java   1051      手动模式</div><div class="line"></div><div class="line">要维持当前值[*]请按回车键，或者键入选择的编号：2</div><div class="line">update-alternatives: using /opt/jdk1.8.0_101/bin/java to provide /usr/bin/java (java) <span class="keyword">in</span> 手动模式</div><div class="line">yinlijun@sj:~$ sudo update-alternatives --config javac</div><div class="line">有 3 个候选项可用于替换 javac (提供 /usr/bin/javac)。</div><div class="line"></div><div class="line">  选择       路径                                       优先级  状态</div><div class="line">------------------------------------------------------------</div><div class="line">  0            /opt/jdk1.6.0_37/bin/javac                    10000     自动模式</div><div class="line">  1            /opt/jdk1.6.0_37/bin/javac                    10000     手动模式</div><div class="line">  2            /opt/jdk1.8.0_101/bin/javac                   100       手动模式</div><div class="line">* 3            /usr/lib/jvm/java-7-openjdk-amd64/bin/javac   1051      手动模式</div><div class="line"></div><div class="line">要维持当前值[*]请按回车键，或者键入选择的编号：2</div></pre></td></tr></table></figure></p>
-
-          
+          <p>利用Android Studio开发，经常会碰到JDK版本的切换问题，安装好新版本的<a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">jdk</a>之后，需要先配置到可选项。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">yinlijun@sj:~$ sudo update-alternatives --install /usr/bin/java java /opt/jdk1.8.0_101/bin/java 100</div><div class="line">update-alternatives: 警告: /etc/alternatives/java has been changed (manually or by a script); switching to manual updates only</div><div class="line">yinlijun@sj:~$ sudo update-alternatives --install /usr/bin/javac javac /opt/jdk1.8.0_101/bin/javac 100</div></pre></td></tr></table></figure></p>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/15/ubuntu利用update-alternatives配置java/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -473,8 +598,7 @@
 
       
         
-          
-            <p>在Ubuntu上从网上下载压缩包版本（非.deb包）的应用程序之后，是不生成桌面图表的，比如网上下载的<a href="http://www.android-studio.org/" target="_blank" rel="external">Android Studio</a>, 所以需要自己做一个桌面图标。</p>
+          <p>在Ubuntu上从网上下载压缩包版本（非.deb包）的应用程序之后，是不生成桌面图表的，比如网上下载的<a href="http://www.android-studio.org/">Android Studio</a>, 所以需要自己做一个桌面图标。</p>
 <ol>
 <li><p>进入到/usr/share/applications/目录下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /usr/share/applications/</div></pre></td></tr></table></figure>
@@ -482,13 +606,14 @@
 <li><p>新建一个android-studio.desktop文件。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim android-studio.desktop</div></pre></td></tr></table></figure>
 </li>
-<li><p>输入一下内容</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Version=2.2</div><div class="line">Name=Android Studio</div><div class="line">GenericName=Android IDE</div><div class="line">Comment=Android Development</div><div class="line">Exec=/home/yinlijun/android_toolchain/android-studio/bin/studio.sh %U</div><div class="line">Terminal=<span class="literal">false</span></div><div class="line">Icon=/home/yinlijun/android_toolchain/android-studio/bin/studio.png</div><div class="line">Type=Application</div><div class="line">Categories=Android;IDE;</div></pre></td></tr></table></figure>
-</li>
 </ol>
-<p>保存退出之后，在应用程序里面就可以找到，绑定了图标的应用程序，可以将其固定到启动器上。</p>
-
-          
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/15/make-ubutun-desktop/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -602,14 +727,15 @@
 
       
         
-          
-            <p>github在统计提交的时候，会判断邮箱是否跟github的登陆邮箱匹配，不匹配则不计算活跃度，即不生成小绿块。</p>
+          <p>github在统计提交的时候，会判断邮箱是否跟github的登陆邮箱匹配，不匹配则不计算活跃度，即不生成小绿块。</p>
 <p>获取配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">yinlijun@yinlijun:~/personal_github/johnny-blog$ git config user.email</div><div class="line">aaa@aaa.com</div><div class="line">yinlijun@yinlijun:~/personal_github/johnny-blog$ git config user.name</div><div class="line">aaa</div></pre></td></tr></table></figure></p>
-<p>设置当前仓库的user.name/user.email<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yinlijun@yinlijun:~/personal_github/johnny-blog$ git config user.email aaa</div><div class="line">yinlijun@yinlijun:~/personal_github/johnny-blog$ git config user.email aaa@aaa.com</div></pre></td></tr></table></figure></p>
-<p>设置全局user.name/user.email<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yinlijun@yinlijun:~/personal_github/johnny-blog$ git config --global user.name yinlijun</div><div class="line">yinlijun@yinlijun:~/personal_github/johnny-blog$ git config --global user.email yinlijun2004@gmail.com</div></pre></td></tr></table></figure></p>
-<p>如果当前仓库未设置user.name/user.email则采用全局的user.name/user.email，否则当前仓库的user.name/user.email会覆盖全局的user.name/user.email。</p>
-
-          
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/15/git配置user-name和user-email/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -723,29 +849,22 @@
 
       
         
-          
-            <p>刚给windows电脑配置了mongdb记录一下。</p>
+          <p>刚给windows电脑配置了mongdb记录一下。</p>
 <ul>
-<li><p>前往<a href="https://www.mongodb.com/download-center" target="_blank" rel="external">官网</a>下载合适的安装包，我选择的是msi安装包，也可以选择下载zip包。</p>
+<li><p>前往<a href="https://www.mongodb.com/download-center">官网</a>下载合适的安装包，我选择的是msi安装包，也可以选择下载zip包。</p>
 </li>
 <li><p>运行msi安装包（默认安装在C盘，没找到在哪里可以修改盘符）。</p>
 </li>
 <li><p>在D:\下创建好相关文件夹<br><img src="http://img.blog.csdn.net/20161109194149759" alt="这里写图片描述"></p>
 </li>
-<li><p>打开命令提示符，进入到mongodb安装文件夹下的bin目录<br><img src="http://img.blog.csdn.net/20161109194331090" alt="这里写图片描述"></p>
-</li>
-<li><p>输入如下命令，注册MongoDB服务 </p>
-</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mongod.exe --logpath D:\MongoDB\data\<span class="built_in">log</span>\MongoDB.log --logappend --dbpath D:\MongoDB\data\db --directoryperdb --storageEngin=mmappv1 --serviceName MongoDB --install</div></pre></td></tr></table></figure>
-<p><img src="http://img.blog.csdn.net/20161109194436279" alt="这里写图片描述"></p>
-<ul>
-<li>启动MongoDB服务</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">net start MongoDB</div></pre></td></tr></table></figure>
-<p><img src="http://img.blog.csdn.net/20161109194520874" alt="这里写图片描述"></p>
-
-          
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/09/windows配置mongdb记录/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -859,13 +978,15 @@
 
       
         
-          
-            <p>windows下npm开发时，有时候node_modules/下的目录嵌套太深，导致无法删除项目。</p>
-<p>npm社区贡献了一个工具<a href="https://www.npmjs.com/package/windows-node-deps-deleter" target="_blank" rel="external">windows-node-deps-deleter</a>可供删除这样的目录。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">E:\vscode&gt;npm install -g windows-node-deps-deleter</div><div class="line">C:\Users\xx\AppData\Roaming\npm\wnddel -&gt; C:\Users\xx\AppData\Roaming\npm\no</div><div class="line">de_modules\windows-node-deps-deleter\wnddel.js</div><div class="line">windows-node-deps-deleter@0.1.1 C:\Users\xx\AppData\Roaming\npm\node_modules\w</div><div class="line">indows-node-deps-deleter</div><div class="line">└── fs-extra@0.13.0 (ncp@1.0.1, jsonfile@2.4.0, rimraf@2.5.4)</div><div class="line"></div><div class="line">E:\vscode&gt;wnddel react-todo-list</div><div class="line">Deleting &quot;react-todo-list&quot; ...</div><div class="line">&quot;react-todo-list&quot; deleted.</div></pre></td></tr></table></figure>
-<p>参考：<a href="https://www.npmjs.com/package/windows-node-deps-deleter#readme" target="_blank" rel="external">windows-node-deps-delete</a></p>
-
-          
+          <p>windows下npm开发时，有时候node_modules/下的目录嵌套太深，导致无法删除项目。</p>
+<p>npm社区贡献了一个工具<a href="https://www.npmjs.com/package/windows-node-deps-deleter">windows-node-deps-deleter</a>可供删除这样的目录。</p>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/08/windows下文件路径太深，无法删除解决办法/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -979,136 +1100,16 @@
 
       
         
-          
-            <p>利用.gitignore过滤文件，如编译过程中的中间文件，等等，这些文件不需要被追踪管理。</p>
+          <p>利用.gitignore过滤文件，如编译过程中的中间文件，等等，这些文件不需要被追踪管理。</p>
 <p>现象：</p>
 <p>在.gitignore添加file1文件，以过滤该文件，但是通过Git status查看仍显示file1文件的状态。</p>
-<p>原因：</p>
-<p>在git库中已存在了这个文件，之前push提交过该文件。</p>
-<p>.gitignore文件只对还没有加入版本管理的文件起作用，如果之前已经用git把这些文件纳入了版本库，就不起作用了</p>
-<p>解决：</p>
-<p>需要在git库中删除该文件，并更新。</p>
-<p>然后再次git status查看状态，file1文件不再显示状态。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/05/android-studio编译错误-目标模式不含有“-”。-停止。/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Johnny">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://tva3.sinaimg.cn/crop.0.0.180.180.180/7d92e765jw1e8qgp5bmzyj2050050aa8.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Johnny">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Johnny" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/05/android-studio编译错误-目标模式不含有“-”。-停止。/" itemprop="url">
-                  android studio编译错误: *** 目标模式不含有“%”。 停止。
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-05T18:04:19+08:00">
-                2016-11-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Android Studio NDK编译出现如下错误：<br><strong><em> target pattern contains no `%’. Stop<br>中文：
-</em></strong> 目标模式不含有“%”。 停止。<br>可能是obj目录的问题，需要删掉。<br>在工程目录下find所有的obj目录<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find . -name obj</div></pre></td></tr></table></figure></p>
-
-          
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/06/gitignore无效，不能过滤某些文件/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1271,6 +1272,124 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/05/android-studio编译错误-目标模式不含有“-”。-停止。/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Johnny">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://tva3.sinaimg.cn/crop.0.0.180.180.180/7d92e765jw1e8qgp5bmzyj2050050aa8.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Johnny">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Johnny" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/11/05/android-studio编译错误-目标模式不含有“-”。-停止。/" itemprop="url">
+                  android studio编译错误: *** 目标模式不含有“%”。 停止。
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-05T18:04:19+08:00">
+                2016-11-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Android Studio NDK编译出现如下错误：<br><strong><em> target pattern contains no `%’. Stop<br>中文：
+</em></strong> 目标模式不含有“%”。 停止。<br>可能是obj目录的问题，需要删掉。<br>在工程目录下find所有的obj目录<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find . -name obj</div></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/06/CSS-The-Definitive-Guide/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1393,132 +1512,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/05/chapter-4/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Johnny">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://tva3.sinaimg.cn/crop.0.0.180.180.180/7d92e765jw1e8qgp5bmzyj2050050aa8.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Johnny">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Johnny" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/05/chapter-4/" itemprop="url">
-                  锋利的jQeury 第四章-笔记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-05T18:04:19+08:00">
-                2016-09-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="第四章-jQuery中的事件和动画"><a href="#第四章-jQuery中的事件和动画" class="headerlink" title="第四章 jQuery中的事件和动画"></a>第四章 jQuery中的事件和动画</h2><ul>
-<li>window.onload方法，相当于<code>jQuery</code>中的$(window).load(function(){})方法。都是等文档中的所有元素加载完成时调用，包括关联css文件和javascript文件。</li>
-<li>$(document).ready(function() {})则不会等待关联文件下载完，在DOM准备好之后就会调用。</li>
-<li>$(window).load(function(){})可以调用多次，都会执行，而window.onload只会调用最后一次赋予的函数。</li>
-<li>$(document).ready(function() {})可以简写为$(function() {});</li>
-</ul>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/05/chapter-4/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1564,7 +1557,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-count">13</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1574,7 +1567,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

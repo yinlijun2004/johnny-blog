@@ -15,6 +15,7 @@ cd /usr/share/applications/
 ```bash
 vim android-studio.desktop
 ```
+<!--more-->
 
 3. 输入一下内容
 ```bash

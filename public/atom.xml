@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-11-15T11:32:55.231Z</updated>
+  <updated>2016-11-15T12:17:56.341Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,19 +16,55 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>如何下载安装openJDK</title>
+    <link href="http://yoursite.com/2016/11/15/how-to-download-openjdk/"/>
+    <id>http://yoursite.com/2016/11/15/how-to-download-openjdk/</id>
+    <published>2016-11-15T12:04:44.000Z</published>
+    <updated>2016-11-15T12:17:56.341Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="JDK-8"><a href="#JDK-8" class="headerlink" title="JDK 8"></a>JDK 8</h2><h3 id="Debian-Ubuntu"><a href="#Debian-Ubuntu" class="headerlink" title="Debian, Ubuntu"></a><strong>Debian, Ubuntu</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install openjdk-8-jre</div></pre></td></tr></table></figure>
+<p>openjdk-8-jre只包含运行时环境(Java Runtime Environment）。如果你想开发java程序，请安装openjdk-8-jdk。</p>
+<a id="more"></a>
+<h3 id="Fedora-Oracle-Linux-Red-Hat-Enterprise-Linux"><a href="#Fedora-Oracle-Linux-Red-Hat-Enterprise-Linux" class="headerlink" title="Fedora, Oracle Linux, Red Hat Enterprise Linux"></a><strong>Fedora, Oracle Linux, Red Hat Enterprise Linux</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ su -c &quot;yum install java-1.8.0-openjdk&quot;</div></pre></td></tr></table></figure>
+<p>java-1.8.0-openjdk只包含运行时环境(Java Runtime Environment）。如果你想开发java程序，请安装java-1.8.0-openjdk-devel。</p>
+<h2 id="JDK-7"><a href="#JDK-7" class="headerlink" title="JDK 7"></a>JDK 7</h2><h3 id="Debian-Ubuntu-1"><a href="#Debian-Ubuntu-1" class="headerlink" title="Debian, Ubuntu"></a><strong>Debian, Ubuntu</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install openjdk-7-jre</div></pre></td></tr></table></figure>
+<p>openjdk-7-jre只包含运行时环境(Java Runtime Environment）。如果你想开发java程序，请安装openjdk-7-jdk。</p>
+<h3 id="Fedora-Oracle-Linux-Red-Hat-Enterprise-Linux-1"><a href="#Fedora-Oracle-Linux-Red-Hat-Enterprise-Linux-1" class="headerlink" title="Fedora, Oracle Linux, Red Hat Enterprise Linux"></a><strong>Fedora, Oracle Linux, Red Hat Enterprise Linux</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ su -c &quot;yum install java-1.7.0-openjdk&quot;</div></pre></td></tr></table></figure>
+<p>java-1.7.0-openjdk只包含运行时环境(Java Runtime Environment）。如果你想开发java程序，请安装java-1.7.0-openjdk-devel。</p>
+<h2 id="JDK-6"><a href="#JDK-6" class="headerlink" title="JDK 6"></a>JDK 6</h2><h3 id="Debian-Ubuntu-2"><a href="#Debian-Ubuntu-2" class="headerlink" title="Debian, Ubuntu"></a><strong>Debian, Ubuntu</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install openjdk-6-jre</div></pre></td></tr></table></figure>
+<p>openjdk-6-jre只包含运行时环境(Java Runtime Environment）。如果你想开发java程序，请安装openjdk-6-jdk。</p>
+<h3 id="Fedora-Oracle-Linux-Red-Hat-Enterprise-Linux-2"><a href="#Fedora-Oracle-Linux-Red-Hat-Enterprise-Linux-2" class="headerlink" title="Fedora, Oracle Linux, Red Hat Enterprise Linux"></a><strong>Fedora, Oracle Linux, Red Hat Enterprise Linux</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ su -c &quot;yum install java-1.6.0-openjdk&quot;</div></pre></td></tr></table></figure>
+<p>java-1.6.0-openjdk只包含运行时环境(Java Runtime Environment）。如果你想开发java程序，请安装java-1.6.0-openjdk-devel。</p>
+<p>参考<a href="http://openjdk.java.net/install/" target="_blank" rel="external">http://openjdk.java.net/install/</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;JDK-8&quot;&gt;&lt;a href=&quot;#JDK-8&quot; class=&quot;headerlink&quot; title=&quot;JDK 8&quot;&gt;&lt;/a&gt;JDK 8&lt;/h2&gt;&lt;h3 id=&quot;Debian-Ubuntu&quot;&gt;&lt;a href=&quot;#Debian-Ubuntu&quot; class=&quot;headerlink&quot; title=&quot;Debian, Ubuntu&quot;&gt;&lt;/a&gt;&lt;strong&gt;Debian, Ubuntu&lt;/strong&gt;&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;$ sudo apt-get install openjdk-8-jre&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;openjdk-8-jre只包含运行时环境(Java Runtime Environment）。如果你想开发java程序，请安装openjdk-8-jdk。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="openjdk; java" scheme="http://yoursite.com/tags/openjdk-java/"/>
+    
+  </entry>
+  
+  <entry>
     <title>ubuntu利用update-alternatives配置java</title>
     <link href="http://yoursite.com/2016/11/15/ubuntu%E5%88%A9%E7%94%A8update-alternatives%E9%85%8D%E7%BD%AEjava/"/>
     <id>http://yoursite.com/2016/11/15/ubuntu利用update-alternatives配置java/</id>
     <published>2016-11-15T11:32:21.000Z</published>
-    <updated>2016-11-15T11:32:55.231Z</updated>
+    <updated>2016-11-15T12:17:21.365Z</updated>
     
     <content type="html"><![CDATA[<p>利用Android Studio开发，经常会碰到JDK版本的切换问题，安装好新版本的<a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank" rel="external">jdk</a>之后，需要先配置到可选项。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">yinlijun@sj:~$ sudo update-alternatives --install /usr/bin/java java /opt/jdk1.8.0_101/bin/java 100</div><div class="line">update-alternatives: 警告: /etc/alternatives/java has been changed (manually or by a script); switching to manual updates only</div><div class="line">yinlijun@sj:~$ sudo update-alternatives --install /usr/bin/javac javac /opt/jdk1.8.0_101/bin/javac 100</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
 <p>然后，选择默认的JDK版本：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">yinlijun@sj:~$ sudo update-alternatives --config java</div><div class="line">有 3 个候选项可用于替换 java (提供 /usr/bin/java)。</div><div class="line"></div><div class="line">  选择       路径                                          优先级  状态</div><div class="line">------------------------------------------------------------</div><div class="line">  0            /opt/jdk1.6.0_37/bin/java                        10000     自动模式</div><div class="line">  1            /opt/jdk1.6.0_37/bin/java                        10000     手动模式</div><div class="line">  2            /opt/jdk1.8.0_101/bin/java                       100       手动模式</div><div class="line">  3            /usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java   1051      手动模式</div><div class="line"></div><div class="line">要维持当前值[*]请按回车键，或者键入选择的编号：2</div><div class="line">update-alternatives: using /opt/jdk1.8.0_101/bin/java to provide /usr/bin/java (java) <span class="keyword">in</span> 手动模式</div><div class="line">yinlijun@sj:~$ sudo update-alternatives --config javac</div><div class="line">有 3 个候选项可用于替换 javac (提供 /usr/bin/javac)。</div><div class="line"></div><div class="line">  选择       路径                                       优先级  状态</div><div class="line">------------------------------------------------------------</div><div class="line">  0            /opt/jdk1.6.0_37/bin/javac                    10000     自动模式</div><div class="line">  1            /opt/jdk1.6.0_37/bin/javac                    10000     手动模式</div><div class="line">  2            /opt/jdk1.8.0_101/bin/javac                   100       手动模式</div><div class="line">* 3            /usr/lib/jvm/java-7-openjdk-amd64/bin/javac   1051      手动模式</div><div class="line"></div><div class="line">要维持当前值[*]请按回车键，或者键入选择的编号：2</div></pre></td></tr></table></figure></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;利用Android Studio开发，经常会碰到JDK版本的切换问题，安装好新版本的&lt;a href=&quot;http://www.oracle.com/technetwork/java/javase/downloads/index.html&quot; target=&quot;_blank&quot; re
+      &lt;p&gt;利用Android Studio开发，经常会碰到JDK版本的切换问题，安装好新版本的&lt;a href=&quot;http://www.oracle.com/technetwork/java/javase/downloads/index.html&quot;&gt;jdk&lt;/a&gt;之后，需要先配置到可选项。&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;yinlijun@sj:~$ sudo update-alternatives --install /usr/bin/java java /opt/jdk1.8.0_101/bin/java 100&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;update-alternatives: 警告: /etc/alternatives/java has been changed (manually or by a script); switching to manual updates only&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;yinlijun@sj:~$ sudo update-alternatives --install /usr/bin/javac javac /opt/jdk1.8.0_101/bin/javac 100&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
     
     </summary>
     
@@ -42,7 +78,7 @@
     <link href="http://yoursite.com/2016/11/15/make-ubutun-desktop/"/>
     <id>http://yoursite.com/2016/11/15/make-ubutun-desktop/</id>
     <published>2016-11-15T10:04:19.000Z</published>
-    <updated>2016-11-15T10:10:05.000Z</updated>
+    <updated>2016-11-15T12:17:12.809Z</updated>
     
     <content type="html"><![CDATA[<p>在Ubuntu上从网上下载压缩包版本（非.deb包）的应用程序之后，是不生成桌面图表的，比如网上下载的<a href="http://www.android-studio.org/" target="_blank" rel="external">Android Studio</a>, 所以需要自己做一个桌面图标。</p>
 <ol>
@@ -52,8 +88,10 @@
 <li><p>新建一个android-studio.desktop文件。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim android-studio.desktop</div></pre></td></tr></table></figure>
 </li>
-<li><p>输入一下内容</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Version=2.2</div><div class="line">Name=Android Studio</div><div class="line">GenericName=Android IDE</div><div class="line">Comment=Android Development</div><div class="line">Exec=/home/yinlijun/android_toolchain/android-studio/bin/studio.sh %U</div><div class="line">Terminal=<span class="literal">false</span></div><div class="line">Icon=/home/yinlijun/android_toolchain/android-studio/bin/studio.png</div><div class="line">Type=Application</div><div class="line">Categories=Android;IDE;</div></pre></td></tr></table></figure>
+</ol>
+<a id="more"></a>
+<ol>
+<li>输入一下内容<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Version=2.2</div><div class="line">Name=Android Studio</div><div class="line">GenericName=Android IDE</div><div class="line">Comment=Android Development</div><div class="line">Exec=/home/yinlijun/android_toolchain/android-studio/bin/studio.sh %U</div><div class="line">Terminal=<span class="literal">false</span></div><div class="line">Icon=/home/yinlijun/android_toolchain/android-studio/bin/studio.png</div><div class="line">Type=Application</div><div class="line">Categories=Android;IDE;</div></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>保存退出之后，在应用程序里面就可以找到，绑定了图标的应用程序，可以将其固定到启动器上。</p>
@@ -61,7 +99,15 @@
     
     <summary type="html">
     
-      &lt;p&gt;在Ubuntu上从网上下载压缩包版本（非.deb包）的应用程序之后，是不生成桌面图表的，比如网上下载的&lt;a href=&quot;http://www.android-studio.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Android Studio
+      &lt;p&gt;在Ubuntu上从网上下载压缩包版本（非.deb包）的应用程序之后，是不生成桌面图表的，比如网上下载的&lt;a href=&quot;http://www.android-studio.org/&quot;&gt;Android Studio&lt;/a&gt;, 所以需要自己做一个桌面图标。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;进入到/usr/share/applications/目录下&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;cd&lt;/span&gt; /usr/share/applications/&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;新建一个android-studio.desktop文件。&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;vim android-studio.desktop&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
     
     </summary>
     
@@ -75,10 +121,11 @@
     <link href="http://yoursite.com/2016/11/15/git%E9%85%8D%E7%BD%AEuser-name%E5%92%8Cuser-email/"/>
     <id>http://yoursite.com/2016/11/15/git配置user-name和user-email/</id>
     <published>2016-11-15T10:02:54.000Z</published>
-    <updated>2016-11-15T10:09:23.008Z</updated>
+    <updated>2016-11-15T12:17:44.749Z</updated>
     
     <content type="html"><![CDATA[<p>github在统计提交的时候，会判断邮箱是否跟github的登陆邮箱匹配，不匹配则不计算活跃度，即不生成小绿块。</p>
 <p>获取配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">yinlijun@yinlijun:~/personal_github/johnny-blog$ git config user.email</div><div class="line">aaa@aaa.com</div><div class="line">yinlijun@yinlijun:~/personal_github/johnny-blog$ git config user.name</div><div class="line">aaa</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
 <p>设置当前仓库的user.name/user.email<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yinlijun@yinlijun:~/personal_github/johnny-blog$ git config user.email aaa</div><div class="line">yinlijun@yinlijun:~/personal_github/johnny-blog$ git config user.email aaa@aaa.com</div></pre></td></tr></table></figure></p>
 <p>设置全局user.name/user.email<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yinlijun@yinlijun:~/personal_github/johnny-blog$ git config --global user.name yinlijun</div><div class="line">yinlijun@yinlijun:~/personal_github/johnny-blog$ git config --global user.email yinlijun2004@gmail.com</div></pre></td></tr></table></figure></p>
 <p>如果当前仓库未设置user.name/user.email则采用全局的user.name/user.email，否则当前仓库的user.name/user.email会覆盖全局的user.name/user.email。</p>
@@ -87,7 +134,7 @@
     <summary type="html">
     
       &lt;p&gt;github在统计提交的时候，会判断邮箱是否跟github的登陆邮箱匹配，不匹配则不计算活跃度，即不生成小绿块。&lt;/p&gt;
-&lt;p&gt;获取配置&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pr
+&lt;p&gt;获取配置&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;yinlijun@yinlijun:~/personal_github/johnny-blog$ git config user.email&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;aaa@aaa.com&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;yinlijun@yinlijun:~/personal_github/johnny-blog$ git config user.name&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;aaa&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
     
     </summary>
     
@@ -101,7 +148,7 @@
     <link href="http://yoursite.com/2016/11/09/windows%E9%85%8D%E7%BD%AEmongdb%E8%AE%B0%E5%BD%95/"/>
     <id>http://yoursite.com/2016/11/09/windows配置mongdb记录/</id>
     <published>2016-11-09T09:55:51.000Z</published>
-    <updated>2016-11-15T09:58:52.100Z</updated>
+    <updated>2016-11-15T12:18:16.773Z</updated>
     
     <content type="html"><![CDATA[<p>刚给windows电脑配置了mongdb记录一下。</p>
 <ul>
@@ -111,6 +158,9 @@
 </li>
 <li><p>在D:\下创建好相关文件夹<br><img src="http://img.blog.csdn.net/20161109194149759" alt="这里写图片描述"></p>
 </li>
+</ul>
+<a id="more"></a>
+<ul>
 <li><p>打开命令提示符，进入到mongodb安装文件夹下的bin目录<br><img src="http://img.blog.csdn.net/20161109194331090" alt="这里写图片描述"></p>
 </li>
 <li><p>输入如下命令，注册MongoDB服务 </p>
@@ -129,7 +179,13 @@
     
       &lt;p&gt;刚给windows电脑配置了mongdb记录一下。&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;前往&lt;a href=&quot;https://www.mongodb.com/download-center&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;官网&lt;/a&gt;下载合适的安
+&lt;li&gt;&lt;p&gt;前往&lt;a href=&quot;https://www.mongodb.com/download-center&quot;&gt;官网&lt;/a&gt;下载合适的安装包，我选择的是msi安装包，也可以选择下载zip包。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;运行msi安装包（默认安装在C盘，没找到在哪里可以修改盘符）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;在D:\下创建好相关文件夹&lt;br&gt;&lt;img src=&quot;http://img.blog.csdn.net/20161109194149759&quot; alt=&quot;这里写图片描述&quot;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     
@@ -143,10 +199,11 @@
     <link href="http://yoursite.com/2016/11/08/windows%E4%B8%8B%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84%E5%A4%AA%E6%B7%B1%EF%BC%8C%E6%97%A0%E6%B3%95%E5%88%A0%E9%99%A4%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/"/>
     <id>http://yoursite.com/2016/11/08/windows下文件路径太深，无法删除解决办法/</id>
     <published>2016-11-08T10:02:04.000Z</published>
-    <updated>2016-11-15T10:06:34.692Z</updated>
+    <updated>2016-11-15T12:18:05.221Z</updated>
     
     <content type="html"><![CDATA[<p>windows下npm开发时，有时候node_modules/下的目录嵌套太深，导致无法删除项目。</p>
 <p>npm社区贡献了一个工具<a href="https://www.npmjs.com/package/windows-node-deps-deleter" target="_blank" rel="external">windows-node-deps-deleter</a>可供删除这样的目录。</p>
+<a id="more"></a>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">E:\vscode&gt;npm install -g windows-node-deps-deleter</div><div class="line">C:\Users\xx\AppData\Roaming\npm\wnddel -&gt; C:\Users\xx\AppData\Roaming\npm\no</div><div class="line">de_modules\windows-node-deps-deleter\wnddel.js</div><div class="line">windows-node-deps-deleter@0.1.1 C:\Users\xx\AppData\Roaming\npm\node_modules\w</div><div class="line">indows-node-deps-deleter</div><div class="line">└── fs-extra@0.13.0 (ncp@1.0.1, jsonfile@2.4.0, rimraf@2.5.4)</div><div class="line"></div><div class="line">E:\vscode&gt;wnddel react-todo-list</div><div class="line">Deleting &quot;react-todo-list&quot; ...</div><div class="line">&quot;react-todo-list&quot; deleted.</div></pre></td></tr></table></figure>
 <p>参考：<a href="https://www.npmjs.com/package/windows-node-deps-deleter#readme" target="_blank" rel="external">windows-node-deps-delete</a></p>
 ]]></content>
@@ -154,7 +211,7 @@
     <summary type="html">
     
       &lt;p&gt;windows下npm开发时，有时候node_modules/下的目录嵌套太深，导致无法删除项目。&lt;/p&gt;
-&lt;p&gt;npm社区贡献了一个工具&lt;a href=&quot;https://www.npmjs.com/package/windows-node-deps-deleter&quot; ta
+&lt;p&gt;npm社区贡献了一个工具&lt;a href=&quot;https://www.npmjs.com/package/windows-node-deps-deleter&quot;&gt;windows-node-deps-deleter&lt;/a&gt;可供删除这样的目录。&lt;/p&gt;
     
     </summary>
     
@@ -166,11 +223,12 @@
     <link href="http://yoursite.com/2016/11/06/gitignore%E6%97%A0%E6%95%88%EF%BC%8C%E4%B8%8D%E8%83%BD%E8%BF%87%E6%BB%A4%E6%9F%90%E4%BA%9B%E6%96%87%E4%BB%B6/"/>
     <id>http://yoursite.com/2016/11/06/gitignore无效，不能过滤某些文件/</id>
     <published>2016-11-06T10:03:31.000Z</published>
-    <updated>2016-11-15T10:06:33.016Z</updated>
+    <updated>2016-11-15T12:17:39.197Z</updated>
     
     <content type="html"><![CDATA[<p>利用.gitignore过滤文件，如编译过程中的中间文件，等等，这些文件不需要被追踪管理。</p>
 <p>现象：</p>
 <p>在.gitignore添加file1文件，以过滤该文件，但是通过Git status查看仍显示file1文件的状态。</p>
+<a id="more"></a>
 <p>原因：</p>
 <p>在git库中已存在了这个文件，之前push提交过该文件。</p>
 <p>.gitignore文件只对还没有加入版本管理的文件起作用，如果之前已经用git把这些文件纳入了版本库，就不起作用了</p>
@@ -184,35 +242,11 @@
       &lt;p&gt;利用.gitignore过滤文件，如编译过程中的中间文件，等等，这些文件不需要被追踪管理。&lt;/p&gt;
 &lt;p&gt;现象：&lt;/p&gt;
 &lt;p&gt;在.gitignore添加file1文件，以过滤该文件，但是通过Git status查看仍显示file1文件的状态。&lt;/p&gt;
-&lt;p&gt;原因：&lt;/p&gt;
     
     </summary>
     
     
       <category term="git,.gitignore" scheme="http://yoursite.com/tags/git-gitignore/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>android studio编译错误: *** 目标模式不含有“%”。 停止。</title>
-    <link href="http://yoursite.com/2016/11/05/android-studio%E7%BC%96%E8%AF%91%E9%94%99%E8%AF%AF-%E7%9B%AE%E6%A0%87%E6%A8%A1%E5%BC%8F%E4%B8%8D%E5%90%AB%E6%9C%89%E2%80%9C-%E2%80%9D%E3%80%82-%E5%81%9C%E6%AD%A2%E3%80%82/"/>
-    <id>http://yoursite.com/2016/11/05/android-studio编译错误-目标模式不含有“-”。-停止。/</id>
-    <published>2016-11-05T10:04:19.000Z</published>
-    <updated>2016-11-15T10:07:57.388Z</updated>
-    
-    <content type="html"><![CDATA[<p>Android Studio NDK编译出现如下错误：<br><strong><em> target pattern contains no `%’. Stop<br>中文：
-</em></strong> 目标模式不含有“%”。 停止。<br>可能是obj目录的问题，需要删掉。<br>在工程目录下find所有的obj目录<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find . -name obj</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Android Studio NDK编译出现如下错误：&lt;br&gt;&lt;strong&gt;&lt;em&gt; target pattern contains no `%’. Stop&lt;br&gt;中文：
-&lt;/em&gt;&lt;/strong&gt; 目标模式不含有“%”。 停止。&lt;br&gt;可能是obj目录的问题，需要删
-    
-    </summary>
-    
-    
-      <category term="android studio" scheme="http://yoursite.com/tags/android-studio/"/>
     
   </entry>
   
@@ -283,6 +317,29 @@
     
     
       <category term="javascript" scheme="http://yoursite.com/tags/javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>android studio编译错误: *** 目标模式不含有“%”。 停止。</title>
+    <link href="http://yoursite.com/2016/11/05/android-studio%E7%BC%96%E8%AF%91%E9%94%99%E8%AF%AF-%E7%9B%AE%E6%A0%87%E6%A8%A1%E5%BC%8F%E4%B8%8D%E5%90%AB%E6%9C%89%E2%80%9C-%E2%80%9D%E3%80%82-%E5%81%9C%E6%AD%A2%E3%80%82/"/>
+    <id>http://yoursite.com/2016/11/05/android-studio编译错误-目标模式不含有“-”。-停止。/</id>
+    <published>2016-11-05T10:04:19.000Z</published>
+    <updated>2016-11-15T10:07:57.388Z</updated>
+    
+    <content type="html"><![CDATA[<p>Android Studio NDK编译出现如下错误：<br><strong><em> target pattern contains no `%’. Stop<br>中文：
+</em></strong> 目标模式不含有“%”。 停止。<br>可能是obj目录的问题，需要删掉。<br>在工程目录下find所有的obj目录<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find . -name obj</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Android Studio NDK编译出现如下错误：&lt;br&gt;&lt;strong&gt;&lt;em&gt; target pattern contains no `%’. Stop&lt;br&gt;中文：
+&lt;/em&gt;&lt;/strong&gt; 目标模式不含有“%”。 停止。&lt;br&gt;可能是obj目录的问题，需要删
+    
+    </summary>
+    
+    
+      <category term="android studio" scheme="http://yoursite.com/tags/android-studio/"/>
     
   </entry>
   

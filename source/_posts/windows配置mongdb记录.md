@@ -13,6 +13,8 @@ tags: windows, mongodb
 - 在D:\下创建好相关文件夹
 ![这里写图片描述](http://img.blog.csdn.net/20161109194149759)
 
+<!--more-->
+
 - 打开命令提示符，进入到mongodb安装文件夹下的bin目录
 ![这里写图片描述](http://img.blog.csdn.net/20161109194331090)
 
