@@ -1,7 +1,7 @@
 ---
 title: Ubuntu 12.04 生成桌面图标 
 date: 2016-11-15 18:04:19
-tags: ubuntu, android studio
+tags: [ubuntu, android studio]
 ---
 
 在Ubuntu上从网上下载压缩包版本（非.deb包）的应用程序之后，是不生成桌面图表的，比如网上下载的[Android Studio](http://www.android-studio.org/), 所以需要自己做一个桌面图标。

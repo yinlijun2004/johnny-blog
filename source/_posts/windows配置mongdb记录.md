@@ -1,7 +1,7 @@
 ---
 title: windows配置mongdb记录
 date: 2016-11-9 17:55:51
-tags: windows, mongodb
+tags: [windows, mongodb]
 ---
 
 刚给windows电脑配置了mongdb记录一下。

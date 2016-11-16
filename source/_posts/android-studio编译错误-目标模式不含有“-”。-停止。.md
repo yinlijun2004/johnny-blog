@@ -1,7 +1,7 @@
 ---
 title: 'android studio编译错误: *** 目标模式不含有“%”。 停止。'
 date: 2016-11-5 18:04:19
-tags: android studio
+tags: [android studio, android]
 ---
 
 Android Studio NDK编译出现如下错误：

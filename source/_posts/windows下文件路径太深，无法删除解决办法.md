@@ -1,7 +1,7 @@
 ---
 title: windows下文件路径太深，无法删除解决办法
 date: 2016-11-8 18:02:04
-tags:
+tags: [windows, npm]
 ---
 
 windows下npm开发时，有时候node_modules/下的目录嵌套太深，导致无法删除项目。

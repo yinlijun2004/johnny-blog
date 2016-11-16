@@ -1,7 +1,7 @@
 ---
 title: .gitignore无效，不能过滤某些文件
 date: 2016-11-6 18:03:31
-tags: git,.gitignore
+tags: [git, .gitignore]
 ---
 
 利用.gitignore过滤文件，如编译过程中的中间文件，等等，这些文件不需要被追踪管理。

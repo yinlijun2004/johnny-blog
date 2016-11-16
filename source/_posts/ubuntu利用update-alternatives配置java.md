@@ -1,7 +1,7 @@
 ---
 title: ubuntu利用update-alternatives配置java
 date: 2016-11-15 19:32:21
-tags: ubuntu; update-alternatives
+tags: [ubuntu, update-alternatives]
 ---
 
 利用Android Studio开发，经常会碰到JDK版本的切换问题，安装好新版本的[jdk](http://www.oracle.com/technetwork/java/javase/downloads/index.html)之后，需要先配置到可选项。
