@@ -1,12 +1,14 @@
 ---
-title: [BrowserRouter] react router 4.0.0 api中文文档
+title: BrowserRouter-react router 4.0.0 api中文文档
 date: 2016-11-24 14:54:00
 tags: [react, react-router, 翻译文档]
-catagarys: react router 4.0.0 api 中文文档
+catagarys: react router 4.0.0 api中文文档
 ---
+
+
 [原文链接](https://react-router.now.sh/BrowserRouter)
 
-<font size='5em'>\<BrowserRouter></font>
+<font size='5em'>&lt;BrowserRouter&gt;</font>
 
 保持你的界面与浏览器历史记录保持同步。
 ```html5
@@ -26,4 +28,4 @@ catagarys: react router 4.0.0 api 中文文档
 // 那么超链接指向 "/calendar/today"
 </BrowserRouter>
 ```
-<font size='5em'>\</BrowserRouter></font>
+<font size='5em'>&lt;/BrowserRouter&gt;</font>

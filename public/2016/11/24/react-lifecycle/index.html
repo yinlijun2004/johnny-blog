@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="android studio,android," />
+  <meta name="keywords" content="react," />
 
 
 
@@ -86,19 +86,46 @@
 
 
 
-<meta name="description" content="Android Studio NDK编译出现如下错误： target pattern contains no `%’. Stop中文：
- 目标模式不含有“%”。 停止。可能是obj目录的问题，需要删掉。在工程目录下find所有的obj目录1find . -name obj">
+<meta name="description" content="实例化首次实例化
+getDefaultProps
+getInitialState
+componentWillMount
+render
+componentDidMount
+
+实例化完成后的更新getInitialStatecomponentWillMountrendercomponentDidMount
+存在期组件已存在时的状态改变
+componentWillReceiveProps
+shouldC">
 <meta property="og:type" content="article">
-<meta property="og:title" content="android studio编译错误: *** 目标模式不含有“%”。 停止。">
-<meta property="og:url" content="http://yoursite.com/2016/11/05/android-studio编译错误-目标模式不含有“-”。-停止。/index.html">
+<meta property="og:title" content="React组件生命周期">
+<meta property="og:url" content="http://yoursite.com/2016/11/24/react-lifecycle/index.html">
 <meta property="og:site_name" content="Johnny">
-<meta property="og:description" content="Android Studio NDK编译出现如下错误： target pattern contains no `%’. Stop中文：
- 目标模式不含有“%”。 停止。可能是obj目录的问题，需要删掉。在工程目录下find所有的obj目录1find . -name obj">
-<meta property="og:updated_time" content="2016-11-21T02:37:41.650Z">
+<meta property="og:description" content="实例化首次实例化
+getDefaultProps
+getInitialState
+componentWillMount
+render
+componentDidMount
+
+实例化完成后的更新getInitialStatecomponentWillMountrendercomponentDidMount
+存在期组件已存在时的状态改变
+componentWillReceiveProps
+shouldC">
+<meta property="og:updated_time" content="2016-11-24T07:30:41.501Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="android studio编译错误: *** 目标模式不含有“%”。 停止。">
-<meta name="twitter:description" content="Android Studio NDK编译出现如下错误： target pattern contains no `%’. Stop中文：
- 目标模式不含有“%”。 停止。可能是obj目录的问题，需要删掉。在工程目录下find所有的obj目录1find . -name obj">
+<meta name="twitter:title" content="React组件生命周期">
+<meta name="twitter:description" content="实例化首次实例化
+getDefaultProps
+getInitialState
+componentWillMount
+render
+componentDidMount
+
+实例化完成后的更新getInitialStatecomponentWillMountrendercomponentDidMount
+存在期组件已存在时的状态改变
+componentWillReceiveProps
+shouldC">
 
 
 
@@ -126,13 +153,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/11/05/android-studio编译错误-目标模式不含有“-”。-停止。/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/11/24/react-lifecycle/"/>
 
 
 
 
 
-  <title> android studio编译错误: *** 目标模式不含有“%”。 停止。 | Johnny </title>
+  <title> React组件生命周期 | Johnny </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -273,7 +300,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/05/android-studio编译错误-目标模式不含有“-”。-停止。/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/24/react-lifecycle/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Johnny">
@@ -297,7 +324,7 @@
             
             
               
-                android studio编译错误: *** 目标模式不含有“%”。 停止。
+                React组件生命周期
               
             
           </h1>
@@ -310,8 +337,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-05T18:04:19+08:00">
-                2016-11-05
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-24T15:23:54+08:00">
+                2016-11-24
               </time>
             
 
@@ -346,8 +373,78 @@
       
 
       
-        <p>Android Studio NDK编译出现如下错误：<br><strong><em> target pattern contains no `%’. Stop<br>中文：
-</em></strong> 目标模式不含有“%”。 停止。<br>可能是obj目录的问题，需要删掉。<br>在工程目录下find所有的obj目录<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find . -name obj</div></pre></td></tr></table></figure></p>
+        <h2 id="实例化"><a href="#实例化" class="headerlink" title="实例化"></a>实例化</h2><h3 id="首次实例化"><a href="#首次实例化" class="headerlink" title="首次实例化"></a>首次实例化</h3><ul>
+<li>getDefaultProps</li>
+<li>getInitialState</li>
+<li>componentWillMount</li>
+<li>render</li>
+<li>componentDidMount</li>
+</ul>
+<h3 id="实例化完成后的更新"><a href="#实例化完成后的更新" class="headerlink" title="实例化完成后的更新"></a>实例化完成后的更新</h3><p>getInitialState<br>componentWillMount<br>render<br>componentDidMount</p>
+<h2 id="存在期"><a href="#存在期" class="headerlink" title="存在期"></a>存在期</h2><h3 id="组件已存在时的状态改变"><a href="#组件已存在时的状态改变" class="headerlink" title="组件已存在时的状态改变"></a>组件已存在时的状态改变</h3><ul>
+<li>componentWillReceiveProps</li>
+<li>shouldComponentUpdate</li>
+<li>componentWillUpdate</li>
+<li>render</li>
+<li>componentDidUpdate</li>
+</ul>
+<h2 id="销毁-amp-清理期"><a href="#销毁-amp-清理期" class="headerlink" title="销毁&amp;清理期"></a>销毁&amp;清理期</h2><ul>
+<li>componentWillUnmount</li>
+</ul>
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>生命周期共提供了10个不同的API。</p>
+<ol>
+<li>getDefaultProps</li>
+</ol>
+<p>作用于组件类，只调用一次，返回对象用于设置默认的props，对于引用值，会在实例中共享。</p>
+<ol>
+<li>getInitialState</li>
+</ol>
+<p>作用于组件的实例，在实例创建时调用一次，用于初始化每个实例的state，此时可以访问this.props。</p>
+<ol>
+<li>componentWillMount</li>
+</ol>
+<p>在完成首次渲染之前调用，此时仍可以修改组件的state。</p>
+<ol>
+<li>render</li>
+</ol>
+<p>必选的方法，创建虚拟DOM，该方法具有特殊的规则：</p>
+<ul>
+<li>只能通过this.props和this.state访问数据</li>
+<li>可以返回null、false或任何React组件</li>
+<li>只能出现一个顶级组件（不能返回数组）</li>
+<li>不能改变组件的状态</li>
+<li>不能修改DOM的输出</li>
+</ul>
+<ol>
+<li>componentDidMount</li>
+</ol>
+<p>真实的DOM被渲染出来后调用，在该方法中可通过this.getDOMNode()访问到真实的DOM元素。此时已可以使用其他类库来操作这个DOM。</p>
+<p><em>在服务端中，该方法不会被调用。</em></p>
+<ol>
+<li>componentWillReceiveProps</li>
+</ol>
+<p>组件接收到新的props时调用，并将其作为参数nextProps使用，此时可以更改组件props及state。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">componentWillReceiveProps: <span class="function"><span class="keyword">function</span>(<span class="params">nextProps</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (nextProps.bool) &#123;</div><div class="line">        <span class="keyword">this</span>.setState(&#123;</div><div class="line">            bool: <span class="literal">true</span></div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ol>
+<li>shouldComponentUpdate</li>
+</ol>
+<p>组件是否应当渲染新的props或state，返回false表示跳过后续的生命周期方法，通常不需要使用以避免出现bug。在出现应用的瓶颈时，可通过该方法进行适当的优化。</p>
+<p><em>在首次渲染期间或者调用了forceUpdate方法后，该方法不会被调用</em></p>
+<ol>
+<li>componentWillUpdate</li>
+</ol>
+<p>接收到新的props或者state后，进行渲染之前调用，此时不允许更新props或state。</p>
+<ol>
+<li>componentDidUpdate</li>
+</ol>
+<p>完成渲染新的props或者state后调用，此时可以访问到新的DOM元素。</p>
+<ol>
+<li>componentWillUnmount</li>
+</ol>
+<p>组件被移除之前被调用，可以用于做一些清理工作，在componentDidMount方法中添加的所有任务都需要在该方法中撤销，比如创建的定时器或添加的事件监听器。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li>React：引领未来的用户界面开发框架/寸志 范洪春 杨森 陈涌 译 – 电子工业出版社</li>
+<li><a href="https://facebook.github.io/react/docs/component-specs.html" target="_blank" rel="external">Component Specs and Lifecycle190</a></li>
+</ul>
 
       
     </div>
@@ -371,9 +468,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/android-studio/" rel="tag"># android studio</a>
-          
-            <a href="/tags/android/" rel="tag"># android</a>
+            <a href="/tags/react/" rel="tag"># react</a>
           
         </div>
       
@@ -382,8 +477,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/09/06/CSS-The-Definitive-Guide/" rel="next" title="CSS权威值南-笔记">
-                <i class="fa fa-chevron-left"></i> CSS权威值南-笔记
+              <a href="/2016/11/24/react-router-4-0-0-api/" rel="next" title="BrowserRouter-react router 4.0.0 api中文文档">
+                <i class="fa fa-chevron-left"></i> BrowserRouter-react router 4.0.0 api中文文档
               </a>
             
           </div>
@@ -391,10 +486,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/11/05/High-Performance-Javascript/" rel="prev" title="高性能Javscript - 笔记">
-                高性能Javscript - 笔记 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -441,8 +532,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://tva3.sinaimg.cn/crop.0.0.180.180.180/7d92e765jw1e8qgp5bmzyj2050050aa8.jpg"
@@ -495,6 +595,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#实例化"><span class="nav-number">1.</span> <span class="nav-text">实例化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#首次实例化"><span class="nav-number">1.1.</span> <span class="nav-text">首次实例化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例化完成后的更新"><span class="nav-number">1.2.</span> <span class="nav-text">实例化完成后的更新</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存在期"><span class="nav-number">2.</span> <span class="nav-text">存在期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#组件已存在时的状态改变"><span class="nav-number">2.1.</span> <span class="nav-text">组件已存在时的状态改变</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#销毁-amp-清理期"><span class="nav-number">3.</span> <span class="nav-text">销毁&清理期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#说明"><span class="nav-number">4.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
