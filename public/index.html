@@ -268,6 +268,129 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/25/react-router-4-0-0-api-Match/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Johnny">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://tva3.sinaimg.cn/crop.0.0.180.180.180/7d92e765jw1e8qgp5bmzyj2050050aa8.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Johnny">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Johnny" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/11/25/react-router-4-0-0-api-Match/" itemprop="url">
+                  Match-react router 4.0.0 api中文文档
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-25T13:05:50+08:00">
+                2016-11-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><a href="https://react-router.now.sh/Match">原文链接</a></p>
+<h1 id="lt-Match-gt"><a href="#lt-Match-gt" class="headerlink" title="&lt;Match&gt;"></a>&lt;Match&gt;</h1><p>匹配到地址(location)时进行UI渲染</p>
+<h3 id="pattern-string"><a href="#pattern-string" class="headerlink" title="pattern: string"></a><font color='red'>pattern: string</font></h3><p>任何<a href="https://www.npmjs.com/package/path-to-regexp">path-to-regexp</a>可以理解的URL模式表达式<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Match</span> <span class="attr">pattern</span>=<span class="string">"/users/:id"</span> <span class="attr">component</span>=<span class="string">&#123;User&#125;/</span>&gt;</span></div></pre></td></tr></table></figure></p>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/25/react-router-4-0-0-api-Match/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/24/react-lifecycle/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -345,81 +468,21 @@
 
       
         
-          
-            <h2 id="实例化"><a href="#实例化" class="headerlink" title="实例化"></a>实例化</h2><h3 id="首次实例化"><a href="#首次实例化" class="headerlink" title="首次实例化"></a>首次实例化</h3><ul>
+          <p><a href="http://blog.flappyend.com/react-component-lifecycle/">原文链接</a></p>
+<h2 id="实例化"><a href="#实例化" class="headerlink" title="实例化"></a>实例化</h2><h3 id="首次实例化"><a href="#首次实例化" class="headerlink" title="首次实例化"></a>首次实例化</h3><ul>
 <li>getDefaultProps</li>
 <li>getInitialState</li>
 <li>componentWillMount</li>
 <li>render</li>
 <li>componentDidMount</li>
 </ul>
-<h3 id="实例化完成后的更新"><a href="#实例化完成后的更新" class="headerlink" title="实例化完成后的更新"></a>实例化完成后的更新</h3><p>getInitialState<br>componentWillMount<br>render<br>componentDidMount</p>
-<h2 id="存在期"><a href="#存在期" class="headerlink" title="存在期"></a>存在期</h2><h3 id="组件已存在时的状态改变"><a href="#组件已存在时的状态改变" class="headerlink" title="组件已存在时的状态改变"></a>组件已存在时的状态改变</h3><ul>
-<li>componentWillReceiveProps</li>
-<li>shouldComponentUpdate</li>
-<li>componentWillUpdate</li>
-<li>render</li>
-<li>componentDidUpdate</li>
-</ul>
-<h2 id="销毁-amp-清理期"><a href="#销毁-amp-清理期" class="headerlink" title="销毁&amp;清理期"></a>销毁&amp;清理期</h2><ul>
-<li>componentWillUnmount</li>
-</ul>
-<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>生命周期共提供了10个不同的API。</p>
-<ol>
-<li>getDefaultProps</li>
-</ol>
-<p>作用于组件类，只调用一次，返回对象用于设置默认的props，对于引用值，会在实例中共享。</p>
-<ol>
-<li>getInitialState</li>
-</ol>
-<p>作用于组件的实例，在实例创建时调用一次，用于初始化每个实例的state，此时可以访问this.props。</p>
-<ol>
-<li>componentWillMount</li>
-</ol>
-<p>在完成首次渲染之前调用，此时仍可以修改组件的state。</p>
-<ol>
-<li>render</li>
-</ol>
-<p>必选的方法，创建虚拟DOM，该方法具有特殊的规则：</p>
-<ul>
-<li>只能通过this.props和this.state访问数据</li>
-<li>可以返回null、false或任何React组件</li>
-<li>只能出现一个顶级组件（不能返回数组）</li>
-<li>不能改变组件的状态</li>
-<li>不能修改DOM的输出</li>
-</ul>
-<ol>
-<li>componentDidMount</li>
-</ol>
-<p>真实的DOM被渲染出来后调用，在该方法中可通过this.getDOMNode()访问到真实的DOM元素。此时已可以使用其他类库来操作这个DOM。</p>
-<p><em>在服务端中，该方法不会被调用。</em></p>
-<ol>
-<li>componentWillReceiveProps</li>
-</ol>
-<p>组件接收到新的props时调用，并将其作为参数nextProps使用，此时可以更改组件props及state。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">componentWillReceiveProps: <span class="function"><span class="keyword">function</span>(<span class="params">nextProps</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (nextProps.bool) &#123;</div><div class="line">        <span class="keyword">this</span>.setState(&#123;</div><div class="line">            bool: <span class="literal">true</span></div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<ol>
-<li>shouldComponentUpdate</li>
-</ol>
-<p>组件是否应当渲染新的props或state，返回false表示跳过后续的生命周期方法，通常不需要使用以避免出现bug。在出现应用的瓶颈时，可通过该方法进行适当的优化。</p>
-<p><em>在首次渲染期间或者调用了forceUpdate方法后，该方法不会被调用</em></p>
-<ol>
-<li>componentWillUpdate</li>
-</ol>
-<p>接收到新的props或者state后，进行渲染之前调用，此时不允许更新props或state。</p>
-<ol>
-<li>componentDidUpdate</li>
-</ol>
-<p>完成渲染新的props或者state后调用，此时可以访问到新的DOM元素。</p>
-<ol>
-<li>componentWillUnmount</li>
-</ol>
-<p>组件被移除之前被调用，可以用于做一些清理工作，在componentDidMount方法中添加的所有任务都需要在该方法中撤销，比如创建的定时器或添加的事件监听器。</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li>React：引领未来的用户界面开发框架/寸志 范洪春 杨森 陈涌 译 – 电子工业出版社</li>
-<li><a href="https://facebook.github.io/react/docs/component-specs.html" target="_blank" rel="external">Component Specs and Lifecycle190</a></li>
-</ul>
-
-          
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/24/react-lifecycle/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -533,18 +596,17 @@
 
       
         
-          
-            <p><a href="https://react-router.now.sh/BrowserRouter" target="_blank" rel="external">原文链接</a></p>
-<font size="5em">&lt;BrowserRouter&gt;</font>
+          <p><a href="https://react-router.now.sh/BrowserRouter">原文链接</a></p>
+<font size='5em'>&lt;BrowserRouter&gt;</font>
 
 <p>保持你的界面与浏览器历史记录保持同步。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;BrowserRouter&gt;</div><div class="line">  &lt;App/&gt;</div><div class="line">&lt;/BrowserRouter&gt;</div></pre></td></tr></table></figure></p>
-<font color="#FF0000">basename</font>
-
-<p>所有路由的根URL，如果你的应用处于服务端的子目录, 你可以设置这个值为该子目录。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;BrowserRouter basename=&quot;/calendar&quot; /&gt;</div><div class="line"></div><div class="line">// 假设Link标签如下所示：</div><div class="line">&lt;Link to=&quot;/today&quot;/&gt;</div><div class="line">// 那么超链接指向 &quot;/calendar/today&quot;</div><div class="line">&lt;/BrowserRouter&gt;</div></pre></td></tr></table></figure>
-<font size="5em">&lt;/BrowserRouter&gt;</font>
-
-          
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/24/react-router-4-0-0-api/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1439,129 +1501,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/06/gitignore无效，不能过滤某些文件/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Johnny">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://tva3.sinaimg.cn/crop.0.0.180.180.180/7d92e765jw1e8qgp5bmzyj2050050aa8.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Johnny">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Johnny" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/06/gitignore无效，不能过滤某些文件/" itemprop="url">
-                  .gitignore无效，不能过滤某些文件
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-06T18:03:31+08:00">
-                2016-11-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>利用.gitignore过滤文件，如编译过程中的中间文件，等等，这些文件不需要被追踪管理。</p>
-<p>现象：</p>
-<p>在.gitignore添加file1文件，以过滤该文件，但是通过Git status查看仍显示file1文件的状态。</p>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/11/06/gitignore无效，不能过滤某些文件/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1607,7 +1546,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-count">17</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

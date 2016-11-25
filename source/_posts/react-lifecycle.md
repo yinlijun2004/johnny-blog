@@ -3,6 +3,7 @@ title: React组件生命周期
 date: 2016-11-24 15:23:54
 tags: react
 ---
+[原文链接](http://blog.flappyend.com/react-component-lifecycle/)
 
 ## 实例化
 ### 首次实例化
@@ -12,6 +13,8 @@ tags: react
 - componentWillMount
 - render
 - componentDidMount
+
+<!--more-->
 
 ### 实例化完成后的更新
 

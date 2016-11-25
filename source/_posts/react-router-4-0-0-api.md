@@ -16,6 +16,8 @@ catagarys: react router 4.0.0 api中文文档
   <App/>
 </BrowserRouter>
 ```
+<!--more-->
+
 <font color='#FF0000'>basename</font>
 
 所有路由的根URL，如果你的应用处于服务端的子目录, 你可以设置这个值为该子目录。

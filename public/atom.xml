@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-11-24T07:30:41.501Z</updated>
+  <updated>2016-11-25T07:17:52.661Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,19 +16,95 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Match-react router 4.0.0 api中文文档</title>
+    <link href="http://yoursite.com/2016/11/25/react-router-4-0-0-api-Match/"/>
+    <id>http://yoursite.com/2016/11/25/react-router-4-0-0-api-Match/</id>
+    <published>2016-11-25T05:05:50.000Z</published>
+    <updated>2016-11-25T07:17:52.661Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://react-router.now.sh/Match" target="_blank" rel="external">原文链接</a></p>
+<h1 id="lt-Match-gt"><a href="#lt-Match-gt" class="headerlink" title="&lt;Match&gt;"></a>&lt;Match&gt;</h1><p>匹配到地址(location)时进行UI渲染</p>
+<h3 id="pattern-string"><a href="#pattern-string" class="headerlink" title="pattern: string"></a><font color="red">pattern: string</font></h3><p>任何<a href="https://www.npmjs.com/package/path-to-regexp" target="_blank" rel="external">path-to-regexp</a>可以理解的URL模式表达式<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Match</span> <span class="attr">pattern</span>=<span class="string">"/users/:id"</span> <span class="attr">component</span>=<span class="string">&#123;User&#125;/</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<h3 id="exactly-bool"><a href="#exactly-bool" class="headerlink" title="exactly: bool"></a><font color="red">exactly: bool</font></h3><p>当为true时，只有模式表达式严格匹配时，才算匹配上。</p>
+<table>
+<thead>
+<tr>
+<th>pattern</th>
+<th style="text-align:center">location.pathname</th>
+<th style="text-align:center">exactly?</th>
+<th style="text-align:center">matches?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/foo</td>
+<td style="text-align:center">/foo/bar</td>
+<td style="text-align:center">yes</td>
+<td style="text-align:center">no</td>
+</tr>
+<tr>
+<td>/foo</td>
+<td style="text-align:center">/foo/bar</td>
+<td style="text-align:center">no</td>
+<td style="text-align:center">yes</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Match</span> <span class="attr">pattern</span>=<span class="string">"/foo"</span> <span class="attr">exactly</span> <span class="attr">component</span>=<span class="string">&#123;Foo&#125;/</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="location"><a href="#location" class="headerlink" title="location"></a><font color="red">location</font></h3><p>如果你不想匹配上下文(context)中的地址(location)时，你可以传入一个location参数来替代。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Match</span> <span class="attr">pattern</span>=<span class="string">"/foo"</span> <span class="attr">location</span>=<span class="string">&#123;&#123;</span> <span class="attr">pathname:</span> '/<span class="attr">foo</span>' &#125;&#125;/&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="component"><a href="#component" class="headerlink" title="component"></a><font color="red">component</font></h3><p>当匹配到地址时渲染的React组件，渲染该组件时，会传入如下属性(props)：</p>
+<ul>
+<li>pattern: (string) 匹配表达式.</li>
+<li>pathname: (string) 匹配后的路径.</li>
+<li>isExact: (bool) 是否严格匹配 (v. partial).</li>
+<li>location: 匹配到的location对象.</li>
+<li>params: 根据匹配模式解析出来的参数</li>
+</ul>
+<p>如下所示：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">const</span> &#123;params, pattern, pathname, isExact, location&#125; = <span class="keyword">this</span>.props;</div><div class="line">        <span class="keyword">return</span> (&lt;div&gt;</div><div class="line">            &lt;h2&gt;User&lt;/h2&gt;</div><div class="line">            &lt;div&gt;</div><div class="line">                location:&#123;JSON.stringify(location)&#125;</div><div class="line">                &lt;br /&gt;</div><div class="line">                pattern:&#123;pattern&#125;</div><div class="line">                &lt;br /&gt;</div><div class="line">                pathname:&#123;pathname&#125;</div><div class="line">                &lt;br /&gt;</div><div class="line">                isExact:&#123;isExact ? "true" : "false"&#125;</div><div class="line">                &lt;br /&gt;</div><div class="line">                params:&#123;JSON.stringify(params, null, 2)&#125;</div><div class="line">                &lt;br /&gt;</div><div class="line">            &lt;/div&gt;</div><div class="line">        &lt;/div&gt;)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">&lt;Match pattern="/:user" component=&#123;User&#125;/&gt;</div></pre></td></tr></table></figure></p>
+<p>效果如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">location:&#123;&quot;pathname&quot;:&quot;/kim&quot;,&quot;search&quot;:&quot;&quot;,&quot;hash&quot;:&quot;&quot;,&quot;state&quot;:null,&quot;query&quot;:null,&quot;key&quot;:&quot;a21zge&quot;&#125;</div><div class="line">pattern:/:user</div><div class="line">pathname:/kim</div><div class="line">isExact:true</div><div class="line">params:&#123; &quot;user&quot;: &quot;kim&quot; &#125;</div></pre></td></tr></table></figure></p>
+<h3 id="render-func"><a href="#render-func" class="headerlink" title="render: func"></a><font color="red">render: func</font></h3><p>相对于直接渲染一个组件，你可以之间传一个渲染函数，该函数被调用时，会传入组件一样的参数。</p>
+<p>这相当于提供了一种内联(inline rendering)渲染方式，或者对Match的封装(wrapping)。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 非常方便的内联渲染</span></div><div class="line">&lt;Match pattern=<span class="string">"/home"</span> render=&#123;() =&gt; <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Home<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>&#125;/&gt;</div><div class="line"></div><div class="line"><span class="comment">// 对Match进行封装</span></div><div class="line"><span class="keyword">const</span> MatchWithFade = (&#123; component:Component, ...rest &#125;) =&gt; (</div><div class="line">  &lt;Match &#123;...rest&#125; render=&#123;(matchProps) =&gt; (</div><div class="line">    &lt;FadeIn&gt;</div><div class="line">      &lt;Component &#123;...matchProps&#125;/&gt;</div><div class="line">    &lt;/FadeIn&gt;</div><div class="line">  )&#125;/&gt;</div><div class="line">)</div><div class="line"></div><div class="line">&lt;MatchWithFade pattern="/cool" component=&#123;Something&#125;/&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="children-func"><a href="#children-func" class="headerlink" title="children: func"></a><font color="red">children: func</font></h3><p>有时你可能需要根据匹配与否进行不同的渲染，这时，你可以使用children属性，它的类型为function，<br>它的表现有点象render函数，但是有以下不同：</p>
+<p>(1) 不管有没有匹配上都会被调用。 </p>
+<p>(2) 回传递一个matched属性表示有没有被匹配上。</p>
+<p>It seems unlikely you’ll need this for anything besides animating when a component transitions from matching to not matching and back, but who knows?</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;Match children=&#123;(&#123; matched, ...rest&#125;) =&gt; (</div><div class="line">  &#123;<span class="comment">/* 因为Animate 总是能被渲染，所以你可以利用组件的生命周期(lifecycle)来实现动画。*/</span>&#125;</div><div class="line">  &lt;Animate&gt;</div><div class="line">    &#123;matched &amp;&amp; (</div><div class="line">      <span class="xml"><span class="tag">&lt;<span class="name">Something</span> &#123;<span class="attr">...rest</span>&#125;/&gt;</span></span></div><div class="line">    )&#125;</div><div class="line">  <span class="tag">&lt;/<span class="name">Animate</span>&gt;</span></div><div class="line">)&#125;/&gt;</div></pre></td></tr></table></figure>
+<h1 id="lt-Match-gt-1"><a href="#lt-Match-gt-1" class="headerlink" title="&lt;/Match&gt;"></a>&lt;/Match&gt;</h1>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;https://react-router.now.sh/Match&quot;&gt;原文链接&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;lt-Match-gt&quot;&gt;&lt;a href=&quot;#lt-Match-gt&quot; class=&quot;headerlink&quot; title=&quot;&amp;lt;Match&amp;gt;&quot;&gt;&lt;/a&gt;&amp;lt;Match&amp;gt;&lt;/h1&gt;&lt;p&gt;匹配到地址(location)时进行UI渲染&lt;/p&gt;
+&lt;h3 id=&quot;pattern-string&quot;&gt;&lt;a href=&quot;#pattern-string&quot; class=&quot;headerlink&quot; title=&quot;pattern: string&quot;&gt;&lt;/a&gt;&lt;font color=&#39;red&#39;&gt;pattern: string&lt;/font&gt;&lt;/h3&gt;&lt;p&gt;任何&lt;a href=&quot;https://www.npmjs.com/package/path-to-regexp&quot;&gt;path-to-regexp&lt;/a&gt;可以理解的URL模式表达式&lt;br&gt;&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;Match&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;pattern&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;/users/:id&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;component&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&amp;#123;User&amp;#125;/&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="react" scheme="http://yoursite.com/tags/react/"/>
+    
+      <category term="react-router" scheme="http://yoursite.com/tags/react-router/"/>
+    
+      <category term="翻译文档" scheme="http://yoursite.com/tags/%E7%BF%BB%E8%AF%91%E6%96%87%E6%A1%A3/"/>
+    
+  </entry>
+  
+  <entry>
     <title>React组件生命周期</title>
     <link href="http://yoursite.com/2016/11/24/react-lifecycle/"/>
     <id>http://yoursite.com/2016/11/24/react-lifecycle/</id>
     <published>2016-11-24T07:23:54.000Z</published>
-    <updated>2016-11-24T07:30:41.501Z</updated>
+    <updated>2016-11-25T07:17:40.990Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="实例化"><a href="#实例化" class="headerlink" title="实例化"></a>实例化</h2><h3 id="首次实例化"><a href="#首次实例化" class="headerlink" title="首次实例化"></a>首次实例化</h3><ul>
+    <content type="html"><![CDATA[<p><a href="http://blog.flappyend.com/react-component-lifecycle/" target="_blank" rel="external">原文链接</a></p>
+<h2 id="实例化"><a href="#实例化" class="headerlink" title="实例化"></a>实例化</h2><h3 id="首次实例化"><a href="#首次实例化" class="headerlink" title="首次实例化"></a>首次实例化</h3><ul>
 <li>getDefaultProps</li>
 <li>getInitialState</li>
 <li>componentWillMount</li>
 <li>render</li>
 <li>componentDidMount</li>
 </ul>
+<a id="more"></a>
 <h3 id="实例化完成后的更新"><a href="#实例化完成后的更新" class="headerlink" title="实例化完成后的更新"></a>实例化完成后的更新</h3><p>getInitialState<br>componentWillMount<br>render<br>componentDidMount</p>
 <h2 id="存在期"><a href="#存在期" class="headerlink" title="存在期"></a>存在期</h2><h3 id="组件已存在时的状态改变"><a href="#组件已存在时的状态改变" class="headerlink" title="组件已存在时的状态改变"></a>组件已存在时的状态改变</h3><ul>
 <li>componentWillReceiveProps</li>
@@ -98,7 +174,14 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;实例化&quot;&gt;&lt;a href=&quot;#实例化&quot; class=&quot;headerlink&quot; title=&quot;实例化&quot;&gt;&lt;/a&gt;实例化&lt;/h2&gt;&lt;h3 id=&quot;首次实例化&quot;&gt;&lt;a href=&quot;#首次实例化&quot; class=&quot;headerlink&quot; title=&quot;首次实例化&quot;&gt;&lt;/a&gt;
+      &lt;p&gt;&lt;a href=&quot;http://blog.flappyend.com/react-component-lifecycle/&quot;&gt;原文链接&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;实例化&quot;&gt;&lt;a href=&quot;#实例化&quot; class=&quot;headerlink&quot; title=&quot;实例化&quot;&gt;&lt;/a&gt;实例化&lt;/h2&gt;&lt;h3 id=&quot;首次实例化&quot;&gt;&lt;a href=&quot;#首次实例化&quot; class=&quot;headerlink&quot; title=&quot;首次实例化&quot;&gt;&lt;/a&gt;首次实例化&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;getDefaultProps&lt;/li&gt;
+&lt;li&gt;getInitialState&lt;/li&gt;
+&lt;li&gt;componentWillMount&lt;/li&gt;
+&lt;li&gt;render&lt;/li&gt;
+&lt;li&gt;componentDidMount&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     
@@ -112,12 +195,13 @@
     <link href="http://yoursite.com/2016/11/24/react-router-4-0-0-api/"/>
     <id>http://yoursite.com/2016/11/24/react-router-4-0-0-api/</id>
     <published>2016-11-24T06:54:00.000Z</published>
-    <updated>2016-11-24T07:19:11.011Z</updated>
+    <updated>2016-11-25T07:17:48.375Z</updated>
     
     <content type="html"><![CDATA[<p><a href="https://react-router.now.sh/BrowserRouter" target="_blank" rel="external">原文链接</a></p>
 <font size="5em">&lt;BrowserRouter&gt;</font>
 
 <p>保持你的界面与浏览器历史记录保持同步。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;BrowserRouter&gt;</div><div class="line">  &lt;App/&gt;</div><div class="line">&lt;/BrowserRouter&gt;</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
 <font color="#FF0000">basename</font>
 
 <p>所有路由的根URL，如果你的应用处于服务端的子目录, 你可以设置这个值为该子目录。</p>
@@ -127,8 +211,10 @@
     
     <summary type="html">
     
-      &lt;p&gt;&lt;a href=&quot;https://react-router.now.sh/BrowserRouter&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;原文链接&lt;/a&gt;&lt;/p&gt;
-&lt;font size=&quot;5em&quot;&gt;&amp;lt;BrowserRouter&amp;gt;&lt;/f
+      &lt;p&gt;&lt;a href=&quot;https://react-router.now.sh/BrowserRouter&quot;&gt;原文链接&lt;/a&gt;&lt;/p&gt;
+&lt;font size=&#39;5em&#39;&gt;&amp;lt;BrowserRouter&amp;gt;&lt;/font&gt;
+
+&lt;p&gt;保持你的界面与浏览器历史记录保持同步。&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;BrowserRouter&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &amp;lt;App/&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;/BrowserRouter&amp;gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
     
     </summary>
     
@@ -419,6 +505,31 @@
   </entry>
   
   <entry>
+    <title>android studio编译错误: *** 目标模式不含有“%”。 停止。</title>
+    <link href="http://yoursite.com/2016/11/05/android-studio%E7%BC%96%E8%AF%91%E9%94%99%E8%AF%AF-%E7%9B%AE%E6%A0%87%E6%A8%A1%E5%BC%8F%E4%B8%8D%E5%90%AB%E6%9C%89%E2%80%9C-%E2%80%9D%E3%80%82-%E5%81%9C%E6%AD%A2%E3%80%82/"/>
+    <id>http://yoursite.com/2016/11/05/android-studio编译错误-目标模式不含有“-”。-停止。/</id>
+    <published>2016-11-05T10:04:19.000Z</published>
+    <updated>2016-11-21T02:37:41.650Z</updated>
+    
+    <content type="html"><![CDATA[<p>Android Studio NDK编译出现如下错误：<br><strong><em> target pattern contains no `%’. Stop<br>中文：
+</em></strong> 目标模式不含有“%”。 停止。<br>可能是obj目录的问题，需要删掉。<br>在工程目录下find所有的obj目录<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find . -name obj</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Android Studio NDK编译出现如下错误：&lt;br&gt;&lt;strong&gt;&lt;em&gt; target pattern contains no `%’. Stop&lt;br&gt;中文：
+&lt;/em&gt;&lt;/strong&gt; 目标模式不含有“%”。 停止。&lt;br&gt;可能是obj目录的问题，需要删
+    
+    </summary>
+    
+    
+      <category term="android studio" scheme="http://yoursite.com/tags/android-studio/"/>
+    
+      <category term="android" scheme="http://yoursite.com/tags/android/"/>
+    
+  </entry>
+  
+  <entry>
     <title>高性能Javscript - 笔记</title>
     <link href="http://yoursite.com/2016/11/05/High-Performance-Javascript/"/>
     <id>http://yoursite.com/2016/11/05/High-Performance-Javascript/</id>
@@ -485,31 +596,6 @@
     
     
       <category term="javascript" scheme="http://yoursite.com/tags/javascript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>android studio编译错误: *** 目标模式不含有“%”。 停止。</title>
-    <link href="http://yoursite.com/2016/11/05/android-studio%E7%BC%96%E8%AF%91%E9%94%99%E8%AF%AF-%E7%9B%AE%E6%A0%87%E6%A8%A1%E5%BC%8F%E4%B8%8D%E5%90%AB%E6%9C%89%E2%80%9C-%E2%80%9D%E3%80%82-%E5%81%9C%E6%AD%A2%E3%80%82/"/>
-    <id>http://yoursite.com/2016/11/05/android-studio编译错误-目标模式不含有“-”。-停止。/</id>
-    <published>2016-11-05T10:04:19.000Z</published>
-    <updated>2016-11-21T02:37:41.650Z</updated>
-    
-    <content type="html"><![CDATA[<p>Android Studio NDK编译出现如下错误：<br><strong><em> target pattern contains no `%’. Stop<br>中文：
-</em></strong> 目标模式不含有“%”。 停止。<br>可能是obj目录的问题，需要删掉。<br>在工程目录下find所有的obj目录<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find . -name obj</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Android Studio NDK编译出现如下错误：&lt;br&gt;&lt;strong&gt;&lt;em&gt; target pattern contains no `%’. Stop&lt;br&gt;中文：
-&lt;/em&gt;&lt;/strong&gt; 目标模式不含有“%”。 停止。&lt;br&gt;可能是obj目录的问题，需要删
-    
-    </summary>
-    
-    
-      <category term="android studio" scheme="http://yoursite.com/tags/android-studio/"/>
-    
-      <category term="android" scheme="http://yoursite.com/tags/android/"/>
     
   </entry>
   
