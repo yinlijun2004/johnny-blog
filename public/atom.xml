@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-11-25T07:17:52.661Z</updated>
+  <updated>2016-12-02T11:32:25.843Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,15 +16,297 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>NavigationPrompt-react router 4.0.0 api中文文档</title>
+    <link href="http://yoursite.com/2016/12/02/react-router-4-0-0-api-NavigationPrompt/"/>
+    <id>http://yoursite.com/2016/12/02/react-router-4-0-0-api-NavigationPrompt/</id>
+    <published>2016-12-02T11:16:00.000Z</published>
+    <updated>2016-12-02T11:32:25.843Z</updated>
+    
+    <content type="html"><![CDATA[<font size="6em">&lt;NavigationPrompt&gt;</font>
+
+<p>当你的应用进入一个状态，但是需要防止用户从当前状态离开时（比如填了一半的表单），渲染出一个导航确认（NavigationPrompt）。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;formIsHalfFilledOut &amp;&amp; (</div><div class="line">  &lt;NavigationPrompt message=&quot;Are you sure you want to leave?&quot;/&gt;</div><div class="line">)&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="message-string"><a href="#message-string" class="headerlink" title="message: string"></a><font color="red">message: string</font></h3><a id="more"></a>
+<p>当用户试图从当前状态离开时显示的信息。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;NavigationPrompt message=&quot;Are you sure you want to leave?&quot;/&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="message-func"><a href="#message-func" class="headerlink" title="message: func"></a><font color="red">message: func</font></h3><p>这个函数返回一个提示用户跳转的信息，如果返回true，则允许跳转，函数的参数是用户将要跳转的下一个链接，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;NavigationPrompt message=&#123;(location) =&gt; (</div><div class="line">  `Are you sure you want to go to $&#123;location.pathname&#125;?`</div><div class="line">)&#125;/&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="when-bool"><a href="#when-bool" class="headerlink" title="when: bool"></a><font color="red">when: bool</font></h3><p>when是一个逻辑变量，为true时，将显示message内容的弹窗，为false时，直接跳转。</p>
+<p><navigationprompt when="{formIsHalfFilledOut}" message="Are you sure?"></navigationprompt></p>
+<font size="6em">&lt;/NavigationPrompt&gt;</font>
+
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;font size=&quot;6em&quot;&gt;&amp;lt;NavigationPrompt&amp;gt;&lt;/font&gt;
+
+&lt;p&gt;当你的应用进入一个状态，但是需要防止用户从当前状态离开时（比如填了一半的表单），渲染出一个导航确认（NavigationPrompt）。&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&amp;#123;formIsHalfFilledOut &amp;amp;&amp;amp; (&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &amp;lt;NavigationPrompt message=&amp;quot;Are you sure you want to leave?&amp;quot;/&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;)&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h3 id=&quot;message-string&quot;&gt;&lt;a href=&quot;#message-string&quot; class=&quot;headerlink&quot; title=&quot;message: string&quot;&gt;&lt;/a&gt;&lt;font color=&quot;red&quot;&gt;message: string&lt;/font&gt;&lt;/h3&gt;
+    
+    </summary>
+    
+      <category term="react router 4.0.0 api中文文档" scheme="http://yoursite.com/categories/react-router-4-0-0-api%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3/"/>
+    
+    
+      <category term="react" scheme="http://yoursite.com/tags/react/"/>
+    
+      <category term="react-router" scheme="http://yoursite.com/tags/react-router/"/>
+    
+      <category term="翻译文档" scheme="http://yoursite.com/tags/%E7%BF%BB%E8%AF%91%E6%96%87%E6%A1%A3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Link-react router 4.0.0 api中文文档</title>
+    <link href="http://yoursite.com/2016/11/29/react-router-4-0-0-api-Link/"/>
+    <id>http://yoursite.com/2016/11/29/react-router-4-0-0-api-Link/</id>
+    <published>2016-11-29T06:18:08.000Z</published>
+    <updated>2016-12-02T11:15:33.039Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://react-router.now.sh/Link" target="_blank" rel="external">原文链接</a></p>
+<font size="6em">&lt;Link&gt;</font>
+
+<p>为你的应用提供可以声明的，可访问的导航功能。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;Link to=<span class="string">"/about"</span> activeClassName=<span class="string">"active"</span>&gt;</div><div class="line">  About</div><div class="line">&lt;<span class="regexp">/Link&gt;</span></div></pre></td></tr></table></figure></p>
+<font color="red">children: node | func</font>
+
+<p>Link组件可以接受一个函数作为子控件，使得允许你使用自定义的组件渲染Link对象。</p>
+<a id="more"></a>
+<p>子控件函数的参数是一个对象，包含如下属性：</p>
+<ul>
+<li>isActive: (bool) 当前链接是否激活</li>
+<li>location: 传递给Link的链接</li>
+<li>href: (string) 路由的url</li>
+<li>onClick: (func) dom的onClick处理函数</li>
+<li>transition: (func) 它是router.transitionTo的快捷方式，代表Link对象的to属性。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;Link to=<span class="string">"/courses"</span>&gt;&#123;</div><div class="line">  (&#123;isActive, location, href, onClick, transition&#125;) =&gt; </div><div class="line">    <span class="xml"><span class="tag">&lt;<span class="name">RaisedButton</span> <span class="attr">label</span>=<span class="string">"Courses"</span> <span class="attr">onClick</span>=<span class="string">&#123;onClick&#125;</span> <span class="attr">primary</span>=<span class="string">&#123;isActive&#125;</span> <span class="attr">href</span>=<span class="string">&#123;href&#125;</span> /&gt;</span></span></div><div class="line">&#125;<span class="tag">&lt;/<span class="name">Link</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<font color="red">to: string | object</font>
+
+<p>链接的描述。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;Link to=&quot;/courses&quot;/&gt;</div><div class="line">&lt;Link to=&#123;&#123;</div><div class="line">  pathname: &apos;/courses&apos;,</div><div class="line">  query: &#123; sort: &apos;name&apos; &#125;,</div><div class="line">  state: &#123; fromDashboard: true &#125;</div><div class="line">&#125;&#125;/&gt;</div></pre></td></tr></table></figure></p>
+<font color="red">activeStyle: object</font>
+
+<p>当链接匹配到<font color="grey" size="5em"><strong>to</strong></font>属性时的样式对象。它会和tyle对象合并之后生效。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;Link</div><div class="line">  to=&quot;/courses&quot;</div><div class="line">  style=&#123;&#123; color: &apos;blue&apos;, background: &apos;gray&apos; &#125;&#125;</div><div class="line">  activeStyle=&#123;&#123; color: &apos;red&apos; &#125;&#125;</div><div class="line">/&gt;</div><div class="line">// 总是有灰色背景</div><div class="line">// 链接为/foo时字体为blue</div><div class="line">// 为/courses为red(激活状态)</div></pre></td></tr></table></figure></p>
+<font color="red">activeClassName: string</font>
+
+<p>当匹配到链接时，生效的className。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;Link</div><div class="line">  to=<span class="string">"/courses"</span></div><div class="line">  className=<span class="string">"course-link"</span></div><div class="line">  activeClassName=<span class="string">"active"</span></div><div class="line">/&gt;</div><div class="line"><span class="comment">// will always have "course-link"</span></div><div class="line"><span class="comment">// at /courses it will be "course-link active"</span></div></pre></td></tr></table></figure></p>
+<font color="red">activeOnlyWhenExact: bool</font>
+
+<p>为true时, 只有当严格匹配，activeClassName和activeStyle才会生效。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;Link to=&quot;/courses&quot; activeOnlyWhenExact activeClassName=&quot;active&quot;/&gt;</div><div class="line">// /courses 被激活</div><div class="line">// /courses/123 不被激活</div></pre></td></tr></table></figure>
+<font color="red">isActive: func</font>
+
+<p>允许自定义当前链接是否被激活，激活时返回true，否则返回false。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&lt;Link</div><div class="line">  to=<span class="string">"/"</span></div><div class="line">  activeStyle=&#123;&#123; color: <span class="string">'red'</span> &#125;&#125;</div><div class="line">  isActive=&#123;(location) =&gt; (</div><div class="line">    <span class="comment">// 只有当没有query字段时被激活</span></div><div class="line">    !<span class="built_in">Object</span>.keys(location.query).length</div><div class="line">  )&#125;</div><div class="line">/&gt;</div><div class="line"></div><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">Link</span></span></span></div><div class="line">  <span class="attr">to</span>=<span class="string">"/courses"</span></div><div class="line">  <span class="attr">activeStyle</span>=<span class="string">&#123;&#123;</span> <span class="attr">color:</span> '<span class="attr">red</span>' &#125;&#125;</div><div class="line">  <span class="attr">isActive</span>=<span class="string">&#123;(location,</span> <span class="attr">props</span>) =&gt; (</div><div class="line">    // 匹配到"/courses" 或者 "/course/123"被激活</div><div class="line">    // 尽管这不是真正意义上的被激活, it is</div><div class="line">    // theoretically for the sake of a navigation menu</div><div class="line">    location.pathname.match(/course(s)?/)</div><div class="line">  )&#125;</div><div class="line">/&gt;</div></pre></td></tr></table></figure></p>
+<font color="red">location</font>
+
+<p>如果你不想使用上下文中的location, 可以传递一个location的属性作为替代，这在链接比较深的redux应用中很有用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;Match pattern=&quot;/foo&quot; location=&#123;this.props.location&#125;/&gt;</div></pre></td></tr></table></figure></p>
+<font size="6em">&lt;/Link&gt;</font>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;https://react-router.now.sh/Link&quot;&gt;原文链接&lt;/a&gt;&lt;/p&gt;
+&lt;font size=&#39;6em&#39;&gt;&amp;lt;Link&amp;gt;&lt;/font&gt;
+
+&lt;p&gt;为你的应用提供可以声明的，可访问的导航功能。&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;Link to=&lt;span class=&quot;string&quot;&gt;&quot;/about&quot;&lt;/span&gt; activeClassName=&lt;span class=&quot;string&quot;&gt;&quot;active&quot;&lt;/span&gt;&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  About&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;&lt;span class=&quot;regexp&quot;&gt;/Link&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;font color=&#39;red&#39;&gt;children: node | func&lt;/font&gt;
+
+&lt;p&gt;Link组件可以接受一个函数作为子控件，使得允许你使用自定义的组件渲染Link对象。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="react router 4.0.0 api中文文档" scheme="http://yoursite.com/categories/react-router-4-0-0-api%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3/"/>
+    
+    
+      <category term="react" scheme="http://yoursite.com/tags/react/"/>
+    
+      <category term="react-router" scheme="http://yoursite.com/tags/react-router/"/>
+    
+      <category term="翻译文档" scheme="http://yoursite.com/tags/%E7%BF%BB%E8%AF%91%E6%96%87%E6%A1%A3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Miss-react router 4.0.0 api中文文档</title>
+    <link href="http://yoursite.com/2016/11/29/react-router-4-0-0-api-Miss/"/>
+    <id>http://yoursite.com/2016/11/29/react-router-4-0-0-api-Miss/</id>
+    <published>2016-11-29T05:55:49.000Z</published>
+    <updated>2016-11-29T06:13:53.581Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://react-router.now.sh/Miss" target="_blank" rel="external">原文链接</a></p>
+<font size="6em">&lt;Miss&gt;</font>
+
+<p>当没有匹配到当前的地址时，将会渲染Miss。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> App = () =&gt; (</div><div class="line">  &lt;Router&gt;</div><div class="line">    &lt;Match pattern="/foo"/&gt;</div><div class="line">    &lt;Match pattern="/bar"/&gt;</div><div class="line">    &lt;Miss component=&#123;NoMatch&#125;/&gt;</div><div class="line">  &lt;/Router&gt;</div><div class="line">)</div><div class="line"></div><div class="line">const NoMatch = (&#123; location &#125;) =&gt; (</div><div class="line">  &lt;div&gt;Nothing matched &#123;location.pathname&#125;.&lt;/div&gt;</div><div class="line">)</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<h3 id="component"><a href="#component" class="headerlink" title="component"></a><font color="red">component</font></h3><p>跟Match一样的，表示将要渲染的组建，但是不同的是只有location一个prop传进去。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;Miss component=&#123;NoMatch&#125;/&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="render-func"><a href="#render-func" class="headerlink" title="render: func"></a><font color="red">render: func</font></h3><p>跟Match一样的，可以提供一个渲染函数，同样，也只有location一个prop传进去。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;Miss render=&#123;(&#123; location &#125;) =&gt; (</div><div class="line">  &lt;div&gt;Nothing matched &#123;location.pathname&#125;.&lt;/div&gt;</div><div class="line">)&#125;/&gt;</div></pre></td></tr></table></figure></p>
+<p><font size="6em">&lt;/Miss&gt;<font></font></font></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;https://react-router.now.sh/Miss&quot;&gt;原文链接&lt;/a&gt;&lt;/p&gt;
+&lt;font size=&#39;6em&#39;&gt;&amp;lt;Miss&amp;gt;&lt;/font&gt;
+
+&lt;p&gt;当没有匹配到当前的地址时，将会渲染Miss。&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; App = () =&amp;gt; (&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &amp;lt;Router&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;lt;Match pattern=&quot;/foo&quot;/&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;lt;Match pattern=&quot;/bar&quot;/&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;lt;Miss component=&amp;#123;NoMatch&amp;#125;/&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &amp;lt;/Router&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;const NoMatch = (&amp;#123; location &amp;#125;) =&amp;gt; (&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &amp;lt;div&amp;gt;Nothing matched &amp;#123;location.pathname&amp;#125;.&amp;lt;/div&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;)&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="react router 4.0.0 api中文文档" scheme="http://yoursite.com/categories/react-router-4-0-0-api%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3/"/>
+    
+    
+      <category term="react" scheme="http://yoursite.com/tags/react/"/>
+    
+      <category term="react-router" scheme="http://yoursite.com/tags/react-router/"/>
+    
+      <category term="翻译文档" scheme="http://yoursite.com/tags/%E7%BF%BB%E8%AF%91%E6%96%87%E6%A1%A3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>解决 /dev/kvm is not found 的问题</title>
+    <link href="http://yoursite.com/2016/11/28/fix-dev-kvm-is-not-found/"/>
+    <id>http://yoursite.com/2016/11/28/fix-dev-kvm-is-not-found/</id>
+    <published>2016-11-28T11:44:23.000Z</published>
+    <updated>2016-11-28T11:44:23.869Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="问题出现环境"><a href="#问题出现环境" class="headerlink" title="问题出现环境"></a>问题出现环境</h2><ul>
+<li>Ubuntu 12.04</li>
+<li>Android Studio 2.2.2</li>
+</ul>
+<h2 id="解决步骤"><a href="#解决步骤" class="headerlink" title="解决步骤"></a>解决步骤</h2><h3 id="开启VT-x"><a href="#开启VT-x" class="headerlink" title="开启VT-x"></a>开启VT-x</h3><p>在ubuntu上使用Android Studio创建模拟器时，会提示一个错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/dev/kvm is not found</div></pre></td></tr></table></figure></p>
+<p>并且提示要在<em>BIOS</em>里面开启<font size="4em"><strong>VT-x</strong></font>。</p>
+<a id="more"></a>
+<p>重启电脑，按<em>DEL</em>键进入<em>BIOS</em>,发现确实没有启用，于是启用后再此重启电脑。</p>
+<p>此时打开Android Studio，仍然提示一样的错误。</p>
+<p>再次在网上搜寻，发现如下解决方案，记录一下。</p>
+<p><a href="http://askubuntu.com/questions/600727/replacement-for-haxm-on-ubuntu-says-intel-x86-emulator-accelerator-is-not-comp" target="_blank" rel="external">http://askubuntu.com/questions/600727/replacement-for-haxm-on-ubuntu-says-intel-x86-emulator-accelerator-is-not-comp</a></p>
+<p>###<br>Check if your CPU supports hardware virtualization, by typing:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">egrep -c &apos;(vmx|svm)&apos; /proc/cpuinfo</div></pre></td></tr></table></figure></p>
+<p>If the result is 0, your CPU does not support hardware virtualization, which is necessary to run the KVM. If you get 1 or more, that means you’re fine.</p>
+<p>Next, install KVM. First make sure if your processor supports KVM by typing:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">kvm-ok</div></pre></td></tr></table></figure></p>
+<p>You will see this if that’s the case:</p>
+<p>INFO: Your CPU supports KVM extensions INFO: /dev/kvm exists KVM acceleration can be used<br>If this is the result, you need to turn on Intel VT in BIOS:</p>
+<p>INFO: KVM is disabled by your BIOS HINT: Enter your BIOS setup and enable Virtualization Technology (VT), and then hard poweroff/poweron your system KVM acceleration can NOT be used<br>The next step is to install the KVM and a few other packages needed. To do so, type:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils</div></pre></td></tr></table></figure></p>
+<p>Add your user to some groups, replacing by your own username:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo adduser &lt;user&gt; libvirtd</div><div class="line">sudo adduser &lt;user&gt; kvm</div></pre></td></tr></table></figure></p>
+<p>Check if everything is ok:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo virsh -c qemu:///system list</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;问题出现环境&quot;&gt;&lt;a href=&quot;#问题出现环境&quot; class=&quot;headerlink&quot; title=&quot;问题出现环境&quot;&gt;&lt;/a&gt;问题出现环境&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Ubuntu 12.04&lt;/li&gt;
+&lt;li&gt;Android Studio 2.2.2&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;解决步骤&quot;&gt;&lt;a href=&quot;#解决步骤&quot; class=&quot;headerlink&quot; title=&quot;解决步骤&quot;&gt;&lt;/a&gt;解决步骤&lt;/h2&gt;&lt;h3 id=&quot;开启VT-x&quot;&gt;&lt;a href=&quot;#开启VT-x&quot; class=&quot;headerlink&quot; title=&quot;开启VT-x&quot;&gt;&lt;/a&gt;开启VT-x&lt;/h3&gt;&lt;p&gt;在ubuntu上使用Android Studio创建模拟器时，会提示一个错误：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;/dev/kvm is not found&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;并且提示要在&lt;em&gt;BIOS&lt;/em&gt;里面开启&lt;font size=&#39;4em&#39;&gt;&lt;strong&gt;VT-x&lt;/strong&gt;&lt;/font&gt;。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="ubuntu" scheme="http://yoursite.com/tags/ubuntu/"/>
+    
+      <category term="android" scheme="http://yoursite.com/tags/android/"/>
+    
+      <category term="android studio" scheme="http://yoursite.com/tags/android-studio/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>https双向验证功能的实现</title>
+    <link href="http://yoursite.com/2016/11/28/android-https-verify-ways/"/>
+    <id>http://yoursite.com/2016/11/28/android-https-verify-ways/</id>
+    <published>2016-11-28T00:51:23.000Z</published>
+    <updated>2016-11-29T00:59:51.151Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文介绍一个简单echo服务器的实现，服务端用nodejs，客户端用android。</p>
+<h2 id="用openssl一系列证书"><a href="#用openssl一系列证书" class="headerlink" title="用openssl一系列证书"></a><font size="6em">用openssl一系列证书</font></h2><h3 id="生成自己的CA根证书"><a href="#生成自己的CA根证书" class="headerlink" title="生成自己的CA根证书"></a><font size="5em">生成自己的CA根证书</font></h3><h4 id="生成跟证书私钥ca-key"><a href="#生成跟证书私钥ca-key" class="headerlink" title="生成跟证书私钥ca.key"></a><font size="4em">生成跟证书私钥ca.key</font></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ openssl genrsa -des3 -out ca.key 1024</div></pre></td></tr></table></figure>
+<h4 id="生成X-509证书签名请求文件ca-csr"><a href="#生成X-509证书签名请求文件ca-csr" class="headerlink" title="生成X.509证书签名请求文件ca.csr"></a><font size="4em">生成X.509证书签名请求文件ca.csr</font></h4><p>在生成ca.csr的过程中，会让输入一些组织信息等。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ openssl req -new -key ca.key -out ca.csr</div></pre></td></tr></table></figure></p>
+<a id="more"></a> 
+<p>输出如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">Enter pass phrase for ca.key:</div><div class="line">You are about to be asked to enter information that will be incorporated</div><div class="line">into your certificate request.</div><div class="line">What you are about to enter is what is called a Distinguished Name or a DN.</div><div class="line">There are quite a few fields but you can leave some blank</div><div class="line">For some fields there will be a default value,</div><div class="line">If you enter &apos;.&apos;, the field will be left blank.</div><div class="line">-----</div><div class="line">Country Name (2 letter code) [AU]:CN</div><div class="line">State or Province Name (full name) [Some-State]:GuangDong</div><div class="line">Locality Name (eg, city) []:ShenZhen</div><div class="line">Organization Name (eg, company) [Internet Widgits Pty Ltd]:IBoxPay</div><div class="line">Organizational Unit Name (eg, section) []:IBoxPay</div><div class="line">Common Name (e.g. server FQDN or YOUR name) []:</div><div class="line">Email Address []:admin@iboxpay.com</div><div class="line"></div><div class="line">Please enter the following &apos;extra&apos; attributes</div><div class="line">to be sent with your certificate request</div><div class="line">A challenge password []:</div><div class="line">An optional company name []:</div></pre></td></tr></table></figure></p>
+<h4 id="生成X-509格式的CA根证书ca-crt"><a href="#生成X-509格式的CA根证书ca-crt" class="headerlink" title="生成X.509格式的CA根证书ca.crt"></a><font size="4em">生成X.509格式的CA根证书ca.crt</font></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ openssl x509 -req -days 365 -in ca.csr -out ca.crt -signkey ca.key</div></pre></td></tr></table></figure>
+<p>输出如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Signature ok</div><div class="line">subject=/C=CN/ST=GuangDong/L=ShenZhen/O=IBoxPay/OU=IBoxPay/emailAddress=admin@iboxpay.com</div><div class="line">Getting Private key</div><div class="line">Enter pass phrase for ca.key:</div></pre></td></tr></table></figure></p>
+<h3 id="生成服务端的证书"><a href="#生成服务端的证书" class="headerlink" title="生成服务端的证书"></a><font size="5em">生成服务端的证书</font></h3><h4 id="生成服务端私钥文件-server-key"><a href="#生成服务端私钥文件-server-key" class="headerlink" title="生成服务端私钥文件 server.key"></a><font size="4em">生成服务端私钥文件 server.key</font></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ openssl genrsa -des3 -out server.key 1024</div></pre></td></tr></table></figure>
+<h4 id="服务端需要向CA机构申请签名证书，在申请签名证书之前依然是创建自己的证书签名请求文件server-csr"><a href="#服务端需要向CA机构申请签名证书，在申请签名证书之前依然是创建自己的证书签名请求文件server-csr" class="headerlink" title="服务端需要向CA机构申请签名证书，在申请签名证书之前依然是创建自己的证书签名请求文件server.csr"></a><font size="4em">服务端需要向CA机构申请签名证书，在申请签名证书之前依然是创建自己的证书签名请求文件server.csr</font></h4><p>这一步需要填写一个组织信息，不要跟根证书的组织的一样。另外Common Name填一个自己的域名（如果没有实际的域名也可以写，后面在/etc/hosts映射一个，我写的就是yinlijun.com），不要填localhost，android会报错。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">openssl req -new -key server.key -out server.csr</div></pre></td></tr></table></figure></p>
+<p>输出如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">Enter pass phrase for server.key:</div><div class="line">You are about to be asked to enter information that will be incorporated</div><div class="line">into your certificate request.</div><div class="line">What you are about to enter is what is called a Distinguished Name or a DN.</div><div class="line">There are quite a few fields but you can leave some blank</div><div class="line">For some fields there will be a default value,</div><div class="line">If you enter &apos;.&apos;, the field will be left blank.</div><div class="line">-----</div><div class="line">Country Name (2 letter code) [AU]:CN</div><div class="line">State or Province Name (full name) [Some-State]:GuangDong</div><div class="line">Locality Name (eg, city) []:ShenZhen</div><div class="line">Organization Name (eg, company) [Internet Widgits Pty Ltd]:yinlijun</div><div class="line">Organizational Unit Name (eg, section) []:yinlijun</div><div class="line">Common Name (e.g. server FQDN or YOUR name) []:yinlijun.com</div><div class="line">Email Address []:admin@yinlijun.com</div><div class="line"></div><div class="line">Please enter the following &apos;extra&apos; attributes</div><div class="line">to be sent with your certificate request</div><div class="line">A challenge password []:</div></pre></td></tr></table></figure></p>
+<h4 id="删除私钥的密码，这一步非常重要，一定要执行-否则会影响后面的步骤。"><a href="#删除私钥的密码，这一步非常重要，一定要执行-否则会影响后面的步骤。" class="headerlink" title="删除私钥的密码，这一步非常重要，一定要执行,否则会影响后面的步骤。"></a><font size="4em">删除私钥的密码，这一步非常<strong>重要</strong>，一定要执行,否则会影响后面的步骤。</font></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cp server.key server.key.passphrase</div><div class="line">$ openssl rsa -in server.key.passphrase -out server.key</div></pre></td></tr></table></figure>
+<p>输出如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Enter pass phrase for server.key.passphrase:</div><div class="line">writing RSA key</div></pre></td></tr></table></figure></p>
+<h4 id="签发服务器证书server-crt："><a href="#签发服务器证书server-crt：" class="headerlink" title="签发服务器证书server.crt："></a><font size="4em">签发服务器证书server.crt：</font></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt</div></pre></td></tr></table></figure>
+<p>输出如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Signature ok</div><div class="line">subject=/C=CN/ST=GuangDong/L=ShenZhen/O=yinlijun/OU=yinlijun/CN=yinlijun.com/emailAddress=admin@yinlijun.com</div><div class="line">Getting Private key</div></pre></td></tr></table></figure></p>
+<p>到现在为止，你目录下的文件应该有：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">ls -la</div><div class="line">total 36</div><div class="line">drwxr-xr-x  2 user user 4096 Sep  5 16:19 .</div><div class="line">drwxr-xr-x 12 user user 4096 Sep  5 16:09 ..</div><div class="line">-rw-r--r--  1 user user  757 Sep  5 16:12 ca.crt</div><div class="line">-rw-r--r--  1 user user  603 Sep  5 16:10 ca.csr</div><div class="line">-rw-r--r--  1 user user  963 Sep  5 16:09 ca.key</div><div class="line">-rw-r--r--  1 user user  757 Sep  5 16:19 server.crt</div><div class="line">-rw-r--r--  1 user user  603 Sep  5 16:16 server.csr</div><div class="line">-rw-r--r--  1 user user  887 Sep  5 16:18 server.key</div><div class="line">-rw-r--r--  1 user user  951 Sep  5 16:17 server.key.passphrase</div></pre></td></tr></table></figure></p>
+<h4 id="生成之后察看服务器证书信息。"><a href="#生成之后察看服务器证书信息。" class="headerlink" title="生成之后察看服务器证书信息。"></a>生成之后察看服务器证书信息。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">openssl x509 -in server.crt -text -noout</div></pre></td></tr></table></figure>
+<h4 id="生成服务器的pfx文件，这个文件node服务器要用到。"><a href="#生成服务器的pfx文件，这个文件node服务器要用到。" class="headerlink" title="生成服务器的pfx文件，这个文件node服务器要用到。"></a>生成服务器的pfx文件，这个文件node服务器要用到。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">openssl pkcs12 -export -in server.crt -inkey server.key -certfile ca.crt -out server.pfx</div></pre></td></tr></table></figure>
+<p>输出如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Enter Export Password:</div><div class="line">Verifying - Enter Export Password:</div></pre></td></tr></table></figure></p>
+<h4 id="生成服务端的p12文件。，这个是为了生成服务端bks文件用的"><a href="#生成服务端的p12文件。，这个是为了生成服务端bks文件用的" class="headerlink" title="生成服务端的p12文件。，这个是为了生成服务端bks文件用的"></a>生成服务端的p12文件。，这个是为了生成服务端bks文件用的</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">openssl pkcs12 -export -clcerts -in server.crt -inkey server.key -out server.p12</div></pre></td></tr></table></figure>
+<h3 id="下载一个bcprov-jdk16-141-jar，也是为了生成服务端bks文件要用到的。"><a href="#下载一个bcprov-jdk16-141-jar，也是为了生成服务端bks文件要用到的。" class="headerlink" title="下载一个bcprov-jdk16-141.jar，也是为了生成服务端bks文件要用到的。"></a>下载一个bcprov-jdk16-141.jar，也是为了生成服务端bks文件要用到的。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">下载地址：[http://www.java2s.com/Code/JarDownload/bcprov/bcprov-jdk16-141.jar.zip](http://www.java2s.com/Code/JarDownload/bcprov/bcprov-jdk16-141.jar.zip)</div></pre></td></tr></table></figure>
+<h3 id="生成服务端的bks文件，这个android程序要用到"><a href="#生成服务端的bks文件，这个android程序要用到" class="headerlink" title="生成服务端的bks文件，这个android程序要用到"></a>生成服务端的bks文件，这个android程序要用到</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">keytool -importkeystore -srckeystore server.p12 -srcstoretype pkcs12 -destkeystore server.bks -deststoretype bks -provider org.bouncycastle.jce.provider.BouncyCastleProvider -providerpath bcprov-jdk16-141.jar</div></pre></td></tr></table></figure>
+<p>输出如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">输入目标密钥库口令:  </div><div class="line">再次输入新密码: </div><div class="line">输入源密钥库口令:  </div><div class="line">已成功导入别名 1 项。</div><div class="line">已完成导入命令: 1 项成功导入，0 项失败或取消</div></pre></td></tr></table></figure></p>
+<p>因为要进行双向验证，还需要生成客户端证书。</p>
+<h4 id="生成客户端密钥"><a href="#生成客户端密钥" class="headerlink" title="生成客户端密钥"></a>生成客户端密钥</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">openssl genrsa -des3 -out client.key 1024</div></pre></td></tr></table></figure>
+<h4 id="生成客户端证书请求签名文件"><a href="#生成客户端证书请求签名文件" class="headerlink" title="生成客户端证书请求签名文件"></a>生成客户端证书请求签名文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">openssl req -new -out client.csr -key client.key</div></pre></td></tr></table></figure>
+<p>输出如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">Enter pass phrase for client.key:</div><div class="line">You are about to be asked to enter information that will be incorporated</div><div class="line">into your certificate request.</div><div class="line">What you are about to enter is what is called a Distinguished Name or a DN.</div><div class="line">There are quite a few fields but you can leave some blank</div><div class="line">For some fields there will be a default value,</div><div class="line">If you enter &apos;.&apos;, the field will be left blank.</div><div class="line">-----</div><div class="line">Country Name (2 letter code) [AU]:CN</div><div class="line">State or Province Name (full name) [Some-State]:GuangDong </div><div class="line">Locality Name (eg, city) []:ShenZhen</div><div class="line">Organization Name (eg, company) [Internet Widgits Pty Ltd]:ruochen</div><div class="line">Organizational Unit Name (eg, section) []:ruochen</div><div class="line">Common Name (e.g. server FQDN or YOUR name) []:</div><div class="line">Email Address []:admin@ruochen.com</div><div class="line"></div><div class="line">Please enter the following &apos;extra&apos; attributes</div><div class="line">to be sent with your certificate request</div><div class="line">A challenge password []:</div><div class="line">An optional company name []:</div></pre></td></tr></table></figure></p>
+<h4 id="创建一个自当前日期起有效期为十年的客户端证书，需要根证书和根密钥参与。"><a href="#创建一个自当前日期起有效期为十年的客户端证书，需要根证书和根密钥参与。" class="headerlink" title="创建一个自当前日期起有效期为十年的客户端证书，需要根证书和根密钥参与。"></a>创建一个自当前日期起有效期为十年的客户端证书，需要根证书和根密钥参与。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">openssl x509 -req -in client.csr -out client.cert -signkey client.key -CA ca.crt -CAkey ca.key -CAcreateserial -days 3650</div></pre></td></tr></table></figure>
+<p>输入如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Signature ok</div><div class="line">subject=/C=CN/ST=GuangDong/L=ShenZhen/O=ruochen/OU=ruochen/emailAddress=admin@ruochen.com</div><div class="line">Getting Private key</div><div class="line">Enter pass phrase for client.key:</div><div class="line">Getting CA Private Key</div><div class="line">Enter pass phrase for ca.key:</div><div class="line">yinlijun@yinlijun:~/personal_github/echo-https-server/keys$ ls</div><div class="line">ca.crt  ca.csr  ca.key  ca.srl  client.cert  client.csr  client.key  server.crt  server.csr  server.key  server.key.passphrase  server.pfx</div><div class="line">yinlijun@yinlijun:~/personal_github/echo-https-server/keys$ openssl pkcs12 -export -clcerts -in client.cert -inkey client.key -out client.p12</div><div class="line">Enter pass phrase for client.key:</div><div class="line">Enter Export Password:</div><div class="line">Verifying - Enter Export Password:</div></pre></td></tr></table></figure></p>
+<h4 id="生成浏览器支持的p12文件"><a href="#生成浏览器支持的p12文件" class="headerlink" title="生成浏览器支持的p12文件"></a>生成浏览器支持的p12文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">openssl pkcs12 -export -clcerts -in client.cert -inkey client.key -out client.p12</div></pre></td></tr></table></figure>
+<h4 id="将客户端证书文件client-crt和客户端证书密钥文件client-key合并成客户端证书安装包client-pfx"><a href="#将客户端证书文件client-crt和客户端证书密钥文件client-key合并成客户端证书安装包client-pfx" class="headerlink" title="将客户端证书文件client.crt和客户端证书密钥文件client.key合并成客户端证书安装包client.pfx"></a>将客户端证书文件client.crt和客户端证书密钥文件client.key合并成客户端证书安装包client.pfx</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">openssl pkcs12 -export -in client.crt -inkey client.key -out client.pfx</div></pre></td></tr></table></figure>
+<p>以上的文件我只用到了一部分，应该有替代关系，具体我也搞不清楚:)。 不同的实现方式有用到不同的文件。<br>我的android客户端用到了</p>
+<ul>
+<li>server.bks</li>
+<li>client.p12</li>
+</ul>
+<p>看了网上的一些例子，好像server.bks可以用server.crt替代。</p>
+<p>node用到了</p>
+<ul>
+<li>server.pfx</li>
+</ul>
+<p>察看node的文档，server.pfx可以用server.crt和server.key替代。</p>
+<h2 id="服务端（nodejs）的代码"><a href="#服务端（nodejs）的代码" class="headerlink" title="服务端（nodejs）的代码"></a>服务端（nodejs）的代码</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> https =<span class="built_in">require</span>(<span class="string">'https'</span>), fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> options = &#123;</div><div class="line">    key: fs.readFileSync(<span class="string">'./keys/server.key'</span>),</div><div class="line">    cert: fs.readFileSync(<span class="string">'./keys/server.crt'</span>),</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">var</span> app = express();</div><div class="line"><span class="keyword">var</span> server = https.createServer(options, app);</div><div class="line">server.listen(<span class="number">443</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'Https server listening on port '</span> + <span class="number">443</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h2 id="android应用自有证书的验证方式"><a href="#android应用自有证书的验证方式" class="headerlink" title="android应用自有证书的验证方式"></a>android应用自有证书的验证方式</h2><p>将服务端证书拷贝到app资源目录下，一般是<project_dir>/assets/server.crt</project_dir></p>
+<h3 id="方法一：直接根据server-crt初始化TrustManagerFactory"><a href="#方法一：直接根据server-crt初始化TrustManagerFactory" class="headerlink" title="方法一：直接根据server.crt初始化TrustManagerFactory"></a>方法一：直接根据server.crt初始化TrustManagerFactory</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">    CertificateFactory cf = CertificateFactory.getInstance(<span class="string">"X.509"</span>);</div><div class="line">    InputStream caInput = <span class="keyword">new</span> BufferedInputStream(getAssets().open(<span class="string">"server.crt"</span>));</div><div class="line">    <span class="keyword">final</span> Certificate ca;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        ca = cf.generateCertificate(caInput);</div><div class="line">        Log.i(TAG, <span class="string">"ca="</span> + ((X509Certificate) ca).getSubjectDN());</div><div class="line">        Log.i(TAG, <span class="string">"key="</span> + ((X509Certificate) ca).getPublicKey());</div><div class="line">    &#125; <span class="keyword">finally</span> &#123;</div><div class="line">        caInput.close();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    String keyStoreType = KeyStore.getDefaultType();</div><div class="line">    Log.d(TAG, <span class="string">"keystore type:"</span> + keyStoreType);</div><div class="line">    KeyStore keyStore = KeyStore.getInstance(keyStoreType);</div><div class="line">    keyStore.load(<span class="keyword">null</span>, <span class="keyword">null</span>);</div><div class="line">    keyStore.setCertificateEntry(<span class="string">"cert"</span>, ca);</div><div class="line"></div><div class="line">    String tmfAlgorithm = TrustManagerFactory.getDefaultAlgorithm();</div><div class="line">    Log.d(TAG, <span class="string">"tmfAlgorithm:"</span> + tmfAlgorithm);</div><div class="line">    TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(tmfAlgorithm);</div><div class="line">    trustManagerFactory.init(keyStore);</div><div class="line"></div><div class="line">    mSSLContext = SSLContext.getInstance(<span class="string">"TLS"</span>);</div><div class="line">    mSSLContext.init(<span class="keyword">null</span>, trustManagerFactory.getTrustManagers(), <span class="keyword">null</span>);</div><div class="line"></div><div class="line">    URL url = <span class="keyword">new</span> URL(<span class="string">"https://yinlijun.com"</span>);</div><div class="line">    HttpsURLConnection urlConnection =</div><div class="line">            (HttpsURLConnection)url.openConnection();</div><div class="line">    urlConnection.setSSLSocketFactory(mSSLContext.getSocketFactory());</div><div class="line">    InputStream in = urlConnection.getInputStream();</div><div class="line">    copyInputStreamToOutputStream(in, System.out);</div><div class="line">&#125; <span class="keyword">catch</span> (CertificateException e) &#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125; <span class="keyword">catch</span> (NoSuchAlgorithmException e) &#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125; <span class="keyword">catch</span> (KeyManagementException e) &#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125; <span class="keyword">catch</span> (KeyStoreException e) &#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>copyInputStreamToOutputStream方法如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">copyInputStreamToOutputStream</span><span class="params">(InputStream in, PrintStream out)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">    <span class="keyword">byte</span>[] buffer = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</div><div class="line">    <span class="keyword">int</span> c = <span class="number">0</span>;</div><div class="line">    <span class="keyword">while</span> ((c = in.read(buffer)) != -<span class="number">1</span>) &#123;</div><div class="line">        out.write(buffer, <span class="number">0</span>, c);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    CertificateFactory cf = CertificateFactory.getInstance(<span class="string">"X.509"</span>);</div><div class="line">    InputStream caInput = <span class="keyword">new</span> BufferedInputStream(getAssets().open(<span class="string">"server.crt"</span>));</div><div class="line">    <span class="keyword">final</span> Certificate ca;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        ca = cf.generateCertificate(caInput);</div><div class="line">        Log.i(<span class="string">"Longer"</span>, <span class="string">"ca="</span> + ((X509Certificate) ca).getSubjectDN());</div><div class="line">        Log.i(<span class="string">"Longer"</span>, <span class="string">"key="</span> + ((X509Certificate) ca).getPublicKey());</div><div class="line">    &#125; <span class="keyword">finally</span> &#123;</div><div class="line">        caInput.close();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// Create an SSLContext that uses our TrustManager</span></div><div class="line">    SSLContext context = SSLContext.getInstance(<span class="string">"TLSv1"</span>,<span class="string">"AndroidOpenSSL"</span>);</div><div class="line">    context.init(<span class="keyword">null</span>, <span class="keyword">new</span> TrustManager[]&#123;</div><div class="line">            <span class="keyword">new</span> X509TrustManager() &#123;</div><div class="line">                <span class="meta">@Override</span></div><div class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">checkClientTrusted</span><span class="params">(X509Certificate[] chain,</span></span></div><div class="line">                                                String authType)</div><div class="line">                        <span class="keyword">throws</span> CertificateException &#123;</div><div class="line"></div><div class="line">                &#125;</div><div class="line"></div><div class="line">                <span class="meta">@Override</span></div><div class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">checkServerTrusted</span><span class="params">(X509Certificate[] chain,</span></span></div><div class="line">                                                String authType)</div><div class="line">                        <span class="keyword">throws</span> CertificateException &#123;</div><div class="line">                    <span class="keyword">for</span> (X509Certificate cert : chain) &#123;</div><div class="line"></div><div class="line">                        <span class="comment">// Make sure that it hasn't expired.</span></div><div class="line">                        cert.checkValidity();</div><div class="line"></div><div class="line">                        <span class="comment">// Verify the certificate's public key chain.</span></div><div class="line">                        <span class="keyword">try</span> &#123;</div><div class="line">                            cert.verify(((X509Certificate) ca).getPublicKey());</div><div class="line">                        &#125; <span class="keyword">catch</span> (NoSuchAlgorithmException e) &#123;</div><div class="line">                            e.printStackTrace();</div><div class="line">                        &#125; <span class="keyword">catch</span> (InvalidKeyException e) &#123;</div><div class="line">                            e.printStackTrace();</div><div class="line">                        &#125; <span class="keyword">catch</span> (NoSuchProviderException e) &#123;</div><div class="line">                            e.printStackTrace();</div><div class="line">                        &#125; <span class="keyword">catch</span> (SignatureException e) &#123;</div><div class="line">                            e.printStackTrace();</div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                <span class="meta">@Override</span></div><div class="line">                <span class="keyword">public</span> X509Certificate[] getAcceptedIssuers() &#123;</div><div class="line">                    <span class="keyword">return</span> <span class="keyword">new</span> X509Certificate[<span class="number">0</span>];</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">    &#125;, <span class="keyword">null</span>);</div><div class="line"></div><div class="line">    URL url = <span class="keyword">new</span> URL(<span class="string">"https://yinlijun.com/"</span>);</div><div class="line">    HttpsURLConnection urlConnection =</div><div class="line">            (HttpsURLConnection)url.openConnection();</div><div class="line">    urlConnection.setSSLSocketFactory(context.getSocketFactory());</div><div class="line">    InputStream in = urlConnection.getInputStream();</div><div class="line">    copyInputStreamToOutputStream(in, System.out);</div></pre></td></tr></table></figure>
+<h2 id="双向认证"><a href="#双向认证" class="headerlink" title="双向认证"></a>双向认证</h2><p>单向验证只能验证服务器，如果服务器也想对客户端进行验证，即所谓（双向验证），需要在连接是一起发送客户端证书。</p>
+<h3 id="双向认证，服务器代码"><a href="#双向认证，服务器代码" class="headerlink" title="双向认证，服务器代码"></a>双向认证，服务器代码</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> tls = <span class="built_in">require</span>(<span class="string">'tls'</span>);</div><div class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"></div><div class="line"><span class="keyword">const</span> options = &#123;</div><div class="line">  pfx: fs.readFileSync(<span class="string">'./server.pfx'</span>),</div><div class="line">  passphrase: <span class="string">"123456"</span>,</div><div class="line">  <span class="comment">// This is necessary only if using the client certificate authentication.</span></div><div class="line">  requestCert: <span class="literal">true</span>,</div><div class="line">  rejectUnauthorized: <span class="literal">true</span> <span class="comment">//如果接受也非认证链接，可以删除此行。</span></div><div class="line">&#125;;</div><div class="line"><span class="comment">//需要双向认证才需要配置requestCert为true。</span></div><div class="line"><span class="keyword">const</span> server = tls.createServer(options, (socket) =&gt; &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'server connected'</span>,</div><div class="line">              socket.authorized ? <span class="string">'authorized'</span> : <span class="string">'unauthorized'</span>);</div><div class="line">  socket.setEncoding(<span class="string">'utf8'</span>);</div><div class="line">  socket.on(<span class="string">'data'</span>, (data) =&gt; &#123;</div><div class="line">      <span class="built_in">console</span>.log(data);</div><div class="line">      socket.write(data);</div><div class="line">  &#125;);</div><div class="line">  socket.on(<span class="string">'end'</span>, (socket) =&gt; &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"socket closed"</span>);</div><div class="line">  &#125;);</div><div class="line">&#125;);</div><div class="line">server.listen(<span class="number">8000</span>, () =&gt; &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'server bound'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="双向认证，android的代码，实现方式一"><a href="#双向认证，android的代码，实现方式一" class="headerlink" title="双向认证，android的代码，实现方式一"></a>双向认证，android的代码，实现方式一</h3><p>server.pfx和client.p12放到<project_dir>/assets/目录下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    KeyStore trustStore = KeyStore.getInstance(<span class="string">"bks"</span>);</div><div class="line">    InputStream tsIn = getResources().getAssets().open(<span class="string">"server.bks"</span>);</div><div class="line"></div><div class="line">    KeyStore keyStore = KeyStore.getInstance(<span class="string">"PKCS12"</span>);</div><div class="line">    InputStream ksIn = getResources().getAssets().open(<span class="string">"client.p12"</span>);</div><div class="line"></div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        keyStore.load(ksIn, <span class="string">"123456"</span>.toCharArray());</div><div class="line">        trustStore.load(tsIn, <span class="string">"123456"</span>.toCharArray());</div><div class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125; <span class="keyword">finally</span> &#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            ksIn.close();</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception ignore) &#123;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            tsIn.close();</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception ignore) &#123;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance(<span class="string">"X509"</span>);</div><div class="line">    keyManagerFactory.init(keyStore, <span class="string">"123456"</span>.toCharArray());</div><div class="line">    TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());</div><div class="line">    trustManagerFactory.init(trustStore);</div><div class="line">    mSSLContext = SSLContext.getInstance(<span class="string">"TLS"</span>);</div><div class="line">    mSSLContext.init(<span class="keyword">null</span>, trustManagerFactory.getTrustManagers(), <span class="keyword">null</span>);</div><div class="line"></div><div class="line">    mSSLSocket = (SSLSocket) mSSLContext.getSocketFactory().createSocket(<span class="string">"yinlijun.com"</span>, <span class="number">8000</span>);</div><div class="line">    mSSLSocket.startHandshake();</div><div class="line">    <span class="comment">//...</span></div><div class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125; <span class="keyword">catch</span> (NoSuchAlgorithmException e) &#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125; <span class="keyword">catch</span> (KeyManagementException e) &#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125; <span class="keyword">catch</span> (KeyStoreException e) &#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125; <span class="keyword">catch</span> (UnrecoverableKeyException e) &#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125;</div></pre></td></tr></table></figure></project_dir></p>
+<h3 id="双向认证，android的代码，实现方式2，用server-crt替代server-bks"><a href="#双向认证，android的代码，实现方式2，用server-crt替代server-bks" class="headerlink" title="双向认证，android的代码，实现方式2，用server.crt替代server.bks"></a>双向认证，android的代码，实现方式2，用server.crt替代server.bks</h3><p>server.crt和client.p12放到<project_dir>/assets/目录下</project_dir></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    CertificateFactory cf = CertificateFactory.getInstance(<span class="string">"X.509"</span>);</div><div class="line">    InputStream caInput = <span class="keyword">new</span> BufferedInputStream(getAssets().open(<span class="string">"server.crt"</span>));</div><div class="line">    <span class="keyword">final</span> Certificate ca;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        ca = cf.generateCertificate(caInput);</div><div class="line">        Log.i(<span class="string">"Longer"</span>, <span class="string">"ca="</span> + ((X509Certificate) ca).getSubjectDN());</div><div class="line">        Log.i(<span class="string">"Longer"</span>, <span class="string">"key="</span> + ((X509Certificate) ca).getPublicKey());</div><div class="line">    &#125; <span class="keyword">finally</span> &#123;</div><div class="line">        caInput.close();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    KeyStore keyStore = KeyStore.getInstance(<span class="string">"PKCS12"</span>);</div><div class="line">    InputStream ksIn = getResources().getAssets().open(<span class="string">"client.p12"</span>);</div><div class="line"></div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        keyStore.load(ksIn, <span class="string">"123456"</span>.toCharArray());</div><div class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125; <span class="keyword">finally</span> &#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            ksIn.close();</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception ignore) &#123;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance(<span class="string">"X509"</span>);</div><div class="line">    keyManagerFactory.init(keyStore, <span class="string">"123456"</span>.toCharArray());</div><div class="line"></div><div class="line">    <span class="comment">// Create an SSLContext that uses our TrustManager</span></div><div class="line">    SSLContext context = SSLContext.getInstance(<span class="string">"TLSv1"</span>,<span class="string">"AndroidOpenSSL"</span>);</div><div class="line">    context.init(keyManagerFactory.getKeyManagers(), <span class="keyword">new</span> TrustManager[]&#123;</div><div class="line">            <span class="keyword">new</span> X509TrustManager() &#123;</div><div class="line">                <span class="meta">@Override</span></div><div class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">checkClientTrusted</span><span class="params">(X509Certificate[] chain,</span></span></div><div class="line">                                                String authType)</div><div class="line">                        <span class="keyword">throws</span> CertificateException &#123;</div><div class="line"></div><div class="line">                &#125;</div><div class="line"></div><div class="line">                <span class="meta">@Override</span></div><div class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">checkServerTrusted</span><span class="params">(X509Certificate[] chain,</span></span></div><div class="line">                                                String authType)</div><div class="line">                        <span class="keyword">throws</span> CertificateException &#123;</div><div class="line">                    <span class="keyword">for</span> (X509Certificate cert : chain) &#123;</div><div class="line"></div><div class="line">                        <span class="comment">// Make sure that it hasn't expired.</span></div><div class="line">                        cert.checkValidity();</div><div class="line"></div><div class="line">                        <span class="comment">// Verify the certificate's public key chain.</span></div><div class="line">                        <span class="keyword">try</span> &#123;</div><div class="line">                            cert.verify(((X509Certificate) ca).getPublicKey());</div><div class="line">                        &#125; <span class="keyword">catch</span> (NoSuchAlgorithmException e) &#123;</div><div class="line">                            e.printStackTrace();</div><div class="line">                        &#125; <span class="keyword">catch</span> (InvalidKeyException e) &#123;</div><div class="line">                            e.printStackTrace();</div><div class="line">                        &#125; <span class="keyword">catch</span> (NoSuchProviderException e) &#123;</div><div class="line">                            e.printStackTrace();</div><div class="line">                        &#125; <span class="keyword">catch</span> (SignatureException e) &#123;</div><div class="line">                            e.printStackTrace();</div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                <span class="meta">@Override</span></div><div class="line">                <span class="keyword">public</span> X509Certificate[] getAcceptedIssuers() &#123;</div><div class="line">                    <span class="keyword">return</span> <span class="keyword">new</span> X509Certificate[<span class="number">0</span>];</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">    &#125;, <span class="keyword">null</span>);</div><div class="line">    <span class="comment">//...</span></div></pre></td></tr></table></figure>
+<p>项目地址：</p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li><a href="https://matoski.com/article/node-express-generate-ssl/" target="_blank" rel="external">How to generate self-signed certificate for usage in Express4 or Node.js HTTP</a></li>
+<li><a href="http://blog.csdn.net/fyang2007/article/details/6180361" target="_blank" rel="external">SSL证书生成方法</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/22816331" target="_blank" rel="external">Android安全开发之安全使用HTTPS</a></li>
+<li><a href="https://developer.android.com/training/articles/security-ssl.html#nogotofail" target="_blank" rel="external">通过 HTTPS 和 SSL 确保安全</a> (要翻墙)</li>
+<li><a href="https://nodejs.org/api/tls.html" target="_blank" rel="external">https://nodejs.org/api/tls.html</a></li>
+<li><a href="https://gist.github.com/Frank-Zhu/41e21a00df26d63cd38d" target="_blank" rel="external">https://gist.github.com/Frank-Zhu/41e21a00df26d63cd38d</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文介绍一个简单echo服务器的实现，服务端用nodejs，客户端用android。&lt;/p&gt;
+&lt;h2 id=&quot;用openssl一系列证书&quot;&gt;&lt;a href=&quot;#用openssl一系列证书&quot; class=&quot;headerlink&quot; title=&quot;用openssl一系列证书&quot;&gt;&lt;/a&gt;&lt;font size=&#39;6em&#39;&gt;用openssl一系列证书&lt;/font&gt;&lt;/h2&gt;&lt;h3 id=&quot;生成自己的CA根证书&quot;&gt;&lt;a href=&quot;#生成自己的CA根证书&quot; class=&quot;headerlink&quot; title=&quot;生成自己的CA根证书&quot;&gt;&lt;/a&gt;&lt;font size=&#39;5em&#39;&gt;生成自己的CA根证书&lt;/font&gt;&lt;/h3&gt;&lt;h4 id=&quot;生成跟证书私钥ca-key&quot;&gt;&lt;a href=&quot;#生成跟证书私钥ca-key&quot; class=&quot;headerlink&quot; title=&quot;生成跟证书私钥ca.key&quot;&gt;&lt;/a&gt;&lt;font size=&#39;4em&#39;&gt;生成跟证书私钥ca.key&lt;/font&gt;&lt;/h4&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;$ openssl genrsa -des3 -out ca.key 1024&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h4 id=&quot;生成X-509证书签名请求文件ca-csr&quot;&gt;&lt;a href=&quot;#生成X-509证书签名请求文件ca-csr&quot; class=&quot;headerlink&quot; title=&quot;生成X.509证书签名请求文件ca.csr&quot;&gt;&lt;/a&gt;&lt;font size=&#39;4em&#39;&gt;生成X.509证书签名请求文件ca.csr&lt;/font&gt;&lt;/h4&gt;&lt;p&gt;在生成ca.csr的过程中，会让输入一些组织信息等。&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;$ openssl req -new -key ca.key -out ca.csr&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="android" scheme="http://yoursite.com/tags/android/"/>
+    
+      <category term="nodejs" scheme="http://yoursite.com/tags/nodejs/"/>
+    
+      <category term="https" scheme="http://yoursite.com/tags/https/"/>
+    
+      <category term="openssl" scheme="http://yoursite.com/tags/openssl/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Match-react router 4.0.0 api中文文档</title>
     <link href="http://yoursite.com/2016/11/25/react-router-4-0-0-api-Match/"/>
     <id>http://yoursite.com/2016/11/25/react-router-4-0-0-api-Match/</id>
     <published>2016-11-25T05:05:50.000Z</published>
-    <updated>2016-11-25T07:17:52.661Z</updated>
+    <updated>2016-11-29T06:15:43.093Z</updated>
     
     <content type="html"><![CDATA[<p><a href="https://react-router.now.sh/Match" target="_blank" rel="external">原文链接</a></p>
-<h1 id="lt-Match-gt"><a href="#lt-Match-gt" class="headerlink" title="&lt;Match&gt;"></a>&lt;Match&gt;</h1><p>匹配到地址(location)时进行UI渲染</p>
-<h3 id="pattern-string"><a href="#pattern-string" class="headerlink" title="pattern: string"></a><font color="red">pattern: string</font></h3><p>任何<a href="https://www.npmjs.com/package/path-to-regexp" target="_blank" rel="external">path-to-regexp</a>可以理解的URL模式表达式<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Match</span> <span class="attr">pattern</span>=<span class="string">"/users/:id"</span> <span class="attr">component</span>=<span class="string">&#123;User&#125;/</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<font size="6em">&lt;Match&gt;<font><br><br>匹配到地址(location)时进行UI渲染<br><br>### <font color="red">pattern: string</font>
+
+<p>任何<a href="https://www.npmjs.com/package/path-to-regexp" target="_blank" rel="external">path-to-regexp</a>可以理解的URL模式表达式<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Match</span> <span class="attr">pattern</span>=<span class="string">"/users/:id"</span> <span class="attr">component</span>=<span class="string">&#123;User&#125;/</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <a id="more"></a>
 <h3 id="exactly-bool"><a href="#exactly-bool" class="headerlink" title="exactly: bool"></a><font color="red">exactly: bool</font></h3><p>当为true时，只有模式表达式严格匹配时，才算匹配上。</p>
 <table>
@@ -70,15 +352,18 @@
 <p>(2) 回传递一个matched属性表示有没有被匹配上。</p>
 <p>It seems unlikely you’ll need this for anything besides animating when a component transitions from matching to not matching and back, but who knows?</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;Match children=&#123;(&#123; matched, ...rest&#125;) =&gt; (</div><div class="line">  &#123;<span class="comment">/* 因为Animate 总是能被渲染，所以你可以利用组件的生命周期(lifecycle)来实现动画。*/</span>&#125;</div><div class="line">  &lt;Animate&gt;</div><div class="line">    &#123;matched &amp;&amp; (</div><div class="line">      <span class="xml"><span class="tag">&lt;<span class="name">Something</span> &#123;<span class="attr">...rest</span>&#125;/&gt;</span></span></div><div class="line">    )&#125;</div><div class="line">  <span class="tag">&lt;/<span class="name">Animate</span>&gt;</span></div><div class="line">)&#125;/&gt;</div></pre></td></tr></table></figure>
-<h1 id="lt-Match-gt-1"><a href="#lt-Match-gt-1" class="headerlink" title="&lt;/Match&gt;"></a>&lt;/Match&gt;</h1>]]></content>
+<font size="6em">&lt;/Match&gt;</font></font></font>]]></content>
     
     <summary type="html">
     
       &lt;p&gt;&lt;a href=&quot;https://react-router.now.sh/Match&quot;&gt;原文链接&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&quot;lt-Match-gt&quot;&gt;&lt;a href=&quot;#lt-Match-gt&quot; class=&quot;headerlink&quot; title=&quot;&amp;lt;Match&amp;gt;&quot;&gt;&lt;/a&gt;&amp;lt;Match&amp;gt;&lt;/h1&gt;&lt;p&gt;匹配到地址(location)时进行UI渲染&lt;/p&gt;
-&lt;h3 id=&quot;pattern-string&quot;&gt;&lt;a href=&quot;#pattern-string&quot; class=&quot;headerlink&quot; title=&quot;pattern: string&quot;&gt;&lt;/a&gt;&lt;font color=&#39;red&#39;&gt;pattern: string&lt;/font&gt;&lt;/h3&gt;&lt;p&gt;任何&lt;a href=&quot;https://www.npmjs.com/package/path-to-regexp&quot;&gt;path-to-regexp&lt;/a&gt;可以理解的URL模式表达式&lt;br&gt;&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;Match&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;pattern&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;/users/:id&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;component&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&amp;#123;User&amp;#125;/&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;font size=&#39;6em&#39;&gt;&amp;lt;Match&amp;gt;&lt;font&gt;&lt;br&gt;&lt;br&gt;匹配到地址(location)时进行UI渲染&lt;br&gt;&lt;br&gt;### &lt;font color=&#39;red&#39;&gt;pattern: string&lt;/font&gt;
+
+&lt;p&gt;任何&lt;a href=&quot;https://www.npmjs.com/package/path-to-regexp&quot;&gt;path-to-regexp&lt;/a&gt;可以理解的URL模式表达式&lt;br&gt;&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;Match&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;pattern&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;/users/:id&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;component&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&amp;#123;User&amp;#125;/&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
     
     </summary>
+    
+      <category term="react router 4.0.0 api中文文档" scheme="http://yoursite.com/categories/react-router-4-0-0-api%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3/"/>
     
     
       <category term="react" scheme="http://yoursite.com/tags/react/"/>
@@ -94,7 +379,7 @@
     <link href="http://yoursite.com/2016/11/24/react-lifecycle/"/>
     <id>http://yoursite.com/2016/11/24/react-lifecycle/</id>
     <published>2016-11-24T07:23:54.000Z</published>
-    <updated>2016-11-25T07:17:40.990Z</updated>
+    <updated>2016-11-28T11:43:16.461Z</updated>
     
     <content type="html"><![CDATA[<p><a href="http://blog.flappyend.com/react-component-lifecycle/" target="_blank" rel="external">原文链接</a></p>
 <h2 id="实例化"><a href="#实例化" class="headerlink" title="实例化"></a>实例化</h2><h3 id="首次实例化"><a href="#首次实例化" class="headerlink" title="首次实例化"></a>首次实例化</h3><ul>
@@ -192,13 +477,13 @@
   
   <entry>
     <title>BrowserRouter-react router 4.0.0 api中文文档</title>
-    <link href="http://yoursite.com/2016/11/24/react-router-4-0-0-api/"/>
-    <id>http://yoursite.com/2016/11/24/react-router-4-0-0-api/</id>
+    <link href="http://yoursite.com/2016/11/24/react-router-4-0-0-api-BrowserRouter/"/>
+    <id>http://yoursite.com/2016/11/24/react-router-4-0-0-api-BrowserRouter/</id>
     <published>2016-11-24T06:54:00.000Z</published>
-    <updated>2016-11-25T07:17:48.375Z</updated>
+    <updated>2016-11-29T06:14:46.000Z</updated>
     
     <content type="html"><![CDATA[<p><a href="https://react-router.now.sh/BrowserRouter" target="_blank" rel="external">原文链接</a></p>
-<font size="5em">&lt;BrowserRouter&gt;</font>
+<font size="6em">&lt;BrowserRouter&gt;</font>
 
 <p>保持你的界面与浏览器历史记录保持同步。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;BrowserRouter&gt;</div><div class="line">  &lt;App/&gt;</div><div class="line">&lt;/BrowserRouter&gt;</div></pre></td></tr></table></figure></p>
 <a id="more"></a>
@@ -206,17 +491,19 @@
 
 <p>所有路由的根URL，如果你的应用处于服务端的子目录, 你可以设置这个值为该子目录。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;BrowserRouter basename=&quot;/calendar&quot; /&gt;</div><div class="line"></div><div class="line">// 假设Link标签如下所示：</div><div class="line">&lt;Link to=&quot;/today&quot;/&gt;</div><div class="line">// 那么超链接指向 &quot;/calendar/today&quot;</div><div class="line">&lt;/BrowserRouter&gt;</div></pre></td></tr></table></figure>
-<font size="5em">&lt;/BrowserRouter&gt;</font>
+<font size="6em">&lt;/BrowserRouter&gt;</font>
 ]]></content>
     
     <summary type="html">
     
       &lt;p&gt;&lt;a href=&quot;https://react-router.now.sh/BrowserRouter&quot;&gt;原文链接&lt;/a&gt;&lt;/p&gt;
-&lt;font size=&#39;5em&#39;&gt;&amp;lt;BrowserRouter&amp;gt;&lt;/font&gt;
+&lt;font size=&#39;6em&#39;&gt;&amp;lt;BrowserRouter&amp;gt;&lt;/font&gt;
 
 &lt;p&gt;保持你的界面与浏览器历史记录保持同步。&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;BrowserRouter&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &amp;lt;App/&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;/BrowserRouter&amp;gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
     
     </summary>
+    
+      <category term="react router 4.0.0 api中文文档" scheme="http://yoursite.com/categories/react-router-4-0-0-api%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3/"/>
     
     
       <category term="react" scheme="http://yoursite.com/tags/react/"/>
@@ -232,7 +519,7 @@
     <link href="http://yoursite.com/2016/11/16/ubuntu%E7%BC%96%E8%AF%91android%E6%BA%90%E4%BB%A3%E7%A0%81%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
     <id>http://yoursite.com/2016/11/16/ubuntu编译android源代码环境搭建/</id>
     <published>2016-11-16T01:04:37.000Z</published>
-    <updated>2016-11-21T02:37:41.650Z</updated>
+    <updated>2016-11-16T11:18:54.718Z</updated>
     
     <content type="html"><![CDATA[<h2 id="安装jdk"><a href="#安装jdk" class="headerlink" title="安装jdk"></a>安装jdk</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install openjdk-7-jdk openjdk-7-jre</div></pre></td></tr></table></figure>
 <p>如果之前系统是其他版本的JDK，需要把环境变量切换过来。</p>
@@ -249,9 +536,9 @@
     </summary>
     
     
-      <category term="android" scheme="http://yoursite.com/tags/android/"/>
-    
       <category term="ubuntu" scheme="http://yoursite.com/tags/ubuntu/"/>
+    
+      <category term="android" scheme="http://yoursite.com/tags/android/"/>
     
       <category term="环境搭建" scheme="http://yoursite.com/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
     
@@ -262,7 +549,7 @@
     <link href="http://yoursite.com/2016/11/15/how-to-download-openjdk/"/>
     <id>http://yoursite.com/2016/11/15/how-to-download-openjdk/</id>
     <published>2016-11-15T12:04:44.000Z</published>
-    <updated>2016-11-21T02:37:41.650Z</updated>
+    <updated>2016-11-16T11:38:18.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="JDK-8"><a href="#JDK-8" class="headerlink" title="JDK 8"></a>JDK 8</h2><h3 id="Debian-Ubuntu"><a href="#Debian-Ubuntu" class="headerlink" title="Debian, Ubuntu"></a><strong>Debian, Ubuntu</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install openjdk-8-jre</div></pre></td></tr></table></figure>
 <p>openjdk-8-jre只包含运行时环境(Java Runtime Environment）。如果你想开发java程序，请安装openjdk-8-jdk。</p>
@@ -288,7 +575,9 @@
     </summary>
     
     
-      <category term="openjdk; java" scheme="http://yoursite.com/tags/openjdk-java/"/>
+      <category term="openjdk" scheme="http://yoursite.com/tags/openjdk/"/>
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
     
   </entry>
   
@@ -297,7 +586,7 @@
     <link href="http://yoursite.com/2016/11/15/ubuntu%E5%88%A9%E7%94%A8update-alternatives%E9%85%8D%E7%BD%AEjava/"/>
     <id>http://yoursite.com/2016/11/15/ubuntu利用update-alternatives配置java/</id>
     <published>2016-11-15T11:32:21.000Z</published>
-    <updated>2016-11-21T02:37:41.650Z</updated>
+    <updated>2016-11-16T01:14:37.507Z</updated>
     
     <content type="html"><![CDATA[<p>利用Android Studio开发，经常会碰到JDK版本的切换问题，安装好新版本的<a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank" rel="external">jdk</a>之后，需要先配置到可选项。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">yinlijun@sj:~$ sudo update-alternatives --install /usr/bin/java java /opt/jdk1.8.0_101/bin/java 100</div><div class="line">update-alternatives: 警告: /etc/alternatives/java has been changed (manually or by a script); switching to manual updates only</div><div class="line">yinlijun@sj:~$ sudo update-alternatives --install /usr/bin/javac javac /opt/jdk1.8.0_101/bin/javac 100</div></pre></td></tr></table></figure></p>
 <a id="more"></a>
@@ -322,7 +611,7 @@
     <link href="http://yoursite.com/2016/11/15/make-ubutun-desktop/"/>
     <id>http://yoursite.com/2016/11/15/make-ubutun-desktop/</id>
     <published>2016-11-15T10:04:19.000Z</published>
-    <updated>2016-11-21T02:37:41.650Z</updated>
+    <updated>2016-11-16T01:14:28.807Z</updated>
     
     <content type="html"><![CDATA[<p>在Ubuntu上从网上下载压缩包版本（非.deb包）的应用程序之后，是不生成桌面图表的，比如网上下载的<a href="http://www.android-studio.org/" target="_blank" rel="external">Android Studio</a>, 所以需要自己做一个桌面图标。</p>
 <ol>
@@ -356,9 +645,9 @@
     </summary>
     
     
-      <category term="android studio" scheme="http://yoursite.com/tags/android-studio/"/>
-    
       <category term="ubuntu" scheme="http://yoursite.com/tags/ubuntu/"/>
+    
+      <category term="android studio" scheme="http://yoursite.com/tags/android-studio/"/>
     
   </entry>
   
@@ -367,7 +656,7 @@
     <link href="http://yoursite.com/2016/11/15/git%E9%85%8D%E7%BD%AEuser-name%E5%92%8Cuser-email/"/>
     <id>http://yoursite.com/2016/11/15/git配置user-name和user-email/</id>
     <published>2016-11-15T10:02:54.000Z</published>
-    <updated>2016-11-21T02:37:41.650Z</updated>
+    <updated>2016-11-15T12:17:44.749Z</updated>
     
     <content type="html"><![CDATA[<p>github在统计提交的时候，会判断邮箱是否跟github的登陆邮箱匹配，不匹配则不计算活跃度，即不生成小绿块。</p>
 <p>获取配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">yinlijun@yinlijun:~/personal_github/johnny-blog$ git config user.email</div><div class="line">aaa@aaa.com</div><div class="line">yinlijun@yinlijun:~/personal_github/johnny-blog$ git config user.name</div><div class="line">aaa</div></pre></td></tr></table></figure></p>
@@ -394,7 +683,7 @@
     <link href="http://yoursite.com/2016/11/09/windows%E9%85%8D%E7%BD%AEmongdb%E8%AE%B0%E5%BD%95/"/>
     <id>http://yoursite.com/2016/11/09/windows配置mongdb记录/</id>
     <published>2016-11-09T09:55:51.000Z</published>
-    <updated>2016-11-21T02:37:41.650Z</updated>
+    <updated>2016-11-16T01:14:55.479Z</updated>
     
     <content type="html"><![CDATA[<p>刚给windows电脑配置了mongdb记录一下。</p>
 <ul>
@@ -447,7 +736,7 @@
     <link href="http://yoursite.com/2016/11/08/windows%E4%B8%8B%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84%E5%A4%AA%E6%B7%B1%EF%BC%8C%E6%97%A0%E6%B3%95%E5%88%A0%E9%99%A4%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/"/>
     <id>http://yoursite.com/2016/11/08/windows下文件路径太深，无法删除解决办法/</id>
     <published>2016-11-08T10:02:04.000Z</published>
-    <updated>2016-11-21T02:37:41.650Z</updated>
+    <updated>2016-11-16T01:14:48.487Z</updated>
     
     <content type="html"><![CDATA[<p>windows下npm开发时，有时候node_modules/下的目录嵌套太深，导致无法删除项目。</p>
 <p>npm社区贡献了一个工具<a href="https://www.npmjs.com/package/windows-node-deps-deleter" target="_blank" rel="external">windows-node-deps-deleter</a>可供删除这样的目录。</p>
@@ -475,7 +764,7 @@
     <link href="http://yoursite.com/2016/11/06/gitignore%E6%97%A0%E6%95%88%EF%BC%8C%E4%B8%8D%E8%83%BD%E8%BF%87%E6%BB%A4%E6%9F%90%E4%BA%9B%E6%96%87%E4%BB%B6/"/>
     <id>http://yoursite.com/2016/11/06/gitignore无效，不能过滤某些文件/</id>
     <published>2016-11-06T10:03:31.000Z</published>
-    <updated>2016-11-21T02:37:41.650Z</updated>
+    <updated>2016-11-16T01:14:20.883Z</updated>
     
     <content type="html"><![CDATA[<p>利用.gitignore过滤文件，如编译过程中的中间文件，等等，这些文件不需要被追踪管理。</p>
 <p>现象：</p>
@@ -509,7 +798,7 @@
     <link href="http://yoursite.com/2016/11/05/android-studio%E7%BC%96%E8%AF%91%E9%94%99%E8%AF%AF-%E7%9B%AE%E6%A0%87%E6%A8%A1%E5%BC%8F%E4%B8%8D%E5%90%AB%E6%9C%89%E2%80%9C-%E2%80%9D%E3%80%82-%E5%81%9C%E6%AD%A2%E3%80%82/"/>
     <id>http://yoursite.com/2016/11/05/android-studio编译错误-目标模式不含有“-”。-停止。/</id>
     <published>2016-11-05T10:04:19.000Z</published>
-    <updated>2016-11-21T02:37:41.650Z</updated>
+    <updated>2016-11-16T01:14:06.123Z</updated>
     
     <content type="html"><![CDATA[<p>Android Studio NDK编译出现如下错误：<br><strong><em> target pattern contains no `%’. Stop<br>中文：
 </em></strong> 目标模式不含有“%”。 停止。<br>可能是obj目录的问题，需要删掉。<br>在工程目录下find所有的obj目录<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find . -name obj</div></pre></td></tr></table></figure></p>
@@ -523,9 +812,9 @@
     </summary>
     
     
-      <category term="android studio" scheme="http://yoursite.com/tags/android-studio/"/>
-    
       <category term="android" scheme="http://yoursite.com/tags/android/"/>
+    
+      <category term="android studio" scheme="http://yoursite.com/tags/android-studio/"/>
     
   </entry>
   
@@ -534,7 +823,7 @@
     <link href="http://yoursite.com/2016/11/05/High-Performance-Javascript/"/>
     <id>http://yoursite.com/2016/11/05/High-Performance-Javascript/</id>
     <published>2016-11-05T10:04:19.000Z</published>
-    <updated>2016-11-21T02:37:41.650Z</updated>
+    <updated>2016-11-15T10:09:41.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="第一章-加载和执行"><a href="#第一章-加载和执行" class="headerlink" title="第一章 加载和执行"></a>第一章 加载和执行</h2><h3 id="减少Javascript加载对性能的影响"><a href="#减少Javascript加载对性能的影响" class="headerlink" title="减少Javascript加载对性能的影响"></a>减少Javascript加载对性能的影响</h3><ul>
 <li>&lt;/body&gt;闭合标签之前，将所有&lt;javascript&gt;标签放到页面底部。这能确保在脚本执行前页面已经完成了渲染</li>
@@ -604,7 +893,7 @@
     <link href="http://yoursite.com/2016/09/06/CSS-The-Definitive-Guide/"/>
     <id>http://yoursite.com/2016/09/06/CSS-The-Definitive-Guide/</id>
     <published>2016-09-06T10:04:19.000Z</published>
-    <updated>2016-11-21T02:37:41.650Z</updated>
+    <updated>2016-11-15T10:09:13.424Z</updated>
     
     <content type="html"><![CDATA[<h2 id="第一章-css和文档"><a href="#第一章-css和文档" class="headerlink" title="第一章 css和文档"></a>第一章 css和文档</h2><ul>
 <li><p>文档内定义样式</p>
@@ -1050,7 +1339,7 @@
     <link href="http://yoursite.com/2016/09/05/chapter-4/"/>
     <id>http://yoursite.com/2016/09/05/chapter-4/</id>
     <published>2016-09-05T10:04:19.000Z</published>
-    <updated>2016-11-21T02:37:41.650Z</updated>
+    <updated>2016-11-15T10:08:44.328Z</updated>
     
     <content type="html"><![CDATA[<h2 id="第四章-jQuery中的事件和动画"><a href="#第四章-jQuery中的事件和动画" class="headerlink" title="第四章 jQuery中的事件和动画"></a>第四章 jQuery中的事件和动画</h2><ul>
 <li>window.onload方法，相当于<code>jQuery</code>中的$(window).load(function(){})方法。都是等文档中的所有元素加载完成时调用，包括关联css文件和javascript文件。</li>
@@ -1142,256 +1431,6 @@
 &lt;li&gt;$(document).ready(function() {})则不会等待关联文件下载完，在DOM准备好之后就会调用。&lt;/li&gt;
 &lt;li&gt;$(window).load(function(){})可以调用多次，都会执行，而window.onload只会调用最后一次赋予的函数。&lt;/li&gt;
 &lt;li&gt;$(document).ready(function() {})可以简写为$(function() {});&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-    
-      <category term="jQuery" scheme="http://yoursite.com/tags/jQuery/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>锋利的jQeury 第三章-笔记</title>
-    <link href="http://yoursite.com/2016/09/03/chapter-3/"/>
-    <id>http://yoursite.com/2016/09/03/chapter-3/</id>
-    <published>2016-09-03T10:04:19.000Z</published>
-    <updated>2016-11-21T02:37:41.650Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="第三章-jQuery中的DOM操作"><a href="#第三章-jQuery中的DOM操作" class="headerlink" title="第三章 jQuery中的DOM操作"></a>第三章 jQuery中的DOM操作</h2><ul>
-<li><p>查找<code>DOM</code>节点</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> $li = $(<span class="string">'ul li:eq(1)'</span>); <span class="comment">//获取&lt;ul&gt;里的第二个&lt;li&gt;节点</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<a id="more"></a>
-<ul>
-<li><p>查找属性节点</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> $para = $(<span class="string">'p'</span>); </div><div class="line"><span class="keyword">var</span> p_txt = $para.attr(<span class="string">'title'</span>);</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<!--more-->
-<ul>
-<li><p>创建元素节点</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> $li = $(<span class="string">'&lt;li&gt;&lt;/li&gt;'</span>);</div></pre></td></tr></table></figure>
-</li>
-<li><p>创建文本节点</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> $li = $(<span class="string">'&lt;li&gt;香蕉&lt;/li&gt;'</span>);</div></pre></td></tr></table></figure>
-</li>
-<li><p>创建属性节点</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> $li = $(<span class="string">'&lt;li title="香蕉"&gt;香蕉&lt;/li&gt;'</span>);</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li>插入节点的方法<ul>
-<li>append 追加元素。$(‘p’).append($(“&lt;b&gt;你好&lt;/b&gt;”))，A.append(B)之后，A和B是父子关系。</li>
-<li>appendTo 跟append相反，A.append(B) 相当于 B.appendTo(A)</li>
-<li>prepend 插入到前面</li>
-<li>prependTo 跟prepend相反</li>
-<li>after 在每个匹配元素之后插入内容，A.after(B)之后，A与B是兄弟元素</li>
-<li>intertAfter跟after相反，A.after(B)相当于B.instertAfter(A)</li>
-<li>before，跟after相反</li>
-<li>insertBefore，A.before(B)相当于B.insertBefore(A)</li>
-<li>删除节点的方法</li>
-<li>remove 删除匹配的元素 $(‘ul li:eq(1)’).remove()，删除第二个li元素，remove返回值是删除的元素</li>
-<li>detach 与remove不同，detach会保留所有该元素绑定的事件，附加的数据等。</li>
-<li>empty 清空节点</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>复制节点 clone，可以传入一个boolean参数表示是否同时复制元素中所绑定的事件。</p>
-</li>
-<li><p>替换节点</p>
-<ul>
-<li>replaceWith， A.replaceWith(B)，用B替换A</li>
-<li>replaceAll 跟replaceWith相反，A.replaceWith(B)相当于B.replaceAll(A)</li>
-</ul>
-</li>
-<li><p>包裹节点</p>
-<ul>
-<li>wrap $(‘strong’).wrap(‘&lt;b&gt;&lt;/b&gt;’) 用&lt;b&gt;标签将&lt;strong&gt;标签包起来，如果有多个匹配，则每个元素单独包裹。</li>
-<li>wrapAll，将所有的元素用一个元素来包裹。如果匹配的节点之间有其他节点，其他节点会被放到包裹元素之后。</li>
-<li>wrapInner 将子内容（包括文本节点）包裹起来。</li>
-</ul>
-</li>
-<li><p>获取属性，$(‘p’).atter(‘title’)</p>
-</li>
-<li><p>设置属性</p>
-<ul>
-<li><p>$(‘p’).attr(‘title’, ‘your title’) 设置单个属性</p>
-</li>
-<li><p>$(‘p’).attr({‘title’, ‘your title’, ‘name’: ‘test’})，设置多个属性</p>
-</li>
-</ul>
-</li>
-<li><p>删除属性 $(‘p’).removeAttr(‘title’);</p>
-</li>
-<li><p>获取样式 $(‘p’).attr(‘class’)获取&lt;p&gt;元素的class</p>
-</li>
-<li><p>设置样式 $(‘p’).attr(‘class’, ‘high’) 设置样式</p>
-</li>
-<li><p>追加样式 $(‘p’).addClass(‘another’)</p>
-</li>
-<li><p>移除样式</p>
-<ul>
-<li><p>$(‘p’).removeClass(‘another’) 移除一个样式</p>
-</li>
-<li><p>$(‘p’).removeClass(‘another high’) 移除多个样式</p>
-</li>
-</ul>
-</li>
-<li><p>切换样式 $(‘p’).toggleClass(‘another’)，如果another类名不存在则添加之，否则删除之</p>
-</li>
-<li><p>判断是否含有某个样式 $(‘p’).hasClass(‘another’)</p>
-</li>
-<li>html()方法 获取或设置html内容，相当于javascript的innerHTML属性</li>
-<li><p>text() 获取或设置文本内容，相当于javascript的innerText属性</p>
-<ul>
-<li><p>获取: var text = $(‘p’).text()</p>
-</li>
-<li><p>设置 $(‘p’).text(‘你喜欢的水果是’)</p>
-</li>
-</ul>
-</li>
-<li><p>val()方法 获取或设置value，相当于javascript的value属性</p>
-</li>
-<li><p>遍历节点</p>
-<ul>
-<li>children() 返回子节点（DOM原声节点，非jQuery节点）</li>
-<li>next()方法，获取紧临的同辈元素，也就是返回下一个兄弟节点。</li>
-<li>prev()，跟next相反，返回上一个兄弟节点</li>
-<li>siblings()返回前后所有的同辈元素。</li>
-<li>closest() 取得最近的匹配元素，往父控件追溯。如$(e.target).closest(‘li’).css(‘color’, ‘red’);给点击的目标元素附近的li元素添加颜色。</li>
-<li>parents() 获得集合中每个匹配元素的祖先元素。</li>
-<li>parent() 获得集合中每个匹配元素的父级元素。</li>
-<li>find() / filter() / nextAll() / prevAll() 等。</li>
-</ul>
-</li>
-<li><p>获取样式 $(‘p’).css(‘color’) 获取&lt;p&gt;的样式颜色</p>
-</li>
-<li><p>设置样式</p>
-<ul>
-<li><p>$(‘p’).css(‘color’, ‘red’);</p>
-</li>
-<li><p>$(‘p’).css({“fontSize”: “30px”, “backgroundColor”: “#888888”‘});</p>
-</li>
-<li><p>元素定位</p>
-<ul>
-<li>offset()，获取元素在当前视窗中的相对偏移。</li>
-<li>position() 获取元素相对于最近的一个position样式为relative或absolute（为啥）的父节点的相对偏移。</li>
-</ul>
-</li>
-<li>scrollLeft() 获取或设置水平滚动条的位置</li>
-<li>scrollRight() 获取或设置垂直滚动条的位置。</li>
-</ul>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;第三章-jQuery中的DOM操作&quot;&gt;&lt;a href=&quot;#第三章-jQuery中的DOM操作&quot; class=&quot;headerlink&quot; title=&quot;第三章 jQuery中的DOM操作&quot;&gt;&lt;/a&gt;第三章 jQuery中的DOM操作&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;查找&lt;code&gt;DOM&lt;/code&gt;节点&lt;/p&gt;
- &lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; $li = $(&lt;span class=&quot;string&quot;&gt;&#39;ul li:eq(1)&#39;&lt;/span&gt;); &lt;span class=&quot;comment&quot;&gt;//获取&amp;lt;ul&amp;gt;里的第二个&amp;lt;li&amp;gt;节点&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-    
-      <category term="jQuery" scheme="http://yoursite.com/tags/jQuery/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>锋利的jQeury 第二章-笔记</title>
-    <link href="http://yoursite.com/2016/09/02/chapter-2/"/>
-    <id>http://yoursite.com/2016/09/02/chapter-2/</id>
-    <published>2016-09-02T10:04:19.000Z</published>
-    <updated>2016-11-21T02:37:41.650Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="第二章-jQuery选择器"><a href="#第二章-jQuery选择器" class="headerlink" title="第二章 jQuery选择器"></a>第二章 jQuery选择器</h2><h3 id="基本选择器"><a href="#基本选择器" class="headerlink" title="基本选择器"></a>基本选择器</h3><ul>
-<li><code>#id</code> 匹配id,  <code>$(&#39;#test&#39;)</code></li>
-<li><code>.class</code> 匹配类, <code>$(&#39;.test&#39;)</code></li>
-<li><code>element</code> 匹配标签, <code>$(&#39;div&#39;)</code></li>
-<li><code>*</code> 匹配所有元素, <code>$(&#39;*&#39;)</code></li>
-<li><code>selector1, select2,...,selectN</code> 匹配集合，如$(‘div, span, p.myClass’)</li>
-</ul>
-<a id="more"></a>
-<h3 id="层次选择器"><a href="#层次选择器" class="headerlink" title="层次选择器"></a>层次选择器</h3><ul>
-<li><code>$(&#39;ancestor decendant&#39;)</code> 选择后代元素</li>
-<li><code>$(&#39;parent &gt; child&#39;)</code> 选择子元素</li>
-<li><code>$(&#39;prev + next&#39;)</code> 选择紧接在<code>prev</code>后的<code>next</code>元素，如: <code>$(&#39;.one + div&#39;)</code>，选择<code>one</code>之后的下个一个<code>div</code>同辈元素</li>
-<li><code>$(&#39;prev ~ siblings&#39;)</code> 选择prev后的所有siblings元素，如<code>$(&#39;#two ~ div&#39;)</code>选择<code>two</code>之后的所有<code>div</code>同辈元素</li>
-</ul>
-<h3 id="过滤选择器"><a href="#过滤选择器" class="headerlink" title="过滤选择器"></a>过滤选择器</h3><ul>
-<li><code>:first</code> 选取第一个元素，它只返回一个元素。 如<code>$(&#39;div:first&#39;)</code>选取第一个div元素。</li>
-<li><code>:last</code> 选取最后一个元素，它只返回一个元素。</li>
-<li><code>:not(selector)</code> 取出所有给定选择器匹配的元素，如<code>$(&#39;input:not(.myClass)&#39;)</code>,选取<code>class</code>不是<code>myClass</code>的<code>input</code>元素</li>
-<li><code>:even</code> 选取索引为偶数的元素，索引从<strong>0</strong>开始</li>
-<li><code>:odd</code> 选取奇数索引元素</li>
-<li><code>:eq(index)</code> 选取指定索引元素</li>
-<li><code>:gt(index)</code> 选取大于索引的元素</li>
-<li><code>:lt(index)</code> 选取小于索引的元素</li>
-<li><code>:header</code> 选取所有标题元素 如<code>$(&#39;:header&#39;)</code>，选取网页中所有<code>&amp;lt;h1&gt;,&amp;lt;h2&gt;,&amp;lt;h3&gt;;....</code></li>
-<li><code>:animated</code> 选取所有正在执行动画的元素 如：<code>$(&#39;div:animated&#39;)</code>选取正在执行动画的所有<code>div</code>元素</li>
-<li><code>:focus</code> 选取当前获取焦点的元素 如<code>$(&#39;:focus&#39;)</code>，获取当前获取焦点的元素</li>
-</ul>
-<h3 id="内容过滤选择器"><a href="#内容过滤选择器" class="headerlink" title="内容过滤选择器"></a>内容过滤选择器</h3><ul>
-<li><code>:contains(text)</code> 选取文本内容含有text的元素, 如<code>$(&#39;div:contains(&quot;我&quot;)&#39;)</code>,选取文本含有<code>我</code>的<code>div</code>元素</li>
-<li><code>:empty</code> 选取不包含子元素或者文本为空的元素, 如<code>$(&#39;div:empty&#39;)</code>选取不包含子元素的<code>div</code>元素</li>
-<li><code>:has(selector)</code> 选取含有选择器的所匹配的元素的元素，如<code>$(&#39;div:has(p)&#39;)</code>，选取含有<code>p</code>元素的<code>div</code>元素</li>
-<li><code>:parent</code> 选取含有子元素或文本的元素 如<code>$(&#39;div:parent&#39;)</code>,选取拥有子元素的<code>div</code>元素</li>
-</ul>
-<h3 id="可见性过滤器"><a href="#可见性过滤器" class="headerlink" title="可见性过滤器"></a>可见性过滤器</h3><ul>
-<li><code>:hidden</code> 选取所有不可见元素, 如<code>$(&#39;:hidden&#39;)</code>, 选取所有不可见元素，<code>$(&#39;input:hidden&#39;)</code>选取所有不可见的input元素</li>
-<li><code>:visible</code> 选取所有可见元素</li>
-</ul>
-<h3 id="属性过滤选择器"><a href="#属性过滤选择器" class="headerlink" title="属性过滤选择器"></a>属性过滤选择器</h3><ul>
-<li><code>[attr]</code> 选取拥有此属性的元素, 如<code>$(&#39;div[id]&#39;)</code>, 选取拥有属性<code>id</code>的元素</li>
-<li><code>[attr=val]</code> 选取<code>attr</code>属性为<code>val</code>的元素如, <code>$(&#39;div[title=test]&#39;)</code>选取<code>title</code>为<code>test</code>的<code>div</code>元素</li>
-<li><code>[attr!=val]</code> 选取<code>attr</code>的值不为<code>val</code>的元素</li>
-<li><code>[attr^=val]</code> 选取<code>attr</code>的值以<code>val</code>开始的元素</li>
-<li><code>[attr$=val]</code> 选取<code>attr</code>的值以<code>val</code>结束的元素</li>
-<li><code>[attr*=val]</code> 选取<code>attr</code>的值包含<code>val</code>的元素</li>
-<li><code>[attr|=val]</code> 选取<code>attr</code>的值为<code>val</code>或以<code>val-</code>开始的元素</li>
-<li><code>[attr~=val]</code> 选取<code>attr</code>的值包含<code>&#39; val&#39;</code>的元素（注意val前面要有空格）</li>
-<li><code>[attr1][attr2][attrN]</code> 选取同时满足几个条件的元素，如<code>$(&#39;div[id][title$=&quot;test&quot;]&#39;)</code>，选取拥有属性id，并且属性title以test结束的div元素</li>
-</ul>
-<h3 id="子元素过滤选择器"><a href="#子元素过滤选择器" class="headerlink" title="子元素过滤选择器"></a>子元素过滤选择器</h3><ul>
-<li><code>:nth-child(index/even/odd/equation)</code> 选取每个父元素下的第<code>index</code>个或者奇偶子元素</li>
-<li><code>:first-child</code> 选取每个父元素的第一个子元素，如<code>$(&#39;ul li:first-child&#39;)</code>, 选择ul的第一个li元素</li>
-<li><code>:last-child</code> 选取每个父元素的子元素</li>
-<li><code>:only-child</code> 如果父控件一个子元素，那么匹配到，否则不被匹配。<code>$(&#39;ul li:only-child&#39;)</code>返回只有一个子元素且为li的li元素</li>
-</ul>
-<h3 id="表单对象属性过滤选择器"><a href="#表单对象属性过滤选择器" class="headerlink" title="表单对象属性过滤选择器"></a>表单对象属性过滤选择器</h3><ul>
-<li><code>:enabled</code> 选取所有可用元素。<code>$(&#39;#form1 :enabled&#39;)</code>,选取<code>id</code>为<code>form1</code>的表单内的所有可用元素。</li>
-<li><code>:disbaled</code> 选取所有不可用元素。</li>
-<li><code>:checked</code> 选取所有被选中元素(单选框，复选框)。<code>$(&#39;input:checked&#39;)</code>,选取所有被选中的<code>input</code>元素</li>
-<li><code>:selected</code> 选取所有被选中的选项元素（下拉列表）。<code>$(&#39;select option:seleted&#39;)</code></li>
-</ul>
-<h3 id="表单选择器"><a href="#表单选择器" class="headerlink" title="表单选择器"></a>表单选择器</h3><ul>
-<li><code>:input</code> 选取所有<code>&amp;lt;input&gt;,&amp;lt;textarea&gt;,&amp;lt;select&gt;,&amp;lt;button&gt;</code>元素。如<code>$(&#39;#form1 :input&#39;)</code></li>
-<li><code>:text</code> 选取所有单行文本框。</li>
-<li><code>:password</code> 选取所有密码框</li>
-<li><code>:radio</code> 选取所有单选框</li>
-<li><code>:submit</code> 选取所有提交按钮</li>
-<li><code>:image</code> 选取所有的图像按钮</li>
-<li><code>:reset</code> 选取所有的重置按钮</li>
-<li><code>:button</code> 选取所有的按钮</li>
-<li><code>:file</code> 选取所有的上川域</li>
-<li><code>:hidden</code> 选取所有不可见元素</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;第二章-jQuery选择器&quot;&gt;&lt;a href=&quot;#第二章-jQuery选择器&quot; class=&quot;headerlink&quot; title=&quot;第二章 jQuery选择器&quot;&gt;&lt;/a&gt;第二章 jQuery选择器&lt;/h2&gt;&lt;h3 id=&quot;基本选择器&quot;&gt;&lt;a href=&quot;#基本选择器&quot; class=&quot;headerlink&quot; title=&quot;基本选择器&quot;&gt;&lt;/a&gt;基本选择器&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;#id&lt;/code&gt; 匹配id,  &lt;code&gt;$(&amp;#39;#test&amp;#39;)&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;.class&lt;/code&gt; 匹配类, &lt;code&gt;$(&amp;#39;.test&amp;#39;)&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;element&lt;/code&gt; 匹配标签, &lt;code&gt;$(&amp;#39;div&amp;#39;)&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;*&lt;/code&gt; 匹配所有元素, &lt;code&gt;$(&amp;#39;*&amp;#39;)&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;selector1, select2,...,selectN&lt;/code&gt; 匹配集合，如$(‘div, span, p.myClass’)&lt;/li&gt;
 &lt;/ul&gt;
     
     </summary>

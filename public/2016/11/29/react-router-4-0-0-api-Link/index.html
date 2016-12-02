@@ -1,0 +1,721 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="react,react-router,翻译文档," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Johnny" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="原文链接
+&amp;lt;Link&amp;gt;
+
+为你的应用提供可以声明的，可访问的导航功能。123&amp;lt;Link to=&quot;/about&quot; activeClassName=&quot;active&quot;&amp;gt;  About&amp;lt;/Link&amp;gt;
+children: node | func
+
+Link组件可以接受一个函数作为子控件，使得允许你使用自定义的组件渲染Link对象。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Link-react router 4.0.0 api中文文档">
+<meta property="og:url" content="http://yoursite.com/2016/11/29/react-router-4-0-0-api-Link/index.html">
+<meta property="og:site_name" content="Johnny">
+<meta property="og:description" content="原文链接
+&amp;lt;Link&amp;gt;
+
+为你的应用提供可以声明的，可访问的导航功能。123&amp;lt;Link to=&quot;/about&quot; activeClassName=&quot;active&quot;&amp;gt;  About&amp;lt;/Link&amp;gt;
+children: node | func
+
+Link组件可以接受一个函数作为子控件，使得允许你使用自定义的组件渲染Link对象。">
+<meta property="og:updated_time" content="2016-12-02T11:15:33.039Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Link-react router 4.0.0 api中文文档">
+<meta name="twitter:description" content="原文链接
+&amp;lt;Link&amp;gt;
+
+为你的应用提供可以声明的，可访问的导航功能。123&amp;lt;Link to=&quot;/about&quot; activeClassName=&quot;active&quot;&amp;gt;  About&amp;lt;/Link&amp;gt;
+children: node | func
+
+Link组件可以接受一个函数作为子控件，使得允许你使用自定义的组件渲染Link对象。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/11/29/react-router-4-0-0-api-Link/"/>
+
+
+
+
+
+  <title> Link-react router 4.0.0 api中文文档 | Johnny </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Johnny</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'bing','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/29/react-router-4-0-0-api-Link/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Johnny">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://tva3.sinaimg.cn/crop.0.0.180.180.180/7d92e765jw1e8qgp5bmzyj2050050aa8.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Johnny">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Johnny" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Link-react router 4.0.0 api中文文档
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-29T14:18:08+08:00">
+                2016-11-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/react-router-4-0-0-api中文文档/" itemprop="url" rel="index">
+                    <span itemprop="name">react router 4.0.0 api中文文档</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="https://react-router.now.sh/Link" target="_blank" rel="external">原文链接</a></p>
+<font size="6em">&lt;Link&gt;</font>
+
+<p>为你的应用提供可以声明的，可访问的导航功能。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;Link to=<span class="string">"/about"</span> activeClassName=<span class="string">"active"</span>&gt;</div><div class="line">  About</div><div class="line">&lt;<span class="regexp">/Link&gt;</span></div></pre></td></tr></table></figure></p>
+<font color="red">children: node | func</font>
+
+<p>Link组件可以接受一个函数作为子控件，使得允许你使用自定义的组件渲染Link对象。</p>
+<a id="more"></a>
+<p>子控件函数的参数是一个对象，包含如下属性：</p>
+<ul>
+<li>isActive: (bool) 当前链接是否激活</li>
+<li>location: 传递给Link的链接</li>
+<li>href: (string) 路由的url</li>
+<li>onClick: (func) dom的onClick处理函数</li>
+<li>transition: (func) 它是router.transitionTo的快捷方式，代表Link对象的to属性。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;Link to=<span class="string">"/courses"</span>&gt;&#123;</div><div class="line">  (&#123;isActive, location, href, onClick, transition&#125;) =&gt; </div><div class="line">    <span class="xml"><span class="tag">&lt;<span class="name">RaisedButton</span> <span class="attr">label</span>=<span class="string">"Courses"</span> <span class="attr">onClick</span>=<span class="string">&#123;onClick&#125;</span> <span class="attr">primary</span>=<span class="string">&#123;isActive&#125;</span> <span class="attr">href</span>=<span class="string">&#123;href&#125;</span> /&gt;</span></span></div><div class="line">&#125;<span class="tag">&lt;/<span class="name">Link</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<font color="red">to: string | object</font>
+
+<p>链接的描述。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;Link to=&quot;/courses&quot;/&gt;</div><div class="line">&lt;Link to=&#123;&#123;</div><div class="line">  pathname: &apos;/courses&apos;,</div><div class="line">  query: &#123; sort: &apos;name&apos; &#125;,</div><div class="line">  state: &#123; fromDashboard: true &#125;</div><div class="line">&#125;&#125;/&gt;</div></pre></td></tr></table></figure></p>
+<font color="red">activeStyle: object</font>
+
+<p>当链接匹配到<font color="grey" size="5em"><strong>to</strong></font>属性时的样式对象。它会和tyle对象合并之后生效。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;Link</div><div class="line">  to=&quot;/courses&quot;</div><div class="line">  style=&#123;&#123; color: &apos;blue&apos;, background: &apos;gray&apos; &#125;&#125;</div><div class="line">  activeStyle=&#123;&#123; color: &apos;red&apos; &#125;&#125;</div><div class="line">/&gt;</div><div class="line">// 总是有灰色背景</div><div class="line">// 链接为/foo时字体为blue</div><div class="line">// 为/courses为red(激活状态)</div></pre></td></tr></table></figure></p>
+<font color="red">activeClassName: string</font>
+
+<p>当匹配到链接时，生效的className。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;Link</div><div class="line">  to=<span class="string">"/courses"</span></div><div class="line">  className=<span class="string">"course-link"</span></div><div class="line">  activeClassName=<span class="string">"active"</span></div><div class="line">/&gt;</div><div class="line"><span class="comment">// will always have "course-link"</span></div><div class="line"><span class="comment">// at /courses it will be "course-link active"</span></div></pre></td></tr></table></figure></p>
+<font color="red">activeOnlyWhenExact: bool</font>
+
+<p>为true时, 只有当严格匹配，activeClassName和activeStyle才会生效。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;Link to=&quot;/courses&quot; activeOnlyWhenExact activeClassName=&quot;active&quot;/&gt;</div><div class="line">// /courses 被激活</div><div class="line">// /courses/123 不被激活</div></pre></td></tr></table></figure>
+<font color="red">isActive: func</font>
+
+<p>允许自定义当前链接是否被激活，激活时返回true，否则返回false。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&lt;Link</div><div class="line">  to=<span class="string">"/"</span></div><div class="line">  activeStyle=&#123;&#123; color: <span class="string">'red'</span> &#125;&#125;</div><div class="line">  isActive=&#123;(location) =&gt; (</div><div class="line">    <span class="comment">// 只有当没有query字段时被激活</span></div><div class="line">    !<span class="built_in">Object</span>.keys(location.query).length</div><div class="line">  )&#125;</div><div class="line">/&gt;</div><div class="line"></div><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">Link</span></span></span></div><div class="line">  <span class="attr">to</span>=<span class="string">"/courses"</span></div><div class="line">  <span class="attr">activeStyle</span>=<span class="string">&#123;&#123;</span> <span class="attr">color:</span> '<span class="attr">red</span>' &#125;&#125;</div><div class="line">  <span class="attr">isActive</span>=<span class="string">&#123;(location,</span> <span class="attr">props</span>) =&gt; (</div><div class="line">    // 匹配到"/courses" 或者 "/course/123"被激活</div><div class="line">    // 尽管这不是真正意义上的被激活, it is</div><div class="line">    // theoretically for the sake of a navigation menu</div><div class="line">    location.pathname.match(/course(s)?/)</div><div class="line">  )&#125;</div><div class="line">/&gt;</div></pre></td></tr></table></figure></p>
+<font color="red">location</font>
+
+<p>如果你不想使用上下文中的location, 可以传递一个location的属性作为替代，这在链接比较深的redux应用中很有用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;Match pattern=&quot;/foo&quot; location=&#123;this.props.location&#125;/&gt;</div></pre></td></tr></table></figure></p>
+<font size="6em">&lt;/Link&gt;</font>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/react/" rel="tag"># react</a>
+          
+            <a href="/tags/react-router/" rel="tag"># react-router</a>
+          
+            <a href="/tags/翻译文档/" rel="tag"># 翻译文档</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/29/react-router-4-0-0-api-Miss/" rel="next" title="Miss-react router 4.0.0 api中文文档">
+                <i class="fa fa-chevron-left"></i> Miss-react router 4.0.0 api中文文档
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/02/react-router-4-0-0-api-NavigationPrompt/" rel="prev" title="NavigationPrompt-react router 4.0.0 api中文文档">
+                NavigationPrompt-react router 4.0.0 api中文文档 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://tva3.sinaimg.cn/crop.0.0.180.180.180/7d92e765jw1e8qgp5bmzyj2050050aa8.jpg"
+               alt="Johnny" />
+          <p class="site-author-name" itemprop="name">Johnny</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">22</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Johnny</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

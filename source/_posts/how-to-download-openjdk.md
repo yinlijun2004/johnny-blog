@@ -1,7 +1,7 @@
 ---
 title: 如何下载安装openJDK
 date: 2016-11-15 20:04:44
-tags: openjdk; java
+tags: [openjdk, java]
 ---
 
 ## JDK 8

@@ -2,10 +2,11 @@
 title: Match-react router 4.0.0 api中文文档
 date: 2016-11-25 13:05:50
 tags: [react, react-router, 翻译文档]
+categories: react router 4.0.0 api中文文档
 ---
 [原文链接](https://react-router.now.sh/Match)
 
-# &lt;Match&gt;
+<font size='6em'>&lt;Match&gt;<font>
 
 匹配到地址(location)时进行UI渲染
 
@@ -119,5 +120,4 @@ It seems unlikely you’ll need this for anything besides animating when a compo
   </Animate>
 )}/>
 ```
-
-# &lt;/Match&gt;
+<font size='6em'>&lt;/Match&gt;</font>

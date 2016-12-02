@@ -87,21 +87,24 @@
 
 
 <meta name="description" content="原文链接
-&amp;lt;Match&amp;gt;匹配到地址(location)时进行UI渲染
-pattern: string任何path-to-regexp可以理解的URL模式表达式1&amp;lt;Match pattern=&quot;/users/:id&quot; component=&amp;#123;User&amp;#125;/&amp;gt;">
+&amp;lt;Match&amp;gt;匹配到地址(location)时进行UI渲染### pattern: string
+
+任何path-to-regexp可以理解的URL模式表达式1&amp;lt;Match pattern=&quot;/users/:id&quot; component=&amp;#123;User&amp;#125;/&amp;gt;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Match-react router 4.0.0 api中文文档">
 <meta property="og:url" content="http://yoursite.com/2016/11/25/react-router-4-0-0-api-Match/index.html">
 <meta property="og:site_name" content="Johnny">
 <meta property="og:description" content="原文链接
-&amp;lt;Match&amp;gt;匹配到地址(location)时进行UI渲染
-pattern: string任何path-to-regexp可以理解的URL模式表达式1&amp;lt;Match pattern=&quot;/users/:id&quot; component=&amp;#123;User&amp;#125;/&amp;gt;">
-<meta property="og:updated_time" content="2016-11-25T07:17:52.661Z">
+&amp;lt;Match&amp;gt;匹配到地址(location)时进行UI渲染### pattern: string
+
+任何path-to-regexp可以理解的URL模式表达式1&amp;lt;Match pattern=&quot;/users/:id&quot; component=&amp;#123;User&amp;#125;/&amp;gt;">
+<meta property="og:updated_time" content="2016-11-29T06:15:43.093Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Match-react router 4.0.0 api中文文档">
 <meta name="twitter:description" content="原文链接
-&amp;lt;Match&amp;gt;匹配到地址(location)时进行UI渲染
-pattern: string任何path-to-regexp可以理解的URL模式表达式1&amp;lt;Match pattern=&quot;/users/:id&quot; component=&amp;#123;User&amp;#125;/&amp;gt;">
+&amp;lt;Match&amp;gt;匹配到地址(location)时进行UI渲染### pattern: string
+
+任何path-to-regexp可以理解的URL模式表达式1&amp;lt;Match pattern=&quot;/users/:id&quot; component=&amp;#123;User&amp;#125;/&amp;gt;">
 
 
 
@@ -194,6 +197,16 @@ pattern: string任何path-to-regexp可以理解的URL模式表达式1&amp;lt;Mat
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
           </a>
         </li>
       
@@ -324,6 +337,24 @@ pattern: string任何path-to-regexp可以理解的URL模式表达式1&amp;lt;Mat
           </span>
 
           
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/react-router-4-0-0-api中文文档/" itemprop="url" rel="index">
+                    <span itemprop="name">react router 4.0.0 api中文文档</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -350,8 +381,9 @@ pattern: string任何path-to-regexp可以理解的URL模式表达式1&amp;lt;Mat
 
       
         <p><a href="https://react-router.now.sh/Match" target="_blank" rel="external">原文链接</a></p>
-<h1 id="lt-Match-gt"><a href="#lt-Match-gt" class="headerlink" title="&lt;Match&gt;"></a>&lt;Match&gt;</h1><p>匹配到地址(location)时进行UI渲染</p>
-<h3 id="pattern-string"><a href="#pattern-string" class="headerlink" title="pattern: string"></a><font color="red">pattern: string</font></h3><p>任何<a href="https://www.npmjs.com/package/path-to-regexp" target="_blank" rel="external">path-to-regexp</a>可以理解的URL模式表达式<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Match</span> <span class="attr">pattern</span>=<span class="string">"/users/:id"</span> <span class="attr">component</span>=<span class="string">&#123;User&#125;/</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<font size="6em">&lt;Match&gt;<font><br><br>匹配到地址(location)时进行UI渲染<br><br>### <font color="red">pattern: string</font>
+
+<p>任何<a href="https://www.npmjs.com/package/path-to-regexp" target="_blank" rel="external">path-to-regexp</a>可以理解的URL模式表达式<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Match</span> <span class="attr">pattern</span>=<span class="string">"/users/:id"</span> <span class="attr">component</span>=<span class="string">&#123;User&#125;/</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <a id="more"></a>
 <h3 id="exactly-bool"><a href="#exactly-bool" class="headerlink" title="exactly: bool"></a><font color="red">exactly: bool</font></h3><p>当为true时，只有模式表达式严格匹配时，才算匹配上。</p>
 <table>
@@ -397,7 +429,7 @@ pattern: string任何path-to-regexp可以理解的URL模式表达式1&amp;lt;Mat
 <p>(2) 回传递一个matched属性表示有没有被匹配上。</p>
 <p>It seems unlikely you’ll need this for anything besides animating when a component transitions from matching to not matching and back, but who knows?</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;Match children=&#123;(&#123; matched, ...rest&#125;) =&gt; (</div><div class="line">  &#123;<span class="comment">/* 因为Animate 总是能被渲染，所以你可以利用组件的生命周期(lifecycle)来实现动画。*/</span>&#125;</div><div class="line">  &lt;Animate&gt;</div><div class="line">    &#123;matched &amp;&amp; (</div><div class="line">      <span class="xml"><span class="tag">&lt;<span class="name">Something</span> &#123;<span class="attr">...rest</span>&#125;/&gt;</span></span></div><div class="line">    )&#125;</div><div class="line">  <span class="tag">&lt;/<span class="name">Animate</span>&gt;</span></div><div class="line">)&#125;/&gt;</div></pre></td></tr></table></figure>
-<h1 id="lt-Match-gt-1"><a href="#lt-Match-gt-1" class="headerlink" title="&lt;/Match&gt;"></a>&lt;/Match&gt;</h1>
+<font size="6em">&lt;/Match&gt;</font></font></font>
       
     </div>
 
@@ -442,6 +474,10 @@ pattern: string任何path-to-regexp可以理解的URL模式表达式1&amp;lt;Mat
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/28/android-https-verify-ways/" rel="prev" title="https双向验证功能的实现">
+                https双向验证功能的实现 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -509,17 +545,24 @@ pattern: string任何path-to-regexp可以理解的URL模式表达式1&amp;lt;Mat
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-count">22</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
 
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -561,7 +604,7 @@ pattern: string任何path-to-regexp可以理解的URL模式表达式1&amp;lt;Mat
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#lt-Match-gt"><span class="nav-number">1.</span> <span class="nav-text"><Match></span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pattern-string"><span class="nav-number">1.0.1.</span> <span class="nav-text">pattern: string</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#exactly-bool"><span class="nav-number">1.0.2.</span> <span class="nav-text">exactly: bool</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#location"><span class="nav-number">1.0.3.</span> <span class="nav-text">location</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#component"><span class="nav-number">1.0.4.</span> <span class="nav-text">component</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#render-func"><span class="nav-number">1.0.5.</span> <span class="nav-text">render: func</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#children-func"><span class="nav-number">1.0.6.</span> <span class="nav-text">children: func</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lt-Match-gt-1"><span class="nav-number">2.</span> <span class="nav-text"></Match></span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#exactly-bool"><span class="nav-number">1.</span> <span class="nav-text">exactly: bool</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#location"><span class="nav-number">2.</span> <span class="nav-text">location</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#component"><span class="nav-number">3.</span> <span class="nav-text">component</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#render-func"><span class="nav-number">4.</span> <span class="nav-text">render: func</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#children-func"><span class="nav-number">5.</span> <span class="nav-text">children: func</span></a></li></ol></div>
             
 
           </div>
