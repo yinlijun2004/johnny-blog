@@ -13,8 +13,14 @@
 
 
 
+
+
+
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
 
 
 
@@ -65,7 +71,7 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -79,7 +85,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
 
 
 
@@ -90,7 +96,7 @@
 <meta property="og:title" content="tags">
 <meta property="og:url" content="http://yoursite.com/tags/index.html">
 <meta property="og:site_name" content="Johnny">
-<meta property="og:updated_time" content="2016-11-15T10:19:33.480Z">
+<meta property="og:updated_time" content="2017-05-25T03:41:18.238Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="tags">
 
@@ -101,7 +107,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Muse',
-    sidebar: {"position":"left","display":"post"},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -126,13 +132,7 @@
 
 
 
-  <title>
-  
-
-  
-    tags | Johnny
-  
-</title>
+  <title>tags | Johnny</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -148,34 +148,43 @@
 
 
 
+
+
+
+
+
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container sidebar-position-left  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Johnny</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Johnny</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
   </div>
-  <p class="site-subtitle"></p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
@@ -191,16 +200,6 @@
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
           </a>
         </li>
       
@@ -276,7 +275,7 @@
   <div id="posts" class="posts-expand">
   <header class="post-header">
 
-	<h2 class="post-title" itemprop="name headline">tags</h2>
+	<h1 class="post-title" itemprop="name headline">tags</h1>
 
 
 
@@ -286,10 +285,10 @@
     
       <div class="tag-cloud">
         <div class="tag-cloud-title">
-            目前共计 24 个标签
+            目前共计 25 个标签
         </div>
         <div class="tag-cloud-tags">
-          <a href="/tags/gitignore/" style="font-size: 12px; color: #ccc">.gitignore</a> <a href="/tags/android/" style="font-size: 22.8px; color: #5c5c5c">android</a> <a href="/tags/android-studio/" style="font-size: 19.2px; color: #818181">android studio</a> <a href="/tags/css/" style="font-size: 12px; color: #ccc">css</a> <a href="/tags/git/" style="font-size: 15.6px; color: #a7a7a7">git</a> <a href="/tags/https/" style="font-size: 12px; color: #ccc">https</a> <a href="/tags/jQuery/" style="font-size: 19.2px; color: #818181">jQuery</a> <a href="/tags/java/" style="font-size: 12px; color: #ccc">java</a> <a href="/tags/javascript/" style="font-size: 12px; color: #ccc">javascript</a> <a href="/tags/mongodb/" style="font-size: 12px; color: #ccc">mongodb</a> <a href="/tags/nodejs/" style="font-size: 12px; color: #ccc">nodejs</a> <a href="/tags/npm/" style="font-size: 12px; color: #ccc">npm</a> <a href="/tags/openjdk/" style="font-size: 12px; color: #ccc">openjdk</a> <a href="/tags/openssl/" style="font-size: 12px; color: #ccc">openssl</a> <a href="/tags/react/" style="font-size: 30px; color: #111">react</a> <a href="/tags/react-router/" style="font-size: 26.4px; color: #363636">react-router</a> <a href="/tags/ubuntu/" style="font-size: 22.8px; color: #5c5c5c">ubuntu</a> <a href="/tags/update-alternatives/" style="font-size: 12px; color: #ccc">update-alternatives</a> <a href="/tags/windows/" style="font-size: 15.6px; color: #a7a7a7">windows</a> <a href="/tags/环境搭建/" style="font-size: 12px; color: #ccc">环境搭建</a> <a href="/tags/翻译文档/" style="font-size: 26.4px; color: #363636">翻译文档</a>
+          <a href="/tags/gitignore/" style="font-size: 12px; color: #ccc">.gitignore</a> <a href="/tags/android/" style="font-size: 24px; color: #4f4f4f">android</a> <a href="/tags/android-studio/" style="font-size: 18px; color: #8e8e8e">android studio</a> <a href="/tags/css/" style="font-size: 12px; color: #ccc">css</a> <a href="/tags/git/" style="font-size: 15px; color: #adadad">git</a> <a href="/tags/https/" style="font-size: 12px; color: #ccc">https</a> <a href="/tags/jQuery/" style="font-size: 18px; color: #8e8e8e">jQuery</a> <a href="/tags/java/" style="font-size: 15px; color: #adadad">java</a> <a href="/tags/javascript/" style="font-size: 12px; color: #ccc">javascript</a> <a href="/tags/kotlin/" style="font-size: 12px; color: #ccc">kotlin</a> <a href="/tags/mongodb/" style="font-size: 12px; color: #ccc">mongodb</a> <a href="/tags/nodejs/" style="font-size: 12px; color: #ccc">nodejs</a> <a href="/tags/npm/" style="font-size: 12px; color: #ccc">npm</a> <a href="/tags/openjdk/" style="font-size: 12px; color: #ccc">openjdk</a> <a href="/tags/openssl/" style="font-size: 12px; color: #ccc">openssl</a> <a href="/tags/react/" style="font-size: 30px; color: #111">react</a> <a href="/tags/react-router/" style="font-size: 27px; color: #303030">react-router</a> <a href="/tags/ubuntu/" style="font-size: 21px; color: #6f6f6f">ubuntu</a> <a href="/tags/update-alternatives/" style="font-size: 12px; color: #ccc">update-alternatives</a> <a href="/tags/windows/" style="font-size: 15px; color: #adadad">windows</a> <a href="/tags/环境搭建/" style="font-size: 12px; color: #ccc">环境搭建</a> <a href="/tags/翻译文档/" style="font-size: 27px; color: #303030">翻译文档</a>
         </div>
       </div>
     
@@ -327,19 +326,26 @@
                src="http://tva3.sinaimg.cn/crop.0.0.180.180.180/7d92e765jw1e8qgp5bmzyj2050050aa8.jpg"
                alt="Johnny" />
           <p class="site-author-name" itemprop="name">Johnny</p>
-          <p class="site-description motion-element" itemprop="description"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
         </div>
         <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">22</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
 
           
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
             <div class="site-state-item site-state-categories">
-              <a href="/categories">
+              <a href="/categories/index.html">
                 <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
               </a>
@@ -347,9 +353,11 @@
           
 
           
+            
+            
             <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">24</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -383,6 +391,8 @@
 
       
 
+      
+
     </div>
   </aside>
 
@@ -396,7 +406,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -422,9 +432,13 @@
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
   </div>
 
   
@@ -444,6 +458,15 @@
 
 
   
+
+
+
+
+
+
+
+
+
 
 
 
@@ -469,26 +492,25 @@
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
 
 
 
   
+  
 
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
 
 
   
@@ -501,8 +523,31 @@
 
 
 
+
   
+
+
+
+
+
   
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
 
   
 
@@ -512,6 +557,7 @@
 
   
 
+  
 
 </body>
 </html>

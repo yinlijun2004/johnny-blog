@@ -13,8 +13,14 @@
 
 
 
+
+
+
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
 
 
 
@@ -65,7 +71,7 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="jQuery," />
@@ -79,32 +85,24 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
 
 
 
 
 
 
-<meta name="description" content="第四章 jQuery中的事件和动画
-window.onload方法，相当于jQuery中的$(window).load(function(){})方法。都是等文档中的所有元素加载完成时调用，包括关联css文件和javascript文件。
-$(document).ready(function() {})则不会等待关联文件下载完，在DOM准备好之后就会调用。
-$(window).load(functi">
+<meta name="description" content="第四章 jQuery中的事件和动画 window.onload方法，相当于jQuery中的$(window).load(function(){})方法。都是等文档中的所有元素加载完成时调用，包括关联css文件和javascript文件。 $(document).ready(function() {})则不会等待关联文件下载完，在DOM准备好之后就会调用。 $(window).load(functi">
+<meta name="keywords" content="jQuery">
 <meta property="og:type" content="article">
 <meta property="og:title" content="锋利的jQeury 第四章-笔记">
 <meta property="og:url" content="http://yoursite.com/2016/09/05/chapter-4/index.html">
 <meta property="og:site_name" content="Johnny">
-<meta property="og:description" content="第四章 jQuery中的事件和动画
-window.onload方法，相当于jQuery中的$(window).load(function(){})方法。都是等文档中的所有元素加载完成时调用，包括关联css文件和javascript文件。
-$(document).ready(function() {})则不会等待关联文件下载完，在DOM准备好之后就会调用。
-$(window).load(functi">
-<meta property="og:updated_time" content="2016-11-15T10:08:44.328Z">
+<meta property="og:description" content="第四章 jQuery中的事件和动画 window.onload方法，相当于jQuery中的$(window).load(function(){})方法。都是等文档中的所有元素加载完成时调用，包括关联css文件和javascript文件。 $(document).ready(function() {})则不会等待关联文件下载完，在DOM准备好之后就会调用。 $(window).load(functi">
+<meta property="og:updated_time" content="2017-05-25T03:41:18.233Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="锋利的jQeury 第四章-笔记">
-<meta name="twitter:description" content="第四章 jQuery中的事件和动画
-window.onload方法，相当于jQuery中的$(window).load(function(){})方法。都是等文档中的所有元素加载完成时调用，包括关联css文件和javascript文件。
-$(document).ready(function() {})则不会等待关联文件下载完，在DOM准备好之后就会调用。
-$(window).load(functi">
+<meta name="twitter:description" content="第四章 jQuery中的事件和动画 window.onload方法，相当于jQuery中的$(window).load(function(){})方法。都是等文档中的所有元素加载完成时调用，包括关联css文件和javascript文件。 $(document).ready(function() {})则不会等待关联文件下载完，在DOM准备好之后就会调用。 $(window).load(functi">
 
 
 
@@ -113,7 +111,7 @@ $(window).load(functi">
   var CONFIG = {
     root: '/',
     scheme: 'Muse',
-    sidebar: {"position":"left","display":"post"},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -138,7 +136,7 @@ $(window).load(functi">
 
 
 
-  <title> 锋利的jQeury 第四章-笔记 | Johnny </title>
+  <title>锋利的jQeury 第四章-笔记 | Johnny</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -154,34 +152,43 @@ $(window).load(functi">
 
 
 
+
+
+
+
+
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Johnny</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Johnny</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
   </div>
-  <p class="site-subtitle"></p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
@@ -197,16 +204,6 @@ $(window).load(functi">
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
           </a>
         </li>
       
@@ -289,34 +286,24 @@ $(window).load(functi">
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/05/chapter-4/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/05/chapter-4/">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Johnny">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://tva3.sinaimg.cn/crop.0.0.180.180.180/7d92e765jw1e8qgp5bmzyj2050050aa8.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Johnny">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Johnny" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Johnny">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://tva3.sinaimg.cn/crop.0.0.180.180.180/7d92e765jw1e8qgp5bmzyj2050050aa8.jpg">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Johnny">
+    </span>
 
     
       <header class="post-header">
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                锋利的jQeury 第四章-笔记
-              
-            
-          </h1>
+          <h1 class="post-title" itemprop="name headline">锋利的jQeury 第四章-笔记</h1>
         
 
         <div class="post-meta">
@@ -325,8 +312,10 @@ $(window).load(functi">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-05T18:04:19+08:00">
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-05T18:04:19+08:00">
                 2016-09-05
               </time>
             
@@ -343,8 +332,8 @@ $(window).load(functi">
           
 
           
-
           
+
           
 
           
@@ -354,7 +343,6 @@ $(window).load(functi">
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -461,6 +449,12 @@ $(window).load(functi">
       
     </div>
 
+    <div>
+      
+        
+
+      
+    </div>
 
     <footer class="post-footer">
       
@@ -469,6 +463,10 @@ $(window).load(functi">
             <a href="/tags/jQuery/" rel="tag"># jQuery</a>
           
         </div>
+      
+
+      
+        
       
 
       
@@ -550,19 +548,26 @@ $(window).load(functi">
                src="http://tva3.sinaimg.cn/crop.0.0.180.180.180/7d92e765jw1e8qgp5bmzyj2050050aa8.jpg"
                alt="Johnny" />
           <p class="site-author-name" itemprop="name">Johnny</p>
-          <p class="site-description motion-element" itemprop="description"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
         </div>
         <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">22</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
 
           
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
             <div class="site-state-item site-state-categories">
-              <a href="/categories">
+              <a href="/categories/index.html">
                 <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
               </a>
@@ -570,9 +575,11 @@ $(window).load(functi">
           
 
           
+            
+            
             <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">24</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -622,6 +629,8 @@ $(window).load(functi">
       <!--/noindex-->
       
 
+      
+
     </div>
   </aside>
 
@@ -635,7 +644,7 @@ $(window).load(functi">
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -661,9 +670,13 @@ $(window).load(functi">
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
   </div>
 
   
@@ -683,6 +696,15 @@ $(window).load(functi">
 
 
   
+
+
+
+
+
+
+
+
+
 
 
 
@@ -708,30 +730,29 @@ $(window).load(functi">
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
 
 
 
   
+  
 
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
 
 
 
   
 
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
 
 
   
@@ -744,8 +765,31 @@ $(window).load(functi">
 
 
 
+
   
+
+
+
+
+
   
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
 
   
 
@@ -755,6 +799,7 @@ $(window).load(functi">
 
   
 
+  
 
 </body>
 </html>

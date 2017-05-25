@@ -13,8 +13,14 @@
 
 
 
+
+
+
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
 
 
 
@@ -65,7 +71,7 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="windows,npm," />
@@ -79,26 +85,24 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
 
 
 
 
 
 
-<meta name="description" content="windows下npm开发时，有时候node_modules/下的目录嵌套太深，导致无法删除项目。
-npm社区贡献了一个工具windows-node-deps-deleter可供删除这样的目录。">
+<meta name="description" content="windows下npm开发时，有时候node_modules/下的目录嵌套太深，导致无法删除项目。 npm社区贡献了一个工具windows-node-deps-deleter可供删除这样的目录。">
+<meta name="keywords" content="windows,npm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="windows下文件路径太深，无法删除解决办法">
 <meta property="og:url" content="http://yoursite.com/2016/11/08/windows下文件路径太深，无法删除解决办法/index.html">
 <meta property="og:site_name" content="Johnny">
-<meta property="og:description" content="windows下npm开发时，有时候node_modules/下的目录嵌套太深，导致无法删除项目。
-npm社区贡献了一个工具windows-node-deps-deleter可供删除这样的目录。">
-<meta property="og:updated_time" content="2016-11-16T01:14:48.487Z">
+<meta property="og:description" content="windows下npm开发时，有时候node_modules/下的目录嵌套太深，导致无法删除项目。 npm社区贡献了一个工具windows-node-deps-deleter可供删除这样的目录。">
+<meta property="og:updated_time" content="2017-05-25T03:41:18.237Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="windows下文件路径太深，无法删除解决办法">
-<meta name="twitter:description" content="windows下npm开发时，有时候node_modules/下的目录嵌套太深，导致无法删除项目。
-npm社区贡献了一个工具windows-node-deps-deleter可供删除这样的目录。">
+<meta name="twitter:description" content="windows下npm开发时，有时候node_modules/下的目录嵌套太深，导致无法删除项目。 npm社区贡献了一个工具windows-node-deps-deleter可供删除这样的目录。">
 
 
 
@@ -107,7 +111,7 @@ npm社区贡献了一个工具windows-node-deps-deleter可供删除这样的目�
   var CONFIG = {
     root: '/',
     scheme: 'Muse',
-    sidebar: {"position":"left","display":"post"},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -132,7 +136,7 @@ npm社区贡献了一个工具windows-node-deps-deleter可供删除这样的目�
 
 
 
-  <title> windows下文件路径太深，无法删除解决办法 | Johnny </title>
+  <title>windows下文件路径太深，无法删除解决办法 | Johnny</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -148,34 +152,43 @@ npm社区贡献了一个工具windows-node-deps-deleter可供删除这样的目�
 
 
 
+
+
+
+
+
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Johnny</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Johnny</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
   </div>
-  <p class="site-subtitle"></p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
@@ -191,16 +204,6 @@ npm社区贡献了一个工具windows-node-deps-deleter可供删除这样的目�
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
           </a>
         </li>
       
@@ -283,34 +286,24 @@ npm社区贡献了一个工具windows-node-deps-deleter可供删除这样的目�
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/08/windows下文件路径太深，无法删除解决办法/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/08/windows下文件路径太深，无法删除解决办法/">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Johnny">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://tva3.sinaimg.cn/crop.0.0.180.180.180/7d92e765jw1e8qgp5bmzyj2050050aa8.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Johnny">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Johnny" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Johnny">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://tva3.sinaimg.cn/crop.0.0.180.180.180/7d92e765jw1e8qgp5bmzyj2050050aa8.jpg">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Johnny">
+    </span>
 
     
       <header class="post-header">
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                windows下文件路径太深，无法删除解决办法
-              
-            
-          </h1>
+          <h1 class="post-title" itemprop="name headline">windows下文件路径太深，无法删除解决办法</h1>
         
 
         <div class="post-meta">
@@ -319,8 +312,10 @@ npm社区贡献了一个工具windows-node-deps-deleter可供删除这样的目�
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-08T18:02:04+08:00">
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-08T18:02:04+08:00">
                 2016-11-08
               </time>
             
@@ -337,8 +332,8 @@ npm社区贡献了一个工具windows-node-deps-deleter可供删除这样的目�
           
 
           
-
           
+
           
 
           
@@ -348,7 +343,6 @@ npm社区贡献了一个工具windows-node-deps-deleter可供删除这样的目�
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -379,6 +373,12 @@ npm社区贡献了一个工具windows-node-deps-deleter可供删除这样的目�
       
     </div>
 
+    <div>
+      
+        
+
+      
+    </div>
 
     <footer class="post-footer">
       
@@ -389,6 +389,10 @@ npm社区贡献了一个工具windows-node-deps-deleter可供删除这样的目�
             <a href="/tags/npm/" rel="tag"># npm</a>
           
         </div>
+      
+
+      
+        
       
 
       
@@ -461,19 +465,26 @@ npm社区贡献了一个工具windows-node-deps-deleter可供删除这样的目�
                src="http://tva3.sinaimg.cn/crop.0.0.180.180.180/7d92e765jw1e8qgp5bmzyj2050050aa8.jpg"
                alt="Johnny" />
           <p class="site-author-name" itemprop="name">Johnny</p>
-          <p class="site-description motion-element" itemprop="description"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
         </div>
         <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">22</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
 
           
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
             <div class="site-state-item site-state-categories">
-              <a href="/categories">
+              <a href="/categories/index.html">
                 <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
               </a>
@@ -481,9 +492,11 @@ npm社区贡献了一个工具windows-node-deps-deleter可供删除这样的目�
           
 
           
+            
+            
             <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">24</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -517,6 +530,8 @@ npm社区贡献了一个工具windows-node-deps-deleter可供删除这样的目�
 
       
 
+      
+
     </div>
   </aside>
 
@@ -530,7 +545,7 @@ npm社区贡献了一个工具windows-node-deps-deleter可供删除这样的目�
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -556,9 +571,13 @@ npm社区贡献了一个工具windows-node-deps-deleter可供删除这样的目�
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
   </div>
 
   
@@ -578,6 +597,15 @@ npm社区贡献了一个工具windows-node-deps-deleter可供删除这样的目�
 
 
   
+
+
+
+
+
+
+
+
+
 
 
 
@@ -603,30 +631,29 @@ npm社区贡献了一个工具windows-node-deps-deleter可供删除这样的目�
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
 
 
 
   
+  
 
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
 
 
 
   
 
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
 
 
   
@@ -639,8 +666,31 @@ npm社区贡献了一个工具windows-node-deps-deleter可供删除这样的目�
 
 
 
+
   
+
+
+
+
+
   
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
 
   
 
@@ -650,6 +700,7 @@ npm社区贡献了一个工具windows-node-deps-deleter可供删除这样的目�
 
   
 
+  
 
 </body>
 </html>
