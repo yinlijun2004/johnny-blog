@@ -6,7 +6,7 @@ categories: react router 4.0.0 api中文文档
 ---
 [原文链接](https://react-router.now.sh/Match)
 
-<font size='6em'>&lt;Match&gt;<font>
+<font size='1em'>&lt;Match&gt;</font>
 
 匹配到地址(location)时进行UI渲染
 

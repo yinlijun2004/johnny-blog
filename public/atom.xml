@@ -157,7 +157,7 @@
 <li>location: 传递给Link的链接</li>
 <li>href: (string) 路由的url</li>
 <li>onClick: (func) dom的onClick处理函数</li>
-<li>transition: (func) 它是router.transitionTo的快捷方式，代表Link对象的to属性。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;Link to=<span class="string">"/courses"</span>&gt;&#123;</div><div class="line">  (&#123;isActive, location, href, onClick, transition&#125;) =&gt; </div><div class="line">    <span class="xml"><span class="tag">&lt;<span class="name">RaisedButton</span> <span class="attr">label</span>=<span class="string">"Courses"</span> <span class="attr">onClick</span>=<span class="string">&#123;onClick&#125;</span> <span class="attr">primary</span>=<span class="string">&#123;isActive&#125;</span> <span class="attr">href</span>=<span class="string">&#123;href&#125;</span> /&gt;</span></span></div><div class="line">&#125;<span class="tag">&lt;/<span class="name">Link</span>&gt;</span></div></pre></td></tr></table></figure>
+<li>transition: (func) 它是router.transitionTo的快捷方式，代表Link对象的to属性。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;Link to=<span class="string">"/courses"</span>&gt;&#123;</div><div class="line">  (&#123;isActive, location, href, onClick, transition&#125;) =&gt; </div><div class="line">    &lt;RaisedButton label="Courses" onClick=&#123;onClick&#125; primary=&#123;isActive&#125; href=&#123;href&#125; /&gt;</div><div class="line">&#125;&lt;/Link&gt;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <font color="red">to: string | object</font>
@@ -175,7 +175,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;Link to=&quot;/courses&quot; activeOnlyWhenExact activeClassName=&quot;active&quot;/&gt;</div><div class="line">// /courses 被激活</div><div class="line">// /courses/123 不被激活</div></pre></td></tr></table></figure>
 <font color="red">isActive: func</font>
 
-<p>允许自定义当前链接是否被激活，激活时返回true，否则返回false。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&lt;Link</div><div class="line">  to=<span class="string">"/"</span></div><div class="line">  activeStyle=&#123;&#123; color: <span class="string">'red'</span> &#125;&#125;</div><div class="line">  isActive=&#123;(location) =&gt; (</div><div class="line">    <span class="comment">// 只有当没有query字段时被激活</span></div><div class="line">    !<span class="built_in">Object</span>.keys(location.query).length</div><div class="line">  )&#125;</div><div class="line">/&gt;</div><div class="line"></div><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">Link</span></span></span></div><div class="line">  <span class="attr">to</span>=<span class="string">"/courses"</span></div><div class="line">  <span class="attr">activeStyle</span>=<span class="string">&#123;&#123;</span> <span class="attr">color:</span> '<span class="attr">red</span>' &#125;&#125;</div><div class="line">  <span class="attr">isActive</span>=<span class="string">&#123;(location,</span> <span class="attr">props</span>) =&gt; (</div><div class="line">    // 匹配到"/courses" 或者 "/course/123"被激活</div><div class="line">    // 尽管这不是真正意义上的被激活, it is</div><div class="line">    // theoretically for the sake of a navigation menu</div><div class="line">    location.pathname.match(/course(s)?/)</div><div class="line">  )&#125;</div><div class="line">/&gt;</div></pre></td></tr></table></figure></p>
+<p>允许自定义当前链接是否被激活，激活时返回true，否则返回false。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&lt;Link</div><div class="line">  to=<span class="string">"/"</span></div><div class="line">  activeStyle=&#123;&#123; color: <span class="string">'red'</span> &#125;&#125;</div><div class="line">  isActive=&#123;(location) =&gt; (</div><div class="line">    <span class="comment">// 只有当没有query字段时被激活</span></div><div class="line">    !<span class="built_in">Object</span>.keys(location.query).length</div><div class="line">  )&#125;</div><div class="line">/&gt;</div><div class="line"></div><div class="line">&lt;Link</div><div class="line">  to="/courses"</div><div class="line">  activeStyle=&#123;&#123; color: 'red' &#125;&#125;</div><div class="line">  isActive=&#123;(location, props) =&gt; (</div><div class="line">    // 匹配到"/courses" 或者 "/course/123"被激活</div><div class="line">    // 尽管这不是真正意义上的被激活, it is</div><div class="line">    // theoretically for the sake of a navigation menu</div><div class="line">    location.pathname.match(/course(s)?/)</div><div class="line">  )&#125;</div><div class="line">/&gt;</div></pre></td></tr></table></figure></p>
 <font color="red">location</font>
 
 <p>如果你不想使用上下文中的location, 可以传递一个location的属性作为替代，这在链接比较深的redux应用中很有用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;Match pattern=&quot;/foo&quot; location=&#123;this.props.location&#125;/&gt;</div></pre></td></tr></table></figure></p>
@@ -281,11 +281,11 @@
     </summary>
     
     
-      <category term="android studio" scheme="http://yoursite.com/tags/android-studio/"/>
+      <category term="ubuntu" scheme="http://yoursite.com/tags/ubuntu/"/>
     
       <category term="android" scheme="http://yoursite.com/tags/android/"/>
     
-      <category term="ubuntu" scheme="http://yoursite.com/tags/ubuntu/"/>
+      <category term="android studio" scheme="http://yoursite.com/tags/android-studio/"/>
     
   </entry>
   
@@ -383,12 +383,13 @@
     <link href="http://yoursite.com/2016/11/25/react-router-4-0-0-api-Match/"/>
     <id>http://yoursite.com/2016/11/25/react-router-4-0-0-api-Match/</id>
     <published>2016-11-25T05:05:50.000Z</published>
-    <updated>2017-05-25T03:41:18.235Z</updated>
+    <updated>2017-05-25T09:23:45.984Z</updated>
     
     <content type="html"><![CDATA[<p><a href="https://react-router.now.sh/Match" target="_blank" rel="external">原文链接</a></p>
-<font size="6em">&lt;Match&gt;<font><br><br>匹配到地址(location)时进行UI渲染<br><br>### <font color="red">pattern: string</font>
+<font size="1em">&lt;Match&gt;</font>
 
-<p>任何<a href="https://www.npmjs.com/package/path-to-regexp" target="_blank" rel="external">path-to-regexp</a>可以理解的URL模式表达式<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Match</span> <span class="attr">pattern</span>=<span class="string">"/users/:id"</span> <span class="attr">component</span>=<span class="string">&#123;User&#125;/</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>匹配到地址(location)时进行UI渲染</p>
+<h3 id="pattern-string"><a href="#pattern-string" class="headerlink" title="pattern: string"></a><font color="red">pattern: string</font></h3><p>任何<a href="https://www.npmjs.com/package/path-to-regexp" target="_blank" rel="external">path-to-regexp</a>可以理解的URL模式表达式<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Match</span> <span class="attr">pattern</span>=<span class="string">"/users/:id"</span> <span class="attr">component</span>=<span class="string">&#123;User&#125;/</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <a id="more"></a>
 <h3 id="exactly-bool"><a href="#exactly-bool" class="headerlink" title="exactly: bool"></a><font color="red">exactly: bool</font></h3><p>当为true时，只有模式表达式严格匹配时，才算匹配上。</p>
 <table>
@@ -434,14 +435,15 @@
 <p>(2) 回传递一个matched属性表示有没有被匹配上。</p>
 <p>It seems unlikely you’ll need this for anything besides animating when a component transitions from matching to not matching and back, but who knows?</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;Match children=&#123;(&#123; matched, ...rest&#125;) =&gt; (</div><div class="line">  &#123;<span class="comment">/* 因为Animate 总是能被渲染，所以你可以利用组件的生命周期(lifecycle)来实现动画。*/</span>&#125;</div><div class="line">  &lt;Animate&gt;</div><div class="line">    &#123;matched &amp;&amp; (</div><div class="line">      <span class="xml"><span class="tag">&lt;<span class="name">Something</span> &#123;<span class="attr">...rest</span>&#125;/&gt;</span></span></div><div class="line">    )&#125;</div><div class="line">  <span class="tag">&lt;/<span class="name">Animate</span>&gt;</span></div><div class="line">)&#125;/&gt;</div></pre></td></tr></table></figure>
-<font size="6em">&lt;/Match&gt;</font></font></font>]]></content>
+<font size="6em">&lt;/Match&gt;</font>]]></content>
     
     <summary type="html">
     
       &lt;p&gt;&lt;a href=&quot;https://react-router.now.sh/Match&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;原文链接&lt;/a&gt;&lt;/p&gt;
-&lt;font size=&quot;6em&quot;&gt;&amp;lt;Match&amp;gt;&lt;font&gt;&lt;br&gt;&lt;br&gt;匹配到地址(location)时进行UI渲染&lt;br&gt;&lt;br&gt;### &lt;font color=&quot;red&quot;&gt;pattern: string&lt;/font&gt;
+&lt;font size=&quot;1em&quot;&gt;&amp;lt;Match&amp;gt;&lt;/font&gt;
 
-&lt;p&gt;任何&lt;a href=&quot;https://www.npmjs.com/package/path-to-regexp&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;path-to-regexp&lt;/a&gt;可以理解的URL模式表达式&lt;br&gt;&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;Match&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;pattern&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;/users/:id&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;component&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&amp;#123;User&amp;#125;/&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;匹配到地址(location)时进行UI渲染&lt;/p&gt;
+&lt;h3 id=&quot;pattern-string&quot;&gt;&lt;a href=&quot;#pattern-string&quot; class=&quot;headerlink&quot; title=&quot;pattern: string&quot;&gt;&lt;/a&gt;&lt;font color=&quot;red&quot;&gt;pattern: string&lt;/font&gt;&lt;/h3&gt;&lt;p&gt;任何&lt;a href=&quot;https://www.npmjs.com/package/path-to-regexp&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;path-to-regexp&lt;/a&gt;可以理解的URL模式表达式&lt;br&gt;&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;Match&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;pattern&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;/users/:id&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;component&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&amp;#123;User&amp;#125;/&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
     
     </summary>
     
@@ -655,9 +657,9 @@
     </summary>
     
     
-      <category term="android" scheme="http://yoursite.com/tags/android/"/>
-    
       <category term="ubuntu" scheme="http://yoursite.com/tags/ubuntu/"/>
+    
+      <category term="android" scheme="http://yoursite.com/tags/android/"/>
     
       <category term="环境搭建" scheme="http://yoursite.com/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
     
@@ -764,9 +766,9 @@
     </summary>
     
     
-      <category term="android studio" scheme="http://yoursite.com/tags/android-studio/"/>
-    
       <category term="ubuntu" scheme="http://yoursite.com/tags/ubuntu/"/>
+    
+      <category term="android studio" scheme="http://yoursite.com/tags/android-studio/"/>
     
   </entry>
   
@@ -1001,9 +1003,9 @@
     </summary>
     
     
-      <category term="android studio" scheme="http://yoursite.com/tags/android-studio/"/>
-    
       <category term="android" scheme="http://yoursite.com/tags/android/"/>
+    
+      <category term="android studio" scheme="http://yoursite.com/tags/android-studio/"/>
     
   </entry>
   
