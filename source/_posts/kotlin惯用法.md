@@ -4,7 +4,7 @@ date: 2017-05-26 10:01:03
 tags: kotlin
 ---
 
-kotlin的提供了一些惯用法（语法糖？），简单的记录一下。
+kotlin提供了一些惯用法（语法糖？），简单的记录一下。
 
 ## data class
 有时候需要一些类要保存数据，而不需要其他操作，当然基本操作除外，kotlin为data class提供的基本操作有：
@@ -328,7 +328,7 @@ with(myTurtle) { //draw a 100 pix square
 }
 ```
 
-### nullable的Boolean对象
+## nullable的Boolean对象
 ```kotlin
 val b: Boolean? = ...
 if (b == true) {

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-05-26T03:27:04.202Z</updated>
+  <updated>2017-05-26T03:47:58.791Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="http://yoursite.com/2017/05/26/kotlin%E6%83%AF%E7%94%A8%E6%B3%95/"/>
     <id>http://yoursite.com/2017/05/26/kotlin惯用法/</id>
     <published>2017-05-26T02:01:03.000Z</published>
-    <updated>2017-05-26T03:27:04.202Z</updated>
+    <updated>2017-05-26T03:47:58.791Z</updated>
     
-    <content type="html"><![CDATA[<p>kotlin的提供了一些惯用法（语法糖？），简单的记录一下。</p>
+    <content type="html"><![CDATA[<p>kotlin提供了一些惯用法（语法糖？），简单的记录一下。</p>
 <h2 id="data-class"><a href="#data-class" class="headerlink" title="data class"></a>data class</h2><p>有时候需要一些类要保存数据，而不需要其他操作，当然基本操作除外，kotlin为data class提供的基本操作有：</p>
 <ul>
 <li>equals() 相当与“==”操作</li>
@@ -63,12 +63,12 @@
 <p>等于如下函数<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">fun</span> <span class="title">theAnswer</span><span class="params">()</span></span>: <span class="built_in">Int</span> &#123;</div><div class="line">    <span class="keyword">return</span> <span class="number">42</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>表达式函数可以很方便的和其他惯用法结合在一起使用<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">fun</span> <span class="title">transform</span><span class="params">(color: <span class="type">String</span>)</span></span>: <span class="built_in">Int</span> = <span class="keyword">when</span> (color) &#123;</div><div class="line">    <span class="string">"Red"</span> -&gt; <span class="number">0</span></div><div class="line">    <span class="string">"Green"</span> -&gt; <span class="number">1</span></div><div class="line">    <span class="string">"Blue"</span> -&gt; <span class="number">2</span></div><div class="line">    <span class="keyword">else</span> -&gt; <span class="keyword">throw</span> IllegalArgumentException(<span class="string">"Invalid color param value"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h2 id="with语句（ES6不是快废除这个了？）"><a href="#with语句（ES6不是快废除这个了？）" class="headerlink" title="with语句（ES6不是快废除这个了？）"></a>with语句（ES6不是快废除这个了？）</h2><p>with语句块的函数都是对()括号内的对象的方法调用。<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Turtle</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">penDown</span><span class="params">()</span></span></div><div class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">penUp</span><span class="params">()</span></span></div><div class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">turn</span><span class="params">(degrees: <span class="type">Double</span>)</span></span></div><div class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">forward</span><span class="params">(pixels: <span class="type">Double</span>)</span></span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">val</span> myTurtle = Turtle()</div><div class="line">with(myTurtle) &#123; <span class="comment">//draw a 100 pix square</span></div><div class="line">    penDown()</div><div class="line">    <span class="keyword">for</span>(i <span class="keyword">in</span> <span class="number">1.</span><span class="number">.4</span>) &#123;</div><div class="line">        forward(<span class="number">100.0</span>)</div><div class="line">        turn(<span class="number">90.0</span>)</div><div class="line">    &#125;</div><div class="line">    penUp()</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="nullable的Boolean对象"><a href="#nullable的Boolean对象" class="headerlink" title="nullable的Boolean对象"></a>nullable的Boolean对象</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> b: <span class="built_in">Boolean</span>? = ...</div><div class="line"><span class="keyword">if</span> (b == <span class="literal">true</span>) &#123;</div><div class="line">    ...</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="comment">// `b` 为false或者null</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="nullable的Boolean对象"><a href="#nullable的Boolean对象" class="headerlink" title="nullable的Boolean对象"></a>nullable的Boolean对象</h2><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> b: <span class="built_in">Boolean</span>? = ...</div><div class="line"><span class="keyword">if</span> (b == <span class="literal">true</span>) &#123;</div><div class="line">    ...</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="comment">// `b` 为false或者null</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;kotlin的提供了一些惯用法（语法糖？），简单的记录一下。&lt;/p&gt;
+      &lt;p&gt;kotlin提供了一些惯用法（语法糖？），简单的记录一下。&lt;/p&gt;
 &lt;h2 id=&quot;data-class&quot;&gt;&lt;a href=&quot;#data-class&quot; class=&quot;headerlink&quot; title=&quot;data class&quot;&gt;&lt;/a&gt;data class&lt;/h2&gt;&lt;p&gt;有时候需要一些类要保存数据，而不需要其他操作，当然基本操作除外，kotlin为data class提供的基本操作有：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;equals() 相当与“==”操作&lt;/li&gt;
@@ -632,43 +632,6 @@
   
   <entry>
     <title>BrowserRouter-react router 4.0.0 api中文文档</title>
-    <link href="http://yoursite.com/2016/11/24/react-router-4-0-0-api/"/>
-    <id>http://yoursite.com/2016/11/24/react-router-4-0-0-api/</id>
-    <published>2016-11-24T06:54:00.000Z</published>
-    <updated>2017-05-25T03:41:18.236Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="https://react-router.now.sh/BrowserRouter" target="_blank" rel="external">原文链接</a></p>
-<font size="5em">&lt;BrowserRouter&gt;</font>
-
-<p>保持你的界面与浏览器历史记录保持同步。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;BrowserRouter&gt;</div><div class="line">  &lt;App/&gt;</div><div class="line">&lt;/BrowserRouter&gt;</div></pre></td></tr></table></figure></p>
-<a id="more"></a>
-<font color="#FF0000">basename</font>
-
-<p>所有路由的根URL，如果你的应用处于服务端的子目录, 你可以设置这个值为该子目录。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;BrowserRouter basename=&quot;/calendar&quot; /&gt;</div><div class="line"></div><div class="line">// 假设Link标签如下所示：</div><div class="line">&lt;Link to=&quot;/today&quot;/&gt;</div><div class="line">// 那么超链接指向 &quot;/calendar/today&quot;</div><div class="line">&lt;/BrowserRouter&gt;</div></pre></td></tr></table></figure>
-<font size="5em">&lt;/BrowserRouter&gt;</font>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;a href=&quot;https://react-router.now.sh/BrowserRouter&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;原文链接&lt;/a&gt;&lt;/p&gt;
-&lt;font size=&quot;5em&quot;&gt;&amp;lt;BrowserRouter&amp;gt;&lt;/font&gt;
-
-&lt;p&gt;保持你的界面与浏览器历史记录保持同步。&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;BrowserRouter&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &amp;lt;App/&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;/BrowserRouter&amp;gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="react" scheme="http://yoursite.com/tags/react/"/>
-    
-      <category term="react-router" scheme="http://yoursite.com/tags/react-router/"/>
-    
-      <category term="翻译文档" scheme="http://yoursite.com/tags/%E7%BF%BB%E8%AF%91%E6%96%87%E6%A1%A3/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>BrowserRouter-react router 4.0.0 api中文文档</title>
     <link href="http://yoursite.com/2016/11/24/react-router-4-0-0-api-BrowserRouter/"/>
     <id>http://yoursite.com/2016/11/24/react-router-4-0-0-api-BrowserRouter/</id>
     <published>2016-11-24T06:54:00.000Z</published>
@@ -696,6 +659,43 @@
     </summary>
     
       <category term="react router 4.0.0 api中文文档" scheme="http://yoursite.com/categories/react-router-4-0-0-api%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3/"/>
+    
+    
+      <category term="react" scheme="http://yoursite.com/tags/react/"/>
+    
+      <category term="react-router" scheme="http://yoursite.com/tags/react-router/"/>
+    
+      <category term="翻译文档" scheme="http://yoursite.com/tags/%E7%BF%BB%E8%AF%91%E6%96%87%E6%A1%A3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>BrowserRouter-react router 4.0.0 api中文文档</title>
+    <link href="http://yoursite.com/2016/11/24/react-router-4-0-0-api/"/>
+    <id>http://yoursite.com/2016/11/24/react-router-4-0-0-api/</id>
+    <published>2016-11-24T06:54:00.000Z</published>
+    <updated>2017-05-25T03:41:18.236Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://react-router.now.sh/BrowserRouter" target="_blank" rel="external">原文链接</a></p>
+<font size="5em">&lt;BrowserRouter&gt;</font>
+
+<p>保持你的界面与浏览器历史记录保持同步。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;BrowserRouter&gt;</div><div class="line">  &lt;App/&gt;</div><div class="line">&lt;/BrowserRouter&gt;</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<font color="#FF0000">basename</font>
+
+<p>所有路由的根URL，如果你的应用处于服务端的子目录, 你可以设置这个值为该子目录。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;BrowserRouter basename=&quot;/calendar&quot; /&gt;</div><div class="line"></div><div class="line">// 假设Link标签如下所示：</div><div class="line">&lt;Link to=&quot;/today&quot;/&gt;</div><div class="line">// 那么超链接指向 &quot;/calendar/today&quot;</div><div class="line">&lt;/BrowserRouter&gt;</div></pre></td></tr></table></figure>
+<font size="5em">&lt;/BrowserRouter&gt;</font>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;https://react-router.now.sh/BrowserRouter&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;原文链接&lt;/a&gt;&lt;/p&gt;
+&lt;font size=&quot;5em&quot;&gt;&amp;lt;BrowserRouter&amp;gt;&lt;/font&gt;
+
+&lt;p&gt;保持你的界面与浏览器历史记录保持同步。&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;BrowserRouter&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &amp;lt;App/&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;/BrowserRouter&amp;gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+    
+    </summary>
     
     
       <category term="react" scheme="http://yoursite.com/tags/react/"/>
