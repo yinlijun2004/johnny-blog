@@ -632,6 +632,43 @@
   
   <entry>
     <title>BrowserRouter-react router 4.0.0 api中文文档</title>
+    <link href="http://yoursite.com/2016/11/24/react-router-4-0-0-api/"/>
+    <id>http://yoursite.com/2016/11/24/react-router-4-0-0-api/</id>
+    <published>2016-11-24T06:54:00.000Z</published>
+    <updated>2017-05-25T03:41:18.236Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://react-router.now.sh/BrowserRouter" target="_blank" rel="external">原文链接</a></p>
+<font size="5em">&lt;BrowserRouter&gt;</font>
+
+<p>保持你的界面与浏览器历史记录保持同步。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;BrowserRouter&gt;</div><div class="line">  &lt;App/&gt;</div><div class="line">&lt;/BrowserRouter&gt;</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<font color="#FF0000">basename</font>
+
+<p>所有路由的根URL，如果你的应用处于服务端的子目录, 你可以设置这个值为该子目录。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;BrowserRouter basename=&quot;/calendar&quot; /&gt;</div><div class="line"></div><div class="line">// 假设Link标签如下所示：</div><div class="line">&lt;Link to=&quot;/today&quot;/&gt;</div><div class="line">// 那么超链接指向 &quot;/calendar/today&quot;</div><div class="line">&lt;/BrowserRouter&gt;</div></pre></td></tr></table></figure>
+<font size="5em">&lt;/BrowserRouter&gt;</font>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;https://react-router.now.sh/BrowserRouter&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;原文链接&lt;/a&gt;&lt;/p&gt;
+&lt;font size=&quot;5em&quot;&gt;&amp;lt;BrowserRouter&amp;gt;&lt;/font&gt;
+
+&lt;p&gt;保持你的界面与浏览器历史记录保持同步。&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;BrowserRouter&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &amp;lt;App/&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;/BrowserRouter&amp;gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="react" scheme="http://yoursite.com/tags/react/"/>
+    
+      <category term="react-router" scheme="http://yoursite.com/tags/react-router/"/>
+    
+      <category term="翻译文档" scheme="http://yoursite.com/tags/%E7%BF%BB%E8%AF%91%E6%96%87%E6%A1%A3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>BrowserRouter-react router 4.0.0 api中文文档</title>
     <link href="http://yoursite.com/2016/11/24/react-router-4-0-0-api-BrowserRouter/"/>
     <id>http://yoursite.com/2016/11/24/react-router-4-0-0-api-BrowserRouter/</id>
     <published>2016-11-24T06:54:00.000Z</published>
@@ -659,43 +696,6 @@
     </summary>
     
       <category term="react router 4.0.0 api中文文档" scheme="http://yoursite.com/categories/react-router-4-0-0-api%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3/"/>
-    
-    
-      <category term="react" scheme="http://yoursite.com/tags/react/"/>
-    
-      <category term="react-router" scheme="http://yoursite.com/tags/react-router/"/>
-    
-      <category term="翻译文档" scheme="http://yoursite.com/tags/%E7%BF%BB%E8%AF%91%E6%96%87%E6%A1%A3/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>BrowserRouter-react router 4.0.0 api中文文档</title>
-    <link href="http://yoursite.com/2016/11/24/react-router-4-0-0-api/"/>
-    <id>http://yoursite.com/2016/11/24/react-router-4-0-0-api/</id>
-    <published>2016-11-24T06:54:00.000Z</published>
-    <updated>2017-05-25T03:41:18.236Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="https://react-router.now.sh/BrowserRouter" target="_blank" rel="external">原文链接</a></p>
-<font size="5em">&lt;BrowserRouter&gt;</font>
-
-<p>保持你的界面与浏览器历史记录保持同步。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;BrowserRouter&gt;</div><div class="line">  &lt;App/&gt;</div><div class="line">&lt;/BrowserRouter&gt;</div></pre></td></tr></table></figure></p>
-<a id="more"></a>
-<font color="#FF0000">basename</font>
-
-<p>所有路由的根URL，如果你的应用处于服务端的子目录, 你可以设置这个值为该子目录。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;BrowserRouter basename=&quot;/calendar&quot; /&gt;</div><div class="line"></div><div class="line">// 假设Link标签如下所示：</div><div class="line">&lt;Link to=&quot;/today&quot;/&gt;</div><div class="line">// 那么超链接指向 &quot;/calendar/today&quot;</div><div class="line">&lt;/BrowserRouter&gt;</div></pre></td></tr></table></figure>
-<font size="5em">&lt;/BrowserRouter&gt;</font>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;a href=&quot;https://react-router.now.sh/BrowserRouter&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;原文链接&lt;/a&gt;&lt;/p&gt;
-&lt;font size=&quot;5em&quot;&gt;&amp;lt;BrowserRouter&amp;gt;&lt;/font&gt;
-
-&lt;p&gt;保持你的界面与浏览器历史记录保持同步。&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;BrowserRouter&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &amp;lt;App/&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;/BrowserRouter&amp;gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-    
-    </summary>
     
     
       <category term="react" scheme="http://yoursite.com/tags/react/"/>
@@ -986,27 +986,72 @@
   </entry>
   
   <entry>
-    <title>android studio编译错误: *** 目标模式不含有“%”。 停止。</title>
-    <link href="http://yoursite.com/2016/11/05/android-studio%E7%BC%96%E8%AF%91%E9%94%99%E8%AF%AF-%E7%9B%AE%E6%A0%87%E6%A8%A1%E5%BC%8F%E4%B8%8D%E5%90%AB%E6%9C%89%E2%80%9C-%E2%80%9D%E3%80%82-%E5%81%9C%E6%AD%A2%E3%80%82/"/>
-    <id>http://yoursite.com/2016/11/05/android-studio编译错误-目标模式不含有“-”。-停止。/</id>
+    <title>高性能Javscript - 笔记</title>
+    <link href="http://yoursite.com/2016/11/05/High-Performance-Javascript/"/>
+    <id>http://yoursite.com/2016/11/05/High-Performance-Javascript/</id>
     <published>2016-11-05T10:04:19.000Z</published>
-    <updated>2017-05-25T03:41:18.232Z</updated>
+    <updated>2017-05-25T03:41:18.231Z</updated>
     
-    <content type="html"><![CDATA[<p>Android Studio NDK编译出现如下错误：<br><strong><em> target pattern contains no `%’. Stop<br>中文：
-</em></strong> 目标模式不含有“%”。 停止。<br>可能是obj目录的问题，需要删掉。<br>在工程目录下find所有的obj目录<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find . -name obj</div></pre></td></tr></table></figure></p>
+    <content type="html"><![CDATA[<h2 id="第一章-加载和执行"><a href="#第一章-加载和执行" class="headerlink" title="第一章 加载和执行"></a>第一章 加载和执行</h2><h3 id="减少Javascript加载对性能的影响"><a href="#减少Javascript加载对性能的影响" class="headerlink" title="减少Javascript加载对性能的影响"></a>减少Javascript加载对性能的影响</h3><ul>
+<li>&lt;/body&gt;闭合标签之前，将所有&lt;javascript&gt;标签放到页面底部。这能确保在脚本执行前页面已经完成了渲染</li>
+<li>合并脚本，减少&lt;javascript&gt;标签</li>
+<li>使用&lt;javascript&gt;标签的defer属性<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">'text/javascript'</span> src=<span class="string">'file1.js'</span> defer&gt;&lt;/script&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li><p>利用动态创建的&lt;javascript&gt;元素来下载并执行代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> script = <span class="built_in">document</span>.createElemnet(<span class="string">'script'</span>);</div><div class="line">script.type = <span class="string">'text/javascript'</span>;</div><div class="line">script.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    alert(<span class="string">'Script loaded!'</span>);</div><div class="line">&#125;</div><div class="line">script.src = <span class="string">'file1.js'</span>;</div><div class="line"><span class="built_in">document</span>.getElementByTagName(<span class="string">'head'</span>)[<span class="number">0</span>].appendChild(script);</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用XHR对象下载Javascript代码并注入页面中</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">xhr.open(<span class="string">'get'</span>, <span class="string">'file1.js'</span>, <span class="literal">true</span>);</div><div class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span>(xhr.readyState == <span class="number">4</span>) &#123;</div><div class="line">        <span class="keyword">if</span>(xhr.status &gt;= <span class="number">200</span> &amp;&amp; xhr.status &lt; <span class="number">300</span> || xhr.status === <span class="number">304</span>) &#123;</div><div class="line">            <span class="keyword">var</span> script = <span class="built_in">document</span>.createElemnet(<span class="string">'script'</span>);</div><div class="line">            script.type = <span class="string">'text/javascript'</span>;</div><div class="line">            script.text = xhr.responseText;</div><div class="line">            <span class="built_in">document</span>.body.appendChild(script);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="几种类库加载js的方式"><a href="#几种类库加载js的方式" class="headerlink" title="几种类库加载js的方式"></a>几种类库加载js的方式</h3><ul>
+<li><p>YUI3</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">'text/javascript'</span> src=<span class="string">'http://yui.yahooapis.com/combo?3.0.0/build/yui/yui-min.js'</span>&gt;&lt;/script&gt;</div><div class="line">&lt;script type=<span class="string">'text/javascript'</span>&gt;</div><div class="line">    YUI().use(<span class="string">'dom'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">Y</span>) </span>&#123;</div><div class="line">        Y.DOM.addClass(<span class="built_in">document</span>.body, <span class="string">'loaded'</span>);</div><div class="line">    &#125;)</div><div class="line">&lt;<span class="regexp">/script&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>LazyLoad</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">'text/javascript'</span> src=<span class="string">'lazyload-min.js'</span>&gt;&lt;/script&gt;</div><div class="line">&lt;script type=<span class="string">'text/javascript'</span>&gt;</div><div class="line">    LazyLoad.js(<span class="string">'the-rest.js'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        Applicationn.init();</div><div class="line">    &#125;)</div><div class="line">&lt;<span class="regexp">/script&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>LABjs</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">'text/javascript'</span> src=<span class="string">'lab.js'</span>&gt;&lt;/script&gt;</div><div class="line">&lt;script type=<span class="string">'text/javascript'</span>&gt; </div><div class="line">    $LAB.script(<span class="string">'first-file.js'</span>)</div><div class="line">        .wait()</div><div class="line">        .script(<span class="string">'the-rest.js'</span>)</div><div class="line">        .wait(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            Applicationn.init();</div><div class="line">        &#125;)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="第二章-数据存取"><a href="#第二章-数据存取" class="headerlink" title="第二章 数据存取"></a>第二章 数据存取</h2><p>在Javascript中，数据存储的位置会对代码整体性能产成重大影响。数据存储共有4中方式：字面量、变量、数组项、对象成员。它们有着各自的性能特点。</p>
+<ul>
+<li>访问字面量和局部变量的速度最快，相反，访问数组元素和对象成员相对较慢。</li>
+<li>由于局部变量存在于作用域链的起始位置，因此访问局部变量比访问跨作用域变量更快。变量在作用域中的位置越深，访问所需时间就越长。由于全局变量总处在作用域的最末端，因此访问速度时最慢的。</li>
+<li>避免使用with语句。</li>
+<li>嵌套的对象成员会明显影响性能，尽量少用。</li>
+<li>属性或方法在原型链中的位置越深，访问它的速度也越慢。</li>
+<li>通常来说，你可以通过把常用的对象成员、数组元素、跨域变量保存在局部变量中来改善Javascript性能，因为局部变量访问速度更快。</li>
+</ul>
+<h2 id="第三章-DOM编程"><a href="#第三章-DOM编程" class="headerlink" title="第三章 DOM编程"></a>第三章 DOM编程</h2><p>访问和操作DOM时现在Web应用的重要部分。但每次穿越链接ECMAScript和DOM都会有性能消耗，为了减少DOM编程带来的消耗，请记住以下几点：</p>
+<ul>
+<li>最小化DOM访问次数，尽可能在Javascript端处理。</li>
+<li>如果需要多次访问某个DOM节点，请使用局部变量存储它的引用。</li>
+<li>小心处理HTML集合，把集合的长度缓存到一个变量中，并在迭代中使用它。如果需要经常操作集合，建议把它靠背到一个数组中。</li>
+<li>如果可能的话，使用速度更快的API，比如querySelecetAll()和firstElementChild。</li>
+<li>要留意重排和重绘，批量修改样式时，离线操作DOM树，使用缓存，并减少布局信息的次数。</li>
+<li>动画中使用绝对定位，使用拖放代理。</li>
+<li>使用事件委托来减少事件处理器的数量。</li>
+</ul>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;Android Studio NDK编译出现如下错误：&lt;br&gt;&lt;strong&gt;&lt;em&gt; target pattern contains no `%’. Stop&lt;br&gt;中文：
-&lt;/em&gt;&lt;/strong&gt; 目标模式不含有“%”。 停止。&lt;br&gt;可能是obj目录的问题，需要删
+      &lt;h2 id=&quot;第一章-加载和执行&quot;&gt;&lt;a href=&quot;#第一章-加载和执行&quot; class=&quot;headerlink&quot; title=&quot;第一章 加载和执行&quot;&gt;&lt;/a&gt;第一章 加载和执行&lt;/h2&gt;&lt;h3 id=&quot;减少Javascript加载对性能的影响&quot;&gt;&lt;a href=&quot;#减少Javascript加载对性能的影响&quot; class=&quot;headerlink&quot; title=&quot;减少Javascript加载对性能的影响&quot;&gt;&lt;/a&gt;减少Javascript加载对性能的影响&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&amp;lt;/body&amp;gt;闭合标签之前，将所有&amp;lt;javascript&amp;gt;标签放到页面底部。这能确保在脚本执行前页面已经完成了渲染&lt;/li&gt;
+&lt;li&gt;合并脚本，减少&amp;lt;javascript&amp;gt;标签&lt;/li&gt;
+&lt;li&gt;使用&amp;lt;javascript&amp;gt;标签的defer属性&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;script type=&lt;span class=&quot;string&quot;&gt;&#39;text/javascript&#39;&lt;/span&gt; src=&lt;span class=&quot;string&quot;&gt;&#39;file1.js&#39;&lt;/span&gt; defer&amp;gt;&amp;lt;/script&amp;gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     
     
-      <category term="android" scheme="http://yoursite.com/tags/android/"/>
-    
-      <category term="android studio" scheme="http://yoursite.com/tags/android-studio/"/>
+      <category term="javascript" scheme="http://yoursite.com/tags/javascript/"/>
     
   </entry>
   

@@ -72,4 +72,5 @@ swiftype_key: bing
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:yinlijun2004/yinlijun2004.github.io.git
+  repo: yinlijun@120.79.64.190:project/hexo.git
+  branch: master

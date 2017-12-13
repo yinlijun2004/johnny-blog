@@ -1,7 +1,13 @@
 ---
 title: ubuntu如何反编译apk（2016最新方法）
-tags: [ubuntu, android, apk, reverse engineering]
+tags:
+  - ubuntu
+  - android
+  - apk
+  - reverse engineering
+date: 2017-12-13 14:38:02
 ---
+
 
 # 下载apktool
 1. Download Linux [wrapper script](https://raw.githubusercontent.com/iBotPeaches/Apktool/master/scripts/linux/apktool) (Right click, Save Link As apktool)
