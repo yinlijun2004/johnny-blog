@@ -1,24 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Johnny</title>
-  
+  <title>尹莉军</title>
+  <subtitle>个人博客</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
-  <updated>2017-05-26T03:47:58.791Z</updated>
-  <id>http://yoursite.com/</id>
+  <link href="http://www.yinlijun.com/"/>
+  <updated>2017-12-19T06:24:20.355Z</updated>
+  <id>http://www.yinlijun.com/</id>
   
   <author>
-    <name>Johnny</name>
+    <name>尹莉军 &lt;yinlijun2004@gmail.com&gt;</name>
     
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>部署HEXO博客到阿里云ECS</title>
+    <link href="http://www.yinlijun.com/2017/12/18/hexo-to-ali-ecs/"/>
+    <id>http://www.yinlijun.com/2017/12/18/hexo-to-ali-ecs/</id>
+    <published>2017-12-18T09:46:56.000Z</published>
+    <updated>2017-12-19T06:24:20.355Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文假设你具备如下条件：</p>
+<ul>
+<li>熟悉hexo操作</li>
+<li>熟悉linux基本指令</li>
+<li>熟悉express(nodejs)框架</li>
+<li>在github上已经部署了hexo博客</li>
+</ul>
+<h2 id="ECS准备"><a href="#ECS准备" class="headerlink" title="ECS准备"></a>ECS准备</h2><h3 id="购买ECS"><a href="#购买ECS" class="headerlink" title="购买ECS"></a>购买ECS</h3><p>前往阿里云购买<a href="https://ecs-buy.aliyun.com" target="_blank" rel="external">ECS</a>，根据个人需要和财务状况，选择对应规模的ECS。<br>我购买的是这个配置，费用是330.00¥。<br><img src="https://picabstract-preview-ftn.weiyun.com:8443/ftn_pic_abs_v2/a6b1134939a35cdf34dab8f9d564c777b7aafbb5518fae80c8450e0ba8d5280bf07d7e677b3b3c2028e2f7a5c778e5a8?pictype=scale&amp;from=30113&amp;version=2.0.0.2&amp;uin=474724984&amp;fname=1GE9BH_P%29%600QGAZLQY6E%7D0G.png&amp;size=1024" alt="img"></p>
+<h3 id="配置ECS"><a href="#配置ECS" class="headerlink" title="配置ECS"></a>配置ECS</h3><p>购买之后，可以远程登录ECS实例，可以选择网页登录，即点击上图的远程连接，此时需要输入远程连接密码。<br><img src="https://picabstract-preview-ftn.weiyun.com:8443/ftn_pic_abs_v2/8f23cd09eff9be82c51f1dcbe340257766d02aae3ea6c33a920a3fbdf917426660d0df1eecce1e99548aa7aafad45df3?pictype=scale&amp;from=30113&amp;version=2.0.0.2&amp;uin=474724984&amp;fname=2RK%5D3A%28ZCW9N7%7DRB801Q92V.png&amp;size=1024" alt="img"><br>这个密码在创建ECS实例会提供给你，点击确认之后，就可以输入root密码。</p>
+<p>我的本地是ubuntu系统，所以可以利用ssh登录。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh root@xx.xx.xx.xx</div></pre></td></tr></table></figure></p>
+<p>登录之后，创建一个非root用户。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adduser yinlijun</div></pre></td></tr></table></figure></p>
+<p>切换到该用户<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">su yinlijun</div></pre></td></tr></table></figure></p>
+<h3 id="上传本地公钥，方便部署。"><a href="#上传本地公钥，方便部署。" class="headerlink" title="上传本地公钥，方便部署。"></a>上传本地公钥，方便部署。</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-copy-id -i ~/.ssh/id_rsa.pub yinlijun@xx.xx.xx.xx</div></pre></td></tr></table></figure>
+<p>如果需要绑定域名，还需要如下申请域名和备案：</p>
+<h2 id="购买域名"><a href="#购买域名" class="headerlink" title="购买域名"></a>购买域名</h2><p>前往<a href="https://wanwang.aliyun.com/domain" target="_blank" rel="external">阿里域名服务</a>选购域名。</p>
+<h2 id="域名备案"><a href="#域名备案" class="headerlink" title="域名备案"></a>域名备案</h2><p>前往<a href="https://beian.aliyun.com/" target="_blank" rel="external">备案专区</a>，进行备案，需要时间比较长，我花了12天，备案完成后，阿里云会给你的ECS续费，续费的天数就是你的备案花的天数。<br>期间要填写资料，上传备案照片等等。</p>
+<p>备案完成之后，需要设置域名解析。<br><img src="https://picabstract-preview-ftn.weiyun.com:8443/ftn_pic_abs_v2/02ad73354fe97dd378b486349444aeebd3f5fc81ebe1853b1773f70416c90e7878a24b24afa25c27f122c679c20d523b?pictype=scale&amp;from=30113&amp;version=2.0.0.2&amp;uin=474724984&amp;fname=AJTAI%40%601%7DB3GU6Q%60ZWZO%24Z3.png&amp;size=1024" alt="img"><br>上图的记录值，填写你的ECS的公网IP。</p>
+<h3 id="在ECS上创建hexo仓库"><a href="#在ECS上创建hexo仓库" class="headerlink" title="在ECS上创建hexo仓库"></a>在ECS上创建hexo仓库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">git init --bare ~/project/hexo.git</div><div class="line">``` </div><div class="line"><span class="comment">### 捕获post操作</span></div><div class="line">``` bash</div><div class="line">touch ~/project/hexo.git/hooks/post-receive</div></pre></td></tr></table></figure>
+<p>输入如下内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash -l</div><div class="line">GIT_REPO=&lt;到hexo.git的目录&gt;</div><div class="line">TMP_GIT_CLONE=&lt;到临时blog的目录&gt;</div><div class="line">PUBLIC_WWW=&lt;到blog服务的目录/public/blog&gt;</div><div class="line"></div><div class="line">rm -rf $&#123;TMP_GIT_CLONE&#125;</div><div class="line">git clone $&#123;GIT_REPO&#125; $&#123;TMP_GIT_CLONE&#125;</div><div class="line">rm -rf $&#123;PUBLIC_WWW&#125;/*</div><div class="line">cp -rf $&#123;TMP_GIT_CLONE&#125;/* $&#123;PUBLIC_WWW&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="本地blog-express-服务"><a href="#本地blog-express-服务" class="headerlink" title="本地blog(express)服务"></a>本地blog(express)服务</h3><p>新建express服务<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">express blog-server</div></pre></td></tr></table></figure></p>
+<p>修改app.js，配置静态文件目录<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">app.use(express.static(path.join(__dirname, <span class="string">'public/blog/'</span>)));</div></pre></td></tr></table></figure></p>
+<h3 id="启动blog服务"><a href="#启动blog服务" class="headerlink" title="启动blog服务"></a>启动blog服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pm2 start bin/www</div></pre></td></tr></table></figure>
+<h3 id="安装nginx，反向代理二级域名"><a href="#安装nginx，反向代理二级域名" class="headerlink" title="安装nginx，反向代理二级域名"></a>安装nginx，反向代理二级域名</h3><p>通过域名访问默认的80端口，blog默认监听3000端口，因此需要配置代理。<br>创建blog.conf配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">touch /etc/nginx/conf.d/blog.conf</div></pre></td></tr></table></figure></p>
+<p>输入如下内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    listen 80;</div><div class="line">    server_name yinlijun.com www.yinlijun.com bloc.yinlijun.com;</div><div class="line"></div><div class="line">    location / &#123;</div><div class="line">        proxy_pass http://127.0.0.1:3000;</div><div class="line">        proxy_http_version 1.1;</div><div class="line">        proxy_set_header Upgrade $http_upgrade;</div><div class="line">        proxy_set_header Connection &apos;upgrade&apos;;</div><div class="line">        proxy_set_header Host $host;</div><div class="line">        proxy_cache_bypass $http_upgrade;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="本地操作"><a href="#本地操作" class="headerlink" title="本地操作"></a>本地操作</h2><h3 id="把github上的blog目录clone下来"><a href="#把github上的blog目录clone下来" class="headerlink" title="把github上的blog目录clone下来"></a>把github上的blog目录clone下来</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone git@github.com:yinlijun2004/johnny-blog.git</div></pre></td></tr></table></figure>
+<p>如果你原来没有在github上部署hexo博客，也可以用hexo新建一个，然后托管到某个git仓库。</p>
+<h3 id="修改-config-yml配置"><a href="#修改-config-yml配置" class="headerlink" title="修改_config.yml配置"></a>修改_config.yml配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: yinlijun@www.yinlijun.com:project/hexo.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure>
+<h3 id="发布博客"><a href="#发布博客" class="headerlink" title="发布博客"></a>发布博客</h3><p>撰写好博客后，如下命令部署。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hexo clean</div><div class="line">hexo g</div><div class="line">hexo d</div></pre></td></tr></table></figure></p>
+<h3 id="最终效果"><a href="#最终效果" class="headerlink" title="最终效果"></a>最终效果</h3><h2 id="有可能碰到的问题"><a href="#有可能碰到的问题" class="headerlink" title="有可能碰到的问题"></a>有可能碰到的问题</h2><h3 id="外网无法访问端口"><a href="#外网无法访问端口" class="headerlink" title="外网无法访问端口"></a>外网无法访问端口</h3><p>需要配置安全组规则。<br><img src="https://picabstract-preview-ftn.weiyun.com:8443/ftn_pic_abs_v2/87f1aead6dd1582f56cae6e0179540db4090e83c7f3636e20bd26f24faf1bb04340403773fc999742081809ea9168224?pictype=scale&amp;from=30113&amp;version=2.0.0.2&amp;uin=474724984&amp;fname=3VAK%25~%7DO0ZZZXL9M%60%2963UF7.png&amp;size=1024" alt="img"><br>上图是默认开通的端口，如果你的端口不在里面，则需要自行添加安全组规则。</p>
+<h3 id="hexo-deploy之后没有反应"><a href="#hexo-deploy之后没有反应" class="headerlink" title="hexo deploy之后没有反应"></a>hexo deploy之后没有反应</h3><ul>
+<li>检查有没有上传本机公钥</li>
+<li>检查hexo.git仓库的路径是否正确</li>
+<li>检查备案的域名是否能正常访问</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文假设你具备如下条件：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;熟悉hexo操作&lt;/li&gt;
+&lt;li&gt;熟悉linux基本指令&lt;/li&gt;
+&lt;li&gt;熟悉express(nodejs)框架&lt;/li&gt;
+&lt;li&gt;在github上已经部署了hexo博客&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;ECS准
+    
+    </summary>
+    
+    
+      <category term="hexo" scheme="http://www.yinlijun.com/tags/hexo/"/>
+    
+      <category term="ECS" scheme="http://www.yinlijun.com/tags/ECS/"/>
+    
+      <category term="git" scheme="http://www.yinlijun.com/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
     <title>kotlin惯用法</title>
-    <link href="http://yoursite.com/2017/05/26/kotlin%E6%83%AF%E7%94%A8%E6%B3%95/"/>
-    <id>http://yoursite.com/2017/05/26/kotlin惯用法/</id>
+    <link href="http://www.yinlijun.com/2017/05/26/kotlin%E6%83%AF%E7%94%A8%E6%B3%95/"/>
+    <id>http://www.yinlijun.com/2017/05/26/kotlin惯用法/</id>
     <published>2017-05-26T02:01:03.000Z</published>
     <updated>2017-05-26T03:47:58.791Z</updated>
     
@@ -82,14 +147,14 @@
     </summary>
     
     
-      <category term="kotlin" scheme="http://yoursite.com/tags/kotlin/"/>
+      <category term="kotlin" scheme="http://www.yinlijun.com/tags/kotlin/"/>
     
   </entry>
   
   <entry>
     <title>kotlin初探</title>
-    <link href="http://yoursite.com/2017/05/25/kotlin-sample/"/>
-    <id>http://yoursite.com/2017/05/25/kotlin-sample/</id>
+    <link href="http://www.yinlijun.com/2017/05/25/kotlin-sample/"/>
+    <id>http://www.yinlijun.com/2017/05/25/kotlin-sample/</id>
     <published>2017-05-25T04:33:34.000Z</published>
     <updated>2017-05-25T08:51:59.868Z</updated>
     
@@ -160,18 +225,18 @@
     </summary>
     
     
-      <category term="android" scheme="http://yoursite.com/tags/android/"/>
+      <category term="android" scheme="http://www.yinlijun.com/tags/android/"/>
     
-      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+      <category term="java" scheme="http://www.yinlijun.com/tags/java/"/>
     
-      <category term="kotlin" scheme="http://yoursite.com/tags/kotlin/"/>
+      <category term="kotlin" scheme="http://www.yinlijun.com/tags/kotlin/"/>
     
   </entry>
   
   <entry>
     <title>NavigationPrompt-react router 4.0.0 api中文文档</title>
-    <link href="http://yoursite.com/2016/12/02/react-router-4-0-0-api-NavigationPrompt/"/>
-    <id>http://yoursite.com/2016/12/02/react-router-4-0-0-api-NavigationPrompt/</id>
+    <link href="http://www.yinlijun.com/2016/12/02/react-router-4-0-0-api-NavigationPrompt/"/>
+    <id>http://www.yinlijun.com/2016/12/02/react-router-4-0-0-api-NavigationPrompt/</id>
     <published>2016-12-02T11:16:00.000Z</published>
     <updated>2017-05-25T03:41:18.236Z</updated>
     
@@ -196,21 +261,21 @@
     
     </summary>
     
-      <category term="react router 4.0.0 api中文文档" scheme="http://yoursite.com/categories/react-router-4-0-0-api%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3/"/>
+      <category term="react router 4.0.0 api中文文档" scheme="http://www.yinlijun.com/categories/react-router-4-0-0-api%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3/"/>
     
     
-      <category term="react" scheme="http://yoursite.com/tags/react/"/>
+      <category term="react" scheme="http://www.yinlijun.com/tags/react/"/>
     
-      <category term="react-router" scheme="http://yoursite.com/tags/react-router/"/>
+      <category term="react-router" scheme="http://www.yinlijun.com/tags/react-router/"/>
     
-      <category term="翻译文档" scheme="http://yoursite.com/tags/%E7%BF%BB%E8%AF%91%E6%96%87%E6%A1%A3/"/>
+      <category term="翻译文档" scheme="http://www.yinlijun.com/tags/%E7%BF%BB%E8%AF%91%E6%96%87%E6%A1%A3/"/>
     
   </entry>
   
   <entry>
     <title>Link-react router 4.0.0 api中文文档</title>
-    <link href="http://yoursite.com/2016/11/29/react-router-4-0-0-api-Link/"/>
-    <id>http://yoursite.com/2016/11/29/react-router-4-0-0-api-Link/</id>
+    <link href="http://www.yinlijun.com/2016/11/29/react-router-4-0-0-api-Link/"/>
+    <id>http://www.yinlijun.com/2016/11/29/react-router-4-0-0-api-Link/</id>
     <published>2016-11-29T06:18:08.000Z</published>
     <updated>2017-05-25T03:41:18.235Z</updated>
     
@@ -264,21 +329,21 @@
     
     </summary>
     
-      <category term="react router 4.0.0 api中文文档" scheme="http://yoursite.com/categories/react-router-4-0-0-api%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3/"/>
+      <category term="react router 4.0.0 api中文文档" scheme="http://www.yinlijun.com/categories/react-router-4-0-0-api%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3/"/>
     
     
-      <category term="react" scheme="http://yoursite.com/tags/react/"/>
+      <category term="react" scheme="http://www.yinlijun.com/tags/react/"/>
     
-      <category term="react-router" scheme="http://yoursite.com/tags/react-router/"/>
+      <category term="react-router" scheme="http://www.yinlijun.com/tags/react-router/"/>
     
-      <category term="翻译文档" scheme="http://yoursite.com/tags/%E7%BF%BB%E8%AF%91%E6%96%87%E6%A1%A3/"/>
+      <category term="翻译文档" scheme="http://www.yinlijun.com/tags/%E7%BF%BB%E8%AF%91%E6%96%87%E6%A1%A3/"/>
     
   </entry>
   
   <entry>
     <title>Miss-react router 4.0.0 api中文文档</title>
-    <link href="http://yoursite.com/2016/11/29/react-router-4-0-0-api-Miss/"/>
-    <id>http://yoursite.com/2016/11/29/react-router-4-0-0-api-Miss/</id>
+    <link href="http://www.yinlijun.com/2016/11/29/react-router-4-0-0-api-Miss/"/>
+    <id>http://www.yinlijun.com/2016/11/29/react-router-4-0-0-api-Miss/</id>
     <published>2016-11-29T05:55:49.000Z</published>
     <updated>2017-05-25T03:41:18.236Z</updated>
     
@@ -301,21 +366,21 @@
     
     </summary>
     
-      <category term="react router 4.0.0 api中文文档" scheme="http://yoursite.com/categories/react-router-4-0-0-api%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3/"/>
+      <category term="react router 4.0.0 api中文文档" scheme="http://www.yinlijun.com/categories/react-router-4-0-0-api%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3/"/>
     
     
-      <category term="react" scheme="http://yoursite.com/tags/react/"/>
+      <category term="react" scheme="http://www.yinlijun.com/tags/react/"/>
     
-      <category term="react-router" scheme="http://yoursite.com/tags/react-router/"/>
+      <category term="react-router" scheme="http://www.yinlijun.com/tags/react-router/"/>
     
-      <category term="翻译文档" scheme="http://yoursite.com/tags/%E7%BF%BB%E8%AF%91%E6%96%87%E6%A1%A3/"/>
+      <category term="翻译文档" scheme="http://www.yinlijun.com/tags/%E7%BF%BB%E8%AF%91%E6%96%87%E6%A1%A3/"/>
     
   </entry>
   
   <entry>
     <title>解决 /dev/kvm is not found 的问题</title>
-    <link href="http://yoursite.com/2016/11/28/fix-dev-kvm-is-not-found/"/>
-    <id>http://yoursite.com/2016/11/28/fix-dev-kvm-is-not-found/</id>
+    <link href="http://www.yinlijun.com/2016/11/28/fix-dev-kvm-is-not-found/"/>
+    <id>http://www.yinlijun.com/2016/11/28/fix-dev-kvm-is-not-found/</id>
     <published>2016-11-28T11:44:23.000Z</published>
     <updated>2017-05-25T03:41:18.233Z</updated>
     
@@ -352,18 +417,18 @@
     </summary>
     
     
-      <category term="ubuntu" scheme="http://yoursite.com/tags/ubuntu/"/>
+      <category term="android" scheme="http://www.yinlijun.com/tags/android/"/>
     
-      <category term="android" scheme="http://yoursite.com/tags/android/"/>
+      <category term="android studio" scheme="http://www.yinlijun.com/tags/android-studio/"/>
     
-      <category term="android studio" scheme="http://yoursite.com/tags/android-studio/"/>
+      <category term="ubuntu" scheme="http://www.yinlijun.com/tags/ubuntu/"/>
     
   </entry>
   
   <entry>
     <title>https双向验证功能的实现</title>
-    <link href="http://yoursite.com/2016/11/28/android-https-verify-ways/"/>
-    <id>http://yoursite.com/2016/11/28/android-https-verify-ways/</id>
+    <link href="http://www.yinlijun.com/2016/11/28/android-https-verify-ways/"/>
+    <id>http://www.yinlijun.com/2016/11/28/android-https-verify-ways/</id>
     <published>2016-11-28T00:51:23.000Z</published>
     <updated>2017-05-25T03:41:18.231Z</updated>
     
@@ -439,20 +504,20 @@
     </summary>
     
     
-      <category term="android" scheme="http://yoursite.com/tags/android/"/>
+      <category term="android" scheme="http://www.yinlijun.com/tags/android/"/>
     
-      <category term="nodejs" scheme="http://yoursite.com/tags/nodejs/"/>
+      <category term="nodejs" scheme="http://www.yinlijun.com/tags/nodejs/"/>
     
-      <category term="https" scheme="http://yoursite.com/tags/https/"/>
+      <category term="https" scheme="http://www.yinlijun.com/tags/https/"/>
     
-      <category term="openssl" scheme="http://yoursite.com/tags/openssl/"/>
+      <category term="openssl" scheme="http://www.yinlijun.com/tags/openssl/"/>
     
   </entry>
   
   <entry>
     <title>Match-react router 4.0.0 api中文文档</title>
-    <link href="http://yoursite.com/2016/11/25/react-router-4-0-0-api-Match/"/>
-    <id>http://yoursite.com/2016/11/25/react-router-4-0-0-api-Match/</id>
+    <link href="http://www.yinlijun.com/2016/11/25/react-router-4-0-0-api-Match/"/>
+    <id>http://www.yinlijun.com/2016/11/25/react-router-4-0-0-api-Match/</id>
     <published>2016-11-25T05:05:50.000Z</published>
     <updated>2017-05-25T09:23:45.984Z</updated>
     
@@ -518,21 +583,21 @@
     
     </summary>
     
-      <category term="react router 4.0.0 api中文文档" scheme="http://yoursite.com/categories/react-router-4-0-0-api%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3/"/>
+      <category term="react router 4.0.0 api中文文档" scheme="http://www.yinlijun.com/categories/react-router-4-0-0-api%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3/"/>
     
     
-      <category term="react" scheme="http://yoursite.com/tags/react/"/>
+      <category term="react" scheme="http://www.yinlijun.com/tags/react/"/>
     
-      <category term="react-router" scheme="http://yoursite.com/tags/react-router/"/>
+      <category term="react-router" scheme="http://www.yinlijun.com/tags/react-router/"/>
     
-      <category term="翻译文档" scheme="http://yoursite.com/tags/%E7%BF%BB%E8%AF%91%E6%96%87%E6%A1%A3/"/>
+      <category term="翻译文档" scheme="http://www.yinlijun.com/tags/%E7%BF%BB%E8%AF%91%E6%96%87%E6%A1%A3/"/>
     
   </entry>
   
   <entry>
     <title>React组件生命周期</title>
-    <link href="http://yoursite.com/2016/11/24/react-lifecycle/"/>
-    <id>http://yoursite.com/2016/11/24/react-lifecycle/</id>
+    <link href="http://www.yinlijun.com/2016/11/24/react-lifecycle/"/>
+    <id>http://www.yinlijun.com/2016/11/24/react-lifecycle/</id>
     <published>2016-11-24T07:23:54.000Z</published>
     <updated>2017-05-25T03:41:18.235Z</updated>
     
@@ -626,14 +691,14 @@
     </summary>
     
     
-      <category term="react" scheme="http://yoursite.com/tags/react/"/>
+      <category term="react" scheme="http://www.yinlijun.com/tags/react/"/>
     
   </entry>
   
   <entry>
     <title>BrowserRouter-react router 4.0.0 api中文文档</title>
-    <link href="http://yoursite.com/2016/11/24/react-router-4-0-0-api/"/>
-    <id>http://yoursite.com/2016/11/24/react-router-4-0-0-api/</id>
+    <link href="http://www.yinlijun.com/2016/11/24/react-router-4-0-0-api/"/>
+    <id>http://www.yinlijun.com/2016/11/24/react-router-4-0-0-api/</id>
     <published>2016-11-24T06:54:00.000Z</published>
     <updated>2017-05-25T03:41:18.236Z</updated>
     
@@ -659,18 +724,18 @@
     </summary>
     
     
-      <category term="react" scheme="http://yoursite.com/tags/react/"/>
+      <category term="react" scheme="http://www.yinlijun.com/tags/react/"/>
     
-      <category term="react-router" scheme="http://yoursite.com/tags/react-router/"/>
+      <category term="react-router" scheme="http://www.yinlijun.com/tags/react-router/"/>
     
-      <category term="翻译文档" scheme="http://yoursite.com/tags/%E7%BF%BB%E8%AF%91%E6%96%87%E6%A1%A3/"/>
+      <category term="翻译文档" scheme="http://www.yinlijun.com/tags/%E7%BF%BB%E8%AF%91%E6%96%87%E6%A1%A3/"/>
     
   </entry>
   
   <entry>
     <title>BrowserRouter-react router 4.0.0 api中文文档</title>
-    <link href="http://yoursite.com/2016/11/24/react-router-4-0-0-api-BrowserRouter/"/>
-    <id>http://yoursite.com/2016/11/24/react-router-4-0-0-api-BrowserRouter/</id>
+    <link href="http://www.yinlijun.com/2016/11/24/react-router-4-0-0-api-BrowserRouter/"/>
+    <id>http://www.yinlijun.com/2016/11/24/react-router-4-0-0-api-BrowserRouter/</id>
     <published>2016-11-24T06:54:00.000Z</published>
     <updated>2017-05-25T03:41:18.235Z</updated>
     
@@ -695,21 +760,21 @@
     
     </summary>
     
-      <category term="react router 4.0.0 api中文文档" scheme="http://yoursite.com/categories/react-router-4-0-0-api%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3/"/>
+      <category term="react router 4.0.0 api中文文档" scheme="http://www.yinlijun.com/categories/react-router-4-0-0-api%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3/"/>
     
     
-      <category term="react" scheme="http://yoursite.com/tags/react/"/>
+      <category term="react" scheme="http://www.yinlijun.com/tags/react/"/>
     
-      <category term="react-router" scheme="http://yoursite.com/tags/react-router/"/>
+      <category term="react-router" scheme="http://www.yinlijun.com/tags/react-router/"/>
     
-      <category term="翻译文档" scheme="http://yoursite.com/tags/%E7%BF%BB%E8%AF%91%E6%96%87%E6%A1%A3/"/>
+      <category term="翻译文档" scheme="http://www.yinlijun.com/tags/%E7%BF%BB%E8%AF%91%E6%96%87%E6%A1%A3/"/>
     
   </entry>
   
   <entry>
     <title>ubuntu编译android 6.0源代码环境搭建</title>
-    <link href="http://yoursite.com/2016/11/16/ubuntu%E7%BC%96%E8%AF%91android%E6%BA%90%E4%BB%A3%E7%A0%81%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
-    <id>http://yoursite.com/2016/11/16/ubuntu编译android源代码环境搭建/</id>
+    <link href="http://www.yinlijun.com/2016/11/16/ubuntu%E7%BC%96%E8%AF%91android%E6%BA%90%E4%BB%A3%E7%A0%81%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+    <id>http://www.yinlijun.com/2016/11/16/ubuntu编译android源代码环境搭建/</id>
     <published>2016-11-16T01:04:37.000Z</published>
     <updated>2017-05-25T03:41:18.237Z</updated>
     
@@ -728,18 +793,18 @@
     </summary>
     
     
-      <category term="ubuntu" scheme="http://yoursite.com/tags/ubuntu/"/>
+      <category term="android" scheme="http://www.yinlijun.com/tags/android/"/>
     
-      <category term="android" scheme="http://yoursite.com/tags/android/"/>
+      <category term="ubuntu" scheme="http://www.yinlijun.com/tags/ubuntu/"/>
     
-      <category term="环境搭建" scheme="http://yoursite.com/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+      <category term="环境搭建" scheme="http://www.yinlijun.com/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
     
   </entry>
   
   <entry>
     <title>如何下载安装openJDK</title>
-    <link href="http://yoursite.com/2016/11/15/how-to-download-openjdk/"/>
-    <id>http://yoursite.com/2016/11/15/how-to-download-openjdk/</id>
+    <link href="http://www.yinlijun.com/2016/11/15/how-to-download-openjdk/"/>
+    <id>http://www.yinlijun.com/2016/11/15/how-to-download-openjdk/</id>
     <published>2016-11-15T12:04:44.000Z</published>
     <updated>2017-05-25T03:41:18.234Z</updated>
     
@@ -767,16 +832,16 @@
     </summary>
     
     
-      <category term="openjdk" scheme="http://yoursite.com/tags/openjdk/"/>
+      <category term="openjdk" scheme="http://www.yinlijun.com/tags/openjdk/"/>
     
-      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+      <category term="java" scheme="http://www.yinlijun.com/tags/java/"/>
     
   </entry>
   
   <entry>
     <title>ubuntu利用update-alternatives配置java</title>
-    <link href="http://yoursite.com/2016/11/15/ubuntu%E5%88%A9%E7%94%A8update-alternatives%E9%85%8D%E7%BD%AEjava/"/>
-    <id>http://yoursite.com/2016/11/15/ubuntu利用update-alternatives配置java/</id>
+    <link href="http://www.yinlijun.com/2016/11/15/ubuntu%E5%88%A9%E7%94%A8update-alternatives%E9%85%8D%E7%BD%AEjava/"/>
+    <id>http://www.yinlijun.com/2016/11/15/ubuntu利用update-alternatives配置java/</id>
     <published>2016-11-15T11:32:21.000Z</published>
     <updated>2017-05-25T03:41:18.237Z</updated>
     
@@ -792,16 +857,16 @@
     </summary>
     
     
-      <category term="ubuntu" scheme="http://yoursite.com/tags/ubuntu/"/>
+      <category term="ubuntu" scheme="http://www.yinlijun.com/tags/ubuntu/"/>
     
-      <category term="update-alternatives" scheme="http://yoursite.com/tags/update-alternatives/"/>
+      <category term="update-alternatives" scheme="http://www.yinlijun.com/tags/update-alternatives/"/>
     
   </entry>
   
   <entry>
     <title>Ubuntu 12.04 生成桌面图标</title>
-    <link href="http://yoursite.com/2016/11/15/make-ubutun-desktop/"/>
-    <id>http://yoursite.com/2016/11/15/make-ubutun-desktop/</id>
+    <link href="http://www.yinlijun.com/2016/11/15/make-ubutun-desktop/"/>
+    <id>http://www.yinlijun.com/2016/11/15/make-ubutun-desktop/</id>
     <published>2016-11-15T10:04:19.000Z</published>
     <updated>2017-05-25T03:41:18.234Z</updated>
     
@@ -837,16 +902,16 @@
     </summary>
     
     
-      <category term="ubuntu" scheme="http://yoursite.com/tags/ubuntu/"/>
+      <category term="android studio" scheme="http://www.yinlijun.com/tags/android-studio/"/>
     
-      <category term="android studio" scheme="http://yoursite.com/tags/android-studio/"/>
+      <category term="ubuntu" scheme="http://www.yinlijun.com/tags/ubuntu/"/>
     
   </entry>
   
   <entry>
     <title>git配置user.name和user.email</title>
-    <link href="http://yoursite.com/2016/11/15/git%E9%85%8D%E7%BD%AEuser-name%E5%92%8Cuser-email/"/>
-    <id>http://yoursite.com/2016/11/15/git配置user-name和user-email/</id>
+    <link href="http://www.yinlijun.com/2016/11/15/git%E9%85%8D%E7%BD%AEuser-name%E5%92%8Cuser-email/"/>
+    <id>http://www.yinlijun.com/2016/11/15/git配置user-name和user-email/</id>
     <published>2016-11-15T10:02:54.000Z</published>
     <updated>2017-05-25T03:41:18.234Z</updated>
     
@@ -866,14 +931,14 @@
     </summary>
     
     
-      <category term="git" scheme="http://yoursite.com/tags/git/"/>
+      <category term="git" scheme="http://www.yinlijun.com/tags/git/"/>
     
   </entry>
   
   <entry>
     <title>windows配置mongdb记录</title>
-    <link href="http://yoursite.com/2016/11/09/windows%E9%85%8D%E7%BD%AEmongdb%E8%AE%B0%E5%BD%95/"/>
-    <id>http://yoursite.com/2016/11/09/windows配置mongdb记录/</id>
+    <link href="http://www.yinlijun.com/2016/11/09/windows%E9%85%8D%E7%BD%AEmongdb%E8%AE%B0%E5%BD%95/"/>
+    <id>http://www.yinlijun.com/2016/11/09/windows配置mongdb记录/</id>
     <published>2016-11-09T09:55:51.000Z</published>
     <updated>2017-05-25T03:41:18.237Z</updated>
     
@@ -917,16 +982,16 @@
     </summary>
     
     
-      <category term="windows" scheme="http://yoursite.com/tags/windows/"/>
+      <category term="windows" scheme="http://www.yinlijun.com/tags/windows/"/>
     
-      <category term="mongodb" scheme="http://yoursite.com/tags/mongodb/"/>
+      <category term="mongodb" scheme="http://www.yinlijun.com/tags/mongodb/"/>
     
   </entry>
   
   <entry>
     <title>windows下文件路径太深，无法删除解决办法</title>
-    <link href="http://yoursite.com/2016/11/08/windows%E4%B8%8B%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84%E5%A4%AA%E6%B7%B1%EF%BC%8C%E6%97%A0%E6%B3%95%E5%88%A0%E9%99%A4%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/"/>
-    <id>http://yoursite.com/2016/11/08/windows下文件路径太深，无法删除解决办法/</id>
+    <link href="http://www.yinlijun.com/2016/11/08/windows%E4%B8%8B%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84%E5%A4%AA%E6%B7%B1%EF%BC%8C%E6%97%A0%E6%B3%95%E5%88%A0%E9%99%A4%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/"/>
+    <id>http://www.yinlijun.com/2016/11/08/windows下文件路径太深，无法删除解决办法/</id>
     <published>2016-11-08T10:02:04.000Z</published>
     <updated>2017-05-25T03:41:18.237Z</updated>
     
@@ -945,16 +1010,16 @@
     </summary>
     
     
-      <category term="windows" scheme="http://yoursite.com/tags/windows/"/>
+      <category term="windows" scheme="http://www.yinlijun.com/tags/windows/"/>
     
-      <category term="npm" scheme="http://yoursite.com/tags/npm/"/>
+      <category term="npm" scheme="http://www.yinlijun.com/tags/npm/"/>
     
   </entry>
   
   <entry>
     <title>.gitignore无效，不能过滤某些文件</title>
-    <link href="http://yoursite.com/2016/11/06/gitignore%E6%97%A0%E6%95%88%EF%BC%8C%E4%B8%8D%E8%83%BD%E8%BF%87%E6%BB%A4%E6%9F%90%E4%BA%9B%E6%96%87%E4%BB%B6/"/>
-    <id>http://yoursite.com/2016/11/06/gitignore无效，不能过滤某些文件/</id>
+    <link href="http://www.yinlijun.com/2016/11/06/gitignore%E6%97%A0%E6%95%88%EF%BC%8C%E4%B8%8D%E8%83%BD%E8%BF%87%E6%BB%A4%E6%9F%90%E4%BA%9B%E6%96%87%E4%BB%B6/"/>
+    <id>http://www.yinlijun.com/2016/11/06/gitignore无效，不能过滤某些文件/</id>
     <published>2016-11-06T10:03:31.000Z</published>
     <updated>2017-05-25T03:41:18.233Z</updated>
     
@@ -979,79 +1044,9 @@
     </summary>
     
     
-      <category term="git" scheme="http://yoursite.com/tags/git/"/>
+      <category term="git" scheme="http://www.yinlijun.com/tags/git/"/>
     
-      <category term=".gitignore" scheme="http://yoursite.com/tags/gitignore/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>高性能Javscript - 笔记</title>
-    <link href="http://yoursite.com/2016/11/05/High-Performance-Javascript/"/>
-    <id>http://yoursite.com/2016/11/05/High-Performance-Javascript/</id>
-    <published>2016-11-05T10:04:19.000Z</published>
-    <updated>2017-05-25T03:41:18.231Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="第一章-加载和执行"><a href="#第一章-加载和执行" class="headerlink" title="第一章 加载和执行"></a>第一章 加载和执行</h2><h3 id="减少Javascript加载对性能的影响"><a href="#减少Javascript加载对性能的影响" class="headerlink" title="减少Javascript加载对性能的影响"></a>减少Javascript加载对性能的影响</h3><ul>
-<li>&lt;/body&gt;闭合标签之前，将所有&lt;javascript&gt;标签放到页面底部。这能确保在脚本执行前页面已经完成了渲染</li>
-<li>合并脚本，减少&lt;javascript&gt;标签</li>
-<li>使用&lt;javascript&gt;标签的defer属性<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">'text/javascript'</span> src=<span class="string">'file1.js'</span> defer&gt;&lt;/script&gt;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<a id="more"></a>
-<ul>
-<li><p>利用动态创建的&lt;javascript&gt;元素来下载并执行代码</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> script = <span class="built_in">document</span>.createElemnet(<span class="string">'script'</span>);</div><div class="line">script.type = <span class="string">'text/javascript'</span>;</div><div class="line">script.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    alert(<span class="string">'Script loaded!'</span>);</div><div class="line">&#125;</div><div class="line">script.src = <span class="string">'file1.js'</span>;</div><div class="line"><span class="built_in">document</span>.getElementByTagName(<span class="string">'head'</span>)[<span class="number">0</span>].appendChild(script);</div></pre></td></tr></table></figure>
-</li>
-<li><p>使用XHR对象下载Javascript代码并注入页面中</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">xhr.open(<span class="string">'get'</span>, <span class="string">'file1.js'</span>, <span class="literal">true</span>);</div><div class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span>(xhr.readyState == <span class="number">4</span>) &#123;</div><div class="line">        <span class="keyword">if</span>(xhr.status &gt;= <span class="number">200</span> &amp;&amp; xhr.status &lt; <span class="number">300</span> || xhr.status === <span class="number">304</span>) &#123;</div><div class="line">            <span class="keyword">var</span> script = <span class="built_in">document</span>.createElemnet(<span class="string">'script'</span>);</div><div class="line">            script.type = <span class="string">'text/javascript'</span>;</div><div class="line">            script.text = xhr.responseText;</div><div class="line">            <span class="built_in">document</span>.body.appendChild(script);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="几种类库加载js的方式"><a href="#几种类库加载js的方式" class="headerlink" title="几种类库加载js的方式"></a>几种类库加载js的方式</h3><ul>
-<li><p>YUI3</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">'text/javascript'</span> src=<span class="string">'http://yui.yahooapis.com/combo?3.0.0/build/yui/yui-min.js'</span>&gt;&lt;/script&gt;</div><div class="line">&lt;script type=<span class="string">'text/javascript'</span>&gt;</div><div class="line">    YUI().use(<span class="string">'dom'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">Y</span>) </span>&#123;</div><div class="line">        Y.DOM.addClass(<span class="built_in">document</span>.body, <span class="string">'loaded'</span>);</div><div class="line">    &#125;)</div><div class="line">&lt;<span class="regexp">/script&gt;</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>LazyLoad</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">'text/javascript'</span> src=<span class="string">'lazyload-min.js'</span>&gt;&lt;/script&gt;</div><div class="line">&lt;script type=<span class="string">'text/javascript'</span>&gt;</div><div class="line">    LazyLoad.js(<span class="string">'the-rest.js'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        Applicationn.init();</div><div class="line">    &#125;)</div><div class="line">&lt;<span class="regexp">/script&gt;</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>LABjs</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">'text/javascript'</span> src=<span class="string">'lab.js'</span>&gt;&lt;/script&gt;</div><div class="line">&lt;script type=<span class="string">'text/javascript'</span>&gt; </div><div class="line">    $LAB.script(<span class="string">'first-file.js'</span>)</div><div class="line">        .wait()</div><div class="line">        .script(<span class="string">'the-rest.js'</span>)</div><div class="line">        .wait(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            Applicationn.init();</div><div class="line">        &#125;)</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="第二章-数据存取"><a href="#第二章-数据存取" class="headerlink" title="第二章 数据存取"></a>第二章 数据存取</h2><p>在Javascript中，数据存储的位置会对代码整体性能产成重大影响。数据存储共有4中方式：字面量、变量、数组项、对象成员。它们有着各自的性能特点。</p>
-<ul>
-<li>访问字面量和局部变量的速度最快，相反，访问数组元素和对象成员相对较慢。</li>
-<li>由于局部变量存在于作用域链的起始位置，因此访问局部变量比访问跨作用域变量更快。变量在作用域中的位置越深，访问所需时间就越长。由于全局变量总处在作用域的最末端，因此访问速度时最慢的。</li>
-<li>避免使用with语句。</li>
-<li>嵌套的对象成员会明显影响性能，尽量少用。</li>
-<li>属性或方法在原型链中的位置越深，访问它的速度也越慢。</li>
-<li>通常来说，你可以通过把常用的对象成员、数组元素、跨域变量保存在局部变量中来改善Javascript性能，因为局部变量访问速度更快。</li>
-</ul>
-<h2 id="第三章-DOM编程"><a href="#第三章-DOM编程" class="headerlink" title="第三章 DOM编程"></a>第三章 DOM编程</h2><p>访问和操作DOM时现在Web应用的重要部分。但每次穿越链接ECMAScript和DOM都会有性能消耗，为了减少DOM编程带来的消耗，请记住以下几点：</p>
-<ul>
-<li>最小化DOM访问次数，尽可能在Javascript端处理。</li>
-<li>如果需要多次访问某个DOM节点，请使用局部变量存储它的引用。</li>
-<li>小心处理HTML集合，把集合的长度缓存到一个变量中，并在迭代中使用它。如果需要经常操作集合，建议把它靠背到一个数组中。</li>
-<li>如果可能的话，使用速度更快的API，比如querySelecetAll()和firstElementChild。</li>
-<li>要留意重排和重绘，批量修改样式时，离线操作DOM树，使用缓存，并减少布局信息的次数。</li>
-<li>动画中使用绝对定位，使用拖放代理。</li>
-<li>使用事件委托来减少事件处理器的数量。</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;第一章-加载和执行&quot;&gt;&lt;a href=&quot;#第一章-加载和执行&quot; class=&quot;headerlink&quot; title=&quot;第一章 加载和执行&quot;&gt;&lt;/a&gt;第一章 加载和执行&lt;/h2&gt;&lt;h3 id=&quot;减少Javascript加载对性能的影响&quot;&gt;&lt;a href=&quot;#减少Javascript加载对性能的影响&quot; class=&quot;headerlink&quot; title=&quot;减少Javascript加载对性能的影响&quot;&gt;&lt;/a&gt;减少Javascript加载对性能的影响&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&amp;lt;/body&amp;gt;闭合标签之前，将所有&amp;lt;javascript&amp;gt;标签放到页面底部。这能确保在脚本执行前页面已经完成了渲染&lt;/li&gt;
-&lt;li&gt;合并脚本，减少&amp;lt;javascript&amp;gt;标签&lt;/li&gt;
-&lt;li&gt;使用&amp;lt;javascript&amp;gt;标签的defer属性&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;script type=&lt;span class=&quot;string&quot;&gt;&#39;text/javascript&#39;&lt;/span&gt; src=&lt;span class=&quot;string&quot;&gt;&#39;file1.js&#39;&lt;/span&gt; defer&amp;gt;&amp;lt;/script&amp;gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-    
-      <category term="javascript" scheme="http://yoursite.com/tags/javascript/"/>
+      <category term=".gitignore" scheme="http://www.yinlijun.com/tags/gitignore/"/>
     
   </entry>
   

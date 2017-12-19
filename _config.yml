@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Johnny
-subtitle:
-description:
-author: Johnny
+title: 尹莉军
+subtitle: 个人博客
+description: 好记性不如烂笔头。
+author: 尹莉军 <yinlijun2004@gmail.com>
 language: zh-Hans
 timezone:
 avatar: http://tva3.sinaimg.cn/crop.0.0.180.180.180/7d92e765jw1e8qgp5bmzyj2050050aa8.jpg
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: http://www.yinlijun.com
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -72,5 +72,5 @@ swiftype_key: bing
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: yinlijun@120.79.64.190:project/hexo.git
+  repo: yinlijun@www.yinlijun.com:project/hexo.git
   branch: master

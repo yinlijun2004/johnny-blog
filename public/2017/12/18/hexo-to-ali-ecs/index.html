@@ -1,0 +1,763 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="hexo,ECS,git," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="尹莉军" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="本文假设你具备如下条件：  熟悉hexo操作 熟悉linux基本指令 熟悉express(nodejs)框架 在github上已经部署了hexo博客  ECS准备购买ECS前往阿里云购买ECS，根据个人需要和财务状况，选择对应规模的ECS。我购买的是这个配置，费用是330.00¥。 配置ECS购买之后，可以远程登录ECS实例，可以选择网页登录，即点击上图的远程连接，此时需要输入远程连接密码。这个密">
+<meta name="keywords" content="hexo,ECS,git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="部署HEXO博客到阿里云ECS">
+<meta property="og:url" content="http://www.yinlijun.com/2017/12/18/hexo-to-ali-ecs/index.html">
+<meta property="og:site_name" content="尹莉军">
+<meta property="og:description" content="本文假设你具备如下条件：  熟悉hexo操作 熟悉linux基本指令 熟悉express(nodejs)框架 在github上已经部署了hexo博客  ECS准备购买ECS前往阿里云购买ECS，根据个人需要和财务状况，选择对应规模的ECS。我购买的是这个配置，费用是330.00¥。 配置ECS购买之后，可以远程登录ECS实例，可以选择网页登录，即点击上图的远程连接，此时需要输入远程连接密码。这个密">
+<meta property="og:image" content="https://picabstract-preview-ftn.weiyun.com:8443/ftn_pic_abs_v2/a6b1134939a35cdf34dab8f9d564c777b7aafbb5518fae80c8450e0ba8d5280bf07d7e677b3b3c2028e2f7a5c778e5a8?pictype=scale&from=30113&version=2.0.0.2&uin=474724984&fname=1GE9BH_P%29%600QGAZLQY6E%7D0G.png&size=1024">
+<meta property="og:image" content="https://picabstract-preview-ftn.weiyun.com:8443/ftn_pic_abs_v2/8f23cd09eff9be82c51f1dcbe340257766d02aae3ea6c33a920a3fbdf917426660d0df1eecce1e99548aa7aafad45df3?pictype=scale&from=30113&version=2.0.0.2&uin=474724984&fname=2RK%5D3A%28ZCW9N7%7DRB801Q92V.png&size=1024">
+<meta property="og:image" content="https://picabstract-preview-ftn.weiyun.com:8443/ftn_pic_abs_v2/02ad73354fe97dd378b486349444aeebd3f5fc81ebe1853b1773f70416c90e7878a24b24afa25c27f122c679c20d523b?pictype=scale&from=30113&version=2.0.0.2&uin=474724984&fname=AJTAI%40%601%7DB3GU6Q%60ZWZO%24Z3.png&size=1024">
+<meta property="og:image" content="https://picabstract-preview-ftn.weiyun.com:8443/ftn_pic_abs_v2/87f1aead6dd1582f56cae6e0179540db4090e83c7f3636e20bd26f24faf1bb04340403773fc999742081809ea9168224?pictype=scale&from=30113&version=2.0.0.2&uin=474724984&fname=3VAK%25~%7DO0ZZZXL9M%60%2963UF7.png&size=1024">
+<meta property="og:updated_time" content="2017-12-19T06:24:20.355Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="部署HEXO博客到阿里云ECS">
+<meta name="twitter:description" content="本文假设你具备如下条件：  熟悉hexo操作 熟悉linux基本指令 熟悉express(nodejs)框架 在github上已经部署了hexo博客  ECS准备购买ECS前往阿里云购买ECS，根据个人需要和财务状况，选择对应规模的ECS。我购买的是这个配置，费用是330.00¥。 配置ECS购买之后，可以远程登录ECS实例，可以选择网页登录，即点击上图的远程连接，此时需要输入远程连接密码。这个密">
+<meta name="twitter:image" content="https://picabstract-preview-ftn.weiyun.com:8443/ftn_pic_abs_v2/a6b1134939a35cdf34dab8f9d564c777b7aafbb5518fae80c8450e0ba8d5280bf07d7e677b3b3c2028e2f7a5c778e5a8?pictype=scale&from=30113&version=2.0.0.2&uin=474724984&fname=1GE9BH_P%29%600QGAZLQY6E%7D0G.png&size=1024">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.yinlijun.com/2017/12/18/hexo-to-ali-ecs/"/>
+
+
+
+
+
+  <title>部署HEXO博客到阿里云ECS | 尹莉军</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">尹莉军</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">个人博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'bing','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.yinlijun.com/2017/12/18/hexo-to-ali-ecs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="尹莉军 <yinlijun2004@gmail.com>">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://tva3.sinaimg.cn/crop.0.0.180.180.180/7d92e765jw1e8qgp5bmzyj2050050aa8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="尹莉军">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">部署HEXO博客到阿里云ECS</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-18T17:46:56+08:00">
+                2017-12-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文假设你具备如下条件：</p>
+<ul>
+<li>熟悉hexo操作</li>
+<li>熟悉linux基本指令</li>
+<li>熟悉express(nodejs)框架</li>
+<li>在github上已经部署了hexo博客</li>
+</ul>
+<h2 id="ECS准备"><a href="#ECS准备" class="headerlink" title="ECS准备"></a>ECS准备</h2><h3 id="购买ECS"><a href="#购买ECS" class="headerlink" title="购买ECS"></a>购买ECS</h3><p>前往阿里云购买<a href="https://ecs-buy.aliyun.com" target="_blank" rel="external">ECS</a>，根据个人需要和财务状况，选择对应规模的ECS。<br>我购买的是这个配置，费用是330.00¥。<br><img src="https://picabstract-preview-ftn.weiyun.com:8443/ftn_pic_abs_v2/a6b1134939a35cdf34dab8f9d564c777b7aafbb5518fae80c8450e0ba8d5280bf07d7e677b3b3c2028e2f7a5c778e5a8?pictype=scale&amp;from=30113&amp;version=2.0.0.2&amp;uin=474724984&amp;fname=1GE9BH_P%29%600QGAZLQY6E%7D0G.png&amp;size=1024" alt="img"></p>
+<h3 id="配置ECS"><a href="#配置ECS" class="headerlink" title="配置ECS"></a>配置ECS</h3><p>购买之后，可以远程登录ECS实例，可以选择网页登录，即点击上图的远程连接，此时需要输入远程连接密码。<br><img src="https://picabstract-preview-ftn.weiyun.com:8443/ftn_pic_abs_v2/8f23cd09eff9be82c51f1dcbe340257766d02aae3ea6c33a920a3fbdf917426660d0df1eecce1e99548aa7aafad45df3?pictype=scale&amp;from=30113&amp;version=2.0.0.2&amp;uin=474724984&amp;fname=2RK%5D3A%28ZCW9N7%7DRB801Q92V.png&amp;size=1024" alt="img"><br>这个密码在创建ECS实例会提供给你，点击确认之后，就可以输入root密码。</p>
+<p>我的本地是ubuntu系统，所以可以利用ssh登录。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh root@xx.xx.xx.xx</div></pre></td></tr></table></figure></p>
+<p>登录之后，创建一个非root用户。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adduser yinlijun</div></pre></td></tr></table></figure></p>
+<p>切换到该用户<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">su yinlijun</div></pre></td></tr></table></figure></p>
+<h3 id="上传本地公钥，方便部署。"><a href="#上传本地公钥，方便部署。" class="headerlink" title="上传本地公钥，方便部署。"></a>上传本地公钥，方便部署。</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-copy-id -i ~/.ssh/id_rsa.pub yinlijun@xx.xx.xx.xx</div></pre></td></tr></table></figure>
+<p>如果需要绑定域名，还需要如下申请域名和备案：</p>
+<h2 id="购买域名"><a href="#购买域名" class="headerlink" title="购买域名"></a>购买域名</h2><p>前往<a href="https://wanwang.aliyun.com/domain" target="_blank" rel="external">阿里域名服务</a>选购域名。</p>
+<h2 id="域名备案"><a href="#域名备案" class="headerlink" title="域名备案"></a>域名备案</h2><p>前往<a href="https://beian.aliyun.com/" target="_blank" rel="external">备案专区</a>，进行备案，需要时间比较长，我花了12天，备案完成后，阿里云会给你的ECS续费，续费的天数就是你的备案花的天数。<br>期间要填写资料，上传备案照片等等。</p>
+<p>备案完成之后，需要设置域名解析。<br><img src="https://picabstract-preview-ftn.weiyun.com:8443/ftn_pic_abs_v2/02ad73354fe97dd378b486349444aeebd3f5fc81ebe1853b1773f70416c90e7878a24b24afa25c27f122c679c20d523b?pictype=scale&amp;from=30113&amp;version=2.0.0.2&amp;uin=474724984&amp;fname=AJTAI%40%601%7DB3GU6Q%60ZWZO%24Z3.png&amp;size=1024" alt="img"><br>上图的记录值，填写你的ECS的公网IP。</p>
+<h3 id="在ECS上创建hexo仓库"><a href="#在ECS上创建hexo仓库" class="headerlink" title="在ECS上创建hexo仓库"></a>在ECS上创建hexo仓库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">git init --bare ~/project/hexo.git</div><div class="line">``` </div><div class="line"><span class="comment">### 捕获post操作</span></div><div class="line">``` bash</div><div class="line">touch ~/project/hexo.git/hooks/post-receive</div></pre></td></tr></table></figure>
+<p>输入如下内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash -l</div><div class="line">GIT_REPO=&lt;到hexo.git的目录&gt;</div><div class="line">TMP_GIT_CLONE=&lt;到临时blog的目录&gt;</div><div class="line">PUBLIC_WWW=&lt;到blog服务的目录/public/blog&gt;</div><div class="line"></div><div class="line">rm -rf $&#123;TMP_GIT_CLONE&#125;</div><div class="line">git clone $&#123;GIT_REPO&#125; $&#123;TMP_GIT_CLONE&#125;</div><div class="line">rm -rf $&#123;PUBLIC_WWW&#125;/*</div><div class="line">cp -rf $&#123;TMP_GIT_CLONE&#125;/* $&#123;PUBLIC_WWW&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="本地blog-express-服务"><a href="#本地blog-express-服务" class="headerlink" title="本地blog(express)服务"></a>本地blog(express)服务</h3><p>新建express服务<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">express blog-server</div></pre></td></tr></table></figure></p>
+<p>修改app.js，配置静态文件目录<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">app.use(express.static(path.join(__dirname, <span class="string">'public/blog/'</span>)));</div></pre></td></tr></table></figure></p>
+<h3 id="启动blog服务"><a href="#启动blog服务" class="headerlink" title="启动blog服务"></a>启动blog服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pm2 start bin/www</div></pre></td></tr></table></figure>
+<h3 id="安装nginx，反向代理二级域名"><a href="#安装nginx，反向代理二级域名" class="headerlink" title="安装nginx，反向代理二级域名"></a>安装nginx，反向代理二级域名</h3><p>通过域名访问默认的80端口，blog默认监听3000端口，因此需要配置代理。<br>创建blog.conf配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">touch /etc/nginx/conf.d/blog.conf</div></pre></td></tr></table></figure></p>
+<p>输入如下内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    listen 80;</div><div class="line">    server_name yinlijun.com www.yinlijun.com bloc.yinlijun.com;</div><div class="line"></div><div class="line">    location / &#123;</div><div class="line">        proxy_pass http://127.0.0.1:3000;</div><div class="line">        proxy_http_version 1.1;</div><div class="line">        proxy_set_header Upgrade $http_upgrade;</div><div class="line">        proxy_set_header Connection &apos;upgrade&apos;;</div><div class="line">        proxy_set_header Host $host;</div><div class="line">        proxy_cache_bypass $http_upgrade;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="本地操作"><a href="#本地操作" class="headerlink" title="本地操作"></a>本地操作</h2><h3 id="把github上的blog目录clone下来"><a href="#把github上的blog目录clone下来" class="headerlink" title="把github上的blog目录clone下来"></a>把github上的blog目录clone下来</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone git@github.com:yinlijun2004/johnny-blog.git</div></pre></td></tr></table></figure>
+<p>如果你原来没有在github上部署hexo博客，也可以用hexo新建一个，然后托管到某个git仓库。</p>
+<h3 id="修改-config-yml配置"><a href="#修改-config-yml配置" class="headerlink" title="修改_config.yml配置"></a>修改_config.yml配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: yinlijun@www.yinlijun.com:project/hexo.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure>
+<h3 id="发布博客"><a href="#发布博客" class="headerlink" title="发布博客"></a>发布博客</h3><p>撰写好博客后，如下命令部署。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hexo clean</div><div class="line">hexo g</div><div class="line">hexo d</div></pre></td></tr></table></figure></p>
+<h3 id="最终效果"><a href="#最终效果" class="headerlink" title="最终效果"></a>最终效果</h3><h2 id="有可能碰到的问题"><a href="#有可能碰到的问题" class="headerlink" title="有可能碰到的问题"></a>有可能碰到的问题</h2><h3 id="外网无法访问端口"><a href="#外网无法访问端口" class="headerlink" title="外网无法访问端口"></a>外网无法访问端口</h3><p>需要配置安全组规则。<br><img src="https://picabstract-preview-ftn.weiyun.com:8443/ftn_pic_abs_v2/87f1aead6dd1582f56cae6e0179540db4090e83c7f3636e20bd26f24faf1bb04340403773fc999742081809ea9168224?pictype=scale&amp;from=30113&amp;version=2.0.0.2&amp;uin=474724984&amp;fname=3VAK%25~%7DO0ZZZXL9M%60%2963UF7.png&amp;size=1024" alt="img"><br>上图是默认开通的端口，如果你的端口不在里面，则需要自行添加安全组规则。</p>
+<h3 id="hexo-deploy之后没有反应"><a href="#hexo-deploy之后没有反应" class="headerlink" title="hexo deploy之后没有反应"></a>hexo deploy之后没有反应</h3><ul>
+<li>检查有没有上传本机公钥</li>
+<li>检查hexo.git仓库的路径是否正确</li>
+<li>检查备案的域名是否能正常访问</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/hexo/" rel="tag"># hexo</a>
+          
+            <a href="/tags/ECS/" rel="tag"># ECS</a>
+          
+            <a href="/tags/git/" rel="tag"># git</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/26/kotlin惯用法/" rel="next" title="kotlin惯用法">
+                <i class="fa fa-chevron-left"></i> kotlin惯用法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://tva3.sinaimg.cn/crop.0.0.180.180.180/7d92e765jw1e8qgp5bmzyj2050050aa8.jpg"
+               alt="尹莉军 <yinlijun2004@gmail.com>" />
+          <p class="site-author-name" itemprop="name">尹莉军 <yinlijun2004@gmail.com></p>
+           
+              <p class="site-description motion-element" itemprop="description">好记性不如烂笔头。</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ECS准备"><span class="nav-number">1.</span> <span class="nav-text">ECS准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#购买ECS"><span class="nav-number">1.1.</span> <span class="nav-text">购买ECS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置ECS"><span class="nav-number">1.2.</span> <span class="nav-text">配置ECS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上传本地公钥，方便部署。"><span class="nav-number">1.3.</span> <span class="nav-text">上传本地公钥，方便部署。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#购买域名"><span class="nav-number">2.</span> <span class="nav-text">购买域名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#域名备案"><span class="nav-number">3.</span> <span class="nav-text">域名备案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在ECS上创建hexo仓库"><span class="nav-number">3.1.</span> <span class="nav-text">在ECS上创建hexo仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本地blog-express-服务"><span class="nav-number">3.2.</span> <span class="nav-text">本地blog(express)服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动blog服务"><span class="nav-number">3.3.</span> <span class="nav-text">启动blog服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装nginx，反向代理二级域名"><span class="nav-number">3.4.</span> <span class="nav-text">安装nginx，反向代理二级域名</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本地操作"><span class="nav-number">4.</span> <span class="nav-text">本地操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#把github上的blog目录clone下来"><span class="nav-number">4.1.</span> <span class="nav-text">把github上的blog目录clone下来</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改-config-yml配置"><span class="nav-number">4.2.</span> <span class="nav-text">修改_config.yml配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发布博客"><span class="nav-number">4.3.</span> <span class="nav-text">发布博客</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最终效果"><span class="nav-number">4.4.</span> <span class="nav-text">最终效果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有可能碰到的问题"><span class="nav-number">5.</span> <span class="nav-text">有可能碰到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#外网无法访问端口"><span class="nav-number">5.1.</span> <span class="nav-text">外网无法访问端口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hexo-deploy之后没有反应"><span class="nav-number">5.2.</span> <span class="nav-text">hexo deploy之后没有反应</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">尹莉军 <yinlijun2004@gmail.com></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
