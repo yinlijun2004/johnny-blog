@@ -19,7 +19,7 @@ tags: [hexo, ECS, git]
 ### 配置ECS
 购买之后，可以远程登录ECS实例，可以选择网页登录，即点击上图的远程连接，此时需要输入远程连接密码。
 ![img](https://picabstract-preview-ftn.weiyun.com:8443/ftn_pic_abs_v2/8f23cd09eff9be82c51f1dcbe340257766d02aae3ea6c33a920a3fbdf917426660d0df1eecce1e99548aa7aafad45df3?pictype=scale&from=30113&version=2.0.0.2&uin=474724984&fname=2RK%5D3A%28ZCW9N7%7DRB801Q92V.png&size=1024)
-这个密码在创建ECS实例会提供给你，点击确认之后，就可以输入root密码。
+这个密码在创建ECS实例的时候会提供给你，点击确认之后，就可以登录root用户。
 
 我的本地是ubuntu系统，所以可以利用ssh登录。
 ``` bash
@@ -52,15 +52,19 @@ ssh-copy-id -i ~/.ssh/id_rsa.pub yinlijun@xx.xx.xx.xx
 上图的记录值，填写你的ECS的公网IP。
 
 ### 在ECS上创建hexo仓库
-``` bash
+````
 git init --bare ~/project/hexo.git
-``` 
+````
+
 ### 捕获post操作
+
 ``` bash
 touch ~/project/hexo.git/hooks/post-receive
 ```
+
 输入如下内容
-```
+
+``` bash
 #!/bin/bash -l
 GIT_REPO=<到hexo.git的目录>
 TMP_GIT_CLONE=<到临时blog的目录>
@@ -89,7 +93,7 @@ pm2 start bin/www
 ### 安装nginx，反向代理二级域名
 通过域名访问默认的80端口，blog默认监听3000端口，因此需要配置代理。
 创建blog.conf配置文件
-```
+``` bash
 touch /etc/nginx/conf.d/blog.conf
 ```
 输入如下内容
@@ -112,7 +116,7 @@ server {
 ## 本地操作
 
 ### 把github上的blog目录clone下来
-```
+``` bash
 git clone git@github.com:yinlijun2004/johnny-blog.git
 ```
 如果你原来没有在github上部署hexo博客，也可以用hexo新建一个，然后托管到某个git仓库。
@@ -127,14 +131,14 @@ deploy:
 
 ### 发布博客
 撰写好博客后，如下命令部署。
-```
+``` bash
 hexo clean
 hexo g
 hexo d
 ```
 
 ### 最终效果
-
+[www.yinlijun.com](http://www.yinlijun.com)
 
 ## 有可能碰到的问题
 
