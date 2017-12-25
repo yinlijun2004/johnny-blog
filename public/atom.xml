@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.yinlijun.com/"/>
-  <updated>2017-12-19T06:55:27.476Z</updated>
+  <updated>2017-12-21T11:41:18.997Z</updated>
   <id>http://www.yinlijun.com/</id>
   
   <author>
@@ -14,6 +14,135 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>小白的全栈梦之从零搭建Android OTA系统（1）</title>
+    <link href="http://www.yinlijun.com/2017/12/20/my-ota-tutorial-1/"/>
+    <id>http://www.yinlijun.com/2017/12/20/my-ota-tutorial-1/</id>
+    <published>2017-12-20T10:23:04.000Z</published>
+    <updated>2017-12-21T11:41:18.997Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文实现简单的服务端的注册，登录功能，暂时不实现前端界面，用curl模拟前端请求。</p>
+<h3 id="创建后端项目"><a href="#创建后端项目" class="headerlink" title="创建后端项目"></a>创建后端项目</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">express ota_be</div></pre></td></tr></table></figure>
+<h4 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h4><p>model存放数据库代码，routes存放路由代码，controller存放处理代码，middleware存放中间件代码。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">├─app.js</div><div class="line">├─config.js</div><div class="line">├─model/</div><div class="line">├─routes/</div><div class="line">├─controller/</div><div class="line">├─middleware/</div></pre></td></tr></table></figure></p>
+<h3 id="用户注册"><a href="#用户注册" class="headerlink" title="用户注册"></a>用户注册</h3><h4 id="实现用户集合"><a href="#实现用户集合" class="headerlink" title="实现用户集合"></a>实现用户集合</h4><p>创建model/user.js，目前只保存username和password，其中username唯一。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>);</div><div class="line"><span class="keyword">var</span> Schema = mongoose.Schema;</div><div class="line"></div><div class="line"><span class="keyword">var</span> UserSchema = <span class="keyword">new</span> Schema(&#123;</div><div class="line">  username: &#123;</div><div class="line">    type: <span class="built_in">String</span>,</div><div class="line">    unique: <span class="literal">true</span>,</div><div class="line">  &#125;,</div><div class="line">  password: &#123;</div><div class="line">    type: <span class="built_in">String</span>, </div><div class="line">  &#125;,</div><div class="line">&#125;)</div><div class="line">mongoose.model(<span class="string">'User'</span>, UserSchema);</div></pre></td></tr></table></figure></p>
+<p>创建model/index.js，连接数据库。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>);</div><div class="line"><span class="keyword">var</span> config = <span class="built_in">require</span>(<span class="string">'../config'</span>);</div><div class="line"></div><div class="line">mongoose.connect(config.mongodb, &#123;</div><div class="line">  server: &#123;poolSize: <span class="number">20</span>&#125;,</div><div class="line">  useMongoClient: <span class="literal">true</span>,</div><div class="line">&#125;, err =&gt; &#123;</div><div class="line">  <span class="keyword">if</span>(err) &#123;</div><div class="line">    <span class="built_in">console</span>.error(<span class="string">"connect to %s failed"</span>, config.mongodb, err</div><div class="line">    .message);</div><div class="line">    process.exit(<span class="number">-1</span>);</div><div class="line">  &#125; </div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="built_in">require</span>(<span class="string">'./user'</span>);</div><div class="line"></div><div class="line">exports.User = mongoose.model(<span class="string">'User'</span>);</div></pre></td></tr></table></figure></p>
+<h4 id="路由实现"><a href="#路由实现" class="headerlink" title="路由实现"></a>路由实现</h4><p>创建routes/user.js。<br>这里的路由，都分发到控制器的user实现功能。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</div><div class="line"><span class="keyword">var</span> user = <span class="built_in">require</span>(<span class="string">'../controller/user'</span>);</div><div class="line"><span class="keyword">var</span> router = express.Router();</div><div class="line"><span class="keyword">var</span> passport = <span class="built_in">require</span>(<span class="string">'passport'</span>);</div><div class="line"></div><div class="line">router.post(<span class="string">'/user/register'</span>,  user.register);</div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = router;</div></pre></td></tr></table></figure>
+<p>创建routes/index.js，引入路由文件。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</div><div class="line"><span class="keyword">var</span> router = express.Router();</div><div class="line"><span class="keyword">var</span> user = <span class="built_in">require</span>(<span class="string">'./user'</span>);</div><div class="line"></div><div class="line">router.use(user);</div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = router;</div></pre></td></tr></table></figure></p>
+<p>修改app.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> router = <span class="built_in">require</span>(<span class="string">'./routes'</span>);</div><div class="line"><span class="keyword">var</span> app = express();</div><div class="line"><span class="comment">//...</span></div><div class="line">app.use(<span class="string">'/'</span>, router);</div></pre></td></tr></table></figure>
+<h4 id="实现注册操作"><a href="#实现注册操作" class="headerlink" title="实现注册操作"></a>实现注册操作</h4><p>创建controller/user.js。<br>用户密码需要利用bcyptsjs加密，不存储明文密码。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> Model = <span class="built_in">require</span>(<span class="string">'../model'</span>);</div><div class="line"><span class="keyword">var</span> User = Model.User;</div><div class="line"><span class="keyword">var</span> bcrypt = <span class="built_in">require</span>(<span class="string">'bcryptjs'</span>)</div><div class="line"></div><div class="line">validUserRequest = body =&gt; &#123;</div><div class="line">  <span class="comment">//TODO 更详细校验</span></div><div class="line">  <span class="keyword">if</span>(!body.username || !body.password) &#123;</div><div class="line">      <span class="keyword">return</span> &#123;code: <span class="number">-1</span>, message: <span class="string">"valid param"</span>&#125;;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> <span class="literal">null</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">exports.register = (req, res, next) =&gt; &#123;</div><div class="line">  <span class="keyword">var</span> error = validUserRequest(req.body);</div><div class="line">  <span class="keyword">if</span>(error) &#123;</div><div class="line">    res.status(<span class="number">400</span>).send(error);</div><div class="line">    <span class="keyword">return</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">const</span> &#123;username, password&#125; = req.body;</div><div class="line">  bcrypt.hash(password, <span class="number">10</span>)</div><div class="line">    .then(hash =&gt; &#123;</div><div class="line">      <span class="keyword">var</span> user = <span class="keyword">new</span> User(&#123;</div><div class="line">        username: username,</div><div class="line">        password: hash</div><div class="line">      &#125;);</div><div class="line">      <span class="keyword">return</span> user.save()</div><div class="line">    &#125;)</div><div class="line">    .then(user =&gt; &#123;</div><div class="line">      res.json(&#123;code: <span class="number">0</span>, message: <span class="string">"create user success"</span>&#125;);</div><div class="line">    &#125;)</div><div class="line">    .catch(err =&gt; &#123;</div><div class="line">      res.status(<span class="number">406</span>).send(&#123;code: <span class="number">-1</span>, message: err.message&#125;);</div><div class="line">    &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h4><p>因为用到了mongoose库，需要本地先启用mongod服务，端口需要跟config.js中的一致。<br>config.js<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> config = &#123;</div><div class="line">  mongodb: <span class="string">'mongodb://127.0.0.1:50000/ota_server'</span>,</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = config;</div></pre></td></tr></table></figure></p>
+<p>然后启动应用。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yarn start</div></pre></td></tr></table></figure></p>
+<h4 id="测试注册接口"><a href="#测试注册接口" class="headerlink" title="测试注册接口"></a>测试注册接口</h4><p>在终端里面用如下指令模拟注册请求。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ curl <span class="_">-d</span> <span class="string">"username=yinlijun&amp;password=123456"</span> <span class="string">"http://127.0.0.1:3020/user/register"</span></div><div class="line">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current</div><div class="line">                                 Dload  Upload   Total   Spent    Left  Speed</div><div class="line">100    75  100    42  100    33    168    132 --:--:-- --:--:-- --:--:--   168&#123;<span class="string">"code"</span>:0,<span class="string">"message"</span>:<span class="string">"create user success"</span>&#125;</div></pre></td></tr></table></figure></p>
+<p>利用mongo客户端打开集合，查看集合数据，插入成功。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$ mongo mongodb://127.0.0.1:50000</div><div class="line">MongoDB shell version v3.4.9</div><div class="line">connecting to: mongodb://127.0.0.1:50000</div><div class="line">MongoDB server version: 3.4.9</div><div class="line"></div><div class="line">$ use ota_server</div><div class="line">switched to db ota_server</div><div class="line"></div><div class="line">$ db.users.<span class="function"><span class="title">find</span></span>()</div><div class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"5a3b61b1db2e604ebca6dfc4"</span>), <span class="string">"username"</span> : <span class="string">"yinlijun"</span>, <span class="string">"password"</span> : <span class="string">"<span class="variable">$2a</span><span class="variable">$10</span><span class="variable">$Zc33sn8Zj1kJslfTTXM0deFNUjVMJyWk</span>.tMsuh.aaLtZEFUSedLQW"</span>, <span class="string">"__v"</span> : 0 &#125;</div></pre></td></tr></table></figure></p>
+<p>再次注册同名用户，报错。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ curl <span class="_">-d</span> <span class="string">"username=yinlijun&amp;password=123456"</span> <span class="string">"http://127.0.0.1:3020/user/register"</span></div><div class="line">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current</div><div class="line">                                 Dload  Upload   Total   Spent    Left  Speed</div><div class="line">100   158  100   125  100    33   1344    354 --:--:-- --:--:-- --:--:--  1344&#123;<span class="string">"code"</span>:-1,<span class="string">"message"</span>:<span class="string">"E11000 duplicate key error collection: ota_server.users index: username_1 dup key: &#123; : \"yinlijun\" &#125;"</span>&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="用户登录"><a href="#用户登录" class="headerlink" title="用户登录"></a>用户登录</h3><h4 id="路由实现-1"><a href="#路由实现-1" class="headerlink" title="路由实现"></a>路由实现</h4><p>添加路由routes/user.js<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">router.post(<span class="string">'/user/login'</span>, user.login);</div></pre></td></tr></table></figure></p>
+<h4 id="实现登录操作"><a href="#实现登录操作" class="headerlink" title="实现登录操作"></a>实现登录操作</h4><p>在controller/user.js中添加如下代码，校验用户名和密码，校验密码用到了bcrypt.compareSync。</p>
+<p>然后生成cookie发到前端。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">exports.login = (req, res, next) =&gt; &#123;</div><div class="line">  <span class="keyword">let</span> &#123;username, password&#125; = req.body;</div><div class="line">  User.findOne(&#123;username: username&#125;)</div><div class="line">    .then(user =&gt; &#123;</div><div class="line">      <span class="keyword">if</span>(!user) &#123;</div><div class="line">        res.status(<span class="number">400</span>).send(&#123;code: <span class="number">-1</span>, message:<span class="string">"invalid username or password"</span>&#125;);</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">if</span>(!bcrypt.compareSync(password, user.password)) &#123;</div><div class="line">        res.status(<span class="number">400</span>).send(&#123;code: <span class="number">-1</span>, message:<span class="string">"invalid username or password"</span>&#125;);</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">      &#125;</div><div class="line">      genCookie(user, res);    </div><div class="line">      res.send(&#123;code:<span class="number">0</span>, message:<span class="string">"登录成功"</span>&#125;);</div><div class="line">    &#125;)</div><div class="line">&#125;;</div><div class="line"></div><div class="line">genCookie = (user, res) =&gt; &#123;</div><div class="line">  <span class="keyword">var</span> token = user._id + <span class="string">'$$$'</span>;</div><div class="line">  <span class="keyword">var</span> opts = &#123;</div><div class="line">    path: <span class="string">'/'</span>,</div><div class="line">    maxAge: config.session_age,</div><div class="line">    httpOnly: <span class="literal">true</span>,</div><div class="line">  &#125;;</div><div class="line">  res.cookie(config.cookie_name, token);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里可以看到有个重复调用的validUserRequest函数，可以做成一个middleware。</p>
+<p>创建middleware/validRequest.js。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">exports.validUsernamePassword = (req, res, next) =&gt; &#123;</div><div class="line">  <span class="comment">//TODO 更详细校验</span></div><div class="line">  <span class="keyword">let</span> &#123;username, password&#125; = req.body;</div><div class="line">  <span class="keyword">if</span>(!username || !password) &#123;</div><div class="line">      res.status(<span class="number">400</span>).send(&#123;code: <span class="number">-1</span>, message: <span class="string">"valid param"</span>&#125;);</div><div class="line">      <span class="keyword">return</span>;</div><div class="line">  &#125;</div><div class="line">  next();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>然后修改routes/user.js<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> validRequest = <span class="built_in">require</span>(<span class="string">'../middleware/validRequest'</span>);</div><div class="line"></div><div class="line">router.post(<span class="string">'/user/register'</span>, validRequest.validUsernamePassword, user.register);</div><div class="line"></div><div class="line">router.post(<span class="string">'/user/login'</span>, validRequest.validUsernamePassword, user.login);</div></pre></td></tr></table></figure></p>
+<p>把controller/user.js的register中validUserRequest调用去掉。</p>
+<p>测试一下这个middleware：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"> $ curl <span class="_">-d</span> <span class="string">"username=yinlijun&amp;password="</span> <span class="string">"http://127.0.0.1:3020/user/register"</span></div><div class="line">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current</div><div class="line">                                 Dload  Upload   Total   Spent    Left  Speed</div><div class="line">100    62  100    35  100    27   1093    843 --:--:-- --:--:-- --:--:--  1093&#123;<span class="string">"code"</span>:-1,<span class="string">"message"</span>:<span class="string">"valid param"</span>&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="测试登录接口"><a href="#测试登录接口" class="headerlink" title="测试登录接口"></a>测试登录接口</h4><p>输入错误的用户名:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ curl <span class="_">-d</span> <span class="string">"username=liudehua&amp;password=123456"</span> <span class="string">"http://127.0.0.1:3020/user/login"</span></div><div class="line">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current</div><div class="line">                                 Dload  Upload   Total   Spent    Left  Speed</div><div class="line">100    85  100    52  100    33   1106    702 --:--:-- --:--:-- --:--:--  1106&#123;<span class="string">"code"</span>:-1,<span class="string">"message"</span>:<span class="string">"invalid username or password"</span>&#125;</div></pre></td></tr></table></figure></p>
+<p>输入错误密码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ curl <span class="_">-d</span> <span class="string">"username=yinlijun&amp;password=654321"</span> <span class="string">"http://127.0.0.1:3020/user/login"</span></div><div class="line">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current</div><div class="line">                                 Dload  Upload   Total   Spent    Left  Speed</div><div class="line">100    85  100    52  100    33    553    351 --:--:-- --:--:-- --:--:--   553&#123;<span class="string">"code"</span>:-1,<span class="string">"message"</span>:<span class="string">"invalid username or password"</span>&#125;</div></pre></td></tr></table></figure></p>
+<p>输入正确的用户名密码:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ curl -d &quot;username=yinlijun&amp;password=123456&quot; &quot;http://127.0.0.1:3020/user/login&quot;</div><div class="line">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current</div><div class="line">                                 Dload  Upload   Total   Spent    Left  Speed</div><div class="line">100    68  100    35  100    33    372    351 --:--:-- --:--:-- --:--:--   372&#123;&quot;code&quot;:0,&quot;message&quot;:&quot;登录成功&quot;&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="利用passport校验登录功能。"><a href="#利用passport校验登录功能。" class="headerlink" title="利用passport校验登录功能。"></a>利用passport校验登录功能。</h3><p>社区里面有个passport的组件，可以用来实现校验登录功能。</p>
+<h4 id="封装passport中间件"><a href="#封装passport中间件" class="headerlink" title="封装passport中间件"></a>封装passport中间件</h4><p>创建middleware/passport.js，封装passport模块。</p>
+<p>将校验密码的操作挪到passport中，校验成功之后用户信息将会保存到req.user。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> passport = <span class="built_in">require</span>(<span class="string">'passport'</span>);</div><div class="line"><span class="keyword">var</span> User = <span class="built_in">require</span>(<span class="string">'../model'</span>).User;</div><div class="line"><span class="keyword">var</span> LocalStrategy = <span class="built_in">require</span>(<span class="string">'passport-local'</span>).Strategy;</div><div class="line"></div><div class="line">passport.use(<span class="string">'local.login'</span>, <span class="keyword">new</span> LocalStrategy((username, password, done) =&gt; &#123;</div><div class="line">  User.findOne(&#123;username: username&#125;)</div><div class="line">    .exec()</div><div class="line">    .then(user =&gt; &#123;</div><div class="line">      <span class="keyword">if</span>(!user) &#123;</div><div class="line">        <span class="keyword">return</span> done(<span class="literal">null</span>, <span class="literal">false</span>, &#123;code: <span class="number">-1</span>, message: <span class="string">"invalid username or password"</span>&#125;);</div><div class="line">      &#125; </div><div class="line">      <span class="keyword">if</span>(!user.validPassword(password)) &#123;</div><div class="line">        <span class="keyword">return</span> done(<span class="literal">null</span>, <span class="literal">false</span>, &#123;code: <span class="number">-1</span>, message: <span class="string">"invalid username or password"</span>&#125;);</div><div class="line">      &#125; </div><div class="line">      <span class="keyword">return</span> done(<span class="literal">null</span>, user);</div><div class="line">    &#125;)</div><div class="line">    .catch(err =&gt; &#123;</div><div class="line">      done(<span class="literal">null</span>, <span class="literal">false</span>, &#123;code: <span class="number">-1</span>, message: err.message&#125;);</div><div class="line">    &#125;)</div><div class="line">&#125;))</div><div class="line"></div><div class="line">passport.serializeUser((user, done) =&gt; &#123;</div><div class="line">  done(<span class="literal">null</span>, user._id);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">passport.deserializeUser((id, done) =&gt; &#123;</div><div class="line">  User.findById(id)</div><div class="line">    .exec()</div><div class="line">    .then(user =&gt; &#123;</div><div class="line">      done(<span class="literal">null</span>, user);</div><div class="line">    &#125;)</div><div class="line">    .catch(err =&gt; &#123;</div><div class="line">      done(<span class="literal">null</span>, <span class="literal">false</span>, &#123;code: <span class="number">-1</span>, message: err.message&#125;);</div><div class="line">    &#125;)</div><div class="line">&#125;)</div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = passport;</div></pre></td></tr></table></figure></p>
+<h4 id="重新实现登录操作"><a href="#重新实现登录操作" class="headerlink" title="重新实现登录操作"></a>重新实现登录操作</h4><p>修改controller/user.js的login函数，去掉验证用户名密码的代码。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">exports.login = (req, res, next) =&gt; &#123;</div><div class="line">  <span class="keyword">const</span> user = req.user;</div><div class="line">  genCookie(user, res);    </div><div class="line">  res.send(&#123;code:<span class="number">0</span>, message:<span class="string">"login success"</span>&#125;);</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>在middleware/validRequest.js添加一个校验中间件<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">exports.validByPassport = (req, res, next) =&gt; &#123;</div><div class="line">    passport.authenticate(<span class="string">'local.login'</span>, &#123;</div><div class="line">      failureMessage: <span class="string">'invalid username or password'</span>,</div><div class="line">    &#125;)(req,  res, next);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="修改路由"><a href="#修改路由" class="headerlink" title="修改路由"></a>修改路由</h4><p>修改router/user.js路由<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">router.post(<span class="string">'/user/login'</span>, validRequest.validByPassport, user.login);</div></pre></td></tr></table></figure></p>
+<p>这样，用户登录就会走passport的校验流程。</p>
+<h3 id="退出功能"><a href="#退出功能" class="headerlink" title="退出功能"></a>退出功能</h3><p>主要是清除cookie，controller/user.js中添加代码。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">exports.logout = (req, res, next) =&gt; &#123;</div><div class="line">  clearCookie(res);</div><div class="line">  res.send(&#123;code:<span class="number">0</span>, message:<span class="string">"exit success"</span>&#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">clearCookie = (res) =&gt; &#123;</div><div class="line">  res.clearCookie(config.cookie_name, &#123;path: <span class="string">'/'</span>&#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>测试<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ curl &quot;http://127.0.0.1:3020/user/logout&quot;</div><div class="line">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current</div><div class="line">                                 Dload  Upload   Total   Spent    Left  Speed</div><div class="line">100    35  100    35    0     0   2187      0 --:--:-- --:--:-- --:--:--  2187&#123;&quot;code&quot;:0,&quot;message&quot;:&quot;exit success&quot;&#125;</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文实现简单的服务端的注册，登录功能，暂时不实现前端界面，用curl模拟前端请求。&lt;/p&gt;
+&lt;h3 id=&quot;创建后端项目&quot;&gt;&lt;a href=&quot;#创建后端项目&quot; class=&quot;headerlink&quot; title=&quot;创建后端项目&quot;&gt;&lt;/a&gt;创建后端项目&lt;/h3&gt;&lt;figure 
+    
+    </summary>
+    
+    
+      <category term="nodejs" scheme="http://www.yinlijun.com/tags/nodejs/"/>
+    
+      <category term="react" scheme="http://www.yinlijun.com/tags/react/"/>
+    
+      <category term="express" scheme="http://www.yinlijun.com/tags/express/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>小白的全栈梦之从零搭建Android OTA系统（0）</title>
+    <link href="http://www.yinlijun.com/2017/12/20/my-ota-tutorial/"/>
+    <id>http://www.yinlijun.com/2017/12/20/my-ota-tutorial/</id>
+    <published>2017-12-20T09:45:28.000Z</published>
+    <updated>2017-12-21T11:38:48.048Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>作为一个半路出家的码农，一个野生Android工程师，一直对<b>全栈</b>心怀憧憬，但未有行动。直到两年之前有机会开始接触javascript，写了一些前端的代码，加上nodejs社区这些年的蓬勃发展，我觉得这是一个机会。正如某位长者教导的:</p>
+<blockquote>
+<p>人的一生当然要靠自我奋斗,当然也要考虑历史的进程。</p>
+</blockquote>
+<p>我觉得是时候了。</p>
+<p>这是一个完整的项目，也许耗时会比较长，因为上班时间还有工作要完成，但是我会尽力完成它，我的目标是达到可以商用的水平，而不是一个玩具。实现的过程的文章会贴在<a href="http://www.yinlijun.com">本站</a>，代码将会托管到github <a href="https://github.com/yinlijun2004/android_ota_system" target="_blank" rel="external">android ota system</a>。</p>
+<h3 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h3><p>到这个项目完结的时候，能实现如下功能。</p>
+<ul>
+<li>服务端<ul>
+<li>版本管理后台</li>
+<li>用户管理后台</li>
+</ul>
+</li>
+<li>PC端<ul>
+<li>版本管理界面</li>
+<li>用户操作界面</li>
+</ul>
+</li>
+<li>Android端<ul>
+<li>查询版本</li>
+<li>下载版本</li>
+<li>升级版本 </li>
+</ul>
+</li>
+</ul>
+<h3 id="我的技术背景"><a href="#我的技术背景" class="headerlink" title="我的技术背景"></a>我的技术背景</h3><p>语言方面</p>
+<ul>
+<li>javascript 熟练度 30%</li>
+</ul>
+<p>框架</p>
+<ul>
+<li>nodejs 熟练度 5%</li>
+<li>react 熟练度 10%</li>
+</ul>
+<h3 id="会使用到的库"><a href="#会使用到的库" class="headerlink" title="会使用到的库"></a>会使用到的库</h3><ul>
+<li>react</li>
+<li>express</li>
+</ul>
+<h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3><ul>
+<li><a href="/2017/12/20/my-ota-tutorial-1/" title="用户注册登录的后台实现">用户注册登录的后台实现</a></li>
+<li><a href="/2017/12/21/my-ota-tutorial-2/" title="用户注册登录前端界面实现">用户注册登录前端界面实现</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;起因&quot;&gt;&lt;a href=&quot;#起因&quot; class=&quot;headerlink&quot; title=&quot;起因&quot;&gt;&lt;/a&gt;起因&lt;/h3&gt;&lt;p&gt;作为一个半路出家的码农，一个野生Android工程师，一直对&lt;b&gt;全栈&lt;/b&gt;心怀憧憬，但未有行动。直到两年之前有机会开始接触javascr
+    
+    </summary>
+    
+    
+      <category term="nodejs" scheme="http://www.yinlijun.com/tags/nodejs/"/>
+    
+      <category term="react" scheme="http://www.yinlijun.com/tags/react/"/>
+    
+      <category term="express" scheme="http://www.yinlijun.com/tags/express/"/>
+    
+  </entry>
   
   <entry>
     <title>部署HEXO博客到阿里云ECS</title>
@@ -75,11 +204,11 @@
     </summary>
     
     
-      <category term="git" scheme="http://www.yinlijun.com/tags/git/"/>
-    
       <category term="hexo" scheme="http://www.yinlijun.com/tags/hexo/"/>
     
       <category term="ECS" scheme="http://www.yinlijun.com/tags/ECS/"/>
+    
+      <category term="git" scheme="http://www.yinlijun.com/tags/git/"/>
     
   </entry>
   
@@ -420,11 +549,11 @@
     </summary>
     
     
-      <category term="ubuntu" scheme="http://www.yinlijun.com/tags/ubuntu/"/>
+      <category term="android studio" scheme="http://www.yinlijun.com/tags/android-studio/"/>
     
       <category term="android" scheme="http://www.yinlijun.com/tags/android/"/>
     
-      <category term="android studio" scheme="http://www.yinlijun.com/tags/android-studio/"/>
+      <category term="ubuntu" scheme="http://www.yinlijun.com/tags/ubuntu/"/>
     
   </entry>
   
@@ -796,9 +925,9 @@
     </summary>
     
     
-      <category term="ubuntu" scheme="http://www.yinlijun.com/tags/ubuntu/"/>
-    
       <category term="android" scheme="http://www.yinlijun.com/tags/android/"/>
+    
+      <category term="ubuntu" scheme="http://www.yinlijun.com/tags/ubuntu/"/>
     
       <category term="环境搭建" scheme="http://www.yinlijun.com/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
     
@@ -905,9 +1034,9 @@
     </summary>
     
     
-      <category term="ubuntu" scheme="http://www.yinlijun.com/tags/ubuntu/"/>
-    
       <category term="android studio" scheme="http://www.yinlijun.com/tags/android-studio/"/>
+    
+      <category term="ubuntu" scheme="http://www.yinlijun.com/tags/ubuntu/"/>
     
   </entry>
   
@@ -988,68 +1117,6 @@
       <category term="windows" scheme="http://www.yinlijun.com/tags/windows/"/>
     
       <category term="mongodb" scheme="http://www.yinlijun.com/tags/mongodb/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>windows下文件路径太深，无法删除解决办法</title>
-    <link href="http://www.yinlijun.com/2016/11/08/windows%E4%B8%8B%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84%E5%A4%AA%E6%B7%B1%EF%BC%8C%E6%97%A0%E6%B3%95%E5%88%A0%E9%99%A4%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/"/>
-    <id>http://www.yinlijun.com/2016/11/08/windows下文件路径太深，无法删除解决办法/</id>
-    <published>2016-11-08T10:02:04.000Z</published>
-    <updated>2017-05-25T03:41:18.237Z</updated>
-    
-    <content type="html"><![CDATA[<p>windows下npm开发时，有时候node_modules/下的目录嵌套太深，导致无法删除项目。</p>
-<p>npm社区贡献了一个工具<a href="https://www.npmjs.com/package/windows-node-deps-deleter" target="_blank" rel="external">windows-node-deps-deleter</a>可供删除这样的目录。</p>
-<a id="more"></a>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">E:\vscode&gt;npm install -g windows-node-deps-deleter</div><div class="line">C:\Users\xx\AppData\Roaming\npm\wnddel -&gt; C:\Users\xx\AppData\Roaming\npm\no</div><div class="line">de_modules\windows-node-deps-deleter\wnddel.js</div><div class="line">windows-node-deps-deleter@0.1.1 C:\Users\xx\AppData\Roaming\npm\node_modules\w</div><div class="line">indows-node-deps-deleter</div><div class="line">└── fs-extra@0.13.0 (ncp@1.0.1, jsonfile@2.4.0, rimraf@2.5.4)</div><div class="line"></div><div class="line">E:\vscode&gt;wnddel react-todo-list</div><div class="line">Deleting &quot;react-todo-list&quot; ...</div><div class="line">&quot;react-todo-list&quot; deleted.</div></pre></td></tr></table></figure>
-<p>参考：<a href="https://www.npmjs.com/package/windows-node-deps-deleter#readme" target="_blank" rel="external">windows-node-deps-delete</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;windows下npm开发时，有时候node_modules/下的目录嵌套太深，导致无法删除项目。&lt;/p&gt;
-&lt;p&gt;npm社区贡献了一个工具&lt;a href=&quot;https://www.npmjs.com/package/windows-node-deps-deleter&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;windows-node-deps-deleter&lt;/a&gt;可供删除这样的目录。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="windows" scheme="http://www.yinlijun.com/tags/windows/"/>
-    
-      <category term="npm" scheme="http://www.yinlijun.com/tags/npm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>.gitignore无效，不能过滤某些文件</title>
-    <link href="http://www.yinlijun.com/2016/11/06/gitignore%E6%97%A0%E6%95%88%EF%BC%8C%E4%B8%8D%E8%83%BD%E8%BF%87%E6%BB%A4%E6%9F%90%E4%BA%9B%E6%96%87%E4%BB%B6/"/>
-    <id>http://www.yinlijun.com/2016/11/06/gitignore无效，不能过滤某些文件/</id>
-    <published>2016-11-06T10:03:31.000Z</published>
-    <updated>2017-05-25T03:41:18.233Z</updated>
-    
-    <content type="html"><![CDATA[<p>利用.gitignore过滤文件，如编译过程中的中间文件，等等，这些文件不需要被追踪管理。</p>
-<p>现象：</p>
-<p>在.gitignore添加file1文件，以过滤该文件，但是通过Git status查看仍显示file1文件的状态。</p>
-<a id="more"></a>
-<p>原因：</p>
-<p>在git库中已存在了这个文件，之前push提交过该文件。</p>
-<p>.gitignore文件只对还没有加入版本管理的文件起作用，如果之前已经用git把这些文件纳入了版本库，就不起作用了</p>
-<p>解决：</p>
-<p>需要在git库中删除该文件，并更新。</p>
-<p>然后再次git status查看状态，file1文件不再显示状态。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;利用.gitignore过滤文件，如编译过程中的中间文件，等等，这些文件不需要被追踪管理。&lt;/p&gt;
-&lt;p&gt;现象：&lt;/p&gt;
-&lt;p&gt;在.gitignore添加file1文件，以过滤该文件，但是通过Git status查看仍显示file1文件的状态。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="git" scheme="http://www.yinlijun.com/tags/git/"/>
-    
-      <category term=".gitignore" scheme="http://www.yinlijun.com/tags/gitignore/"/>
     
   </entry>
   
