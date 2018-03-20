@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="nodejs,react,express," />
+  <meta name="keywords" content="nodejs,express,react," />
 
 
 
@@ -93,15 +93,15 @@
 
 
 <meta name="description" content="本文实现简单的服务端的注册，登录功能，暂时不实现前端界面，用curl模拟前端请求。 创建后端项目1express ota_be 目录结构model存放数据库代码，routes存放路由代码，controller存放处理代码，middleware存放中间件代码。123456├─app.js├─config.js├─model/├─routes/├─controller/├─middleware/ 用户">
-<meta name="keywords" content="nodejs,react,express">
+<meta name="keywords" content="nodejs,express,react">
 <meta property="og:type" content="article">
-<meta property="og:title" content="小白的全栈梦之从零搭建Android OTA系统（1）">
+<meta property="og:title" content="从零搭建Android OTA系统——创建后端项目">
 <meta property="og:url" content="http://www.yinlijun.com/2017/12/20/my-ota-tutorial-1/index.html">
 <meta property="og:site_name" content="尹莉军">
 <meta property="og:description" content="本文实现简单的服务端的注册，登录功能，暂时不实现前端界面，用curl模拟前端请求。 创建后端项目1express ota_be 目录结构model存放数据库代码，routes存放路由代码，controller存放处理代码，middleware存放中间件代码。123456├─app.js├─config.js├─model/├─routes/├─controller/├─middleware/ 用户">
-<meta property="og:updated_time" content="2017-12-21T11:41:18.997Z">
+<meta property="og:updated_time" content="2018-03-20T11:27:54.748Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="小白的全栈梦之从零搭建Android OTA系统（1）">
+<meta name="twitter:title" content="从零搭建Android OTA系统——创建后端项目">
 <meta name="twitter:description" content="本文实现简单的服务端的注册，登录功能，暂时不实现前端界面，用curl模拟前端请求。 创建后端项目1express ota_be 目录结构model存放数据库代码，routes存放路由代码，controller存放处理代码，middleware存放中间件代码。123456├─app.js├─config.js├─model/├─routes/├─controller/├─middleware/ 用户">
 
 
@@ -136,7 +136,7 @@
 
 
 
-  <title>小白的全栈梦之从零搭建Android OTA系统（1） | 尹莉军</title>
+  <title>从零搭建Android OTA系统——创建后端项目 | 尹莉军</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -307,7 +307,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">小白的全栈梦之从零搭建Android OTA系统（1）</h1>
+          <h1 class="post-title" itemprop="name headline">从零搭建Android OTA系统——创建后端项目</h1>
         
 
         <div class="post-meta">
@@ -351,6 +351,37 @@
 
           
 
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
           
 
           
@@ -424,6 +455,21 @@
     <div>
       
         
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      尹莉军 <yinlijun2004@gmail.com>
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.yinlijun.com/2017/12/20/my-ota-tutorial-1/" title="从零搭建Android OTA系统——创建后端项目">http://www.yinlijun.com/2017/12/20/my-ota-tutorial-1/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
 
       
     </div>
@@ -434,9 +480,9 @@
           
             <a href="/tags/nodejs/" rel="tag"># nodejs</a>
           
-            <a href="/tags/react/" rel="tag"># react</a>
-          
             <a href="/tags/express/" rel="tag"># express</a>
+          
+            <a href="/tags/react/" rel="tag"># react</a>
           
         </div>
       
@@ -449,8 +495,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/12/20/my-ota-tutorial/" rel="next" title="小白的全栈梦之从零搭建Android OTA系统（0）">
-                <i class="fa fa-chevron-left"></i> 小白的全栈梦之从零搭建Android OTA系统（0）
+              <a href="/2017/12/20/my-ota-tutorial/" rel="next" title="从零搭建Android OTA系统——创建后端项目">
+                <i class="fa fa-chevron-left"></i> 从零搭建Android OTA系统——创建后端项目
               </a>
             
           </div>
@@ -458,6 +504,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/09/http-summery/" rel="prev" title="HTTP请求头摘要">
+                HTTP请求头摘要 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -531,7 +581,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -553,7 +603,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-count">29</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -578,6 +628,20 @@
         
 
         
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.yinlijun.com/" title="Title" target="_blank">Title</a>
+                </li>
+              
+            </ul>
+          </div>
         
 
         
@@ -618,7 +682,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

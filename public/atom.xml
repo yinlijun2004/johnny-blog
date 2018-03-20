@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.yinlijun.com/"/>
-  <updated>2017-12-21T11:41:18.997Z</updated>
+  <updated>2018-03-20T11:41:41.697Z</updated>
   <id>http://www.yinlijun.com/</id>
   
   <author>
@@ -16,11 +16,104 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>小白的全栈梦之从零搭建Android OTA系统（1）</title>
+    <title>从零搭建Android OTA系统——部署到阿里云ECS</title>
+    <link href="http://www.yinlijun.com/2018/03/20/my-ota-tutorial-7/"/>
+    <id>http://www.yinlijun.com/2018/03/20/my-ota-tutorial-7/</id>
+    <published>2018-03-20T11:55:31.000Z</published>
+    <updated>2018-03-20T11:41:41.697Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文介绍如何将整个ota系统部署到阿里云ECS上去，没有看过正规军是如何部署的，以下只是我的个人经验。</p>
+<h3 id="创建远程git目录"><a href="#创建远程git目录" class="headerlink" title="创建远程git目录"></a>创建远程git目录</h3><p>登陆阿里云ECS，创建一个bare仓库，存放ota_be代码。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git init --bare ~/project/ota_server.git</div></pre></td></tr></table></figure></p>
+<p>创建post-receive文件，捕获git推送操作，克隆一份到服务器本地，作为运行仓库。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">touch ~/project/ota_server.git/hooks/post-receive</div></pre></td></tr></table></figure></p>
+<p>填入如下内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/bin/bash -l</span></div><div class="line"></div><div class="line">GIT_REPO=/home/yinlijun/project/ota_server.git</div><div class="line">TMP_GIT_CLONE=/home/yinlijun/project/ota_server</div><div class="line"></div><div class="line">rm -rf <span class="variable">$&#123;TMP_GIT_CLONE&#125;</span></div><div class="line">git <span class="built_in">clone</span> <span class="variable">$&#123;GIT_REPO&#125;</span> <span class="variable">$&#123;TMP_GIT_CLONE&#125;</span></div></pre></td></tr></table></figure></p>
+<h4 id="本地部署"><a href="#本地部署" class="headerlink" title="本地部署"></a>本地部署</h4><p>在本地ota目录下，创建.gitignore文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">echo</span> ota_be_deploy &gt;&gt; .gitignore</div></pre></td></tr></table></figure></p>
+<p>这个文件是忽略我们要临时发布目录用的。</p>
+<h4 id="创建部署脚本"><a href="#创建部署脚本" class="headerlink" title="创建部署脚本"></a>创建部署脚本</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">touch deploy.sh</div></pre></td></tr></table></figure>
+<p>deploy.sh脚本内容：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 构建前端代码</span></div><div class="line"><span class="built_in">cd</span> ota_fe;</div><div class="line">yarn build;</div><div class="line"><span class="built_in">cd</span> ../</div><div class="line"><span class="built_in">echo</span> <span class="string">"ota_fe build done..."</span></div><div class="line"></div><div class="line"><span class="comment"># 拷贝前端构建结果到后端代码</span></div><div class="line">cp ota_fe/build/* ota_be/public/ -rf </div><div class="line"><span class="built_in">echo</span> <span class="string">"copy ota_fe build result done..."</span></div><div class="line"></div><div class="line"><span class="comment"># 从部署服务器clone一份代码</span></div><div class="line"><span class="keyword">if</span> [ ! <span class="_">-d</span> <span class="string">"ota_be_deploy"</span> ]; <span class="keyword">then</span></div><div class="line">    git <span class="built_in">clone</span> yinlijun@www.yinlijun.com:project/ota_server.git ./ota_be_deploy</div><div class="line">    <span class="built_in">echo</span> <span class="string">"clone remote ota_server done..."</span></div><div class="line"><span class="keyword">fi</span></div><div class="line"></div><div class="line"><span class="comment"># 将后端代码，拷贝到临时目录</span></div><div class="line">cp -rf ota_be/*  ./ota_be_deploy/</div><div class="line"><span class="built_in">echo</span> <span class="string">"copy ota_be done..."</span></div><div class="line"></div><div class="line"><span class="comment"># 提交后端代码到远程master分支</span></div><div class="line"><span class="built_in">cd</span> ota_be_deploy; </div><div class="line">git add .;</div><div class="line">git commit -m <span class="string">"auto deploy server"</span>; </div><div class="line">git push origin master;</div><div class="line"><span class="built_in">cd</span> ../</div><div class="line"><span class="built_in">echo</span> <span class="string">"deploy done..."</span></div></pre></td></tr></table></figure></p>
+<p>运行上述脚本，就会将本地的代码，推送到服务器的仓库上去，同时，因为我们hook了推送操作，就会在服务器上更新运行代码。</p>
+<h4 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h4><p>pm2启动服务<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pm2 start ~/project/ota_server/bin/www --name <span class="string">"ota-server"</span></div></pre></td></tr></table></figure></p>
+<p>添加nginx代理<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">touch /etc/nginx/ota.conf</div></pre></td></tr></table></figure></p>
+<p>内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    listen: 80;</div><div class="line">    server_name ota.yinlijun.com;</div><div class="line"></div><div class="line">    location / &#123;</div><div class="line">        proxy_pass http://127.0.0.1:3020;</div><div class="line">        proxy_http_version 1.1;</div><div class="line">        proxy_set_header Upgrade $http_upgrade;</div><div class="line">        proxy_set_header Connection &apos;upgrade&apos;;</div><div class="line">        proxy_set_header Host $host</div><div class="line">        proxy_cache_bapass $http_upgrade</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>重启nginx<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo /etc/init.d/nginx restart</div></pre></td></tr></table></figure></p>
+<h4 id="预览"><a href="#预览" class="headerlink" title="预览"></a>预览</h4><p><a href="http://ota.yinlijun.com/" target="_blank" rel="external">http://ota.yinlijun.com/</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文介绍如何将整个ota系统部署到阿里云ECS上去，没有看过正规军是如何部署的，以下只是我的个人经验。&lt;/p&gt;
+&lt;h3 id=&quot;创建远程git目录&quot;&gt;&lt;a href=&quot;#创建远程git目录&quot; class=&quot;headerlink&quot; title=&quot;创建远程git目录&quot;&gt;&lt;/a&gt;
+    
+    </summary>
+    
+    
+      <category term="nodejs" scheme="http://www.yinlijun.com/tags/nodejs/"/>
+    
+      <category term="express" scheme="http://www.yinlijun.com/tags/express/"/>
+    
+      <category term="react" scheme="http://www.yinlijun.com/tags/react/"/>
+    
+      <category term="ECS， nginx" scheme="http://www.yinlijun.com/tags/ECS%EF%BC%8C-nginx/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HTTP请求头摘要</title>
+    <link href="http://www.yinlijun.com/2018/01/09/http-summery/"/>
+    <id>http://www.yinlijun.com/2018/01/09/http-summery/</id>
+    <published>2018-01-09T03:09:03.000Z</published>
+    <updated>2018-01-09T07:19:49.579Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="If-Modified-Since"><a href="#If-Modified-Since" class="headerlink" title="If-Modified-Since"></a>If-Modified-Since</h3><p><b>If-Modified-Since</b>是一个条件式请求首部，服务器只在请求的资源在给定的日期时间之后对内容进行过修改的情况下才会返回，状态码<b>200</b>。如果请求的资源从那时起未经修改，则返回一个不带消息主体的<b>304</b>响应，而在<b>Last-Modified</b>首部中会带有上次修改的时间。</p>
+<p>语法：If-Modified-Since: <day-name>, <day> <month> <year> <hour>:<minute>:<second> GMT</second></minute></hour></year></month></day></day-name></p>
+<p>示例：If-Modified-Since: Wed, 21 Oct 2015 07:28:00 GMT</p>
+<h3 id="If-Unmodified-Since"><a href="#If-Unmodified-Since" class="headerlink" title="If-Unmodified-Since"></a>If-Unmodified-Since</h3><p>只有当资源在指定的时间之后没有进行过修改，服务器在返回请求的资源，或是接受<b>POST</b>或其他non-safe方法的请求。如果所请求的资源在指定的时间之后发生的修改，那么会返回<b>412</b>(Proceondition Failed)错误。</p>
+<p>常见应用场景：</p>
+<ul>
+<li><p>与non-safe方法如<b>POST</b>搭配使用，可以用来优化并发控制，例如某些wiki应用中的做法：假如在原始副本获取之后，服务器上所存储的文档已经被修改，那么对其做出的编辑会被拒绝提交。</p>
+</li>
+<li><p>与含有<b>If-Range</b>消息头的范围请求搭配使用，用来确保新的请求片段来自于未经修改的文档。</p>
+</li>
+</ul>
+<p>语法：<br>If-Unmodified-Since: <day-name>, <day> <month> <year> <hour>:<minute>:<second> GMT</second></minute></hour></year></month></day></day-name></p>
+<p>示例：<br>If-Unmodified-Since: Wed, 21 Oct 2015 07:28:00 GMT</p>
+<h3 id="If-None-Match"><a href="#If-None-Match" class="headerlink" title="If-None-Match"></a>If-None-Match</h3><p>对于<b>GET</b>和<b>HEAD</b>请求来说，当且仅当服务器上没有任何资源的ETag属性值与这个首部中列出的相匹配的时候，服务器端才会返回所请求的资源，响应码200。对其他方法来说，当且仅当最终确认没有已存在的资源的ETag的属性值与这个首部所列出的相匹配的时候，才会对请求进行相应的处理。</p>
+<h3 id="If-Range"><a href="#If-Range" class="headerlink" title="If-Range"></a>If-Range</h3><p>If-Range跟Range一起使用，但字段中的d饿到满足时，Range头字段才会起作用，同时服务器返回(Partial Content)状态码；如果字段值中的条件没有得到满足，服务器返回200状态码，返回完整的请求资源。</p>
+<p>字段值中既可以用Last-Modified时间用作验证，也可以用ETag标记作为验证，但不能同时使用。</p>
+<p>常见场景：<br>If-Range头字段通常用于断点续传的下载过程中，用来自上次中断后，确保下载的资源没有发生改变。</p>
+<p>语法：<br>If-Range: &lt;星期&gt;, &lt;日&gt; &lt;月&gt; &lt;年&gt; &lt;时&gt;:&lt;分&gt;:&lt;秒&gt; GMT<br>If-Range: <etag></etag></p>
+<p>示例：<br>If-Range: Wed, 21 Oct 2015 07:28:00 GMT<br>If-Range: “675af34563dc-tr34”</p>
+<h3 id="Range"><a href="#Range" class="headerlink" title="Range"></a>Range</h3><p><b>Range</b>告知服务器返回文件的哪个部分。在一个Range首部中，可以一次性请求多个部分，服务器会以multipart文件的形式返回。如果服务器返回的是范围响应，需要使用206(Partial Content)状态码。加入所请求的范围不合法，那么服务器会返回416（Range Not Satisfiable）状态码，表示客户端错误。服务器允许忽略Range首部，从而返回整个文件，状态码用200。</p>
+<p>语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Range: &lt;unit&gt;=&lt;range-start&gt;-</div><div class="line">Range: &lt;unit&gt;=&lt;range-start&gt;-&lt;range-end&gt;</div><div class="line">Range: &lt;unit&gt;=&lt;range-start&gt;-&lt;range-end&gt;, &lt;range-start&gt;-&lt;range-end&gt;</div><div class="line">Range: &lt;unit&gt;=&lt;range-start&gt;-&lt;range-end&gt;, &lt;range-start&gt;-&lt;range-end&gt;, &lt;range-start&gt;-&lt;range-end&gt;</div></pre></td></tr></table></figure></p>
+<p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Range: bytes=200-1000, 2000-6576, 19000-</div></pre></td></tr></table></figure></p>
+<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><ul>
+<li><p><b>If-Modified-Since</b>和<b>If-Unmodified-Since</b></p>
+<p>  <b>If-Mmodified-Since</b>只会出现在<b>GET</b>和<b>HEAD</b>请求中。</p>
+</li>
+<li><p><b>If-Modified-Since</b>和<b>If-None-Match</b></p>
+<p>  <b>If-Modified-Since</b>比<b>If-None-Match</b>优先级要高，但两者都存在时，后者会被忽略，除非服务器不支持<b>If-None-Match</b></p>
+</li>
+</ul>
+<p>参考资料：<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/If-Unmodified-Since" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/If-Unmodified-Since</a></p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/If-Range" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/If-Range</a></p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Range" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Range</a></p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/If-None-Match" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/If-None-Match</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;If-Modified-Since&quot;&gt;&lt;a href=&quot;#If-Modified-Since&quot; class=&quot;headerlink&quot; title=&quot;If-Modified-Since&quot;&gt;&lt;/a&gt;If-Modified-Since&lt;/h3&gt;&lt;p&gt;&lt;b&gt;If-Modi
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>从零搭建Android OTA系统——创建后端项目</title>
     <link href="http://www.yinlijun.com/2017/12/20/my-ota-tutorial-1/"/>
     <id>http://www.yinlijun.com/2017/12/20/my-ota-tutorial-1/</id>
     <published>2017-12-20T10:23:04.000Z</published>
-    <updated>2017-12-21T11:41:18.997Z</updated>
+    <updated>2018-03-20T11:27:54.748Z</updated>
     
     <content type="html"><![CDATA[<p>本文实现简单的服务端的注册，登录功能，暂时不实现前端界面，用curl模拟前端请求。</p>
 <h3 id="创建后端项目"><a href="#创建后端项目" class="headerlink" title="创建后端项目"></a>创建后端项目</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">express ota_be</div></pre></td></tr></table></figure>
@@ -72,18 +165,18 @@
     
       <category term="nodejs" scheme="http://www.yinlijun.com/tags/nodejs/"/>
     
-      <category term="react" scheme="http://www.yinlijun.com/tags/react/"/>
-    
       <category term="express" scheme="http://www.yinlijun.com/tags/express/"/>
+    
+      <category term="react" scheme="http://www.yinlijun.com/tags/react/"/>
     
   </entry>
   
   <entry>
-    <title>小白的全栈梦之从零搭建Android OTA系统（0）</title>
+    <title>从零搭建Android OTA系统——创建后端项目</title>
     <link href="http://www.yinlijun.com/2017/12/20/my-ota-tutorial/"/>
     <id>http://www.yinlijun.com/2017/12/20/my-ota-tutorial/</id>
     <published>2017-12-20T09:45:28.000Z</published>
-    <updated>2017-12-21T11:38:48.048Z</updated>
+    <updated>2018-03-20T11:35:16.099Z</updated>
     
     <content type="html"><![CDATA[<h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>作为一个半路出家的码农，一个野生Android工程师，一直对<b>全栈</b>心怀憧憬，但未有行动。直到两年之前有机会开始接触javascript，写了一些前端的代码，加上nodejs社区这些年的蓬勃发展，我觉得这是一个机会。正如某位长者教导的:</p>
 <blockquote>
@@ -125,7 +218,12 @@
 </ul>
 <h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3><ul>
 <li><a href="/2017/12/20/my-ota-tutorial-1/" title="用户注册登录的后台实现">用户注册登录的后台实现</a></li>
-<li><a href="/2017/12/21/my-ota-tutorial-2/" title="用户注册登录前端界面实现">用户注册登录前端界面实现</a></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li><a href="/2018/03/20/my-ota-tutorial-7/" title="Android OTA部署到阿里云ECS">Android OTA部署到阿里云ECS</a></li>
 </ul>
 ]]></content>
     
@@ -138,9 +236,9 @@
     
       <category term="nodejs" scheme="http://www.yinlijun.com/tags/nodejs/"/>
     
-      <category term="react" scheme="http://www.yinlijun.com/tags/react/"/>
-    
       <category term="express" scheme="http://www.yinlijun.com/tags/express/"/>
+    
+      <category term="react" scheme="http://www.yinlijun.com/tags/react/"/>
     
   </entry>
   
@@ -204,11 +302,11 @@
     </summary>
     
     
+      <category term="git" scheme="http://www.yinlijun.com/tags/git/"/>
+    
       <category term="hexo" scheme="http://www.yinlijun.com/tags/hexo/"/>
     
       <category term="ECS" scheme="http://www.yinlijun.com/tags/ECS/"/>
-    
-      <category term="git" scheme="http://www.yinlijun.com/tags/git/"/>
     
   </entry>
   
@@ -549,11 +647,11 @@
     </summary>
     
     
-      <category term="android studio" scheme="http://www.yinlijun.com/tags/android-studio/"/>
+      <category term="ubuntu" scheme="http://www.yinlijun.com/tags/ubuntu/"/>
     
       <category term="android" scheme="http://www.yinlijun.com/tags/android/"/>
     
-      <category term="ubuntu" scheme="http://www.yinlijun.com/tags/ubuntu/"/>
+      <category term="android studio" scheme="http://www.yinlijun.com/tags/android-studio/"/>
     
   </entry>
   
@@ -925,9 +1023,9 @@
     </summary>
     
     
-      <category term="android" scheme="http://www.yinlijun.com/tags/android/"/>
-    
       <category term="ubuntu" scheme="http://www.yinlijun.com/tags/ubuntu/"/>
+    
+      <category term="android" scheme="http://www.yinlijun.com/tags/android/"/>
     
       <category term="环境搭建" scheme="http://www.yinlijun.com/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
     
@@ -1034,89 +1132,9 @@
     </summary>
     
     
-      <category term="android studio" scheme="http://www.yinlijun.com/tags/android-studio/"/>
-    
       <category term="ubuntu" scheme="http://www.yinlijun.com/tags/ubuntu/"/>
     
-  </entry>
-  
-  <entry>
-    <title>git配置user.name和user.email</title>
-    <link href="http://www.yinlijun.com/2016/11/15/git%E9%85%8D%E7%BD%AEuser-name%E5%92%8Cuser-email/"/>
-    <id>http://www.yinlijun.com/2016/11/15/git配置user-name和user-email/</id>
-    <published>2016-11-15T10:02:54.000Z</published>
-    <updated>2017-05-25T03:41:18.234Z</updated>
-    
-    <content type="html"><![CDATA[<p>github在统计提交的时候，会判断邮箱是否跟github的登陆邮箱匹配，不匹配则不计算活跃度，即不生成小绿块。</p>
-<p>获取配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">yinlijun@yinlijun:~/personal_github/johnny-blog$ git config user.email</div><div class="line">aaa@aaa.com</div><div class="line">yinlijun@yinlijun:~/personal_github/johnny-blog$ git config user.name</div><div class="line">aaa</div></pre></td></tr></table></figure></p>
-<a id="more"></a>
-<p>设置当前仓库的user.name/user.email<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yinlijun@yinlijun:~/personal_github/johnny-blog$ git config user.email aaa</div><div class="line">yinlijun@yinlijun:~/personal_github/johnny-blog$ git config user.email aaa@aaa.com</div></pre></td></tr></table></figure></p>
-<p>设置全局user.name/user.email<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yinlijun@yinlijun:~/personal_github/johnny-blog$ git config --global user.name yinlijun</div><div class="line">yinlijun@yinlijun:~/personal_github/johnny-blog$ git config --global user.email yinlijun2004@gmail.com</div></pre></td></tr></table></figure></p>
-<p>如果当前仓库未设置user.name/user.email则采用全局的user.name/user.email，否则当前仓库的user.name/user.email会覆盖全局的user.name/user.email。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;github在统计提交的时候，会判断邮箱是否跟github的登陆邮箱匹配，不匹配则不计算活跃度，即不生成小绿块。&lt;/p&gt;
-&lt;p&gt;获取配置&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;yinlijun@yinlijun:~/personal_github/johnny-blog$ git config user.email&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;aaa@aaa.com&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;yinlijun@yinlijun:~/personal_github/johnny-blog$ git config user.name&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;aaa&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="git" scheme="http://www.yinlijun.com/tags/git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>windows配置mongdb记录</title>
-    <link href="http://www.yinlijun.com/2016/11/09/windows%E9%85%8D%E7%BD%AEmongdb%E8%AE%B0%E5%BD%95/"/>
-    <id>http://www.yinlijun.com/2016/11/09/windows配置mongdb记录/</id>
-    <published>2016-11-09T09:55:51.000Z</published>
-    <updated>2017-05-25T03:41:18.237Z</updated>
-    
-    <content type="html"><![CDATA[<p>刚给windows电脑配置了mongdb记录一下。</p>
-<ul>
-<li><p>前往<a href="https://www.mongodb.com/download-center" target="_blank" rel="external">官网</a>下载合适的安装包，我选择的是msi安装包，也可以选择下载zip包。</p>
-</li>
-<li><p>运行msi安装包（默认安装在C盘，没找到在哪里可以修改盘符）。</p>
-</li>
-<li><p>在D:\下创建好相关文件夹<br><img src="http://img.blog.csdn.net/20161109194149759" alt="这里写图片描述"></p>
-</li>
-</ul>
-<a id="more"></a>
-<ul>
-<li><p>打开命令提示符，进入到mongodb安装文件夹下的bin目录<br><img src="http://img.blog.csdn.net/20161109194331090" alt="这里写图片描述"></p>
-</li>
-<li><p>输入如下命令，注册MongoDB服务 </p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mongod.exe --logpath D:\MongoDB\data\<span class="built_in">log</span>\MongoDB.log --logappend --dbpath D:\MongoDB\data\db --directoryperdb --storageEngin=mmappv1 --serviceName MongoDB --install</div></pre></td></tr></table></figure>
-<p><img src="http://img.blog.csdn.net/20161109194436279" alt="这里写图片描述"></p>
-<ul>
-<li>启动MongoDB服务</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">net start MongoDB</div></pre></td></tr></table></figure>
-<p><img src="http://img.blog.csdn.net/20161109194520874" alt="这里写图片描述"></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;刚给windows电脑配置了mongdb记录一下。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;前往&lt;a href=&quot;https://www.mongodb.com/download-center&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;官网&lt;/a&gt;下载合适的安装包，我选择的是msi安装包，也可以选择下载zip包。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;运行msi安装包（默认安装在C盘，没找到在哪里可以修改盘符）。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;在D:\下创建好相关文件夹&lt;br&gt;&lt;img src=&quot;http://img.blog.csdn.net/20161109194149759&quot; alt=&quot;这里写图片描述&quot;&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-    
-      <category term="windows" scheme="http://www.yinlijun.com/tags/windows/"/>
-    
-      <category term="mongodb" scheme="http://www.yinlijun.com/tags/mongodb/"/>
+      <category term="android studio" scheme="http://www.yinlijun.com/tags/android-studio/"/>
     
   </entry>
   

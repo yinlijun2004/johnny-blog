@@ -1,5 +1,5 @@
 ---
-title: 小白的全栈梦之从零搭建Android OTA系统（1）
+title: 从零搭建Android OTA系统——创建后端项目
 date: 2017-12-20 18:23:04
 tags: [express, react, nodejs]
 ---
