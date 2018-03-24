@@ -290,6 +290,169 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.yinlijun.com/2018/03/24/ngrok-intro/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="尹莉军 <yinlijun2004@gmail.com>">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://tva3.sinaimg.cn/crop.0.0.180.180.180/7d92e765jw1e8qgp5bmzyj2050050aa8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="尹莉军">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/24/ngrok-intro/" itemprop="url">Windows下Ngrok工具的使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-24T10:09:26+08:00">
+                2018-03-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/03/24/ngrok-intro/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://www.yinlijun.com/2018/03/24/ngrok-intro/" class="cy_cmt_count" data-xid="2018/03/24/ngrok-intro/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近在本机调试七牛云上传，碰到一个问题。七牛云存储完成上传操作后，会有一个回调操作，告诉服务器上传结果。</p>
+<blockquote>
+<p><a href="https://developer.qiniu.com/kodo/sdk/1289/nodejs" target="_blank" rel="external">https://developer.qiniu.com/kodo/sdk/1289/nodejs</a><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> options = &#123;</div><div class="line">  scope: bucket,</div><div class="line">  callbackUrl: <span class="string">'http://api.example.com/qiniu/upload/callback'</span>,</div><div class="line">  callbackBody: <span class="string">'key=$(key)&amp;hash=$(etag)&amp;bucket=$(bucket)&amp;fsize=$(fsize)&amp;name=$(x:name)'</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> putPolicy = <span class="keyword">new</span> qiniu.rs.PutPolicy(options);</div><div class="line"><span class="keyword">var</span> uploadToken=putPolicy.uploadToken(mac);</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>上面的<b><a href="http://api.example.com" target="_blank" rel="external">http://api.example.com</a></b>就是回调的url，在开发模式下肯定是指向本机的，而不是生产服务器。</p>
+<p>因此需要一个内网穿透的工具，在网上找到<a href="https://www.ngrok.cc" target="_blank" rel="external">Ngrok</a>。</p>
+<p>Ngrok会生成一个指向你本机服务的隧道，隧道信息，包含一个三级域名（就是上面的回调url），本地端口（就是你的服务运行的端口），协议类型等信息。<br><img src="https://picabstract-preview-ftn.weiyun.com:8443/ftn_pic_abs_v2/56d49defca68f6178c2aadc601ea157c78729113241118fa8f5471199a8e707a5a5ee24a8e08fb8e264665971dbf42db?pictype=scale&amp;from=30113&amp;version=2.0.0.2&amp;uin=474724984&amp;fname=QQ%E5%9B%BE%E7%89%8720180324102303.png&amp;size=1024" alt=""></p>
+<p>隧道有免费的，也有付费的，但免费的貌似不稳定。</p>
+<p>然后在server端可以用环境变量区分回调的url。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">qiniuCallbackDomain: process.env.NODE_ENV === <span class="string">"production"</span> ? <span class="string">'http://test.xxx.com'</span> :<span class="string">'http://prod.xx.com'</span>,</div></pre></td></tr></table></figure></p>
+<p>Ngrok支持大部分的平台，我的是windows 64位，下载完<a href="https://www.ngrok.cc/download.html" target="_blank" rel="external">客户端</a>，解压，运行<b>Sunny-Ngrok启动工具.bat</b>，填入隧道ID，即可实现外网访问。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://www.yinlijun.com/2018/03/20/my-ota-tutorial-7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1913,194 +2076,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.yinlijun.com/2016/11/29/react-router-4-0-0-api-Miss/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="尹莉军 <yinlijun2004@gmail.com>">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://tva3.sinaimg.cn/crop.0.0.180.180.180/7d92e765jw1e8qgp5bmzyj2050050aa8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="尹莉军">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/11/29/react-router-4-0-0-api-Miss/" itemprop="url">Miss-react router 4.0.0 api中文文档</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-29T13:55:49+08:00">
-                2016-11-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/react-router-4-0-0-api中文文档/" itemprop="url" rel="index">
-                    <span itemprop="name">react router 4.0.0 api中文文档</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2016/11/29/react-router-4-0-0-api-Miss/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://www.yinlijun.com/2016/11/29/react-router-4-0-0-api-Miss/" class="cy_cmt_count" data-xid="2016/11/29/react-router-4-0-0-api-Miss/" itemprop="commentsCount" ></span>
-                </a>
-              
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><a href="https://react-router.now.sh/Miss" target="_blank" rel="external">原文链接</a></p>
-<font size="6em">&lt;Miss&gt;</font>
-
-<p>当没有匹配到当前的地址时，将会渲染Miss。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> App = () =&gt; (</div><div class="line">  &lt;Router&gt;</div><div class="line">    &lt;Match pattern="/foo"/&gt;</div><div class="line">    &lt;Match pattern="/bar"/&gt;</div><div class="line">    &lt;Miss component=&#123;NoMatch&#125;/&gt;</div><div class="line">  &lt;/Router&gt;</div><div class="line">)</div><div class="line"></div><div class="line">const NoMatch = (&#123; location &#125;) =&gt; (</div><div class="line">  &lt;div&gt;Nothing matched &#123;location.pathname&#125;.&lt;/div&gt;</div><div class="line">)</div></pre></td></tr></table></figure></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/11/29/react-router-4-0-0-api-Miss/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2145,7 +2125,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">31</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2167,7 +2147,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">31</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

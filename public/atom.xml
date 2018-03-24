@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.yinlijun.com/"/>
-  <updated>2018-03-20T11:41:41.697Z</updated>
+  <updated>2018-03-24T02:37:05.167Z</updated>
   <id>http://www.yinlijun.com/</id>
   
   <author>
@@ -14,6 +14,40 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Windows下Ngrok工具的使用</title>
+    <link href="http://www.yinlijun.com/2018/03/24/ngrok-intro/"/>
+    <id>http://www.yinlijun.com/2018/03/24/ngrok-intro/</id>
+    <published>2018-03-24T02:09:26.000Z</published>
+    <updated>2018-03-24T02:37:05.167Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近在本机调试七牛云上传，碰到一个问题。七牛云存储完成上传操作后，会有一个回调操作，告诉服务器上传结果。</p>
+<blockquote>
+<p><a href="https://developer.qiniu.com/kodo/sdk/1289/nodejs" target="_blank" rel="external">https://developer.qiniu.com/kodo/sdk/1289/nodejs</a><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> options = &#123;</div><div class="line">  scope: bucket,</div><div class="line">  callbackUrl: <span class="string">'http://api.example.com/qiniu/upload/callback'</span>,</div><div class="line">  callbackBody: <span class="string">'key=$(key)&amp;hash=$(etag)&amp;bucket=$(bucket)&amp;fsize=$(fsize)&amp;name=$(x:name)'</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> putPolicy = <span class="keyword">new</span> qiniu.rs.PutPolicy(options);</div><div class="line"><span class="keyword">var</span> uploadToken=putPolicy.uploadToken(mac);</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>上面的<b><a href="http://api.example.com" target="_blank" rel="external">http://api.example.com</a></b>就是回调的url，在开发模式下肯定是指向本机的，而不是生产服务器。</p>
+<p>因此需要一个内网穿透的工具，在网上找到<a href="https://www.ngrok.cc" target="_blank" rel="external">Ngrok</a>。</p>
+<p>Ngrok会生成一个指向你本机服务的隧道，隧道信息，包含一个三级域名（就是上面的回调url），本地端口（就是你的服务运行的端口），协议类型等信息。<br><img src="https://picabstract-preview-ftn.weiyun.com:8443/ftn_pic_abs_v2/56d49defca68f6178c2aadc601ea157c78729113241118fa8f5471199a8e707a5a5ee24a8e08fb8e264665971dbf42db?pictype=scale&amp;from=30113&amp;version=2.0.0.2&amp;uin=474724984&amp;fname=QQ%E5%9B%BE%E7%89%8720180324102303.png&amp;size=1024" alt=""></p>
+<p>隧道有免费的，也有付费的，但免费的貌似不稳定。</p>
+<p>然后在server端可以用环境变量区分回调的url。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">qiniuCallbackDomain: process.env.NODE_ENV === <span class="string">"production"</span> ? <span class="string">'http://test.xxx.com'</span> :<span class="string">'http://prod.xx.com'</span>,</div></pre></td></tr></table></figure></p>
+<p>Ngrok支持大部分的平台，我的是windows 64位，下载完<a href="https://www.ngrok.cc/download.html" target="_blank" rel="external">客户端</a>，解压，运行<b>Sunny-Ngrok启动工具.bat</b>，填入隧道ID，即可实现外网访问。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近在本机调试七牛云上传，碰到一个问题。七牛云存储完成上传操作后，会有一个回调操作，告诉服务器上传结果。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://developer.qiniu.com/kodo/sdk/1289/nodejs&quot; targe
+    
+    </summary>
+    
+    
+      <category term="ngrok" scheme="http://www.yinlijun.com/tags/ngrok/"/>
+    
+      <category term="nodjs" scheme="http://www.yinlijun.com/tags/nodjs/"/>
+    
+  </entry>
   
   <entry>
     <title>从零搭建Android OTA系统——部署到阿里云ECS</title>
@@ -48,11 +82,11 @@
     
       <category term="nodejs" scheme="http://www.yinlijun.com/tags/nodejs/"/>
     
-      <category term="express" scheme="http://www.yinlijun.com/tags/express/"/>
-    
       <category term="react" scheme="http://www.yinlijun.com/tags/react/"/>
     
       <category term="ECS， nginx" scheme="http://www.yinlijun.com/tags/ECS%EF%BC%8C-nginx/"/>
+    
+      <category term="express" scheme="http://www.yinlijun.com/tags/express/"/>
     
   </entry>
   
@@ -165,9 +199,9 @@
     
       <category term="nodejs" scheme="http://www.yinlijun.com/tags/nodejs/"/>
     
-      <category term="express" scheme="http://www.yinlijun.com/tags/express/"/>
-    
       <category term="react" scheme="http://www.yinlijun.com/tags/react/"/>
+    
+      <category term="express" scheme="http://www.yinlijun.com/tags/express/"/>
     
   </entry>
   
@@ -236,9 +270,9 @@
     
       <category term="nodejs" scheme="http://www.yinlijun.com/tags/nodejs/"/>
     
-      <category term="express" scheme="http://www.yinlijun.com/tags/express/"/>
-    
       <category term="react" scheme="http://www.yinlijun.com/tags/react/"/>
+    
+      <category term="express" scheme="http://www.yinlijun.com/tags/express/"/>
     
   </entry>
   
@@ -647,11 +681,11 @@
     </summary>
     
     
-      <category term="ubuntu" scheme="http://www.yinlijun.com/tags/ubuntu/"/>
-    
       <category term="android" scheme="http://www.yinlijun.com/tags/android/"/>
     
       <category term="android studio" scheme="http://www.yinlijun.com/tags/android-studio/"/>
+    
+      <category term="ubuntu" scheme="http://www.yinlijun.com/tags/ubuntu/"/>
     
   </entry>
   
@@ -1023,9 +1057,9 @@
     </summary>
     
     
-      <category term="ubuntu" scheme="http://www.yinlijun.com/tags/ubuntu/"/>
-    
       <category term="android" scheme="http://www.yinlijun.com/tags/android/"/>
+    
+      <category term="ubuntu" scheme="http://www.yinlijun.com/tags/ubuntu/"/>
     
       <category term="环境搭建" scheme="http://www.yinlijun.com/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
     
@@ -1090,51 +1124,6 @@
       <category term="ubuntu" scheme="http://www.yinlijun.com/tags/ubuntu/"/>
     
       <category term="update-alternatives" scheme="http://www.yinlijun.com/tags/update-alternatives/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Ubuntu 12.04 生成桌面图标</title>
-    <link href="http://www.yinlijun.com/2016/11/15/make-ubutun-desktop/"/>
-    <id>http://www.yinlijun.com/2016/11/15/make-ubutun-desktop/</id>
-    <published>2016-11-15T10:04:19.000Z</published>
-    <updated>2017-05-25T03:41:18.234Z</updated>
-    
-    <content type="html"><![CDATA[<p>在Ubuntu上从网上下载压缩包版本（非.deb包）的应用程序之后，是不生成桌面图表的，比如网上下载的<a href="http://www.android-studio.org/" target="_blank" rel="external">Android Studio</a>, 所以需要自己做一个桌面图标。</p>
-<ol>
-<li><p>进入到/usr/share/applications/目录下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /usr/share/applications/</div></pre></td></tr></table></figure>
-</li>
-<li><p>新建一个android-studio.desktop文件。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim android-studio.desktop</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<a id="more"></a>
-<ol>
-<li>输入一下内容<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Version=2.2</div><div class="line">Name=Android Studio</div><div class="line">GenericName=Android IDE</div><div class="line">Comment=Android Development</div><div class="line">Exec=/home/yinlijun/android_toolchain/android-studio/bin/studio.sh %U</div><div class="line">Terminal=<span class="literal">false</span></div><div class="line">Icon=/home/yinlijun/android_toolchain/android-studio/bin/studio.png</div><div class="line">Type=Application</div><div class="line">Categories=Android;IDE;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>保存退出之后，在应用程序里面就可以找到，绑定了图标的应用程序，可以将其固定到启动器上。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在Ubuntu上从网上下载压缩包版本（非.deb包）的应用程序之后，是不生成桌面图表的，比如网上下载的&lt;a href=&quot;http://www.android-studio.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Android Studio&lt;/a&gt;, 所以需要自己做一个桌面图标。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;进入到/usr/share/applications/目录下&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;cd&lt;/span&gt; /usr/share/applications/&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;新建一个android-studio.desktop文件。&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;vim android-studio.desktop&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-    
-    </summary>
-    
-    
-      <category term="ubuntu" scheme="http://www.yinlijun.com/tags/ubuntu/"/>
-    
-      <category term="android studio" scheme="http://www.yinlijun.com/tags/android-studio/"/>
     
   </entry>
   
