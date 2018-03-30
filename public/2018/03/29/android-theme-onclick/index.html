@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="android studio,android,ubuntu," />
+  <meta name="keywords" content="android," />
 
 
 
@@ -92,17 +92,17 @@
 
 
 
-<meta name="description" content="问题出现环境 Ubuntu 12.04 Android Studio 2.2.2  解决步骤开启VT-x在ubuntu上使用Android Studio创建模拟器时，会提示一个错误：1/dev/kvm is not found 并且提示要在BIOS里面开启VT-x。">
-<meta name="keywords" content="android studio,android,ubuntu">
+<meta name="description" content="监听控件的onClick事件有两种方法：  方法1调用控件的setOnClickListener设置监听回调。  123456Button button = (Button) findViewById(R.id.button);button.setOnClickListener(new View.OnClickListener() &amp;#123;    @Override    public voi">
+<meta name="keywords" content="android">
 <meta property="og:type" content="article">
-<meta property="og:title" content="解决 &#x2F;dev&#x2F;kvm is not found 的问题">
-<meta property="og:url" content="http://www.yinlijun.com/2016/11/28/fix-dev-kvm-is-not-found/index.html">
+<meta property="og:title" content="Android 5.0中的布局文件onClick回调报错">
+<meta property="og:url" content="http://www.yinlijun.com/2018/03/29/android-theme-onclick/index.html">
 <meta property="og:site_name" content="尹莉军">
-<meta property="og:description" content="问题出现环境 Ubuntu 12.04 Android Studio 2.2.2  解决步骤开启VT-x在ubuntu上使用Android Studio创建模拟器时，会提示一个错误：1/dev/kvm is not found 并且提示要在BIOS里面开启VT-x。">
-<meta property="og:updated_time" content="2017-05-25T03:41:18.233Z">
+<meta property="og:description" content="监听控件的onClick事件有两种方法：  方法1调用控件的setOnClickListener设置监听回调。  123456Button button = (Button) findViewById(R.id.button);button.setOnClickListener(new View.OnClickListener() &amp;#123;    @Override    public voi">
+<meta property="og:updated_time" content="2018-03-30T01:19:50.712Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="解决 &#x2F;dev&#x2F;kvm is not found 的问题">
-<meta name="twitter:description" content="问题出现环境 Ubuntu 12.04 Android Studio 2.2.2  解决步骤开启VT-x在ubuntu上使用Android Studio创建模拟器时，会提示一个错误：1/dev/kvm is not found 并且提示要在BIOS里面开启VT-x。">
+<meta name="twitter:title" content="Android 5.0中的布局文件onClick回调报错">
+<meta name="twitter:description" content="监听控件的onClick事件有两种方法：  方法1调用控件的setOnClickListener设置监听回调。  123456Button button = (Button) findViewById(R.id.button);button.setOnClickListener(new View.OnClickListener() &amp;#123;    @Override    public voi">
 
 
 
@@ -130,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://www.yinlijun.com/2016/11/28/fix-dev-kvm-is-not-found/"/>
+  <link rel="canonical" href="http://www.yinlijun.com/2018/03/29/android-theme-onclick/"/>
 
 
 
 
 
-  <title>解决 /dev/kvm is not found 的问题 | 尹莉军</title>
+  <title>Android 5.0中的布局文件onClick回调报错 | 尹莉军</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -290,7 +290,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.yinlijun.com/2016/11/28/fix-dev-kvm-is-not-found/">
+    <link itemprop="mainEntityOfPage" href="http://www.yinlijun.com/2018/03/29/android-theme-onclick/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="尹莉军 <yinlijun2004@gmail.com>">
@@ -307,7 +307,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">解决 /dev/kvm is not found 的问题</h1>
+          <h1 class="post-title" itemprop="name headline">Android 5.0中的布局文件onClick回调报错</h1>
         
 
         <div class="post-meta">
@@ -319,8 +319,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-28T19:44:23+08:00">
-                2016-11-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-29T20:16:55+08:00">
+                2018-03-29
               </time>
             
 
@@ -339,8 +339,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2016/11/28/fix-dev-kvm-is-not-found/#SOHUCS" itemprop="discussionUrl">
-                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2016/11/28/fix-dev-kvm-is-not-found/" itemprop="commentsCount"></span>
+                <a href="/2018/03/29/android-theme-onclick/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/03/29/android-theme-onclick/" itemprop="commentsCount"></span>
                 </a>
               
             
@@ -396,25 +396,19 @@
       
 
       
-        <h2 id="问题出现环境"><a href="#问题出现环境" class="headerlink" title="问题出现环境"></a>问题出现环境</h2><ul>
-<li>Ubuntu 12.04</li>
-<li>Android Studio 2.2.2</li>
+        <p>监听控件的onClick事件有两种方法：</p>
+<ul>
+<li>方法1<br>调用控件的setOnClickListener设置监听回调。</li>
 </ul>
-<h2 id="解决步骤"><a href="#解决步骤" class="headerlink" title="解决步骤"></a>解决步骤</h2><h3 id="开启VT-x"><a href="#开启VT-x" class="headerlink" title="开启VT-x"></a>开启VT-x</h3><p>在ubuntu上使用Android Studio创建模拟器时，会提示一个错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/dev/kvm is not found</div></pre></td></tr></table></figure></p>
-<p>并且提示要在<em>BIOS</em>里面开启<font size="4em"><strong>VT-x</strong></font>。</p>
-<a id="more"></a>
-<p>重启电脑，按<em>DEL</em>键进入<em>BIOS</em>,发现确实没有启用，于是启用后再此重启电脑。</p>
-<p>此时打开Android Studio，仍然提示一样的错误。</p>
-<p>再次在网上搜寻，发现如下解决方案，记录一下。</p>
-<p><a href="http://askubuntu.com/questions/600727/replacement-for-haxm-on-ubuntu-says-intel-x86-emulator-accelerator-is-not-comp" target="_blank" rel="external">http://askubuntu.com/questions/600727/replacement-for-haxm-on-ubuntu-says-intel-x86-emulator-accelerator-is-not-comp</a></p>
-<p>###<br>Check if your CPU supports hardware virtualization, by typing:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">egrep -c &apos;(vmx|svm)&apos; /proc/cpuinfo</div></pre></td></tr></table></figure></p>
-<p>If the result is 0, your CPU does not support hardware virtualization, which is necessary to run the KVM. If you get 1 or more, that means you’re fine.</p>
-<p>Next, install KVM. First make sure if your processor supports KVM by typing:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">kvm-ok</div></pre></td></tr></table></figure></p>
-<p>You will see this if that’s the case:</p>
-<p>INFO: Your CPU supports KVM extensions INFO: /dev/kvm exists KVM acceleration can be used<br>If this is the result, you need to turn on Intel VT in BIOS:</p>
-<p>INFO: KVM is disabled by your BIOS HINT: Enter your BIOS setup and enable Virtualization Technology (VT), and then hard poweroff/poweron your system KVM acceleration can NOT be used<br>The next step is to install the KVM and a few other packages needed. To do so, type:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils</div></pre></td></tr></table></figure></p>
-<p>Add your user to some groups, replacing by your own username:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo adduser &lt;user&gt; libvirtd</div><div class="line">sudo adduser &lt;user&gt; kvm</div></pre></td></tr></table></figure></p>
-<p>Check if everything is ok:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo virsh -c qemu:///system list</div></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Button button = (Button) findViewById(R.id.button);</div><div class="line">button.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>&#123;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<ul>
+<li>方法2<br>将回调方法名赋值给布局文件中的onClick属性，然后在Activity中实现该方法。</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Button</span></span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">    <span class="attr">android:text</span>=<span class="string">"Button"</span></div><div class="line">    <span class="attr">android:onClick</span>=<span class="string">"onClickButton"</span>/&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClickButton</span><span class="params">(View view)</span> </span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>但是方法2在5.0上有个坑，如果当前控件的layout的中xml中写了theme属性，那么就会报找不到该方法的错误。<br>如<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">LinearLayout</span></span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"200dp"</span></div><div class="line">    <span class="attr">android:background</span>=<span class="string">"@color/colorPrimary"</span></div><div class="line">    <span class="attr">android:onClick</span>=<span class="string">"onClickButton"</span></div><div class="line">    <span class="attr">android:theme</span>=<span class="string">"@style/AppTheme.MenuDefaultItem"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">        <span class="attr">android:text</span>=<span class="string">"text"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"100dp"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"100dp"</span> /&gt;</div><div class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>这是一个LinearLayout嵌套一个TextView，将onClick回调写在LinearLayout里，然后加上一个theme属性，这时点击LinearLayout就会报错。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">03-30 08:48:24.060 29147-29147/trendit.com.posusageintro E/AndroidRuntime: FATAL EXCEPTION: main</div><div class="line">                                                                           Process: trendit.com.posusageintro, PID: 29147</div><div class="line">                                                                           java.lang.IllegalStateException: Could not find a method onClickButton(View) in the activity class android.view.ContextThemeWrapper for onClick handler on view class android.widget.LinearLayout</div><div class="line">                                                                               at android.view.View$1.onClick(View.java:4008)</div><div class="line">                                                                               at android.view.View.performClick(View.java:4781)</div><div class="line">                                                                               at android.view.View$PerformClick.run(View.java:19874)</div><div class="line">                                                                               at android.os.Handler.handleCallback(Handler.java:739)</div><div class="line">                                                                               at android.os.Handler.dispatchMessage(Handler.java:95)</div><div class="line">                                                                               at android.os.Looper.loop(Looper.java:135)</div><div class="line">                                                                               at android.app.ActivityThread.main(ActivityThread.java:5254)</div><div class="line">                                                                               at java.lang.reflect.Method.invoke(Native Method)</div><div class="line">                                                                               at java.lang.reflect.Method.invoke(Method.java:372)</div><div class="line">                                                                               at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:902)</div><div class="line">                                                                               at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:697)</div><div class="line">                                                                            Caused by: java.lang.NoSuchMethodException: onClickButton [class android.view.View]</div><div class="line">                                                                               at java.lang.Class.getMethod(Class.java:664)</div><div class="line">                                                                               at java.lang.Class.getMethod(Class.java:643)</div><div class="line">                                                                               at android.view.View$1.onClick(View.java:4001)</div><div class="line">                                                                               at android.view.View.performClick(View.java:4781) </div><div class="line">                                                                               at android.view.View$PerformClick.run(View.java:19874) </div><div class="line">                                                                               at android.os.Handler.handleCallback(Handler.java:739) </div><div class="line">                                                                               at android.os.Handler.dispatchMessage(Handler.java:95) </div><div class="line">                                                                               at android.os.Looper.loop(Looper.java:135) </div><div class="line">                                                                               at android.app.ActivityThread.main(ActivityThread.java:5254) </div><div class="line">                                                                               at java.lang.reflect.Method.invoke(Native Method) </div><div class="line">                                                                               at java.lang.reflect.Method.invoke(Method.java:372) </div><div class="line">                                                                               at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:902) </div><div class="line">                                                                               at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:697)</div></pre></td></tr></table></figure></p>
+<p><a href="https://stackoverflow.com/questions/27531381/android-5-and-onclick-in-xml-layout/28345359#28345359" target="_blank" rel="external">StackOverflow</a>上有一段解释，在Android 5.0上的layout布局上，如果应用android:theme属性，就会报这个错误。较老的版本不会有这个问题。解决方法就是要么使用上面的方法1，要么将android:theme应用到application上。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">application</span> </span></div><div class="line">         <span class="attr">...</span></div><div class="line">         <span class="attr">android:theme</span>=<span class="string">"@android:style/Theme.Holo.Light"</span></div><div class="line">         <span class="attr">...</span>  &gt;</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -443,7 +437,7 @@
     </li>
     <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="http://www.yinlijun.com/2016/11/28/fix-dev-kvm-is-not-found/" title="解决 /dev/kvm is not found 的问题">http://www.yinlijun.com/2016/11/28/fix-dev-kvm-is-not-found/</a>
+      <a href="http://www.yinlijun.com/2018/03/29/android-theme-onclick/" title="Android 5.0中的布局文件onClick回调报错">http://www.yinlijun.com/2018/03/29/android-theme-onclick/</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明： </strong>
@@ -459,11 +453,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/android-studio/" rel="tag"># android studio</a>
-          
             <a href="/tags/android/" rel="tag"># android</a>
-          
-            <a href="/tags/ubuntu/" rel="tag"># ubuntu</a>
           
         </div>
       
@@ -476,8 +466,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/28/android-https-verify-ways/" rel="next" title="https双向验证功能的实现">
-                <i class="fa fa-chevron-left"></i> https双向验证功能的实现
+              <a href="/2018/03/24/ngrok-intro/" rel="next" title="Windows下Ngrok工具的使用">
+                <i class="fa fa-chevron-left"></i> Windows下Ngrok工具的使用
               </a>
             
           </div>
@@ -485,10 +475,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/11/29/react-router-4-0-0-api-Miss/" rel="prev" title="Miss-react router 4.0.0 api中文文档">
-                Miss-react router 4.0.0 api中文文档 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -537,17 +523,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://tva3.sinaimg.cn/crop.0.0.180.180.180/7d92e765jw1e8qgp5bmzyj2050050aa8.jpg"
@@ -630,22 +607,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题出现环境"><span class="nav-number">1.</span> <span class="nav-text">问题出现环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决步骤"><span class="nav-number">2.</span> <span class="nav-text">解决步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#开启VT-x"><span class="nav-number">2.1.</span> <span class="nav-text">开启VT-x</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
