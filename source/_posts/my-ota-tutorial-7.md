@@ -2,6 +2,7 @@
 title: 从零搭建Android OTA系统——部署到阿里云ECS
 date: 2018-3-20 19:55:31
 tags: [react, nodejs, ECS， nginx, express]
+categories: 从零搭建Android OTA系统
 ---
 
 本文介绍如何将整个ota系统部署到阿里云ECS上去，没有看过正规军是如何部署的，以下只是我的个人经验。

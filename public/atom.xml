@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.yinlijun.com/"/>
-  <updated>2018-03-30T01:19:50.712Z</updated>
+  <updated>2018-04-09T11:07:09.336Z</updated>
   <id>http://www.yinlijun.com/</id>
   
   <author>
@@ -14,6 +14,56 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>从零搭建Android OTA系统——用户注册登录前端界面实现</title>
+    <link href="http://www.yinlijun.com/2018/04/09/my-ota-tutorial-2/"/>
+    <id>http://www.yinlijun.com/2018/04/09/my-ota-tutorial-2/</id>
+    <published>2018-04-09T09:17:31.000Z</published>
+    <updated>2018-04-09T11:07:09.336Z</updated>
+    
+    <content type="html"><![CDATA[<p>OTA的前端界面，打算用react实现，采用的库有</p>
+<ul>
+<li><a href="https://ant.design/index-cn" target="_blank" rel="external">antd</a> 目前比较流行UI组件库。</li>
+<li><a href="https://www.npmjs.com/package/axios" target="_blank" rel="external">axios</a> 网络请求库。</li>
+<li><a href="https://www.npmjs.com/package/redux-saga" target="_blank" rel="external">redux-saga</a> 一个处理异步流处理的库。</li>
+</ul>
+<p>目录结构：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">src</div><div class="line"> - components</div><div class="line"> - containers</div><div class="line"> - reducers</div><div class="line"> - sagas</div></pre></td></tr></table></figure></p>
+<p>components用来存放无状态组件</p>
+<p>containers用来存放状态组件</p>
+<p>reducers用来存放reducer文件</p>
+<p>sagas用来存放redux-saga文件</p>
+<h4 id="component和container的区别"><a href="#component和container的区别" class="headerlink" title="component和container的区别"></a>component和container的区别</h4><p>我的理解，component是无状态、可复用的，只负责渲染的组件，它的输入是Props，输出是render的结果。</p>
+<p>container负责和redux连接，从store里面获取数据。</p>
+<h4 id="界面"><a href="#界面" class="headerlink" title="界面"></a>界面</h4><p>登录和注册组件，可以作为一个component，用一个Tabs组件包装。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">Login</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">    <span class="keyword">constructor</span>(props) &#123;</div><div class="line">        <span class="keyword">super</span>(props);</div><div class="line">        <span class="keyword">this</span>.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(<span class="keyword">this</span>)</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">const</span> &#123; login, register &#125; = <span class="keyword">this</span>.props;</div><div class="line">        <span class="keyword">return</span> (</div><div class="line">            &lt;Tabs defaultActiveKey="1" tabBarStyle=&#123;&#123; textAlign: 'center' &#125;&#125; className=&#123; style.container &#125;&gt;</div><div class="line">                &lt;TabPane tab="登录" key="1"&gt;</div><div class="line">                    &lt;LoginForm login=&#123; login &#125;/&gt;</div><div class="line">                &lt;/TabPane&gt;</div><div class="line">                &lt;TabPane tab="注册" key="2"&gt;</div><div class="line">                    &lt;RegisterForm register=&#123; register &#125;/&gt;</div><div class="line">                &lt;/TabPane&gt;</div><div class="line">            &lt;/Tabs&gt;</div><div class="line">        )</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h5 id="reducer"><a href="#reducer" class="headerlink" title="reducer"></a>reducer</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> actions = &#123;</div><div class="line">    login: <span class="function"><span class="keyword">function</span> (<span class="params">username, password</span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> &#123;</div><div class="line">            type: actionsTypes.USER_LOGIN,</div><div class="line">            username,</div><div class="line">            password</div><div class="line">        &#125;</div><div class="line">    &#125;,</div><div class="line">    logout: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> &#123;</div><div class="line">            type: actionsTypes.USER_LOGOUT,</div><div class="line">        &#125;</div><div class="line">    &#125;,</div><div class="line">    register: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> &#123;</div><div class="line">            type: actionsTypes.USER_REGISTER,</div><div class="line">            data</div><div class="line">        &#125;</div><div class="line">    &#125;,</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>data是注册表单的内容</p>
+<h4 id="saga"><a href="#saga" class="headerlink" title="saga"></a>saga</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span>* <span class="title">login</span>(<span class="params">username, password</span>) </span>&#123;</div><div class="line">    <span class="keyword">yield</span> put(&#123;type: IndexActionTypes.FETCH_START&#125;);</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">yield</span> call(post, <span class="string">'/user/login'</span>, &#123;username, password&#125;)</div><div class="line">    &#125; <span class="keyword">catch</span> (error) &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"login failed"</span>, error.message);</div><div class="line">    &#125; <span class="keyword">finally</span> &#123;</div><div class="line">        <span class="keyword">yield</span> put(&#123;type: IndexActionTypes.FETCH_END&#125;);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span>* <span class="title">loginFlow</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</div><div class="line">        <span class="keyword">let</span> request = <span class="keyword">yield</span> take(IndexActionTypes.USER_LOGIN);</div><div class="line">        <span class="keyword">let</span> response = <span class="keyword">yield</span> call(login, request.username, request.password);</div><div class="line">        <span class="keyword">if</span>(response &amp;&amp; response.code === <span class="number">0</span>)&#123;</div><div class="line">            <span class="keyword">yield</span> put(&#123;type:IndexActionTypes.SET_MESSAGE,msgContent:<span class="string">'登录成功!'</span>,msgType:<span class="number">1</span>&#125;);</div><div class="line">            <span class="keyword">yield</span> put(&#123;type:IndexActionTypes.RESPONSE_USER_INFO,data:response.data&#125;)</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">yield</span> put(&#123;type:IndexActionTypes.SET_MESSAGE,msgContent: (response &amp;&amp; response.message) || <span class="string">'登录失败'</span>,msgType:<span class="number">0</span>&#125;);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span>* <span class="title">logout</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">yield</span> put(&#123;type: IndexActionTypes.FETCH_START&#125;);</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">yield</span> call(get, <span class="string">'/user/logout'</span>)</div><div class="line">    &#125; <span class="keyword">catch</span> (error) &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"logout failed"</span>, error.message);</div><div class="line">    &#125; <span class="keyword">finally</span> &#123;</div><div class="line">        <span class="keyword">yield</span> put(&#123;type: IndexActionTypes.FETCH_END&#125;);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span>* <span class="title">logoutFlow</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">while</span>(<span class="literal">true</span>) &#123;</div><div class="line">        <span class="keyword">let</span> request = <span class="keyword">yield</span> take(IndexActionTypes.USER_LOGOUT);</div><div class="line">        <span class="keyword">let</span> response = <span class="keyword">yield</span> call(logout);</div><div class="line">        <span class="keyword">yield</span> put(&#123;type:IndexActionTypes.SET_MESSAGE,msgContent:<span class="string">'已退出当前账号'</span>,msgType:<span class="number">1</span>&#125;);</div><div class="line">        <span class="keyword">yield</span> put(&#123;type:IndexActionTypes.RESPONSE_USER_INFO,data:&#123;&#125;&#125;)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span>* <span class="title">register</span> (<span class="params">data</span>) </span>&#123;</div><div class="line">    <span class="keyword">yield</span> put(&#123;type:IndexActionTypes.FETCH_START&#125;);</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">yield</span> call(puter, <span class="string">'/user'</span>, data)</div><div class="line">    &#125; <span class="keyword">catch</span> (error) &#123;</div><div class="line">        <span class="keyword">yield</span> put(&#123;type:IndexActionTypes.SET_MESSAGE,msgContent:<span class="string">'注册失败'</span>,msgType:<span class="number">0</span>&#125;);</div><div class="line">    &#125; <span class="keyword">finally</span> &#123;</div><div class="line">        <span class="keyword">yield</span> put(&#123;type: IndexActionTypes.FETCH_END&#125;); </div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span>* <span class="title">registerFlow</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</div><div class="line">        <span class="keyword">let</span> request = <span class="keyword">yield</span> take(IndexActionTypes.USER_REGISTER);</div><div class="line">        <span class="keyword">let</span> response = <span class="keyword">yield</span> call(register, request.data);</div><div class="line">        <span class="keyword">if</span>(response &amp;&amp; response.code === <span class="number">0</span>)&#123;</div><div class="line">            <span class="keyword">yield</span> put(&#123;type:IndexActionTypes.SET_MESSAGE,msgContent:<span class="string">'注册成功，请联系管理员批准!'</span>,msgType:<span class="number">1</span>&#125;);</div><div class="line">            <span class="keyword">yield</span> put(&#123;type:IndexActionTypes.RESPONSE_USER_INFO,data:response.data&#125;)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="网络请求"><a href="#网络请求" class="headerlink" title="网络请求"></a>网络请求</h4><p>为了和saga的操作put分开，axios的put方法被我封装成了puter。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> config = &#123;</div><div class="line">    baseURL: <span class="string">'/api'</span>,</div><div class="line">    transformRequest: [</div><div class="line">        <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</div><div class="line">            <span class="keyword">let</span> ret = <span class="string">''</span>;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">let</span> it <span class="keyword">in</span> data) &#123;</div><div class="line">                ret += <span class="built_in">encodeURIComponent</span>(it) + <span class="string">'='</span> + <span class="built_in">encodeURIComponent</span>(data[it]) + <span class="string">'&amp;'</span></div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> ret</div><div class="line">        &#125;</div><div class="line">    ],</div><div class="line">    transformResponse: [</div><div class="line">        <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</div><div class="line">            <span class="keyword">return</span> data</div><div class="line">        &#125;</div><div class="line">    ],</div><div class="line">    headers: &#123;</div><div class="line">        <span class="string">'Content-Type'</span>: <span class="string">'application/x-www-form-urlencoded;charset=UTF-8'</span>,</div><div class="line">    &#125;,</div><div class="line">    timeout: <span class="number">10000</span>,</div><div class="line">    responseType: <span class="string">'json'</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line">axios.interceptors.response.use(<span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</div><div class="line">    <span class="comment">//相应拦截器</span></div><div class="line">    <span class="keyword">return</span> res.data;</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">get</span>(<span class="params">url, params</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"url"</span>, url);</div><div class="line">    config.params = params;</div><div class="line">    <span class="keyword">return</span> axios.get(url, config)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">post</span>(<span class="params">url, data</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"url"</span>, url, <span class="string">"data"</span>, data);</div><div class="line">    <span class="keyword">if</span>(config.params) &#123;</div><div class="line">        <span class="keyword">delete</span> config.params</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> axios.post(url, data, config)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">puter</span>(<span class="params">url, data</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"url"</span>, url, <span class="string">"data"</span>, data);</div><div class="line">    <span class="keyword">if</span>(config.params) &#123;</div><div class="line">        <span class="keyword">delete</span> config.params</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> axios.put(url, data, config);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">deleter</span>(<span class="params">url, param</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"url"</span>, url, <span class="string">"param"</span>, param);</div><div class="line">    config.params = param;</div><div class="line">    <span class="keyword">return</span> axios.delete(url, config);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>以上所有的源代码都可以在<a href="https://github.com/yinlijun2004/android_ota_system" target="_blank" rel="external">https://github.com/yinlijun2004/android_ota_system</a>中找到。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;OTA的前端界面，打算用react实现，采用的库有&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://ant.design/index-cn&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;antd&lt;/a&gt; 目前比较流行UI组件库。&lt;/li&gt;
+&lt;l
+    
+    </summary>
+    
+      <category term="从零搭建Android OTA系统" scheme="http://www.yinlijun.com/categories/%E4%BB%8E%E9%9B%B6%E6%90%AD%E5%BB%BAAndroid-OTA%E7%B3%BB%E7%BB%9F/"/>
+    
+    
+      <category term="nodejs" scheme="http://www.yinlijun.com/tags/nodejs/"/>
+    
+      <category term="express" scheme="http://www.yinlijun.com/tags/express/"/>
+    
+      <category term="react" scheme="http://www.yinlijun.com/tags/react/"/>
+    
+      <category term="antd" scheme="http://www.yinlijun.com/tags/antd/"/>
+    
+  </entry>
   
   <entry>
     <title>Android 5.0中的布局文件onClick回调报错</title>
@@ -91,7 +141,7 @@
     <link href="http://www.yinlijun.com/2018/03/20/my-ota-tutorial-7/"/>
     <id>http://www.yinlijun.com/2018/03/20/my-ota-tutorial-7/</id>
     <published>2018-03-20T11:55:31.000Z</published>
-    <updated>2018-03-20T11:41:41.697Z</updated>
+    <updated>2018-04-09T09:18:20.184Z</updated>
     
     <content type="html"><![CDATA[<p>本文介绍如何将整个ota系统部署到阿里云ECS上去，没有看过正规军是如何部署的，以下只是我的个人经验。</p>
 <h3 id="创建远程git目录"><a href="#创建远程git目录" class="headerlink" title="创建远程git目录"></a>创建远程git目录</h3><p>登陆阿里云ECS，创建一个bare仓库，存放ota_be代码。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git init --bare ~/project/ota_server.git</div></pre></td></tr></table></figure></p>
@@ -115,6 +165,8 @@
 &lt;h3 id=&quot;创建远程git目录&quot;&gt;&lt;a href=&quot;#创建远程git目录&quot; class=&quot;headerlink&quot; title=&quot;创建远程git目录&quot;&gt;&lt;/a&gt;
     
     </summary>
+    
+      <category term="从零搭建Android OTA系统" scheme="http://www.yinlijun.com/categories/%E4%BB%8E%E9%9B%B6%E6%90%AD%E5%BB%BAAndroid-OTA%E7%B3%BB%E7%BB%9F/"/>
     
     
       <category term="nodejs" scheme="http://www.yinlijun.com/tags/nodejs/"/>
@@ -184,7 +236,7 @@
     <link href="http://www.yinlijun.com/2017/12/20/my-ota-tutorial-1/"/>
     <id>http://www.yinlijun.com/2017/12/20/my-ota-tutorial-1/</id>
     <published>2017-12-20T10:23:04.000Z</published>
-    <updated>2018-03-20T11:27:54.748Z</updated>
+    <updated>2018-04-09T09:18:07.862Z</updated>
     
     <content type="html"><![CDATA[<p>本文实现简单的服务端的注册，登录功能，暂时不实现前端界面，用curl模拟前端请求。</p>
 <h3 id="创建后端项目"><a href="#创建后端项目" class="headerlink" title="创建后端项目"></a>创建后端项目</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">express ota_be</div></pre></td></tr></table></figure>
@@ -233,6 +285,8 @@
     
     </summary>
     
+      <category term="从零搭建Android OTA系统" scheme="http://www.yinlijun.com/categories/%E4%BB%8E%E9%9B%B6%E6%90%AD%E5%BB%BAAndroid-OTA%E7%B3%BB%E7%BB%9F/"/>
+    
     
       <category term="nodejs" scheme="http://www.yinlijun.com/tags/nodejs/"/>
     
@@ -243,11 +297,11 @@
   </entry>
   
   <entry>
-    <title>从零搭建Android OTA系统——创建后端项目</title>
+    <title>从零搭建Android OTA系统——开篇</title>
     <link href="http://www.yinlijun.com/2017/12/20/my-ota-tutorial/"/>
     <id>http://www.yinlijun.com/2017/12/20/my-ota-tutorial/</id>
     <published>2017-12-20T09:45:28.000Z</published>
-    <updated>2018-03-20T11:35:16.099Z</updated>
+    <updated>2018-04-09T09:19:57.477Z</updated>
     
     <content type="html"><![CDATA[<h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>作为一个半路出家的码农，一个野生Android工程师，一直对<b>全栈</b>心怀憧憬，但未有行动。直到两年之前有机会开始接触javascript，写了一些前端的代码，加上nodejs社区这些年的蓬勃发展，我觉得这是一个机会。正如某位长者教导的:</p>
 <blockquote>
@@ -289,11 +343,11 @@
 </ul>
 <h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3><ul>
 <li><a href="/2017/12/20/my-ota-tutorial-1/" title="用户注册登录的后台实现">用户注册登录的后台实现</a></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
+<li><a href="/2018/04/09/my-ota-tutorial-2/" title="用户注册登录前端界面实现">用户注册登录前端界面实现</a></li>
+<li>七牛云存储接口实现 </li>
+<li>版本发布规则实现 </li>
+<li>用户管理规则实现 </li>
+<li>升级规则实现 </li>
 <li><a href="/2018/03/20/my-ota-tutorial-7/" title="Android OTA部署到阿里云ECS">Android OTA部署到阿里云ECS</a></li>
 </ul>
 ]]></content>
@@ -303,6 +357,8 @@
       &lt;h3 id=&quot;起因&quot;&gt;&lt;a href=&quot;#起因&quot; class=&quot;headerlink&quot; title=&quot;起因&quot;&gt;&lt;/a&gt;起因&lt;/h3&gt;&lt;p&gt;作为一个半路出家的码农，一个野生Android工程师，一直对&lt;b&gt;全栈&lt;/b&gt;心怀憧憬，但未有行动。直到两年之前有机会开始接触javascr
     
     </summary>
+    
+      <category term="从零搭建Android OTA系统" scheme="http://www.yinlijun.com/categories/%E4%BB%8E%E9%9B%B6%E6%90%AD%E5%BB%BAAndroid-OTA%E7%B3%BB%E7%BB%9F/"/>
     
     
       <category term="nodejs" scheme="http://www.yinlijun.com/tags/nodejs/"/>
@@ -718,9 +774,9 @@
     </summary>
     
     
-      <category term="android studio" scheme="http://www.yinlijun.com/tags/android-studio/"/>
-    
       <category term="android" scheme="http://www.yinlijun.com/tags/android/"/>
+    
+      <category term="android studio" scheme="http://www.yinlijun.com/tags/android-studio/"/>
     
       <category term="ubuntu" scheme="http://www.yinlijun.com/tags/ubuntu/"/>
     
@@ -998,6 +1054,43 @@
   
   <entry>
     <title>BrowserRouter-react router 4.0.0 api中文文档</title>
+    <link href="http://www.yinlijun.com/2016/11/24/react-router-4-0-0-api/"/>
+    <id>http://www.yinlijun.com/2016/11/24/react-router-4-0-0-api/</id>
+    <published>2016-11-24T06:54:00.000Z</published>
+    <updated>2017-05-25T03:41:18.236Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://react-router.now.sh/BrowserRouter" target="_blank" rel="external">原文链接</a></p>
+<font size="5em">&lt;BrowserRouter&gt;</font>
+
+<p>保持你的界面与浏览器历史记录保持同步。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;BrowserRouter&gt;</div><div class="line">  &lt;App/&gt;</div><div class="line">&lt;/BrowserRouter&gt;</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<font color="#FF0000">basename</font>
+
+<p>所有路由的根URL，如果你的应用处于服务端的子目录, 你可以设置这个值为该子目录。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;BrowserRouter basename=&quot;/calendar&quot; /&gt;</div><div class="line"></div><div class="line">// 假设Link标签如下所示：</div><div class="line">&lt;Link to=&quot;/today&quot;/&gt;</div><div class="line">// 那么超链接指向 &quot;/calendar/today&quot;</div><div class="line">&lt;/BrowserRouter&gt;</div></pre></td></tr></table></figure>
+<font size="5em">&lt;/BrowserRouter&gt;</font>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;https://react-router.now.sh/BrowserRouter&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;原文链接&lt;/a&gt;&lt;/p&gt;
+&lt;font size=&quot;5em&quot;&gt;&amp;lt;BrowserRouter&amp;gt;&lt;/font&gt;
+
+&lt;p&gt;保持你的界面与浏览器历史记录保持同步。&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;BrowserRouter&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &amp;lt;App/&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;/BrowserRouter&amp;gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="react" scheme="http://www.yinlijun.com/tags/react/"/>
+    
+      <category term="react-router" scheme="http://www.yinlijun.com/tags/react-router/"/>
+    
+      <category term="翻译文档" scheme="http://www.yinlijun.com/tags/%E7%BF%BB%E8%AF%91%E6%96%87%E6%A1%A3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>BrowserRouter-react router 4.0.0 api中文文档</title>
     <link href="http://www.yinlijun.com/2016/11/24/react-router-4-0-0-api-BrowserRouter/"/>
     <id>http://www.yinlijun.com/2016/11/24/react-router-4-0-0-api-BrowserRouter/</id>
     <published>2016-11-24T06:54:00.000Z</published>
@@ -1036,43 +1129,6 @@
   </entry>
   
   <entry>
-    <title>BrowserRouter-react router 4.0.0 api中文文档</title>
-    <link href="http://www.yinlijun.com/2016/11/24/react-router-4-0-0-api/"/>
-    <id>http://www.yinlijun.com/2016/11/24/react-router-4-0-0-api/</id>
-    <published>2016-11-24T06:54:00.000Z</published>
-    <updated>2017-05-25T03:41:18.236Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="https://react-router.now.sh/BrowserRouter" target="_blank" rel="external">原文链接</a></p>
-<font size="5em">&lt;BrowserRouter&gt;</font>
-
-<p>保持你的界面与浏览器历史记录保持同步。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;BrowserRouter&gt;</div><div class="line">  &lt;App/&gt;</div><div class="line">&lt;/BrowserRouter&gt;</div></pre></td></tr></table></figure></p>
-<a id="more"></a>
-<font color="#FF0000">basename</font>
-
-<p>所有路由的根URL，如果你的应用处于服务端的子目录, 你可以设置这个值为该子目录。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;BrowserRouter basename=&quot;/calendar&quot; /&gt;</div><div class="line"></div><div class="line">// 假设Link标签如下所示：</div><div class="line">&lt;Link to=&quot;/today&quot;/&gt;</div><div class="line">// 那么超链接指向 &quot;/calendar/today&quot;</div><div class="line">&lt;/BrowserRouter&gt;</div></pre></td></tr></table></figure>
-<font size="5em">&lt;/BrowserRouter&gt;</font>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;a href=&quot;https://react-router.now.sh/BrowserRouter&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;原文链接&lt;/a&gt;&lt;/p&gt;
-&lt;font size=&quot;5em&quot;&gt;&amp;lt;BrowserRouter&amp;gt;&lt;/font&gt;
-
-&lt;p&gt;保持你的界面与浏览器历史记录保持同步。&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;BrowserRouter&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &amp;lt;App/&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;/BrowserRouter&amp;gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="react" scheme="http://www.yinlijun.com/tags/react/"/>
-    
-      <category term="react-router" scheme="http://www.yinlijun.com/tags/react-router/"/>
-    
-      <category term="翻译文档" scheme="http://www.yinlijun.com/tags/%E7%BF%BB%E8%AF%91%E6%96%87%E6%A1%A3/"/>
-    
-  </entry>
-  
-  <entry>
     <title>ubuntu编译android 6.0源代码环境搭建</title>
     <link href="http://www.yinlijun.com/2016/11/16/ubuntu%E7%BC%96%E8%AF%91android%E6%BA%90%E4%BB%A3%E7%A0%81%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
     <id>http://www.yinlijun.com/2016/11/16/ubuntu编译android源代码环境搭建/</id>
@@ -1099,43 +1155,6 @@
       <category term="ubuntu" scheme="http://www.yinlijun.com/tags/ubuntu/"/>
     
       <category term="环境搭建" scheme="http://www.yinlijun.com/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如何下载安装openJDK</title>
-    <link href="http://www.yinlijun.com/2016/11/15/how-to-download-openjdk/"/>
-    <id>http://www.yinlijun.com/2016/11/15/how-to-download-openjdk/</id>
-    <published>2016-11-15T12:04:44.000Z</published>
-    <updated>2017-05-25T03:41:18.234Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="JDK-8"><a href="#JDK-8" class="headerlink" title="JDK 8"></a>JDK 8</h2><h3 id="Debian-Ubuntu"><a href="#Debian-Ubuntu" class="headerlink" title="Debian, Ubuntu"></a><strong>Debian, Ubuntu</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install openjdk-8-jre</div></pre></td></tr></table></figure>
-<p>openjdk-8-jre只包含运行时环境(Java Runtime Environment）。如果你想开发java程序，请安装openjdk-8-jdk。</p>
-<a id="more"></a>
-<h3 id="Fedora-Oracle-Linux-Red-Hat-Enterprise-Linux"><a href="#Fedora-Oracle-Linux-Red-Hat-Enterprise-Linux" class="headerlink" title="Fedora, Oracle Linux, Red Hat Enterprise Linux"></a><strong>Fedora, Oracle Linux, Red Hat Enterprise Linux</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ su -c &quot;yum install java-1.8.0-openjdk&quot;</div></pre></td></tr></table></figure>
-<p>java-1.8.0-openjdk只包含运行时环境(Java Runtime Environment）。如果你想开发java程序，请安装java-1.8.0-openjdk-devel。</p>
-<h2 id="JDK-7"><a href="#JDK-7" class="headerlink" title="JDK 7"></a>JDK 7</h2><h3 id="Debian-Ubuntu-1"><a href="#Debian-Ubuntu-1" class="headerlink" title="Debian, Ubuntu"></a><strong>Debian, Ubuntu</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install openjdk-7-jre</div></pre></td></tr></table></figure>
-<p>openjdk-7-jre只包含运行时环境(Java Runtime Environment）。如果你想开发java程序，请安装openjdk-7-jdk。</p>
-<h3 id="Fedora-Oracle-Linux-Red-Hat-Enterprise-Linux-1"><a href="#Fedora-Oracle-Linux-Red-Hat-Enterprise-Linux-1" class="headerlink" title="Fedora, Oracle Linux, Red Hat Enterprise Linux"></a><strong>Fedora, Oracle Linux, Red Hat Enterprise Linux</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ su -c &quot;yum install java-1.7.0-openjdk&quot;</div></pre></td></tr></table></figure>
-<p>java-1.7.0-openjdk只包含运行时环境(Java Runtime Environment）。如果你想开发java程序，请安装java-1.7.0-openjdk-devel。</p>
-<h2 id="JDK-6"><a href="#JDK-6" class="headerlink" title="JDK 6"></a>JDK 6</h2><h3 id="Debian-Ubuntu-2"><a href="#Debian-Ubuntu-2" class="headerlink" title="Debian, Ubuntu"></a><strong>Debian, Ubuntu</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install openjdk-6-jre</div></pre></td></tr></table></figure>
-<p>openjdk-6-jre只包含运行时环境(Java Runtime Environment）。如果你想开发java程序，请安装openjdk-6-jdk。</p>
-<h3 id="Fedora-Oracle-Linux-Red-Hat-Enterprise-Linux-2"><a href="#Fedora-Oracle-Linux-Red-Hat-Enterprise-Linux-2" class="headerlink" title="Fedora, Oracle Linux, Red Hat Enterprise Linux"></a><strong>Fedora, Oracle Linux, Red Hat Enterprise Linux</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ su -c &quot;yum install java-1.6.0-openjdk&quot;</div></pre></td></tr></table></figure>
-<p>java-1.6.0-openjdk只包含运行时环境(Java Runtime Environment）。如果你想开发java程序，请安装java-1.6.0-openjdk-devel。</p>
-<p>参考<a href="http://openjdk.java.net/install/" target="_blank" rel="external">http://openjdk.java.net/install/</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;JDK-8&quot;&gt;&lt;a href=&quot;#JDK-8&quot; class=&quot;headerlink&quot; title=&quot;JDK 8&quot;&gt;&lt;/a&gt;JDK 8&lt;/h2&gt;&lt;h3 id=&quot;Debian-Ubuntu&quot;&gt;&lt;a href=&quot;#Debian-Ubuntu&quot; class=&quot;headerlink&quot; title=&quot;Debian, Ubuntu&quot;&gt;&lt;/a&gt;&lt;strong&gt;Debian, Ubuntu&lt;/strong&gt;&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;$ sudo apt-get install openjdk-8-jre&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;openjdk-8-jre只包含运行时环境(Java Runtime Environment）。如果你想开发java程序，请安装openjdk-8-jdk。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="openjdk" scheme="http://www.yinlijun.com/tags/openjdk/"/>
-    
-      <category term="java" scheme="http://www.yinlijun.com/tags/java/"/>
     
   </entry>
   

@@ -2,6 +2,7 @@
 title: 从零搭建Android OTA系统——创建后端项目
 date: 2017-12-20 18:23:04
 tags: [express, react, nodejs]
+categories: 从零搭建Android OTA系统
 ---
 
 本文实现简单的服务端的注册，登录功能，暂时不实现前端界面，用curl模拟前端请求。
