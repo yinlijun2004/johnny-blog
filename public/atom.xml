@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.yinlijun.com/"/>
-  <updated>2018-04-09T11:07:09.336Z</updated>
+  <updated>2018-04-17T13:01:08.097Z</updated>
   <id>http://www.yinlijun.com/</id>
   
   <author>
@@ -14,6 +14,177 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>七牛存储空间别名创建</title>
+    <link href="http://www.yinlijun.com/2018/04/17/qiniu-create-bucket-cname/"/>
+    <id>http://www.yinlijun.com/2018/04/17/qiniu-create-bucket-cname/</id>
+    <published>2018-04-17T12:36:18.000Z</published>
+    <updated>2018-04-17T13:01:08.097Z</updated>
+    
+    <content type="html"><![CDATA[<p>七牛的存储空间会提供一个默认的域名，用来访问里面的资源，但是这个域名使用是受限的，七牛会有如下提示：</p>
+<blockquote>
+<p>测试域名</p>
+<p>此类测试域名，限总流量，限单 IP 访问频率，限速，仅供测试使用，不能用于自定义域名的 CNAME 相关文档</p>
+<p>p71uhtys2.bkt.clouddn.com</p>
+</blockquote>
+<p>我们可以创建一个融合CDN加速域名指向这个空间。</p>
+<p>步骤如下：</p>
+<h3 id="绑定域名"><a href="#绑定域名" class="headerlink" title="绑定域名"></a>绑定域名</h3><p>在存储空间详情页面，点击立即绑定一个域名。<br><img src="https://picabstract-preview-ftn.weiyun.com:8443/ftn_pic_abs_v2/5e9d840cd7942567816fd657772bfdbe28cd8d836eb51e630c0f3d8190e17406cff3244e7b2c7241768836c0ea7bc52f?pictype=scale&amp;from=30113&amp;version=2.0.0.2&amp;uin=474724984&amp;fname=%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20180417204257.png&amp;size=1024" alt=""></p>
+<p>进来之后，填写你要绑定的域名，和对应的存储空间。<br><img src="https://picabstract-preview-ftn.weiyun.com:8443/ftn_pic_abs_v2/e17d5d729c824b0da89d182e7cc930735ece4e9ce6db44b5f81b268c715670598e07cf95b1f5ecb22f3e6052bdadd6f5?pictype=scale&amp;from=30113&amp;version=2.0.0.2&amp;uin=474724984&amp;fname=%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20180417204544.png&amp;size=1024" alt=""><br>注意这个域名是要经过备案的，备案的经过我之前有介绍过。</p>
+<p>其他的地方按需要填写，填写完之后拉到下面点创建按钮。</p>
+<p>然后会提示创建成功的消息。<br><img src="https://picabstract-preview-ftn.weiyun.com:8443/ftn_pic_abs_v2/eaecffc8d117ed56fa2bf60a3e34017b538c25b556529d1f4d154609c76f740b5a6862e98a36b09feeb32e6e1c387ca8?pictype=scale&amp;from=30113&amp;version=2.0.0.2&amp;uin=474724984&amp;fname=%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20180417204616.png&amp;size=1024" alt=""></p>
+<p>然后再回去看，会看到CDN的状态变为等待CNAME。<br><img src="https://picabstract-preview-ftn.weiyun.com:8443/ftn_pic_abs_v2/937e05f8155fb32f3193a7ad8ec7e131ba2637c5cebf6a3b6aeb2b2e995c5b461423102874ecb9e3cfe15957f30f20c8?pictype=scale&amp;from=30113&amp;version=2.0.0.2&amp;uin=474724984&amp;fname=%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20180417205340.png&amp;size=1024" alt=""></p>
+<h3 id="添加域名解析"><a href="#添加域名解析" class="headerlink" title="添加域名解析"></a>添加域名解析</h3><p>因为我的域名是在阿里云申请的，需要到阿里云去填写域名解析信息。</p>
+<p>在云解析DNS界面，添加一条解析规则。<br><img src="https://picabstract-preview-ftn.weiyun.com:8443/ftn_pic_abs_v2/2a13b25abc02dc6fe2ea0887557e72cf51918e4780c987217f2ece9dbfb83f3a6d2af12eb16e439c6e450601ade40159?pictype=scale&amp;from=30113&amp;version=2.0.0.2&amp;uin=474724984&amp;fname=%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20180417205140.png&amp;size=1024" alt=""></p>
+<p>记录值就填刚才的CNAME，主机记录就填二级域名。</p>
+<p>点击确认，等待十分钟，七牛那边的CDN状态就会变为成功。<br><img src="https://picabstract-preview-ftn.weiyun.com:8443/ftn_pic_abs_v2/7c7094162ed066f451bfc9d7e12764a95a29ecd5e4b6ad3989008dacbc236df7f7394167c529aaf8b73bf01d326cd219?pictype=scale&amp;from=30113&amp;version=2.0.0.2&amp;uin=474724984&amp;fname=%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20180417205804.png&amp;size=1024" alt=""></p>
+<p>或者windows下可以用命令行查询解析是否成功。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">$ nslookup -qt=mx qiniu.yinlijun.com</div><div class="line">▒▒Ȩ▒▒Ӧ▒▒:</div><div class="line">▒▒▒▒▒▒:  UnKnown</div><div class="line">Address:  192.168.1.1</div><div class="line"></div><div class="line">qiniu.yinlijun.com      canonical name = qiniu.yinlijun.com.qiniudns.com</div><div class="line">qiniu.yinlijun.com.qiniudns.com canonical name = largeqiniu.b0.aicdn.com</div><div class="line">largeqiniu.b0.aicdn.com canonical name = nm.aicdn.com</div><div class="line">nm.aicdn.com    canonical name = nm.ctn.aicdn.com</div><div class="line"></div><div class="line">aicdn.com</div><div class="line">        primary name server = ns1.ialloc.com</div><div class="line">        responsible mail addr = wtzhu182.163.com</div><div class="line">        serial  = 2015102101</div><div class="line">        refresh = 3600 (1 hour)</div><div class="line">        retry   = 180 (3 mins)</div><div class="line">        expire  = 1209600 (14 days)</div><div class="line">        default TTL = 10800 (3 hours)</div></pre></td></tr></table></figure></p>
+<p>这样的话，可以在代码里面，用你自定义的域名，代替原先七牛提供的测试域名了。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;七牛的存储空间会提供一个默认的域名，用来访问里面的资源，但是这个域名使用是受限的，七牛会有如下提示：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;测试域名&lt;/p&gt;
+&lt;p&gt;此类测试域名，限总流量，限单 IP 访问频率，限速，仅供测试使用，不能用于自定义域名的 CNAME 相关文档
+    
+    </summary>
+    
+    
+      <category term="qiniu" scheme="http://www.yinlijun.com/tags/qiniu/"/>
+    
+      <category term="aliyun" scheme="http://www.yinlijun.com/tags/aliyun/"/>
+    
+      <category term="ecs" scheme="http://www.yinlijun.com/tags/ecs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OTA用户使用指南</title>
+    <link href="http://www.yinlijun.com/2018/04/10/ota-user-manual/"/>
+    <id>http://www.yinlijun.com/2018/04/10/ota-user-manual/</id>
+    <published>2018-04-10T02:14:21.000Z</published>
+    <updated>2018-04-17T12:35:36.967Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h2><h3 id="用户权限"><a href="#用户权限" class="headerlink" title="用户权限"></a>用户权限</h3><p>系统分为四类用户，分别是</p>
+<ul>
+<li><p>系统管理员</p>
+<ul>
+<li>批准用户注册申请</li>
+<li>删除用户</li>
+<li>重置用户密码</li>
+<li>管理测试SN</li>
+<li>管理Android版本</li>
+<li>管理版本类别</li>
+</ul>
+</li>
+<li><p>软件工程师</p>
+<ul>
+<li>新建版本</li>
+<li>修改版本</li>
+<li>上传固件包</li>
+<li>发布Alpha测试</li>
+</ul>
+</li>
+<li><p>测试工程师</p>
+<ul>
+<li>撤回Alpha测试</li>
+<li>发布Beta测试</li>
+</ul>
+</li>
+<li><p>运营工程师</p>
+<ul>
+<li>撤回Beta测试</li>
+<li>发布Release版本</li>
+</ul>
+</li>
+</ul>
+<h4 id="系统管理员权限"><a href="#系统管理员权限" class="headerlink" title="系统管理员权限"></a>系统管理员权限</h4><ul>
+<li>批准用户注册申请<br>用户在OTA主界面注册成为OTA系统用户，注册时需要从以下列表选择一种身份：<ul>
+<li>软件工程师</li>
+<li>测试工程师</li>
+<li>运营工程师</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://picabstract-preview-ftn.weiyun.com:8443/ftn_pic_abs_v2/be617eb7472b662e17af2c693abf6022859fe84604c503b38480a183386139a99b110736f96a163c855f3285fc2760a6?pictype=scale&amp;from=30113&amp;version=2.0.0.2&amp;uin=474724984&amp;fname=1523346231%281%29.png&amp;size=1024" alt=""></p>
+<p>管理员登录之后，在用户管理页面，可以批准或者删除用户的注册申请。<br><img src="https://picabstract-preview-ftn.weiyun.com:8443/ftn_pic_abs_v2/27099809ab4a1b5194e22e59f458d34c927d7cc627fae348c9d3f1fe2b342abce0968f6c4c740a78cc51cece3d8a1189?pictype=scale&amp;from=30113&amp;version=2.0.0.2&amp;uin=474724984&amp;fname=%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20180410154736.png&amp;size=1024" alt=""></p>
+<ul>
+<li><p>删除用户 用户离职之后，管理员可以选择删除用户。</p>
+</li>
+<li><p>重置用户密码 用户忘记密码之后，管理员可以帮助用户重置用户密码。</p>
+</li>
+<li><p>管理测试SN 管理员可以添加SN号，用来标识对应的版本类别，如果勾选了Alpha，则可以进行Alpha版本状态下的版本升级；如果勾选了Beta，则可以进行Beta版本状态下的版本升级。</p>
+</li>
+<li><p>管理Android版本 管理员可以添加/删除Andriod版本，软件工程师可以从中选择一个版本。</p>
+</li>
+<li><p>管理版本类别 管理员可以添加/删除版本类别，一个版本类别标识一类终端产品，OTA会选择同一版本类别的更高的版本进行升级。</p>
+</li>
+</ul>
+<p><img src="https://picabstract-preview-ftn.weiyun.com:8443/ftn_pic_abs_v2/521e0ddaabd7cd53cdc0f5e1b4ff3864d74919bbe73f5682fa054c57b734ff14d81b3e1b0f2353339b9cf7f0c9d43f1b?pictype=scale&amp;from=30113&amp;version=2.0.0.2&amp;uin=474724984&amp;fname=%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20180410162612.png&amp;size=1024" alt=""></p>
+<h4 id="软件工程师权限"><a href="#软件工程师权限" class="headerlink" title="软件工程师权限"></a>软件工程师权限</h4><ul>
+<li><p>新建版本<br>软件工程师将版本编译出来之后，新建一个版本，需要填写如下信息：</p>
+<ul>
+<li>版本类别</li>
+<li>版本号</li>
+<li>版本描述</li>
+<li>Android版本</li>
+<li>更新记录</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://picabstract-preview-ftn.weiyun.com:8443/ftn_pic_abs_v2/b3331a73196a0d3d630155832b3bea3249e262bc3fccb5736bd39ce05a86181f065e320f8f140000cc6698dac00c3f73?pictype=scale&amp;from=30113&amp;version=2.0.0.2&amp;uin=474724984&amp;fname=%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20180410164617.png&amp;size=1024" alt=""></p>
+<p>创建之后，跳转到版本列表界面<br><img src="https://picabstract-preview-ftn.weiyun.com:8443/ftn_pic_abs_v2/8f8b4b1d6e83a323fcc830f362fd2f2e3b50aefe50a1c1ffd0c80b6367d0899df72c2ee4732bef8420f2cbd240d3e09f?pictype=scale&amp;from=30113&amp;version=2.0.0.2&amp;uin=474724984&amp;fname=%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20180410164917.png&amp;size=1024" alt=""></p>
+<p>点击包管理，进入升级包上传界面<br><img src="https://picabstract-preview-ftn.weiyun.com:8443/ftn_pic_abs_v2/45c9173a9a48fed2a8a1fe11c36abad36691e158957ca97f01a4acbc005144b515c043cb3069677c5f8e9c6616a22aaa?pictype=scale&amp;from=30113&amp;version=2.0.0.2&amp;uin=474724984&amp;fname=%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20180410165043.png&amp;size=1024" alt=""></p>
+<p>上传完完整包和固件包。</p>
+<ul>
+<li><p>修改版本<br>软件工程师可以在新建状态下更改版本信息，但是不能修改版本类别和版本号。</p>
+</li>
+<li><p>发布Alpha测试<br>上传完固件包之后，回到版本列表界面，发布alpha测试。如果某台终端被允许Alpha测试，则会收到该版本的更新提示。</p>
+</li>
+</ul>
+<h4 id="测试工程师权限"><a href="#测试工程师权限" class="headerlink" title="测试工程师权限"></a>测试工程师权限</h4><ul>
+<li><p>撤回Alpha测试<br>若测试工程师在测试过程中发现问题，可以撤回到新建状态，要求软件工程师重新上传固件版本。</p>
+</li>
+<li><p>发布Beta测试<br>若测试工程师在Alpha测试过程中没有发现问题，则发布Beta测试。</p>
+</li>
+</ul>
+<h4 id="运营工程师权限"><a href="#运营工程师权限" class="headerlink" title="运营工程师权限"></a>运营工程师权限</h4><ul>
+<li><p>撤回Beta测试<br>如果测试过程中发现问题，可以由运营工程师撤回到Alpha测试状态，由测试工程师确认。</p>
+</li>
+<li><p>发布Release版本<br>如果Beta测试过程中发现问题，可以由运营工程师发布Release状态。</p>
+</li>
+</ul>
+<h3 id="版本状态说明"><a href="#版本状态说明" class="headerlink" title="版本状态说明"></a>版本状态说明</h3><p>版本的状态分为四个：</p>
+<ul>
+<li>新建状态 该状态下，可以修改版本信息，上传固件包。</li>
+<li>Alpha测试状态 该状态下，支持Alpha测试的终端将会收到版本提示。</li>
+<li>Beta测试状态 该状态下，支持Beta测试的终端将会收到版本提示。Beta测试状态与Alpha测试状态类似，Beta测试需要更多的终端设备验证。</li>
+<li>Release状态 该状态下，所有终端将会收到版本提示。</li>
+</ul>
+<p>版本状态迁移：</p>
+<p><img src="https://picabstract-preview-ftn.weiyun.com:8443/ftn_pic_abs_v2/f8279f93bdf2d68e2d599d0498b747cfe83430bbd7161ce4a39268a1156af75ff42effdec511f08e0dc4d6489e58dbbe?pictype=scale&amp;from=30113&amp;version=2.0.0.2&amp;uin=474724984&amp;fname=firmware_process.png&amp;size=1024" alt="版本状态迁移："></p>
+<h3 id="异常操作"><a href="#异常操作" class="headerlink" title="异常操作"></a>异常操作</h3><ul>
+<li><p>如果某台终端，升级了某个Alpha版本或Beta版本，但是该版本最后被撤回，没有发布到Release状态，如何升级到后续版本？</p>
+<p>  此时不能进行差分包升级了，需要进行OTA全包升级。</p>
+</li>
+</ul>
+<h3 id="使用注意事项"><a href="#使用注意事项" class="headerlink" title="使用注意事项"></a>使用注意事项</h3><ul>
+<li>上传固件包时，完整包是必选的。</li>
+<li>与历史版本的差分包是可选的，然后终端有限选择差分包进行OTA升级，如果没有查询到差分包，则下载完整包。</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;用户管理&quot;&gt;&lt;a href=&quot;#用户管理&quot; class=&quot;headerlink&quot; title=&quot;用户管理&quot;&gt;&lt;/a&gt;用户管理&lt;/h2&gt;&lt;h3 id=&quot;用户权限&quot;&gt;&lt;a href=&quot;#用户权限&quot; class=&quot;headerlink&quot; title=&quot;用户权限&quot;&gt;&lt;/a
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>从零搭建Android OTA系统——用户注册登录前端界面实现</title>
@@ -774,9 +945,9 @@
     </summary>
     
     
-      <category term="android" scheme="http://www.yinlijun.com/tags/android/"/>
-    
       <category term="android studio" scheme="http://www.yinlijun.com/tags/android-studio/"/>
+    
+      <category term="android" scheme="http://www.yinlijun.com/tags/android/"/>
     
       <category term="ubuntu" scheme="http://www.yinlijun.com/tags/ubuntu/"/>
     
@@ -1054,43 +1225,6 @@
   
   <entry>
     <title>BrowserRouter-react router 4.0.0 api中文文档</title>
-    <link href="http://www.yinlijun.com/2016/11/24/react-router-4-0-0-api/"/>
-    <id>http://www.yinlijun.com/2016/11/24/react-router-4-0-0-api/</id>
-    <published>2016-11-24T06:54:00.000Z</published>
-    <updated>2017-05-25T03:41:18.236Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="https://react-router.now.sh/BrowserRouter" target="_blank" rel="external">原文链接</a></p>
-<font size="5em">&lt;BrowserRouter&gt;</font>
-
-<p>保持你的界面与浏览器历史记录保持同步。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;BrowserRouter&gt;</div><div class="line">  &lt;App/&gt;</div><div class="line">&lt;/BrowserRouter&gt;</div></pre></td></tr></table></figure></p>
-<a id="more"></a>
-<font color="#FF0000">basename</font>
-
-<p>所有路由的根URL，如果你的应用处于服务端的子目录, 你可以设置这个值为该子目录。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;BrowserRouter basename=&quot;/calendar&quot; /&gt;</div><div class="line"></div><div class="line">// 假设Link标签如下所示：</div><div class="line">&lt;Link to=&quot;/today&quot;/&gt;</div><div class="line">// 那么超链接指向 &quot;/calendar/today&quot;</div><div class="line">&lt;/BrowserRouter&gt;</div></pre></td></tr></table></figure>
-<font size="5em">&lt;/BrowserRouter&gt;</font>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;a href=&quot;https://react-router.now.sh/BrowserRouter&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;原文链接&lt;/a&gt;&lt;/p&gt;
-&lt;font size=&quot;5em&quot;&gt;&amp;lt;BrowserRouter&amp;gt;&lt;/font&gt;
-
-&lt;p&gt;保持你的界面与浏览器历史记录保持同步。&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;BrowserRouter&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &amp;lt;App/&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;/BrowserRouter&amp;gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="react" scheme="http://www.yinlijun.com/tags/react/"/>
-    
-      <category term="react-router" scheme="http://www.yinlijun.com/tags/react-router/"/>
-    
-      <category term="翻译文档" scheme="http://www.yinlijun.com/tags/%E7%BF%BB%E8%AF%91%E6%96%87%E6%A1%A3/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>BrowserRouter-react router 4.0.0 api中文文档</title>
     <link href="http://www.yinlijun.com/2016/11/24/react-router-4-0-0-api-BrowserRouter/"/>
     <id>http://www.yinlijun.com/2016/11/24/react-router-4-0-0-api-BrowserRouter/</id>
     <published>2016-11-24T06:54:00.000Z</published>
@@ -1125,36 +1259,6 @@
       <category term="react-router" scheme="http://www.yinlijun.com/tags/react-router/"/>
     
       <category term="翻译文档" scheme="http://www.yinlijun.com/tags/%E7%BF%BB%E8%AF%91%E6%96%87%E6%A1%A3/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ubuntu编译android 6.0源代码环境搭建</title>
-    <link href="http://www.yinlijun.com/2016/11/16/ubuntu%E7%BC%96%E8%AF%91android%E6%BA%90%E4%BB%A3%E7%A0%81%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
-    <id>http://www.yinlijun.com/2016/11/16/ubuntu编译android源代码环境搭建/</id>
-    <published>2016-11-16T01:04:37.000Z</published>
-    <updated>2017-05-25T03:41:18.237Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="安装jdk"><a href="#安装jdk" class="headerlink" title="安装jdk"></a>安装jdk</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install openjdk-7-jdk openjdk-7-jre</div></pre></td></tr></table></figure>
-<p>如果之前系统是其他版本的JDK，需要把环境变量切换过来。</p>
-<a id="more"></a>
-<p>jdk版本错误会导致编译错误，如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">prebuilts/sdk/api/23.txt:41822: error 9: Removed public constructor android.widget.Toolbar.LayoutParams.Toolbar.LayoutParams(LayoutParams)</div><div class="line">prebuilts/sdk/api/23.txt:41823: error 9: Removed public constructor android.widget.Toolbar.LayoutParams.Toolbar.LayoutParams(MarginLayoutParams)</div><div class="line">prebuilts/sdk/api/23.txt:41824: error 9: Removed public constructor android.widget.Toolbar.LayoutParams.Toolbar.LayoutParams(LayoutParams)</div><div class="line">prebuilts/sdk/api/23.txt:42895: error 9: Removed public constructor java.io.ObjectInputStream.GetField.ObjectInputStream.GetField()</div><div class="line">prebuilts/sdk/api/23.txt:42955: error 9: Removed public constructor java.io.ObjectOutputStream.PutField.ObjectOutputStream.PutField()</div><div class="line">prebuilts/sdk/api/23.txt:43623: error 9: Removed public constructor java.lang.Character.Subset.Character.Subset(String)</div><div class="line">prebuilts/sdk/api/23.txt:46730: error 9: Removed public constructor java.nio.channels.Pipe.SinkChannel.Pipe.SinkChannel(SelectorProvider)</div><div class="line">prebuilts/sdk/api/23.txt:46735: error 9: Removed public constructor java.nio.channels.Pipe.SourceChannel.Pipe.SourceChannel(SelectorProvider)</div><div class="line">prebuilts/sdk/api/23.txt:47370: error 9: Removed public constructor java.security.KeyStore.Builder.KeyStore.Builder()</div><div class="line">prebuilts/sdk/api/23.txt:47379: error 9: Removed public constructor java.security.KeyStore.CallbackHandlerProtection.KeyStore.CallbackHandlerProtection(CallbackHandler)</div><div class="line">prebuilts/sdk/api/23.txt:47391: error 9: Removed public constructor java.security.KeyStore.PasswordProtection.KeyStore.PasswordProtection(char)</div></pre></td></tr></table></figure></p>
-<h2 id="安装其他工具包"><a href="#安装其他工具包" class="headerlink" title="安装其他工具包"></a>安装其他工具包</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install git gitg gnupg flex bison gperf build-essential  zip curl libc6-dev  libncurses5-dev:i386 x11proto-core-dev  libx11-dev:i386 libreadline6-dev:i386   libgl1-mesa-dev g++-multilib mingw32 tofrodos python-markdown	libxml2-utils xsltproc zlib1g-dev:i386 libarchive-zip-perl</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;安装jdk&quot;&gt;&lt;a href=&quot;#安装jdk&quot; class=&quot;headerlink&quot; title=&quot;安装jdk&quot;&gt;&lt;/a&gt;安装jdk&lt;/h2&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;sudo apt-get install openjdk-7-jdk openjdk-7-jre&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;如果之前系统是其他版本的JDK，需要把环境变量切换过来。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="android" scheme="http://www.yinlijun.com/tags/android/"/>
-    
-      <category term="ubuntu" scheme="http://www.yinlijun.com/tags/ubuntu/"/>
-    
-      <category term="环境搭建" scheme="http://www.yinlijun.com/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
     
   </entry>
   

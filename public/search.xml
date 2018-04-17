@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[七牛存储空间别名创建]]></title>
+    <url>%2F2018%2F04%2F17%2Fqiniu-create-bucket-cname%2F</url>
+    <content type="text"><![CDATA[七牛的存储空间会提供一个默认的域名，用来访问里面的资源，但是这个域名使用是受限的，七牛会有如下提示： 测试域名 此类测试域名，限总流量，限单 IP 访问频率，限速，仅供测试使用，不能用于自定义域名的 CNAME 相关文档 p71uhtys2.bkt.clouddn.com 我们可以创建一个融合CDN加速域名指向这个空间。 步骤如下： 绑定域名在存储空间详情页面，点击立即绑定一个域名。 进来之后，填写你要绑定的域名，和对应的存储空间。注意这个域名是要经过备案的，备案的经过我之前有介绍过。 其他的地方按需要填写，填写完之后拉到下面点创建按钮。 然后会提示创建成功的消息。 然后再回去看，会看到CDN的状态变为等待CNAME。 添加域名解析因为我的域名是在阿里云申请的，需要到阿里云去填写域名解析信息。 在云解析DNS界面，添加一条解析规则。 记录值就填刚才的CNAME，主机记录就填二级域名。 点击确认，等待十分钟，七牛那边的CDN状态就会变为成功。 或者windows下可以用命令行查询解析是否成功。123456789101112131415161718$ nslookup -qt=mx qiniu.yinlijun.com▒▒Ȩ▒▒Ӧ▒▒:▒▒▒▒▒▒: UnKnownAddress: 192.168.1.1qiniu.yinlijun.com canonical name = qiniu.yinlijun.com.qiniudns.comqiniu.yinlijun.com.qiniudns.com canonical name = largeqiniu.b0.aicdn.comlargeqiniu.b0.aicdn.com canonical name = nm.aicdn.comnm.aicdn.com canonical name = nm.ctn.aicdn.comaicdn.com primary name server = ns1.ialloc.com responsible mail addr = wtzhu182.163.com serial = 2015102101 refresh = 3600 (1 hour) retry = 180 (3 mins) expire = 1209600 (14 days) default TTL = 10800 (3 hours) 这样的话，可以在代码里面，用你自定义的域名，代替原先七牛提供的测试域名了。]]></content>
+      <tags>
+        <tag>qiniu</tag>
+        <tag>aliyun</tag>
+        <tag>ecs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[OTA用户使用指南]]></title>
+    <url>%2F2018%2F04%2F10%2Fota-user-manual%2F</url>
+    <content type="text"><![CDATA[用户管理用户权限系统分为四类用户，分别是 系统管理员 批准用户注册申请 删除用户 重置用户密码 管理测试SN 管理Android版本 管理版本类别 软件工程师 新建版本 修改版本 上传固件包 发布Alpha测试 测试工程师 撤回Alpha测试 发布Beta测试 运营工程师 撤回Beta测试 发布Release版本 系统管理员权限 批准用户注册申请用户在OTA主界面注册成为OTA系统用户，注册时需要从以下列表选择一种身份： 软件工程师 测试工程师 运营工程师 管理员登录之后，在用户管理页面，可以批准或者删除用户的注册申请。 删除用户 用户离职之后，管理员可以选择删除用户。 重置用户密码 用户忘记密码之后，管理员可以帮助用户重置用户密码。 管理测试SN 管理员可以添加SN号，用来标识对应的版本类别，如果勾选了Alpha，则可以进行Alpha版本状态下的版本升级；如果勾选了Beta，则可以进行Beta版本状态下的版本升级。 管理Android版本 管理员可以添加/删除Andriod版本，软件工程师可以从中选择一个版本。 管理版本类别 管理员可以添加/删除版本类别，一个版本类别标识一类终端产品，OTA会选择同一版本类别的更高的版本进行升级。 软件工程师权限 新建版本软件工程师将版本编译出来之后，新建一个版本，需要填写如下信息： 版本类别 版本号 版本描述 Android版本 更新记录 创建之后，跳转到版本列表界面 点击包管理，进入升级包上传界面 上传完完整包和固件包。 修改版本软件工程师可以在新建状态下更改版本信息，但是不能修改版本类别和版本号。 发布Alpha测试上传完固件包之后，回到版本列表界面，发布alpha测试。如果某台终端被允许Alpha测试，则会收到该版本的更新提示。 测试工程师权限 撤回Alpha测试若测试工程师在测试过程中发现问题，可以撤回到新建状态，要求软件工程师重新上传固件版本。 发布Beta测试若测试工程师在Alpha测试过程中没有发现问题，则发布Beta测试。 运营工程师权限 撤回Beta测试如果测试过程中发现问题，可以由运营工程师撤回到Alpha测试状态，由测试工程师确认。 发布Release版本如果Beta测试过程中发现问题，可以由运营工程师发布Release状态。 版本状态说明版本的状态分为四个： 新建状态 该状态下，可以修改版本信息，上传固件包。 Alpha测试状态 该状态下，支持Alpha测试的终端将会收到版本提示。 Beta测试状态 该状态下，支持Beta测试的终端将会收到版本提示。Beta测试状态与Alpha测试状态类似，Beta测试需要更多的终端设备验证。 Release状态 该状态下，所有终端将会收到版本提示。 版本状态迁移： 异常操作 如果某台终端，升级了某个Alpha版本或Beta版本，但是该版本最后被撤回，没有发布到Release状态，如何升级到后续版本？ 此时不能进行差分包升级了，需要进行OTA全包升级。 使用注意事项 上传固件包时，完整包是必选的。 与历史版本的差分包是可选的，然后终端有限选择差分包进行OTA升级，如果没有查询到差分包，则下载完整包。]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[从零搭建Android OTA系统——用户注册登录前端界面实现]]></title>
     <url>%2F2018%2F04%2F09%2Fmy-ota-tutorial-2%2F</url>
     <content type="text"><![CDATA[OTA的前端界面，打算用react实现，采用的库有 antd 目前比较流行UI组件库。 axios 网络请求库。 redux-saga 一个处理异步流处理的库。 目录结构：12345src - components - containers - reducers - sagas components用来存放无状态组件 containers用来存放状态组件 reducers用来存放reducer文件 sagas用来存放redux-saga文件 component和container的区别我的理解，component是无状态、可复用的，只负责渲染的组件，它的输入是Props，输出是render的结果。 container负责和redux连接，从store里面获取数据。 界面登录和注册组件，可以作为一个component，用一个Tabs组件包装。123456789101112131415161718192021export default class Login extends Component &#123; constructor(props) &#123; super(props); this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this) &#125; render() &#123; const &#123; login, register &#125; = this.props; return ( &lt;Tabs defaultActiveKey="1" tabBarStyle=&#123;&#123; textAlign: 'center' &#125;&#125; className=&#123; style.container &#125;&gt; &lt;TabPane tab="登录" key="1"&gt; &lt;LoginForm login=&#123; login &#125;/&gt; &lt;/TabPane&gt; &lt;TabPane tab="注册" key="2"&gt; &lt;RegisterForm register=&#123; register &#125;/&gt; &lt;/TabPane&gt; &lt;/Tabs&gt; ) &#125;&#125; reducer1234567891011121314151617181920export const actions = &#123; login: function (username, password) &#123; return &#123; type: actionsTypes.USER_LOGIN, username, password &#125; &#125;, logout: function () &#123; return &#123; type: actionsTypes.USER_LOGOUT, &#125; &#125;, register: function (data) &#123; return &#123; type: actionsTypes.USER_REGISTER, data &#125; &#125;,&#125; data是注册表单的内容 saga1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465export function* login(username, password) &#123; yield put(&#123;type: IndexActionTypes.FETCH_START&#125;); try &#123; return yield call(post, '/user/login', &#123;username, password&#125;) &#125; catch (error) &#123; console.log("login failed", error.message); &#125; finally &#123; yield put(&#123;type: IndexActionTypes.FETCH_END&#125;); &#125;&#125;export function* loginFlow() &#123; while (true) &#123; let request = yield take(IndexActionTypes.USER_LOGIN); let response = yield call(login, request.username, request.password); if(response &amp;&amp; response.code === 0)&#123; yield put(&#123;type:IndexActionTypes.SET_MESSAGE,msgContent:'登录成功!',msgType:1&#125;); yield put(&#123;type:IndexActionTypes.RESPONSE_USER_INFO,data:response.data&#125;) &#125; else &#123; yield put(&#123;type:IndexActionTypes.SET_MESSAGE,msgContent: (response &amp;&amp; response.message) || '登录失败',msgType:0&#125;); &#125; &#125;&#125;export function* logout() &#123; yield put(&#123;type: IndexActionTypes.FETCH_START&#125;); try &#123; return yield call(get, '/user/logout') &#125; catch (error) &#123; console.log("logout failed", error.message); &#125; finally &#123; yield put(&#123;type: IndexActionTypes.FETCH_END&#125;); &#125;&#125;export function* logoutFlow() &#123; while(true) &#123; let request = yield take(IndexActionTypes.USER_LOGOUT); let response = yield call(logout); yield put(&#123;type:IndexActionTypes.SET_MESSAGE,msgContent:'已退出当前账号',msgType:1&#125;); yield put(&#123;type:IndexActionTypes.RESPONSE_USER_INFO,data:&#123;&#125;&#125;) &#125;&#125;export function* register (data) &#123; yield put(&#123;type:IndexActionTypes.FETCH_START&#125;); try &#123; return yield call(puter, '/user', data) &#125; catch (error) &#123; yield put(&#123;type:IndexActionTypes.SET_MESSAGE,msgContent:'注册失败',msgType:0&#125;); &#125; finally &#123; yield put(&#123;type: IndexActionTypes.FETCH_END&#125;); &#125;&#125;export function* registerFlow () &#123; while(true)&#123; let request = yield take(IndexActionTypes.USER_REGISTER); let response = yield call(register, request.data); if(response &amp;&amp; response.code === 0)&#123; yield put(&#123;type:IndexActionTypes.SET_MESSAGE,msgContent:'注册成功，请联系管理员批准!',msgType:1&#125;); yield put(&#123;type:IndexActionTypes.RESPONSE_USER_INFO,data:response.data&#125;) &#125; &#125;&#125; 网络请求为了和saga的操作put分开，axios的put方法被我封装成了puter。123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657import axios from 'axios'let config = &#123; baseURL: '/api', transformRequest: [ function (data) &#123; let ret = ''; for (let it in data) &#123; ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&amp;' &#125; return ret &#125; ], transformResponse: [ function (data) &#123; return data &#125; ], headers: &#123; 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8', &#125;, timeout: 10000, responseType: 'json'&#125;;axios.interceptors.response.use(function(res)&#123; //相应拦截器 return res.data;&#125;);export function get(url, params) &#123; console.log("url", url); config.params = params; return axios.get(url, config)&#125;export function post(url, data) &#123; console.log("url", url, "data", data); if(config.params) &#123; delete config.params &#125; return axios.post(url, data, config)&#125;export function puter(url, data) &#123; console.log("url", url, "data", data); if(config.params) &#123; delete config.params &#125; return axios.put(url, data, config);&#125;export function deleter(url, param) &#123; console.log("url", url, "param", param); config.params = param; return axios.delete(url, config);&#125; 以上所有的源代码都可以在https://github.com/yinlijun2004/android_ota_system中找到。]]></content>
@@ -148,8 +163,8 @@
     <url>%2F2016%2F11%2F28%2Ffix-dev-kvm-is-not-found%2F</url>
     <content type="text"><![CDATA[问题出现环境 Ubuntu 12.04 Android Studio 2.2.2 解决步骤开启VT-x在ubuntu上使用Android Studio创建模拟器时，会提示一个错误：1/dev/kvm is not found 并且提示要在BIOS里面开启VT-x。 重启电脑，按DEL键进入BIOS,发现确实没有启用，于是启用后再此重启电脑。 此时打开Android Studio，仍然提示一样的错误。 再次在网上搜寻，发现如下解决方案，记录一下。 http://askubuntu.com/questions/600727/replacement-for-haxm-on-ubuntu-says-intel-x86-emulator-accelerator-is-not-comp ###Check if your CPU supports hardware virtualization, by typing:1egrep -c &apos;(vmx|svm)&apos; /proc/cpuinfo If the result is 0, your CPU does not support hardware virtualization, which is necessary to run the KVM. If you get 1 or more, that means you’re fine. Next, install KVM. First make sure if your processor supports KVM by typing:1kvm-ok You will see this if that’s the case: INFO: Your CPU supports KVM extensions INFO: /dev/kvm exists KVM acceleration can be usedIf this is the result, you need to turn on Intel VT in BIOS: INFO: KVM is disabled by your BIOS HINT: Enter your BIOS setup and enable Virtualization Technology (VT), and then hard poweroff/poweron your system KVM acceleration can NOT be usedThe next step is to install the KVM and a few other packages needed. To do so, type:1sudo apt-get install qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils Add your user to some groups, replacing by your own username:12sudo adduser &lt;user&gt; libvirtdsudo adduser &lt;user&gt; kvm Check if everything is ok:1sudo virsh -c qemu:///system list]]></content>
       <tags>
-        <tag>android</tag>
         <tag>android studio</tag>
+        <tag>android</tag>
         <tag>ubuntu</tag>
       </tags>
   </entry>
@@ -187,8 +202,11 @@
   </entry>
   <entry>
     <title><![CDATA[BrowserRouter-react router 4.0.0 api中文文档]]></title>
-    <url>%2F2016%2F11%2F24%2Freact-router-4-0-0-api%2F</url>
+    <url>%2F2016%2F11%2F24%2Freact-router-4-0-0-api-BrowserRouter%2F</url>
     <content type="text"><![CDATA[原文链接 &lt;BrowserRouter&gt; 保持你的界面与浏览器历史记录保持同步。123&lt;BrowserRouter&gt; &lt;App/&gt;&lt;/BrowserRouter&gt; basename 所有路由的根URL，如果你的应用处于服务端的子目录, 你可以设置这个值为该子目录。 123456&lt;BrowserRouter basename=&quot;/calendar&quot; /&gt;// 假设Link标签如下所示：&lt;Link to=&quot;/today&quot;/&gt;// 那么超链接指向 &quot;/calendar/today&quot;&lt;/BrowserRouter&gt; &lt;/BrowserRouter&gt;]]></content>
+      <categories>
+        <category>react router 4.0.0 api中文文档</category>
+      </categories>
       <tags>
         <tag>react</tag>
         <tag>react-router</tag>
@@ -197,11 +215,8 @@
   </entry>
   <entry>
     <title><![CDATA[BrowserRouter-react router 4.0.0 api中文文档]]></title>
-    <url>%2F2016%2F11%2F24%2Freact-router-4-0-0-api-BrowserRouter%2F</url>
+    <url>%2F2016%2F11%2F24%2Freact-router-4-0-0-api%2F</url>
     <content type="text"><![CDATA[原文链接 &lt;BrowserRouter&gt; 保持你的界面与浏览器历史记录保持同步。123&lt;BrowserRouter&gt; &lt;App/&gt;&lt;/BrowserRouter&gt; basename 所有路由的根URL，如果你的应用处于服务端的子目录, 你可以设置这个值为该子目录。 123456&lt;BrowserRouter basename=&quot;/calendar&quot; /&gt;// 假设Link标签如下所示：&lt;Link to=&quot;/today&quot;/&gt;// 那么超链接指向 &quot;/calendar/today&quot;&lt;/BrowserRouter&gt; &lt;/BrowserRouter&gt;]]></content>
-      <categories>
-        <category>react router 4.0.0 api中文文档</category>
-      </categories>
       <tags>
         <tag>react</tag>
         <tag>react-router</tag>
@@ -223,8 +238,8 @@
     <url>%2F2016%2F11%2F15%2Fhow-to-download-openjdk%2F</url>
     <content type="text"><![CDATA[JDK 8Debian, Ubuntu1$ sudo apt-get install openjdk-8-jre openjdk-8-jre只包含运行时环境(Java Runtime Environment）。如果你想开发java程序，请安装openjdk-8-jdk。 Fedora, Oracle Linux, Red Hat Enterprise Linux1$ su -c &quot;yum install java-1.8.0-openjdk&quot; java-1.8.0-openjdk只包含运行时环境(Java Runtime Environment）。如果你想开发java程序，请安装java-1.8.0-openjdk-devel。 JDK 7Debian, Ubuntu1$ sudo apt-get install openjdk-7-jre openjdk-7-jre只包含运行时环境(Java Runtime Environment）。如果你想开发java程序，请安装openjdk-7-jdk。 Fedora, Oracle Linux, Red Hat Enterprise Linux1$ su -c &quot;yum install java-1.7.0-openjdk&quot; java-1.7.0-openjdk只包含运行时环境(Java Runtime Environment）。如果你想开发java程序，请安装java-1.7.0-openjdk-devel。 JDK 6Debian, Ubuntu1$ sudo apt-get install openjdk-6-jre openjdk-6-jre只包含运行时环境(Java Runtime Environment）。如果你想开发java程序，请安装openjdk-6-jdk。 Fedora, Oracle Linux, Red Hat Enterprise Linux1$ su -c &quot;yum install java-1.6.0-openjdk&quot; java-1.6.0-openjdk只包含运行时环境(Java Runtime Environment）。如果你想开发java程序，请安装java-1.6.0-openjdk-devel。 参考http://openjdk.java.net/install/]]></content>
       <tags>
-        <tag>java</tag>
         <tag>openjdk</tag>
+        <tag>java</tag>
       </tags>
   </entry>
   <entry>
@@ -281,20 +296,20 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[android studio编译错误: *** 目标模式不含有“%”。 停止。]]></title>
-    <url>%2F2016%2F11%2F05%2Fandroid-studio%E7%BC%96%E8%AF%91%E9%94%99%E8%AF%AF-%E7%9B%AE%E6%A0%87%E6%A8%A1%E5%BC%8F%E4%B8%8D%E5%90%AB%E6%9C%89%E2%80%9C-%E2%80%9D%E3%80%82-%E5%81%9C%E6%AD%A2%E3%80%82%2F</url>
-    <content type="text"><![CDATA[Android Studio NDK编译出现如下错误： target pattern contains no `%’. Stop中文： 目标模式不含有“%”。 停止。可能是obj目录的问题，需要删掉。在工程目录下find所有的obj目录1find . -name obj]]></content>
-      <tags>
-        <tag>android</tag>
-        <tag>android studio</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[高性能Javscript - 笔记]]></title>
     <url>%2F2016%2F11%2F05%2FHigh-Performance-Javascript%2F</url>
     <content type="text"><![CDATA[第一章 加载和执行减少Javascript加载对性能的影响 &lt;/body&gt;闭合标签之前，将所有&lt;javascript&gt;标签放到页面底部。这能确保在脚本执行前页面已经完成了渲染 合并脚本，减少&lt;javascript&gt;标签 使用&lt;javascript&gt;标签的defer属性1&lt;script type='text/javascript' src='file1.js' defer&gt;&lt;/script&gt; 利用动态创建的&lt;javascript&gt;元素来下载并执行代码 1234567var script = document.createElemnet('script');script.type = 'text/javascript';script.onload = function() &#123; alert('Script loaded!');&#125;script.src = 'file1.js';document.getElementByTagName('head')[0].appendChild(script); 使用XHR对象下载Javascript代码并注入页面中 123456789101112var xhr = new XMLHttpRequest();xhr.open('get', 'file1.js', true);xhr.onreadystatechange = function() &#123; if(xhr.readyState == 4) &#123; if(xhr.status &gt;= 200 &amp;&amp; xhr.status &lt; 300 || xhr.status === 304) &#123; var script = document.createElemnet('script'); script.type = 'text/javascript'; script.text = xhr.responseText; document.body.appendChild(script); &#125; &#125;&#125; 几种类库加载js的方式 YUI3 123456&lt;script type='text/javascript' src='http://yui.yahooapis.com/combo?3.0.0/build/yui/yui-min.js'&gt;&lt;/script&gt;&lt;script type='text/javascript'&gt; YUI().use('dom', function(Y) &#123; Y.DOM.addClass(document.body, 'loaded'); &#125;)&lt;/script&gt; LazyLoad 123456&lt;script type='text/javascript' src='lazyload-min.js'&gt;&lt;/script&gt;&lt;script type='text/javascript'&gt; LazyLoad.js('the-rest.js', function() &#123; Applicationn.init(); &#125;)&lt;/script&gt; LABjs 12345678&lt;script type='text/javascript' src='lab.js'&gt;&lt;/script&gt;&lt;script type='text/javascript'&gt; $LAB.script('first-file.js') .wait() .script('the-rest.js') .wait(function() &#123; Applicationn.init(); &#125;) 第二章 数据存取在Javascript中，数据存储的位置会对代码整体性能产成重大影响。数据存储共有4中方式：字面量、变量、数组项、对象成员。它们有着各自的性能特点。 访问字面量和局部变量的速度最快，相反，访问数组元素和对象成员相对较慢。 由于局部变量存在于作用域链的起始位置，因此访问局部变量比访问跨作用域变量更快。变量在作用域中的位置越深，访问所需时间就越长。由于全局变量总处在作用域的最末端，因此访问速度时最慢的。 避免使用with语句。 嵌套的对象成员会明显影响性能，尽量少用。 属性或方法在原型链中的位置越深，访问它的速度也越慢。 通常来说，你可以通过把常用的对象成员、数组元素、跨域变量保存在局部变量中来改善Javascript性能，因为局部变量访问速度更快。 第三章 DOM编程访问和操作DOM时现在Web应用的重要部分。但每次穿越链接ECMAScript和DOM都会有性能消耗，为了减少DOM编程带来的消耗，请记住以下几点： 最小化DOM访问次数，尽可能在Javascript端处理。 如果需要多次访问某个DOM节点，请使用局部变量存储它的引用。 小心处理HTML集合，把集合的长度缓存到一个变量中，并在迭代中使用它。如果需要经常操作集合，建议把它靠背到一个数组中。 如果可能的话，使用速度更快的API，比如querySelecetAll()和firstElementChild。 要留意重排和重绘，批量修改样式时，离线操作DOM树，使用缓存，并减少布局信息的次数。 动画中使用绝对定位，使用拖放代理。 使用事件委托来减少事件处理器的数量。]]></content>
       <tags>
         <tag>javascript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[android studio编译错误: *** 目标模式不含有“%”。 停止。]]></title>
+    <url>%2F2016%2F11%2F05%2Fandroid-studio%E7%BC%96%E8%AF%91%E9%94%99%E8%AF%AF-%E7%9B%AE%E6%A0%87%E6%A8%A1%E5%BC%8F%E4%B8%8D%E5%90%AB%E6%9C%89%E2%80%9C-%E2%80%9D%E3%80%82-%E5%81%9C%E6%AD%A2%E3%80%82%2F</url>
+    <content type="text"><![CDATA[Android Studio NDK编译出现如下错误： target pattern contains no `%’. Stop中文： 目标模式不含有“%”。 停止。可能是obj目录的问题，需要删掉。在工程目录下find所有的obj目录1find . -name obj]]></content>
+      <tags>
+        <tag>android studio</tag>
+        <tag>android</tag>
       </tags>
   </entry>
   <entry>
