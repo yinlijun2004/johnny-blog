@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="nodejs,pm2," />
 
 
 
@@ -92,15 +92,17 @@
 
 
 
-<meta name="description" content="好记性不如烂笔头。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="尹莉军">
-<meta property="og:url" content="http://www.yinlijun.com/tags/ngrok/index.html">
+<meta name="description" content="pm2用来管理nodejs应用的时候，可以简单的用命令行来启动，如:1pm2 start ./ota_server/bin/www --name=ota-server 最常用的方法是将启动脚本配置成json，如:">
+<meta name="keywords" content="nodejs,pm2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pm2启动参数加入环境变量">
+<meta property="og:url" content="http://www.yinlijun.com/2018/04/18/pm2-load-environment/index.html">
 <meta property="og:site_name" content="尹莉军">
-<meta property="og:description" content="好记性不如烂笔头。">
+<meta property="og:description" content="pm2用来管理nodejs应用的时候，可以简单的用命令行来启动，如:1pm2 start ./ota_server/bin/www --name=ota-server 最常用的方法是将启动脚本配置成json，如:">
+<meta property="og:updated_time" content="2018-04-18T09:54:49.571Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="尹莉军">
-<meta name="twitter:description" content="好记性不如烂笔头。">
+<meta name="twitter:title" content="pm2启动参数加入环境变量">
+<meta name="twitter:description" content="pm2用来管理nodejs应用的时候，可以简单的用命令行来启动，如:1pm2 start ./ota_server/bin/www --name=ota-server 最常用的方法是将启动脚本配置成json，如:">
 
 
 
@@ -128,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://www.yinlijun.com/tags/ngrok/"/>
+  <link rel="canonical" href="http://www.yinlijun.com/2018/04/18/pm2-load-environment/"/>
 
 
 
 
 
-  <title>标签: ngrok | 尹莉军</title>
+  <title>pm2启动参数加入环境变量 | 尹莉军</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -160,7 +162,7 @@
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -278,44 +280,214 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h1>ngrok<small>标签</small>
-      </h1>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.yinlijun.com/2018/04/18/pm2-load-environment/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="尹莉军 <yinlijun2004@gmail.com>">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://tva3.sinaimg.cn/crop.0.0.180.180.180/7d92e765jw1e8qgp5bmzyj2050050aa8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="尹莉军">
+    </span>
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">pm2启动参数加入环境变量</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-18T17:35:30+08:00">
+                2018-04-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/04/18/pm2-load-environment/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/04/18/pm2-load-environment/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <p>pm2用来管理nodejs应用的时候，可以简单的用命令行来启动，如:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pm2 start ./ota_server/bin/www --name=ota-server</div></pre></td></tr></table></figure></p>
+<p>最常用的方法是将启动脚本配置成json，如:</p>
+<a id="more"></a>
+<p>start.json<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    app: [</div><div class="line">        &#123;</div><div class="line">            name: "ota-server",</div><div class="line">            script: "./ota_server/bin/www",</div><div class="line">            watch: false,</div><div class="line">        &#125;</div><div class="line">    ],</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>比如你的项目package.json启动参数里面可能带了环境变量，比如：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">"scripts": &#123;</div><div class="line">    "start"："cross-env NODE_ENV=production node ./bin/www",</div><div class="line">    "start-dev": "node ./bin/www"</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这个时候可以在start.json里面加上相应的环境变量配置。</p>
+<p>start.json<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    app: [</div><div class="line">        &#123;</div><div class="line">            name: "ota-server",</div><div class="line">            script: "./ota_server/bin/www",</div><div class="line">            watch: false,</div><div class="line">            env_prod: &#123;</div><div class="line">                "NODE_ENV": "production",</div><div class="line">            &#125;,</div><div class="line">            env_dev: &#123;</div><div class="line">                "NODE_ENV": "development",</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    ],</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>然后就可以用如下命令加入环境变量了：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pm2 start start.json --env=prod</div></pre></td></tr></table></figure></p>
 
-      <h2 class="post-title">
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2018/03/24/ngrok-intro/" itemprop="url">
-              
-                <span itemprop="name">Windows下Ngrok工具的使用</span>
-              
-            </a>
+
+      
+    </div>
+
+    <div>
+      
         
-      </h2>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-24T10:09:26+08:00"
-              content="2018-03-24" >
-          03-24
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      尹莉军 <yinlijun2004@gmail.com>
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.yinlijun.com/2018/04/18/pm2-load-environment/" title="pm2启动参数加入环境变量">http://www.yinlijun.com/2018/04/18/pm2-load-environment/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/nodejs/" rel="tag"># nodejs</a>
+          
+            <a href="/tags/pm2/" rel="tag"># pm2</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/18/my-ota-tutorial-3/" rel="next" title="从零搭建Android OTA系统——七牛云存储接口实现">
+                <i class="fa fa-chevron-left"></i> 从零搭建Android OTA系统——七牛云存储接口实现
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -323,6 +495,12 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
 
         </div>
         
@@ -528,6 +706,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
 
   
 

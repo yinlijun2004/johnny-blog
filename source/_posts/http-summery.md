@@ -11,6 +11,8 @@ tags:
 
 示例：If-Modified-Since: Wed, 21 Oct 2015 07:28:00 GMT
 
+<!--more-->
+
 ### If-Unmodified-Since
 只有当资源在指定的时间之后没有进行过修改，服务器在返回请求的资源，或是接受<b>POST</b>或其他non-safe方法的请求。如果所请求的资源在指定的时间之后发生的修改，那么会返回<b>412</b>(Proceondition Failed)错误。
 

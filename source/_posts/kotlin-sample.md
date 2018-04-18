@@ -8,6 +8,8 @@ tags: [android, java, kotlin]
 
 在[kotlin](http://kotlinlang.org/)官网上的资料还是比较丰富的，提供了一个在线的[编辑器](https://try.kotlinlang.org/#/Examples/Hello,%20world!/Simplest%20version/Simplest%20version.kt)，可以写一些小的程序片段。另外提供了一个代码翻译的工具，可以直接将java代码片段翻译成kotlin。
 
+<!--more-->
+
 例如以下java代码：
 ```java
  class Greeting {
@@ -25,7 +27,7 @@ tags: [android, java, kotlin]
 }
 ```
 对应的kotlin代码如下：
-<!--more-->
+
 ```kotlin
 internal class Greeting(g:String) {
   private val greeting:String

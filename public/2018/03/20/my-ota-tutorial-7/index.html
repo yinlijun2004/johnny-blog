@@ -99,7 +99,7 @@
 <meta property="og:url" content="http://www.yinlijun.com/2018/03/20/my-ota-tutorial-7/index.html">
 <meta property="og:site_name" content="尹莉军">
 <meta property="og:description" content="本文介绍如何将整个ota系统部署到阿里云ECS上去，没有看过正规军是如何部署的，以下只是我的个人经验。 创建远程git目录登陆阿里云ECS，创建一个bare仓库，存放ota_be代码。1git init --bare ~/project/ota_server.git 创建post-receive文件，捕获git推送操作，克隆一份到服务器本地，作为运行仓库。1touch ~/project/ota_">
-<meta property="og:updated_time" content="2018-04-09T09:18:20.184Z">
+<meta property="og:updated_time" content="2018-04-18T07:27:09.077Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从零搭建Android OTA系统——部署到阿里云ECS">
 <meta name="twitter:description" content="本文介绍如何将整个ota系统部署到阿里云ECS上去，没有看过正规军是如何部署的，以下只是我的个人经验。 创建远程git目录登陆阿里云ECS，创建一个bare仓库，存放ota_be代码。1git init --bare ~/project/ota_server.git 创建post-receive文件，捕获git推送操作，克隆一份到服务器本地，作为运行仓库。1touch ~/project/ota_">
@@ -421,6 +421,7 @@
         <p>本文介绍如何将整个ota系统部署到阿里云ECS上去，没有看过正规军是如何部署的，以下只是我的个人经验。</p>
 <h3 id="创建远程git目录"><a href="#创建远程git目录" class="headerlink" title="创建远程git目录"></a>创建远程git目录</h3><p>登陆阿里云ECS，创建一个bare仓库，存放ota_be代码。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git init --bare ~/project/ota_server.git</div></pre></td></tr></table></figure></p>
 <p>创建post-receive文件，捕获git推送操作，克隆一份到服务器本地，作为运行仓库。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">touch ~/project/ota_server.git/hooks/post-receive</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
 <p>填入如下内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/bin/bash -l</span></div><div class="line"></div><div class="line">GIT_REPO=/home/yinlijun/project/ota_server.git</div><div class="line">TMP_GIT_CLONE=/home/yinlijun/project/ota_server</div><div class="line"></div><div class="line">rm -rf <span class="variable">$&#123;TMP_GIT_CLONE&#125;</span></div><div class="line">git <span class="built_in">clone</span> <span class="variable">$&#123;GIT_REPO&#125;</span> <span class="variable">$&#123;TMP_GIT_CLONE&#125;</span></div></pre></td></tr></table></figure></p>
 <h4 id="本地部署"><a href="#本地部署" class="headerlink" title="本地部署"></a>本地部署</h4><p>在本地ota目录下，创建.gitignore文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">echo</span> ota_be_deploy &gt;&gt; .gitignore</div></pre></td></tr></table></figure></p>
 <p>这个文件是忽略我们要临时发布目录用的。</p>
@@ -581,7 +582,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">37</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -603,7 +604,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -689,17 +690,6 @@
   <span class="author" itemprop="copyrightHolder">尹莉军 <yinlijun2004@gmail.com></span>
 </div>
 
-
-<div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
-  </a>
-</div>
 
 
         

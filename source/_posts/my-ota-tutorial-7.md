@@ -18,6 +18,9 @@ git init --bare ~/project/ota_server.git
 ```bash
 touch ~/project/ota_server.git/hooks/post-receive
 ```
+
+<!--more-->
+
 填入如下内容
 ```bash
 #!/bin/bash -l

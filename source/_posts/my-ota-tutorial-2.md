@@ -17,6 +17,9 @@ src
  - reducers
  - sagas
 ```
+
+<!--more-->
+
 components用来存放无状态组件
 
 containers用来存放状态组件

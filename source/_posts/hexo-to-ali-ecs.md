@@ -10,6 +10,8 @@ tags: [hexo, ECS, git]
 - 熟悉express(nodejs)框架
 - 在github上已经部署了hexo博客
 
+<!--more-->
+
 ## ECS准备
 ### 购买ECS
 前往阿里云购买[ECS](https://ecs-buy.aliyun.com)，根据个人需要和财务状况，选择对应规模的ECS。

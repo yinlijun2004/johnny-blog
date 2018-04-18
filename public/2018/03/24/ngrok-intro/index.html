@@ -100,7 +100,7 @@
 <meta property="og:site_name" content="尹莉军">
 <meta property="og:description" content="最近在本机调试七牛云上传，碰到一个问题。七牛云存储完成上传操作后，会有一个回调操作，告诉服务器上传结果。  https://developer.qiniu.com/kodo/sdk/1289/nodejs1234567var options = &amp;#123;  scope: bucket,  callbackUrl: &apos;http://api.example.com/qiniu/upload/cal">
 <meta property="og:image" content="https://picabstract-preview-ftn.weiyun.com:8443/ftn_pic_abs_v2/56d49defca68f6178c2aadc601ea157c78729113241118fa8f5471199a8e707a5a5ee24a8e08fb8e264665971dbf42db?pictype=scale&from=30113&version=2.0.0.2&uin=474724984&fname=QQ%E5%9B%BE%E7%89%8720180324102303.png&size=1024">
-<meta property="og:updated_time" content="2018-03-24T02:37:05.167Z">
+<meta property="og:updated_time" content="2018-04-18T07:29:24.878Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Windows下Ngrok工具的使用">
 <meta name="twitter:description" content="最近在本机调试七牛云上传，碰到一个问题。七牛云存储完成上传操作后，会有一个回调操作，告诉服务器上传结果。  https://developer.qiniu.com/kodo/sdk/1289/nodejs1234567var options = &amp;#123;  scope: bucket,  callbackUrl: &apos;http://api.example.com/qiniu/upload/cal">
@@ -402,6 +402,7 @@
 <blockquote>
 <p><a href="https://developer.qiniu.com/kodo/sdk/1289/nodejs" target="_blank" rel="external">https://developer.qiniu.com/kodo/sdk/1289/nodejs</a><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> options = &#123;</div><div class="line">  scope: bucket,</div><div class="line">  callbackUrl: <span class="string">'http://api.example.com/qiniu/upload/callback'</span>,</div><div class="line">  callbackBody: <span class="string">'key=$(key)&amp;hash=$(etag)&amp;bucket=$(bucket)&amp;fsize=$(fsize)&amp;name=$(x:name)'</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> putPolicy = <span class="keyword">new</span> qiniu.rs.PutPolicy(options);</div><div class="line"><span class="keyword">var</span> uploadToken=putPolicy.uploadToken(mac);</div></pre></td></tr></table></figure></p>
 </blockquote>
+<a id="more"></a>
 <p>上面的<b><a href="http://api.example.com" target="_blank" rel="external">http://api.example.com</a></b>就是回调的url，在开发模式下肯定是指向本机的，而不是生产服务器。</p>
 <p>因此需要一个内网穿透的工具，在网上找到<a href="https://www.ngrok.cc" target="_blank" rel="external">Ngrok</a>。</p>
 <p>Ngrok会生成一个指向你本机服务的隧道，隧道信息，包含一个三级域名（就是上面的回调url），本地端口（就是你的服务运行的端口），协议类型等信息。<br><img src="https://picabstract-preview-ftn.weiyun.com:8443/ftn_pic_abs_v2/56d49defca68f6178c2aadc601ea157c78729113241118fa8f5471199a8e707a5a5ee24a8e08fb8e264665971dbf42db?pictype=scale&amp;from=30113&amp;version=2.0.0.2&amp;uin=474724984&amp;fname=QQ%E5%9B%BE%E7%89%8720180324102303.png&amp;size=1024" alt=""></p>
@@ -544,7 +545,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">37</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -566,7 +567,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -636,17 +637,6 @@
   <span class="author" itemprop="copyrightHolder">尹莉军 <yinlijun2004@gmail.com></span>
 </div>
 
-
-<div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
-  </a>
-</div>
 
 
         

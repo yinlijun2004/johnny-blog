@@ -17,6 +17,8 @@ var putPolicy = new qiniu.rs.PutPolicy(options);
 var uploadToken=putPolicy.uploadToken(mac);
 ```
 
+<!--more-->
+
 上面的<b>http://api.example.com</b>就是回调的url，在开发模式下肯定是指向本机的，而不是生产服务器。
 
 因此需要一个内网穿透的工具，在网上找到[Ngrok](https://www.ngrok.cc)。

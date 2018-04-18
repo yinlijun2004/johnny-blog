@@ -13,6 +13,8 @@ categories: 从零搭建Android OTA系统
 
 这是一个完整的项目，也许耗时会比较长，因为上班时间还有工作要完成，但是我会尽力完成它，我的目标是达到可以商用的水平，而不是一个玩具。实现的过程的文章会贴在[本站](http://www.yinlijun.com)，代码将会托管到github [android ota system](https://github.com/yinlijun2004/android_ota_system)。
 
+<!--more-->
+
 ### 目标
 到这个项目完结的时候，能实现如下功能。
 

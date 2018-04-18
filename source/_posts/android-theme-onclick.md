@@ -16,6 +16,9 @@ tags: [android]
         }
     });
 ```
+
+<!--more-->
+
 - 方法2
 将回调方法名赋值给布局文件中的onClick属性，然后在Activity中实现该方法。
 
