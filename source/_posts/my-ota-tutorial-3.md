@@ -296,75 +296,97 @@ exports.getDownloadUrl = (req, res, next) => {
 #### Android下载
 ```java
 public void downloadFirmware(final String filePath, final Subscriber<Integer> subscriber) {
-        if(downloadListener != null) {
-            downloadListener.onStartDownload();
-        }
-        setUpdateState(UpdateStateManager.STATE_DOWNLOADING);
-        Map<String, String> params = OtaParamFactory.createDownloadFirmwareParam(mContext);
-        otaServerApi.getDownloadUtl(params)
-                .subscribeOn(Schedulers.io())
-                .map(new Func1<VersionDownloadUrl, String>() {
-                    @Override
-                    public String call(VersionDownloadUrl url) {
-                        mFirmwareManager.savePackageHash(url.getData().getHash());
-                        return url.getData().getUrl();
-                    }
-                })
-                .flatMap(new Func1<String, rx.Observable<ResponseBody>>() {
-                    @Override
-                    public rx.Observable<ResponseBody> call(String url) {
-                        return qiniuServiceApi.downloadFirmware(url);
-                    }
-                })
-                 .subscribeOn(Schedulers.io())
-                 .unsubscribeOn(Schedulers.io())
-                 .map(new Func1<ResponseBody, String>() {
-                     @Override
-                     public String call(ResponseBody responseBody) {
-                         saveToDisk(responseBody, filePath);
-                         return mPackagePath;
-                     }
-                 })
-                 .observeOn(Schedulers.io())
-                 .map(new Func1<String, Integer>() {
-                    @Override
-                    public Integer call(String path) {
-                        setUpdateState(UpdateStateManager.STATE_VERIFYING);
-                        int result = checkPackageHash();
-                        if(result != Util.OTAresult.CHECK_OK) {
-                            return result;
-                        }
-                        return checkUpdagePackage(path);
-                    }
-                 })
-                 .observeOn(AndroidSchedulers.mainThread())
-                 .subscribe(new Subscriber<Integer>() {
-                     @Override
-                     public void onCompleted() {
-                         subscriber.onCompleted();
-                     }
-
-                     @Override
-                     public void onError(Throwable e) {
-                         setUpdateState(UpdateStateManager.STATE_FAIL);
-                         subscriber.onError(e);
-                     }
-
-                     @Override
-                     public void onNext(Integer result) {
-                         if(result == Util.OTAresult.CHECK_OK) {
-                             if(downloadListener != null) {
-                                 downloadListener.onFinishDownload();
-                             }
-                             setUpdateState(UpdateStateManager.STATE_READY);
-                         } else {
-                             if(downloadListener != null) {
-                                 downloadListener.onFail("download fail code:" + result);
-                             }
-                             setUpdateState(UpdateStateManager.STATE_FAIL);
-                         }
-                         subscriber.onNext(result);
-                     }
-                 });
+    if(downloadListener != null) {
+        downloadListener.onStartDownload();
     }
-    ```
+    setUpdateState(UpdateStateManager.STATE_DOWNLOADING);
+    Map<String, String> params = OtaParamFactory.createDownloadFirmwareParam(mContext);
+    otaServerApi.getDownloadUtl(params)
+            .subscribeOn(Schedulers.io())
+            .map(new Func1<VersionDownloadUrl, String>() {
+                @Override
+                public String call(VersionDownloadUrl url) {
+                    mFirmwareManager.savePackageHash(url.getData().getHash());
+                    return url.getData().getUrl();
+                }
+            })
+            .flatMap(new Func1<String, rx.Observable<ResponseBody>>() {
+                @Override
+                public rx.Observable<ResponseBody> call(String url) {
+                    return qiniuServiceApi.downloadFirmware(url);
+                }
+            })
+              .subscribeOn(Schedulers.io())
+              .unsubscribeOn(Schedulers.io())
+              .map(new Func1<ResponseBody, String>() {
+                  @Override
+                  public String call(ResponseBody responseBody) {
+                      saveToDisk(responseBody, filePath);
+                      return mPackagePath;
+                  }
+              })
+              .observeOn(Schedulers.io())
+              .map(new Func1<String, Integer>() {
+                @Override
+                public Integer call(String path) {
+                    setUpdateState(UpdateStateManager.STATE_VERIFYING);
+                    int result = checkPackageHash();
+                    if(result != Util.OTAresult.CHECK_OK) {
+                        return result;
+                    }
+                    return checkUpdagePackage(path);
+                }
+              })
+              .observeOn(AndroidSchedulers.mainThread())
+              .subscribe(new Subscriber<Integer>() {
+                  @Override
+                  public void onCompleted() {
+                      subscriber.onCompleted();
+                  }
+
+                  @Override
+                  public void onError(Throwable e) {
+                      setUpdateState(UpdateStateManager.STATE_FAIL);
+                      subscriber.onError(e);
+                  }
+
+                  @Override
+                  public void onNext(Integer result) {
+                      if(result == Util.OTAresult.CHECK_OK) {
+                          if(downloadListener != null) {
+                              downloadListener.onFinishDownload();
+                          }
+                          setUpdateState(UpdateStateManager.STATE_READY);
+                      } else {
+                          if(downloadListener != null) {
+                              downloadListener.onFail("download fail code:" + result);
+                          }
+                          setUpdateState(UpdateStateManager.STATE_FAIL);
+                      }
+                      subscriber.onNext(result);
+                  }
+              });
+}
+```
+
+#### 比较Hash值
+
+Etag是七牛Android SDK提供的工具类，用来计算hash，之前我们在业务服务器要求七牛回传etag值，在这里比较两者是否相等。
+
+```javascript
+private Integer checkPackageHash() {
+    try {
+        String tag = Etag.file(mPackagePath);
+        String originTag = mFirmwareManager.getPackageHash();
+        if(tag != null && tag.equals(originTag)) {
+            return Util.OTAresult.CHECK_OK;
+        }
+        return Util.OTAresult.ERROR_OTA_FILE;
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    return Util.OTAresult.ERROR_OTA_FILE;
+}
+```
+
+以上所有的源代码都可以在[https://github.com/yinlijun2004/android_ota_system](https://github.com/yinlijun2004/android_ota_system)中找到。

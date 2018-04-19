@@ -8,7 +8,7 @@ pm2用来管理nodejs应用的时候，可以简单的用命令行来启动，�
 pm2 start ./ota_server/bin/www --name=ota-server
 ```
 
-最常用的方法是将启动脚本配置成json，如:
+更常用的方法是将启动脚本配置成json，如:
 
 <!-- more -->
 start.json
@@ -24,7 +24,7 @@ start.json
 }
 ```
 
-比如你的项目package.json启动参数里面可能带了环境变量，比如：
+如果你的项目package.json启动参数里面带了环境变量，比如：
 ```json
 "scripts": {
     "start"："cross-env NODE_ENV=production node ./bin/www",
@@ -53,7 +53,13 @@ start.json
 }
 ```
 
-然后就可以用如下命令加入环境变量了：
+然后用如下命令加入环境变量了：
 ```bash
 pm2 start start.json --env=prod
+```
+
+这样可以在代码里面这样应用环境变量：
+```javascript
+  domain: process.env.NODE_ENV === "production" ? 'http://ota.yinlijun.com' : 'http://yinlijun.viphk.ngrok.org',
+
 ```

@@ -15,8 +15,9 @@ kotlin提供了一些惯用法（语法糖？），简单的记录一下。
 - componentsN() 函数
 - copy() 拷贝
 
-```kotlin
+<!-- more -->
 
+```kotlin
 data class User(val name: String = "nobody", val age: Int = 0)
 
 fun main(args: Array<String>) {
@@ -77,7 +78,6 @@ fun main(args: Array<String>) {
     println("johnny.hashCode() == anotherJohnny.hashCode() ${johnny.hashCode() == anotherJohnny.hashCode()}")
 }
 ```
-<!-- more -->
 
 ## 函数(包括构造函数)的默认值
 

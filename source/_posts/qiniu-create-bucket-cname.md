@@ -24,7 +24,7 @@ tags: [qiniu, aliyun, ecs]
 
 进来之后，填写你要绑定的域名，和对应的存储空间。
 ![](https://picabstract-preview-ftn.weiyun.com:8443/ftn_pic_abs_v2/e17d5d729c824b0da89d182e7cc930735ece4e9ce6db44b5f81b268c715670598e07cf95b1f5ecb22f3e6052bdadd6f5?pictype=scale&from=30113&version=2.0.0.2&uin=474724984&fname=%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20180417204544.png&size=1024)
-注意这个域名是要经过备案的，备案的经过我之前有介绍过。
+注意这个域名是要经过备案的，备案的经过我之前的文章{% post_link hexo-to-ali-ecs 部署HEXO博客到阿里云ECS %}有介绍过: 。
 
 其他的地方按需要填写，填写完之后拉到下面点创建按钮。
 

@@ -290,6 +290,350 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.yinlijun.com/2016/11/28/android-https-verify-ways/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="尹莉军 <yinlijun2004@gmail.com>">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://tva3.sinaimg.cn/crop.0.0.180.180.180/7d92e765jw1e8qgp5bmzyj2050050aa8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="尹莉军">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/11/28/android-https-verify-ways/" itemprop="url">https双向验证功能的实现</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-28T08:51:23+08:00">
+                2016-11-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2016/11/28/android-https-verify-ways/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://www.yinlijun.com/2016/11/28/android-https-verify-ways/" class="cy_cmt_count" data-xid="2016/11/28/android-https-verify-ways/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>本文介绍一个简单echo服务器的实现，服务端用nodejs，客户端用android。</p>
+<h2 id="用openssl一系列证书"><a href="#用openssl一系列证书" class="headerlink" title="用openssl一系列证书"></a><font size="6em">用openssl一系列证书</font></h2><h3 id="生成自己的CA根证书"><a href="#生成自己的CA根证书" class="headerlink" title="生成自己的CA根证书"></a><font size="5em">生成自己的CA根证书</font></h3><h4 id="生成跟证书私钥ca-key"><a href="#生成跟证书私钥ca-key" class="headerlink" title="生成跟证书私钥ca.key"></a><font size="4em">生成跟证书私钥ca.key</font></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ openssl genrsa -des3 -out ca.key 1024</div></pre></td></tr></table></figure>
+<h4 id="生成X-509证书签名请求文件ca-csr"><a href="#生成X-509证书签名请求文件ca-csr" class="headerlink" title="生成X.509证书签名请求文件ca.csr"></a><font size="4em">生成X.509证书签名请求文件ca.csr</font></h4><p>在生成ca.csr的过程中，会让输入一些组织信息等。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ openssl req -new -key ca.key -out ca.csr</div></pre></td></tr></table></figure></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/11/28/android-https-verify-ways/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.yinlijun.com/2016/11/25/react-router-4-0-0-api-Match/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="尹莉军 <yinlijun2004@gmail.com>">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://tva3.sinaimg.cn/crop.0.0.180.180.180/7d92e765jw1e8qgp5bmzyj2050050aa8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="尹莉军">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/11/25/react-router-4-0-0-api-Match/" itemprop="url">Match-react router 4.0.0 api中文文档</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-25T13:05:50+08:00">
+                2016-11-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/react-router-4-0-0-api中文文档/" itemprop="url" rel="index">
+                    <span itemprop="name">react router 4.0.0 api中文文档</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2016/11/25/react-router-4-0-0-api-Match/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://www.yinlijun.com/2016/11/25/react-router-4-0-0-api-Match/" class="cy_cmt_count" data-xid="2016/11/25/react-router-4-0-0-api-Match/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><a href="https://react-router.now.sh/Match" target="_blank" rel="external">原文链接</a></p>
+<font size="1em">&lt;Match&gt;</font>
+
+<p>匹配到地址(location)时进行UI渲染</p>
+<h3 id="pattern-string"><a href="#pattern-string" class="headerlink" title="pattern: string"></a><font color="red">pattern: string</font></h3><p>任何<a href="https://www.npmjs.com/package/path-to-regexp" target="_blank" rel="external">path-to-regexp</a>可以理解的URL模式表达式<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Match</span> <span class="attr">pattern</span>=<span class="string">"/users/:id"</span> <span class="attr">component</span>=<span class="string">&#123;User&#125;/</span>&gt;</span></div></pre></td></tr></table></figure></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/11/25/react-router-4-0-0-api-Match/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://www.yinlijun.com/2016/11/24/react-lifecycle/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -409,7 +753,7 @@
 </ul>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/11/24/react-lifecycle/#далее" rel="contents">
+            <a class="btn" href="/2016/11/24/react-lifecycle/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -570,7 +914,7 @@
 <p>保持你的界面与浏览器历史记录保持同步。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;BrowserRouter&gt;</div><div class="line">  &lt;App/&gt;</div><div class="line">&lt;/BrowserRouter&gt;</div></pre></td></tr></table></figure></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/11/24/react-router-4-0-0-api/#далее" rel="contents">
+            <a class="btn" href="/2016/11/24/react-router-4-0-0-api/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -753,7 +1097,7 @@
 <p>保持你的界面与浏览器历史记录保持同步。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;BrowserRouter&gt;</div><div class="line">  &lt;App/&gt;</div><div class="line">&lt;/BrowserRouter&gt;</div></pre></td></tr></table></figure></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/11/24/react-router-4-0-0-api-BrowserRouter/#далее" rel="contents">
+            <a class="btn" href="/2016/11/24/react-router-4-0-0-api-BrowserRouter/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -912,7 +1256,7 @@
 <p>如果之前系统是其他版本的JDK，需要把环境变量切换过来。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/11/16/ubuntu编译android源代码环境搭建/#далее" rel="contents">
+            <a class="btn" href="/2016/11/16/ubuntu编译android源代码环境搭建/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1071,7 +1415,7 @@
 <p>openjdk-8-jre只包含运行时环境(Java Runtime Environment）。如果你想开发java程序，请安装openjdk-8-jdk。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/11/15/how-to-download-openjdk/#далее" rel="contents">
+            <a class="btn" href="/2016/11/15/how-to-download-openjdk/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1229,7 +1573,7 @@
           <p>利用Android Studio开发，经常会碰到JDK版本的切换问题，安装好新版本的<a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank" rel="external">jdk</a>之后，需要先配置到可选项。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">yinlijun@sj:~$ sudo update-alternatives --install /usr/bin/java java /opt/jdk1.8.0_101/bin/java 100</div><div class="line">update-alternatives: 警告: /etc/alternatives/java has been changed (manually or by a script); switching to manual updates only</div><div class="line">yinlijun@sj:~$ sudo update-alternatives --install /usr/bin/javac javac /opt/jdk1.8.0_101/bin/javac 100</div></pre></td></tr></table></figure></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/11/15/ubuntu利用update-alternatives配置java/#далее" rel="contents">
+            <a class="btn" href="/2016/11/15/ubuntu利用update-alternatives配置java/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1395,7 +1739,7 @@
 </ol>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/11/15/make-ubutun-desktop/#далее" rel="contents">
+            <a class="btn" href="/2016/11/15/make-ubutun-desktop/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1554,332 +1898,7 @@
 <p>获取配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">yinlijun@yinlijun:~/personal_github/johnny-blog$ git config user.email</div><div class="line">aaa@aaa.com</div><div class="line">yinlijun@yinlijun:~/personal_github/johnny-blog$ git config user.name</div><div class="line">aaa</div></pre></td></tr></table></figure></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/11/15/git配置user-name和user-email/#далее" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.yinlijun.com/2016/11/09/windows配置mongdb记录/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="尹莉军 <yinlijun2004@gmail.com>">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://tva3.sinaimg.cn/crop.0.0.180.180.180/7d92e765jw1e8qgp5bmzyj2050050aa8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="尹莉军">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/11/09/windows配置mongdb记录/" itemprop="url">windows配置mongdb记录</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-09T17:55:51+08:00">
-                2016-11-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2016/11/09/windows配置mongdb记录/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://www.yinlijun.com/2016/11/09/windows配置mongdb记录/" class="cy_cmt_count" data-xid="2016/11/09/windows配置mongdb记录/" itemprop="commentsCount" ></span>
-                </a>
-              
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>刚给windows电脑配置了mongdb记录一下。</p>
-<ul>
-<li><p>前往<a href="https://www.mongodb.com/download-center" target="_blank" rel="external">官网</a>下载合适的安装包，我选择的是msi安装包，也可以选择下载zip包。</p>
-</li>
-<li><p>运行msi安装包（默认安装在C盘，没找到在哪里可以修改盘符）。</p>
-</li>
-<li><p>在D:\下创建好相关文件夹<br><img src="http://img.blog.csdn.net/20161109194149759" alt="这里写图片描述"></p>
-</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/11/09/windows配置mongdb记录/#далее" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.yinlijun.com/2016/11/08/windows下文件路径太深，无法删除解决办法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="尹莉军 <yinlijun2004@gmail.com>">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://tva3.sinaimg.cn/crop.0.0.180.180.180/7d92e765jw1e8qgp5bmzyj2050050aa8.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="尹莉军">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/11/08/windows下文件路径太深，无法删除解决办法/" itemprop="url">windows下文件路径太深，无法删除解决办法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-08T18:02:04+08:00">
-                2016-11-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2016/11/08/windows下文件路径太深，无法删除解决办法/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://www.yinlijun.com/2016/11/08/windows下文件路径太深，无法删除解决办法/" class="cy_cmt_count" data-xid="2016/11/08/windows下文件路径太深，无法删除解决办法/" itemprop="commentsCount" ></span>
-                </a>
-              
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>windows下npm开发时，有时候node_modules/下的目录嵌套太深，导致无法删除项目。</p>
-<p>npm社区贡献了一个工具<a href="https://www.npmjs.com/package/windows-node-deps-deleter" target="_blank" rel="external">windows-node-deps-deleter</a>可供删除这样的目录。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/11/08/windows下文件路径太深，无法删除解决办法/#далее" rel="contents">
+            <a class="btn" href="/2016/11/15/git配置user-name和user-email/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1965,7 +1984,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

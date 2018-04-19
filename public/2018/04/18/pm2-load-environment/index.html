@@ -92,17 +92,17 @@
 
 
 
-<meta name="description" content="pm2用来管理nodejs应用的时候，可以简单的用命令行来启动，如:1pm2 start ./ota_server/bin/www --name=ota-server 最常用的方法是将启动脚本配置成json，如:">
+<meta name="description" content="pm2用来管理nodejs应用的时候，可以简单的用命令行来启动，如:1pm2 start ./ota_server/bin/www --name=ota-server 更常用的方法是将启动脚本配置成json，如:">
 <meta name="keywords" content="nodejs,pm2">
 <meta property="og:type" content="article">
 <meta property="og:title" content="pm2启动参数加入环境变量">
 <meta property="og:url" content="http://www.yinlijun.com/2018/04/18/pm2-load-environment/index.html">
 <meta property="og:site_name" content="尹莉军">
-<meta property="og:description" content="pm2用来管理nodejs应用的时候，可以简单的用命令行来启动，如:1pm2 start ./ota_server/bin/www --name=ota-server 最常用的方法是将启动脚本配置成json，如:">
-<meta property="og:updated_time" content="2018-04-18T09:54:49.571Z">
+<meta property="og:description" content="pm2用来管理nodejs应用的时候，可以简单的用命令行来启动，如:1pm2 start ./ota_server/bin/www --name=ota-server 更常用的方法是将启动脚本配置成json，如:">
+<meta property="og:updated_time" content="2018-04-19T01:07:10.623Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="pm2启动参数加入环境变量">
-<meta name="twitter:description" content="pm2用来管理nodejs应用的时候，可以简单的用命令行来启动，如:1pm2 start ./ota_server/bin/www --name=ota-server 最常用的方法是将启动脚本配置成json，如:">
+<meta name="twitter:description" content="pm2用来管理nodejs应用的时候，可以简单的用命令行来启动，如:1pm2 start ./ota_server/bin/www --name=ota-server 更常用的方法是将启动脚本配置成json，如:">
 
 
 
@@ -397,13 +397,14 @@
 
       
         <p>pm2用来管理nodejs应用的时候，可以简单的用命令行来启动，如:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pm2 start ./ota_server/bin/www --name=ota-server</div></pre></td></tr></table></figure></p>
-<p>最常用的方法是将启动脚本配置成json，如:</p>
+<p>更常用的方法是将启动脚本配置成json，如:</p>
 <a id="more"></a>
 <p>start.json<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    app: [</div><div class="line">        &#123;</div><div class="line">            name: "ota-server",</div><div class="line">            script: "./ota_server/bin/www",</div><div class="line">            watch: false,</div><div class="line">        &#125;</div><div class="line">    ],</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>比如你的项目package.json启动参数里面可能带了环境变量，比如：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">"scripts": &#123;</div><div class="line">    "start"："cross-env NODE_ENV=production node ./bin/www",</div><div class="line">    "start-dev": "node ./bin/www"</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>如果你的项目package.json启动参数里面带了环境变量，比如：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">"scripts": &#123;</div><div class="line">    "start"："cross-env NODE_ENV=production node ./bin/www",</div><div class="line">    "start-dev": "node ./bin/www"</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>这个时候可以在start.json里面加上相应的环境变量配置。</p>
 <p>start.json<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    app: [</div><div class="line">        &#123;</div><div class="line">            name: "ota-server",</div><div class="line">            script: "./ota_server/bin/www",</div><div class="line">            watch: false,</div><div class="line">            env_prod: &#123;</div><div class="line">                "NODE_ENV": "production",</div><div class="line">            &#125;,</div><div class="line">            env_dev: &#123;</div><div class="line">                "NODE_ENV": "development",</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    ],</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>然后就可以用如下命令加入环境变量了：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pm2 start start.json --env=prod</div></pre></td></tr></table></figure></p>
+<p>然后用如下命令加入环境变量了：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pm2 start start.json --env=prod</div></pre></td></tr></table></figure></p>
+<p>这样可以在代码里面这样应用环境变量：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">domain: process.env.NODE_ENV === <span class="string">"production"</span> ? <span class="string">'http://ota.yinlijun.com'</span> : <span class="string">'http://yinlijun.viphk.ngrok.org'</span>,</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -473,6 +474,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/04/19/my-ota-tutorial-4/" rel="prev" title="从零搭建Android OTA系统——版本发布规则实现">
+                从零搭建Android OTA系统——版本发布规则实现 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -536,7 +541,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
