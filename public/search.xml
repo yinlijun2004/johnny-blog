@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[带进度条按钮的实现]]></title>
+    <url>%2F2018%2F04%2F20%2Fprogress-action-button-tutorial%2F</url>
+    <content type="text"><![CDATA[写一个带进度条的按钮：ProgressActionButton，支持外观定制。 可以当单纯的进度条使用，也可以当单纯的按钮使用，还可以当带进度的按钮使用。 主要难点就是实现椭圆按钮的绘制，思路就是，先绘制背景图片，再绘制前景图片，然后剪切一个圆角矩形出来。 12345678910111213141516171819private Bitmap drawRadiusBitmap(Bitmap bg, Bitmap fg, Rect rect, RectF rectF) &#123; Bitmap output = Bitmap.createBitmap(rect.width(), rect.height(), Bitmap.Config.ARGB_8888); Canvas canvas = new Canvas(output); int color = 0xff424242; Paint paint = new Paint(); paint.setAntiAlias(true); canvas.drawARGB(0, 0, 0, 0); paint.setColor(color); canvas.drawRoundRect(rectF, buttonRadius, buttonRadius, paint); paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN)); canvas.drawBitmap(bg, rect, rect, paint); if(fg != null) &#123; Rect fgRect = new Rect(rect.left, rect.top, rect.left + (int) (rect.width() * progress / 100.0f), rect.bottom); canvas.drawBitmap(fg, fgRect, fgRect, paint); &#125; return output;&#125; 支持定制属性： 123456789&lt;declare-styleable name="ProgressActionButton"&gt; &lt;attr name="initBg" format="reference" /&gt; &lt;attr name="successBg" format="reference" /&gt; &lt;attr name="failBg" format="reference"/&gt; &lt;attr name="progressBg" format="reference"/&gt; &lt;attr name="progressFg" format="reference"/&gt; &lt;attr name="disableBg" format="reference"/&gt; &lt;attr name="buttonRadius" format="dimension"/&gt;&lt;/declare-styleable&gt; 用法：12345678&lt;com.trendit.progressactionbutton.ProgressActionButton android:id="@id/progress_bar" android:layout_width="match_parent" android:layout_height="@dimen/progress_action_button_height" android:textSize="@dimen/progress_action_button_text_size" android:textColor="#DEFFFFFF" app:initBg="@drawable/default_progress_bg" /&gt;]]></content>
+      <tags>
+        <tag>android</tag>
+        <tag>button</tag>
+        <tag>progressbar</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[从零搭建Android OTA系统——用户管理规则实现]]></title>
     <url>%2F2018%2F04%2F19%2Fmy-ota-tutorial-5%2F</url>
     <content type="text"><![CDATA[OTA系统提供两套API，一套用于普通的查询功能，比如以发布的版本列表，版本下载地址等，另一套提供管理功能，比如新建，编辑，删除等。 管理功能API，需要区分用户类型，不同的用户有不同的权限，用户分为以下四类： 系统管理员 批准用户注册申请 删除用户 重置用户密码 管理测试SN 管理Android版本 管理版本类别 软件工程师 新建版本 修改版本 上传固件包 发布Alpha测试 测试工程师 撤回Alpha测试 发布Beta测试 运营工程师 撤回Beta测试 发布Release版本 注册用户前端注册请求saga/homeSaga.js12345678910export function* register (data) &#123; yield put(&#123;type:IndexActionTypes.FETCH_START&#125;); try &#123; return yield call(puter, '/user', data) &#125; catch (error) &#123; yield put(&#123;type:IndexActionTypes.SET_MESSAGE,msgContent:'注册失败',msgType:0&#125;); &#125; finally &#123; yield put(&#123;type: IndexActionTypes.FETCH_END&#125;); &#125;&#125; 后端处理注册请求routes/user.js12//注册router.put('/', validRequest.validUsernamePassword, user.register); validRequest中间件用来校验用户名密码。 controller/user.js1234567891011121314151617181920exports.register = (req, res, next) =&gt; &#123; const &#123; type, username, password&#125; = req.body; var newUser = new User(); newUser.username = username; newUser.password = newUser.encryptPassword(password); newUser.type = type; newUser.state = "pending"; newUser.save() .then(user =&gt; &#123; responseClient(res, 200, errorCode.ERROR_CODE_SUCCESS, "注册成功，请联系管理员批准"); &#125;) .catch(err =&gt; &#123; console.log(err.message); responseClient(res, 406, errorCode.ERROR_CODE_SERVER, err.message); &#125;)&#125; 创建用户时，初始状态为pending，存储密码用密文。 批准用户批准用户需要管理员身份。 前端发送批准请求adminManagerUserSaga.js12345678910function* acceptUser(username) &#123; yield put(&#123;type: IndexActionTypes.FETCH_START&#125;); try &#123; return yield call(post, `/user_manager/accept`, &#123;username&#125;); &#125; catch (err) &#123; yield put(&#123;type: IndexActionTypes.SET_MESSAGE, msgContent: '网络请求错误', msgType: 0&#125;); &#125; finally &#123; yield put(&#123;type: IndexActionTypes.FETCH_END&#125;) &#125;&#125; 后端处理批准请求routes/user_manager.js12//批准用户router.post('/accept', validRequest.validUserType('admin'), user.acceptUser); controller/user_manager.js123456789101112131415161718192021222324252627exports.acceptUser = (req, res, next) =&gt; &#123; const &#123; username, &#125; = req.body; if(!username) &#123; responseClient(res, 401, errorCode.ERROR_CODE_CLIENT, "未知用户名"); return; &#125; User.findOne(&#123;username: username&#125;).exec() .then(user =&gt; &#123; if(!user) &#123; throw new Error(`未知用户名:$&#123;username&#125;`) &#125; else if(user.state === 'accept') &#123; return Promise.resolve(user); &#125; user.state = 'accept'; return user.save(); &#125;) .then(user =&gt; &#123; responseClient(res, 200, errorCode.ERROR_CODE_SUCCESS, `$&#123;username&#125;已批准`); &#125;) .catch(error =&gt; &#123; console.log('acceptUser', error.message); responseClient(res, 401, errorCode.ERROR_CODE_CLIENT, `批准用户失败`); &#125;)&#125; 其他用户管理操作的流程是类似的。 以上所有的源代码都可以在https://github.com/yinlijun2004/android_ota_system中找到。]]></content>
@@ -132,7 +142,7 @@
   <entry>
     <title><![CDATA[从零搭建Android OTA系统——开篇]]></title>
     <url>%2F2017%2F12%2F20%2Fmy-ota-tutorial%2F</url>
-    <content type="text"><![CDATA[起因作为一个半路出家的码农，一个野生Android工程师，一直对全栈心怀憧憬，但未有行动。直到两年之前有机会开始接触javascript，写了一些前端的代码，加上nodejs社区这些年的蓬勃发展，我觉得这是一个机会。正如某位长者教导的: 人的一生当然要靠自我奋斗,当然也要考虑历史的进程。 我觉得是时候了。 这是一个完整的项目，也许耗时会比较长，因为上班时间还有工作要完成，但是我会尽力完成它，我的目标是达到可以商用的水平，而不是一个玩具。实现的过程的文章会贴在本站，代码将会托管到github android ota system。 目标到这个项目完结的时候，能实现如下功能。 服务端 版本管理后台 用户管理后台 PC端 版本管理界面 用户操作界面 Android端 查询版本 下载版本 升级版本 我的技术背景语言方面 javascript 熟练度 30% 框架 nodejs 熟练度 5% react 熟练度 10% 会使用到的库 react express 目录 用户注册登录的后台实现 用户注册登录前端界面实现 七牛云存储接口实现 版本发布规则实现 用户管理规则实现 升级规则实现 Android OTA部署到阿里云ECS]]></content>
+    <content type="text"><![CDATA[起因作为一个半路出家的码农，一个野生Android工程师，一直对全栈心怀憧憬，但未有行动。直到两年之前有机会开始接触javascript，写了一些前端的代码，加上nodejs社区这些年的蓬勃发展，我觉得这是一个机会。正如某位长者教导的: 人的一生当然要靠自我奋斗,当然也要考虑历史的进程。 我觉得是时候了。 这是一个完整的项目，也许耗时会比较长，因为上班时间还有工作要完成，但是我会尽力完成它，我的目标是达到可以商用的水平，而不是一个玩具。实现的过程的文章会贴在本站，代码将会托管到github android ota system。 目标到这个项目完结的时候，能实现如下功能。 服务端 版本管理后台 用户管理后台 PC端 版本管理界面 用户操作界面 Android端 查询版本 下载版本 升级版本 我的技术背景语言方面 javascript 熟练度 30% 框架 nodejs 熟练度 5% react 熟练度 10% 会使用到的库 react express 目录 用户注册登录的后台实现 用户注册登录前端界面实现 七牛云存储接口实现 版本发布规则实现 用户管理规则实现 部署到阿里云ECS]]></content>
       <categories>
         <category>从零搭建Android OTA系统</category>
       </categories>
@@ -253,8 +263,11 @@
   </entry>
   <entry>
     <title><![CDATA[BrowserRouter-react router 4.0.0 api中文文档]]></title>
-    <url>%2F2016%2F11%2F24%2Freact-router-4-0-0-api%2F</url>
+    <url>%2F2016%2F11%2F24%2Freact-router-4-0-0-api-BrowserRouter%2F</url>
     <content type="text"><![CDATA[原文链接 &lt;BrowserRouter&gt; 保持你的界面与浏览器历史记录保持同步。123&lt;BrowserRouter&gt; &lt;App/&gt;&lt;/BrowserRouter&gt; basename 所有路由的根URL，如果你的应用处于服务端的子目录, 你可以设置这个值为该子目录。 123456&lt;BrowserRouter basename=&quot;/calendar&quot; /&gt;// 假设Link标签如下所示：&lt;Link to=&quot;/today&quot;/&gt;// 那么超链接指向 &quot;/calendar/today&quot;&lt;/BrowserRouter&gt; &lt;/BrowserRouter&gt;]]></content>
+      <categories>
+        <category>react router 4.0.0 api中文文档</category>
+      </categories>
       <tags>
         <tag>react</tag>
         <tag>react-router</tag>
@@ -263,11 +276,8 @@
   </entry>
   <entry>
     <title><![CDATA[BrowserRouter-react router 4.0.0 api中文文档]]></title>
-    <url>%2F2016%2F11%2F24%2Freact-router-4-0-0-api-BrowserRouter%2F</url>
+    <url>%2F2016%2F11%2F24%2Freact-router-4-0-0-api%2F</url>
     <content type="text"><![CDATA[原文链接 &lt;BrowserRouter&gt; 保持你的界面与浏览器历史记录保持同步。123&lt;BrowserRouter&gt; &lt;App/&gt;&lt;/BrowserRouter&gt; basename 所有路由的根URL，如果你的应用处于服务端的子目录, 你可以设置这个值为该子目录。 123456&lt;BrowserRouter basename=&quot;/calendar&quot; /&gt;// 假设Link标签如下所示：&lt;Link to=&quot;/today&quot;/&gt;// 那么超链接指向 &quot;/calendar/today&quot;&lt;/BrowserRouter&gt; &lt;/BrowserRouter&gt;]]></content>
-      <categories>
-        <category>react router 4.0.0 api中文文档</category>
-      </categories>
       <tags>
         <tag>react</tag>
         <tag>react-router</tag>
@@ -347,20 +357,20 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[高性能Javscript - 笔记]]></title>
-    <url>%2F2016%2F11%2F05%2FHigh-Performance-Javascript%2F</url>
-    <content type="text"><![CDATA[第一章 加载和执行减少Javascript加载对性能的影响 &lt;/body&gt;闭合标签之前，将所有&lt;javascript&gt;标签放到页面底部。这能确保在脚本执行前页面已经完成了渲染 合并脚本，减少&lt;javascript&gt;标签 使用&lt;javascript&gt;标签的defer属性1&lt;script type='text/javascript' src='file1.js' defer&gt;&lt;/script&gt; 利用动态创建的&lt;javascript&gt;元素来下载并执行代码 1234567var script = document.createElemnet('script');script.type = 'text/javascript';script.onload = function() &#123; alert('Script loaded!');&#125;script.src = 'file1.js';document.getElementByTagName('head')[0].appendChild(script); 使用XHR对象下载Javascript代码并注入页面中 123456789101112var xhr = new XMLHttpRequest();xhr.open('get', 'file1.js', true);xhr.onreadystatechange = function() &#123; if(xhr.readyState == 4) &#123; if(xhr.status &gt;= 200 &amp;&amp; xhr.status &lt; 300 || xhr.status === 304) &#123; var script = document.createElemnet('script'); script.type = 'text/javascript'; script.text = xhr.responseText; document.body.appendChild(script); &#125; &#125;&#125; 几种类库加载js的方式 YUI3 123456&lt;script type='text/javascript' src='http://yui.yahooapis.com/combo?3.0.0/build/yui/yui-min.js'&gt;&lt;/script&gt;&lt;script type='text/javascript'&gt; YUI().use('dom', function(Y) &#123; Y.DOM.addClass(document.body, 'loaded'); &#125;)&lt;/script&gt; LazyLoad 123456&lt;script type='text/javascript' src='lazyload-min.js'&gt;&lt;/script&gt;&lt;script type='text/javascript'&gt; LazyLoad.js('the-rest.js', function() &#123; Applicationn.init(); &#125;)&lt;/script&gt; LABjs 12345678&lt;script type='text/javascript' src='lab.js'&gt;&lt;/script&gt;&lt;script type='text/javascript'&gt; $LAB.script('first-file.js') .wait() .script('the-rest.js') .wait(function() &#123; Applicationn.init(); &#125;) 第二章 数据存取在Javascript中，数据存储的位置会对代码整体性能产成重大影响。数据存储共有4中方式：字面量、变量、数组项、对象成员。它们有着各自的性能特点。 访问字面量和局部变量的速度最快，相反，访问数组元素和对象成员相对较慢。 由于局部变量存在于作用域链的起始位置，因此访问局部变量比访问跨作用域变量更快。变量在作用域中的位置越深，访问所需时间就越长。由于全局变量总处在作用域的最末端，因此访问速度时最慢的。 避免使用with语句。 嵌套的对象成员会明显影响性能，尽量少用。 属性或方法在原型链中的位置越深，访问它的速度也越慢。 通常来说，你可以通过把常用的对象成员、数组元素、跨域变量保存在局部变量中来改善Javascript性能，因为局部变量访问速度更快。 第三章 DOM编程访问和操作DOM时现在Web应用的重要部分。但每次穿越链接ECMAScript和DOM都会有性能消耗，为了减少DOM编程带来的消耗，请记住以下几点： 最小化DOM访问次数，尽可能在Javascript端处理。 如果需要多次访问某个DOM节点，请使用局部变量存储它的引用。 小心处理HTML集合，把集合的长度缓存到一个变量中，并在迭代中使用它。如果需要经常操作集合，建议把它靠背到一个数组中。 如果可能的话，使用速度更快的API，比如querySelecetAll()和firstElementChild。 要留意重排和重绘，批量修改样式时，离线操作DOM树，使用缓存，并减少布局信息的次数。 动画中使用绝对定位，使用拖放代理。 使用事件委托来减少事件处理器的数量。]]></content>
-      <tags>
-        <tag>javascript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[android studio编译错误: *** 目标模式不含有“%”。 停止。]]></title>
     <url>%2F2016%2F11%2F05%2Fandroid-studio%E7%BC%96%E8%AF%91%E9%94%99%E8%AF%AF-%E7%9B%AE%E6%A0%87%E6%A8%A1%E5%BC%8F%E4%B8%8D%E5%90%AB%E6%9C%89%E2%80%9C-%E2%80%9D%E3%80%82-%E5%81%9C%E6%AD%A2%E3%80%82%2F</url>
     <content type="text"><![CDATA[Android Studio NDK编译出现如下错误： target pattern contains no `%’. Stop中文： 目标模式不含有“%”。 停止。可能是obj目录的问题，需要删掉。在工程目录下find所有的obj目录1find . -name obj]]></content>
       <tags>
         <tag>android studio</tag>
         <tag>android</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[高性能Javscript - 笔记]]></title>
+    <url>%2F2016%2F11%2F05%2FHigh-Performance-Javascript%2F</url>
+    <content type="text"><![CDATA[第一章 加载和执行减少Javascript加载对性能的影响 &lt;/body&gt;闭合标签之前，将所有&lt;javascript&gt;标签放到页面底部。这能确保在脚本执行前页面已经完成了渲染 合并脚本，减少&lt;javascript&gt;标签 使用&lt;javascript&gt;标签的defer属性1&lt;script type='text/javascript' src='file1.js' defer&gt;&lt;/script&gt; 利用动态创建的&lt;javascript&gt;元素来下载并执行代码 1234567var script = document.createElemnet('script');script.type = 'text/javascript';script.onload = function() &#123; alert('Script loaded!');&#125;script.src = 'file1.js';document.getElementByTagName('head')[0].appendChild(script); 使用XHR对象下载Javascript代码并注入页面中 123456789101112var xhr = new XMLHttpRequest();xhr.open('get', 'file1.js', true);xhr.onreadystatechange = function() &#123; if(xhr.readyState == 4) &#123; if(xhr.status &gt;= 200 &amp;&amp; xhr.status &lt; 300 || xhr.status === 304) &#123; var script = document.createElemnet('script'); script.type = 'text/javascript'; script.text = xhr.responseText; document.body.appendChild(script); &#125; &#125;&#125; 几种类库加载js的方式 YUI3 123456&lt;script type='text/javascript' src='http://yui.yahooapis.com/combo?3.0.0/build/yui/yui-min.js'&gt;&lt;/script&gt;&lt;script type='text/javascript'&gt; YUI().use('dom', function(Y) &#123; Y.DOM.addClass(document.body, 'loaded'); &#125;)&lt;/script&gt; LazyLoad 123456&lt;script type='text/javascript' src='lazyload-min.js'&gt;&lt;/script&gt;&lt;script type='text/javascript'&gt; LazyLoad.js('the-rest.js', function() &#123; Applicationn.init(); &#125;)&lt;/script&gt; LABjs 12345678&lt;script type='text/javascript' src='lab.js'&gt;&lt;/script&gt;&lt;script type='text/javascript'&gt; $LAB.script('first-file.js') .wait() .script('the-rest.js') .wait(function() &#123; Applicationn.init(); &#125;) 第二章 数据存取在Javascript中，数据存储的位置会对代码整体性能产成重大影响。数据存储共有4中方式：字面量、变量、数组项、对象成员。它们有着各自的性能特点。 访问字面量和局部变量的速度最快，相反，访问数组元素和对象成员相对较慢。 由于局部变量存在于作用域链的起始位置，因此访问局部变量比访问跨作用域变量更快。变量在作用域中的位置越深，访问所需时间就越长。由于全局变量总处在作用域的最末端，因此访问速度时最慢的。 避免使用with语句。 嵌套的对象成员会明显影响性能，尽量少用。 属性或方法在原型链中的位置越深，访问它的速度也越慢。 通常来说，你可以通过把常用的对象成员、数组元素、跨域变量保存在局部变量中来改善Javascript性能，因为局部变量访问速度更快。 第三章 DOM编程访问和操作DOM时现在Web应用的重要部分。但每次穿越链接ECMAScript和DOM都会有性能消耗，为了减少DOM编程带来的消耗，请记住以下几点： 最小化DOM访问次数，尽可能在Javascript端处理。 如果需要多次访问某个DOM节点，请使用局部变量存储它的引用。 小心处理HTML集合，把集合的长度缓存到一个变量中，并在迭代中使用它。如果需要经常操作集合，建议把它靠背到一个数组中。 如果可能的话，使用速度更快的API，比如querySelecetAll()和firstElementChild。 要留意重排和重绘，批量修改样式时，离线操作DOM树，使用缓存，并减少布局信息的次数。 动画中使用绝对定位，使用拖放代理。 使用事件委托来减少事件处理器的数量。]]></content>
+      <tags>
+        <tag>javascript</tag>
       </tags>
   </entry>
   <entry>

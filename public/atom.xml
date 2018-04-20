@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.yinlijun.com/"/>
-  <updated>2018-04-19T03:01:26.514Z</updated>
+  <updated>2018-04-20T11:48:06.059Z</updated>
   <id>http://www.yinlijun.com/</id>
   
   <author>
@@ -14,6 +14,40 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>带进度条按钮的实现</title>
+    <link href="http://www.yinlijun.com/2018/04/20/progress-action-button-tutorial/"/>
+    <id>http://www.yinlijun.com/2018/04/20/progress-action-button-tutorial/</id>
+    <published>2018-04-20T11:34:08.000Z</published>
+    <updated>2018-04-20T11:48:06.059Z</updated>
+    
+    <content type="html"><![CDATA[<p>写一个带进度条的按钮：<a href="https://github.com/yinlijun2004/ProgressActionButton" target="_blank" rel="external">ProgressActionButton</a>，支持外观定制。</p>
+<p>可以当单纯的进度条使用，也可以当单纯的按钮使用，还可以当带进度的按钮使用。</p>
+<p>主要难点就是实现椭圆按钮的绘制，思路就是，先绘制背景图片，再绘制前景图片，然后剪切一个圆角矩形出来。</p>
+<a id="more"></a>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> Bitmap <span class="title">drawRadiusBitmap</span><span class="params">(Bitmap bg, Bitmap fg, Rect rect, RectF rectF)</span> </span>&#123;</div><div class="line">    Bitmap output = Bitmap.createBitmap(rect.width(), rect.height(), Bitmap.Config.ARGB_8888);</div><div class="line">    Canvas canvas = <span class="keyword">new</span> Canvas(output);</div><div class="line">    <span class="keyword">int</span> color = <span class="number">0xff424242</span>;</div><div class="line">    Paint paint = <span class="keyword">new</span> Paint();</div><div class="line">    paint.setAntiAlias(<span class="keyword">true</span>);</div><div class="line">    canvas.drawARGB(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</div><div class="line">    paint.setColor(color);</div><div class="line"></div><div class="line">    canvas.drawRoundRect(rectF, buttonRadius, buttonRadius, paint);</div><div class="line">    paint.setXfermode(<span class="keyword">new</span> PorterDuffXfermode(PorterDuff.Mode.SRC_IN));</div><div class="line">    canvas.drawBitmap(bg, rect, rect, paint);</div><div class="line">    <span class="keyword">if</span>(fg != <span class="keyword">null</span>) &#123;</div><div class="line">        Rect fgRect = <span class="keyword">new</span> Rect(rect.left, rect.top, rect.left + (<span class="keyword">int</span>) (rect.width() * progress / <span class="number">100.0f</span>), rect.bottom);</div><div class="line">        canvas.drawBitmap(fg, fgRect, fgRect, paint);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> output;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>支持定制属性：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">declare-styleable</span> <span class="attr">name</span>=<span class="string">"ProgressActionButton"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"initBg"</span> <span class="attr">format</span>=<span class="string">"reference"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"successBg"</span> <span class="attr">format</span>=<span class="string">"reference"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"failBg"</span> <span class="attr">format</span>=<span class="string">"reference"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"progressBg"</span> <span class="attr">format</span>=<span class="string">"reference"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"progressFg"</span> <span class="attr">format</span>=<span class="string">"reference"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"disableBg"</span> <span class="attr">format</span>=<span class="string">"reference"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"buttonRadius"</span> <span class="attr">format</span>=<span class="string">"dimension"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">declare-styleable</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>用法：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">com.trendit.progressactionbutton.ProgressActionButton</span></span></div><div class="line">    <span class="attr">android:id</span>=<span class="string">"@id/progress_bar"</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"@dimen/progress_action_button_height"</span></div><div class="line">    <span class="attr">android:textSize</span>=<span class="string">"@dimen/progress_action_button_text_size"</span></div><div class="line">    <span class="attr">android:textColor</span>=<span class="string">"#DEFFFFFF"</span></div><div class="line">    <span class="attr">app:initBg</span>=<span class="string">"@drawable/default_progress_bg"</span></div><div class="line">    /&gt;</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;写一个带进度条的按钮：&lt;a href=&quot;https://github.com/yinlijun2004/ProgressActionButton&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;ProgressActionButton&lt;/a&gt;，支持外观定制。&lt;/p&gt;
+&lt;p&gt;可以当单纯的进度条使用，也可以当单纯的按钮使用，还可以当带进度的按钮使用。&lt;/p&gt;
+&lt;p&gt;主要难点就是实现椭圆按钮的绘制，思路就是，先绘制背景图片，再绘制前景图片，然后剪切一个圆角矩形出来。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="android" scheme="http://www.yinlijun.com/tags/android/"/>
+    
+      <category term="button" scheme="http://www.yinlijun.com/tags/button/"/>
+    
+      <category term="progressbar" scheme="http://www.yinlijun.com/tags/progressbar/"/>
+    
+  </entry>
   
   <entry>
     <title>从零搭建Android OTA系统——用户管理规则实现</title>
@@ -738,7 +772,7 @@
     <link href="http://www.yinlijun.com/2017/12/20/my-ota-tutorial/"/>
     <id>http://www.yinlijun.com/2017/12/20/my-ota-tutorial/</id>
     <published>2017-12-20T09:45:28.000Z</published>
-    <updated>2018-04-19T02:16:22.523Z</updated>
+    <updated>2018-04-20T11:32:32.703Z</updated>
     
     <content type="html"><![CDATA[<h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>作为一个半路出家的码农，一个野生Android工程师，一直对<b>全栈</b>心怀憧憬，但未有行动。直到两年之前有机会开始接触javascript，写了一些前端的代码，加上nodejs社区这些年的蓬勃发展，我觉得这是一个机会。正如某位长者教导的:</p>
 <blockquote>
@@ -785,8 +819,7 @@
 <li><a href="/2018/04/18/my-ota-tutorial-3/" title="七牛云存储接口实现">七牛云存储接口实现</a></li>
 <li><a href="/2018/04/19/my-ota-tutorial-4/" title="版本发布规则实现">版本发布规则实现</a></li>
 <li><a href="/2018/04/19/my-ota-tutorial-5/" title="用户管理规则实现">用户管理规则实现</a></li>
-<li>升级规则实现 </li>
-<li><a href="/2018/03/20/my-ota-tutorial-7/" title="Android OTA部署到阿里云ECS">Android OTA部署到阿里云ECS</a></li>
+<li><a href="/2018/03/20/my-ota-tutorial-7/" title="部署到阿里云ECS">部署到阿里云ECS</a></li>
 </ul>
 ]]></content>
     
@@ -1173,54 +1206,6 @@
       <category term="react-router" scheme="http://www.yinlijun.com/tags/react-router/"/>
     
       <category term="翻译文档" scheme="http://www.yinlijun.com/tags/%E7%BF%BB%E8%AF%91%E6%96%87%E6%A1%A3/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>解决 /dev/kvm is not found 的问题</title>
-    <link href="http://www.yinlijun.com/2016/11/28/fix-dev-kvm-is-not-found/"/>
-    <id>http://www.yinlijun.com/2016/11/28/fix-dev-kvm-is-not-found/</id>
-    <published>2016-11-28T11:44:23.000Z</published>
-    <updated>2017-05-25T03:41:18.233Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="问题出现环境"><a href="#问题出现环境" class="headerlink" title="问题出现环境"></a>问题出现环境</h2><ul>
-<li>Ubuntu 12.04</li>
-<li>Android Studio 2.2.2</li>
-</ul>
-<h2 id="解决步骤"><a href="#解决步骤" class="headerlink" title="解决步骤"></a>解决步骤</h2><h3 id="开启VT-x"><a href="#开启VT-x" class="headerlink" title="开启VT-x"></a>开启VT-x</h3><p>在ubuntu上使用Android Studio创建模拟器时，会提示一个错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/dev/kvm is not found</div></pre></td></tr></table></figure></p>
-<p>并且提示要在<em>BIOS</em>里面开启<font size="4em"><strong>VT-x</strong></font>。</p>
-<a id="more"></a>
-<p>重启电脑，按<em>DEL</em>键进入<em>BIOS</em>,发现确实没有启用，于是启用后再此重启电脑。</p>
-<p>此时打开Android Studio，仍然提示一样的错误。</p>
-<p>再次在网上搜寻，发现如下解决方案，记录一下。</p>
-<p><a href="http://askubuntu.com/questions/600727/replacement-for-haxm-on-ubuntu-says-intel-x86-emulator-accelerator-is-not-comp" target="_blank" rel="external">http://askubuntu.com/questions/600727/replacement-for-haxm-on-ubuntu-says-intel-x86-emulator-accelerator-is-not-comp</a></p>
-<p>###<br>Check if your CPU supports hardware virtualization, by typing:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">egrep -c &apos;(vmx|svm)&apos; /proc/cpuinfo</div></pre></td></tr></table></figure></p>
-<p>If the result is 0, your CPU does not support hardware virtualization, which is necessary to run the KVM. If you get 1 or more, that means you’re fine.</p>
-<p>Next, install KVM. First make sure if your processor supports KVM by typing:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">kvm-ok</div></pre></td></tr></table></figure></p>
-<p>You will see this if that’s the case:</p>
-<p>INFO: Your CPU supports KVM extensions INFO: /dev/kvm exists KVM acceleration can be used<br>If this is the result, you need to turn on Intel VT in BIOS:</p>
-<p>INFO: KVM is disabled by your BIOS HINT: Enter your BIOS setup and enable Virtualization Technology (VT), and then hard poweroff/poweron your system KVM acceleration can NOT be used<br>The next step is to install the KVM and a few other packages needed. To do so, type:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils</div></pre></td></tr></table></figure></p>
-<p>Add your user to some groups, replacing by your own username:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo adduser &lt;user&gt; libvirtd</div><div class="line">sudo adduser &lt;user&gt; kvm</div></pre></td></tr></table></figure></p>
-<p>Check if everything is ok:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo virsh -c qemu:///system list</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;问题出现环境&quot;&gt;&lt;a href=&quot;#问题出现环境&quot; class=&quot;headerlink&quot; title=&quot;问题出现环境&quot;&gt;&lt;/a&gt;问题出现环境&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;Ubuntu 12.04&lt;/li&gt;
-&lt;li&gt;Android Studio 2.2.2&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;解决步骤&quot;&gt;&lt;a href=&quot;#解决步骤&quot; class=&quot;headerlink&quot; title=&quot;解决步骤&quot;&gt;&lt;/a&gt;解决步骤&lt;/h2&gt;&lt;h3 id=&quot;开启VT-x&quot;&gt;&lt;a href=&quot;#开启VT-x&quot; class=&quot;headerlink&quot; title=&quot;开启VT-x&quot;&gt;&lt;/a&gt;开启VT-x&lt;/h3&gt;&lt;p&gt;在ubuntu上使用Android Studio创建模拟器时，会提示一个错误：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;/dev/kvm is not found&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;并且提示要在&lt;em&gt;BIOS&lt;/em&gt;里面开启&lt;font size=&quot;4em&quot;&gt;&lt;strong&gt;VT-x&lt;/strong&gt;&lt;/font&gt;。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="android studio" scheme="http://www.yinlijun.com/tags/android-studio/"/>
-    
-      <category term="android" scheme="http://www.yinlijun.com/tags/android/"/>
-    
-      <category term="ubuntu" scheme="http://www.yinlijun.com/tags/ubuntu/"/>
     
   </entry>
   

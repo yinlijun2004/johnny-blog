@@ -49,5 +49,4 @@ categories: 从零搭建Android OTA系统
 - {% post_link my-ota-tutorial-3 七牛云存储接口实现 %}
 - {% post_link my-ota-tutorial-4 版本发布规则实现 %}
 - {% post_link my-ota-tutorial-5 用户管理规则实现 %}
-- 升级规则实现 {% post_link my-ota-tutorial-6 升级规则实现 %}
-- {% post_link my-ota-tutorial-7 Android OTA部署到阿里云ECS %}
+- {% post_link my-ota-tutorial-7 部署到阿里云ECS %}

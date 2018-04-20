@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="windows,mongodb," />
+  <meta name="keywords" content="android,button,progressbar," />
 
 
 
@@ -92,22 +92,17 @@
 
 
 
-<meta name="description" content="刚给windows电脑配置了mongdb记录一下。  前往官网下载合适的安装包，我选择的是msi安装包，也可以选择下载zip包。  运行msi安装包（默认安装在C盘，没找到在哪里可以修改盘符）。  在D:\下创建好相关文件夹">
-<meta name="keywords" content="windows,mongodb">
+<meta name="description" content="写一个带进度条的按钮：ProgressActionButton，支持外观定制。 可以当单纯的进度条使用，也可以当单纯的按钮使用，还可以当带进度的按钮使用。 主要难点就是实现椭圆按钮的绘制，思路就是，先绘制背景图片，再绘制前景图片，然后剪切一个圆角矩形出来。">
+<meta name="keywords" content="android,button,progressbar">
 <meta property="og:type" content="article">
-<meta property="og:title" content="windows配置mongdb记录">
-<meta property="og:url" content="http://www.yinlijun.com/2016/11/09/windows配置mongdb记录/index.html">
+<meta property="og:title" content="带进度条按钮的实现">
+<meta property="og:url" content="http://www.yinlijun.com/2018/04/20/progress-action-button-tutorial/index.html">
 <meta property="og:site_name" content="尹莉军">
-<meta property="og:description" content="刚给windows电脑配置了mongdb记录一下。  前往官网下载合适的安装包，我选择的是msi安装包，也可以选择下载zip包。  运行msi安装包（默认安装在C盘，没找到在哪里可以修改盘符）。  在D:\下创建好相关文件夹">
-<meta property="og:image" content="http://img.blog.csdn.net/20161109194149759">
-<meta property="og:image" content="http://img.blog.csdn.net/20161109194331090">
-<meta property="og:image" content="http://img.blog.csdn.net/20161109194436279">
-<meta property="og:image" content="http://img.blog.csdn.net/20161109194520874">
-<meta property="og:updated_time" content="2017-05-25T03:41:18.237Z">
+<meta property="og:description" content="写一个带进度条的按钮：ProgressActionButton，支持外观定制。 可以当单纯的进度条使用，也可以当单纯的按钮使用，还可以当带进度的按钮使用。 主要难点就是实现椭圆按钮的绘制，思路就是，先绘制背景图片，再绘制前景图片，然后剪切一个圆角矩形出来。">
+<meta property="og:updated_time" content="2018-04-20T11:48:06.059Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="windows配置mongdb记录">
-<meta name="twitter:description" content="刚给windows电脑配置了mongdb记录一下。  前往官网下载合适的安装包，我选择的是msi安装包，也可以选择下载zip包。  运行msi安装包（默认安装在C盘，没找到在哪里可以修改盘符）。  在D:\下创建好相关文件夹">
-<meta name="twitter:image" content="http://img.blog.csdn.net/20161109194149759">
+<meta name="twitter:title" content="带进度条按钮的实现">
+<meta name="twitter:description" content="写一个带进度条的按钮：ProgressActionButton，支持外观定制。 可以当单纯的进度条使用，也可以当单纯的按钮使用，还可以当带进度的按钮使用。 主要难点就是实现椭圆按钮的绘制，思路就是，先绘制背景图片，再绘制前景图片，然后剪切一个圆角矩形出来。">
 
 
 
@@ -135,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://www.yinlijun.com/2016/11/09/windows配置mongdb记录/"/>
+  <link rel="canonical" href="http://www.yinlijun.com/2018/04/20/progress-action-button-tutorial/"/>
 
 
 
 
 
-  <title>windows配置mongdb记录 | 尹莉军</title>
+  <title>带进度条按钮的实现 | 尹莉军</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -295,7 +290,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.yinlijun.com/2016/11/09/windows配置mongdb记录/">
+    <link itemprop="mainEntityOfPage" href="http://www.yinlijun.com/2018/04/20/progress-action-button-tutorial/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="尹莉军 <yinlijun2004@gmail.com>">
@@ -312,7 +307,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">windows配置mongdb记录</h1>
+          <h1 class="post-title" itemprop="name headline">带进度条按钮的实现</h1>
         
 
         <div class="post-meta">
@@ -324,8 +319,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-09T17:55:51+08:00">
-                2016-11-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-20T19:34:08+08:00">
+                2018-04-20
               </time>
             
 
@@ -344,8 +339,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2016/11/09/windows配置mongdb记录/#SOHUCS" itemprop="discussionUrl">
-                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2016/11/09/windows配置mongdb记录/" itemprop="commentsCount"></span>
+                <a href="/2018/04/20/progress-action-button-tutorial/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/04/20/progress-action-button-tutorial/" itemprop="commentsCount"></span>
                 </a>
               
             
@@ -401,29 +396,14 @@
       
 
       
-        <p>刚给windows电脑配置了mongdb记录一下。</p>
-<ul>
-<li><p>前往<a href="https://www.mongodb.com/download-center" target="_blank" rel="external">官网</a>下载合适的安装包，我选择的是msi安装包，也可以选择下载zip包。</p>
-</li>
-<li><p>运行msi安装包（默认安装在C盘，没找到在哪里可以修改盘符）。</p>
-</li>
-<li><p>在D:\下创建好相关文件夹<br><img src="http://img.blog.csdn.net/20161109194149759" alt="这里写图片描述"></p>
-</li>
-</ul>
+        <p>写一个带进度条的按钮：<a href="https://github.com/yinlijun2004/ProgressActionButton" target="_blank" rel="external">ProgressActionButton</a>，支持外观定制。</p>
+<p>可以当单纯的进度条使用，也可以当单纯的按钮使用，还可以当带进度的按钮使用。</p>
+<p>主要难点就是实现椭圆按钮的绘制，思路就是，先绘制背景图片，再绘制前景图片，然后剪切一个圆角矩形出来。</p>
 <a id="more"></a>
-<ul>
-<li><p>打开命令提示符，进入到mongodb安装文件夹下的bin目录<br><img src="http://img.blog.csdn.net/20161109194331090" alt="这里写图片描述"></p>
-</li>
-<li><p>输入如下命令，注册MongoDB服务 </p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mongod.exe --logpath D:\MongoDB\data\<span class="built_in">log</span>\MongoDB.log --logappend --dbpath D:\MongoDB\data\db --directoryperdb --storageEngin=mmappv1 --serviceName MongoDB --install</div></pre></td></tr></table></figure>
-<p><img src="http://img.blog.csdn.net/20161109194436279" alt="这里写图片描述"></p>
-<ul>
-<li>启动MongoDB服务</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">net start MongoDB</div></pre></td></tr></table></figure>
-<p><img src="http://img.blog.csdn.net/20161109194520874" alt="这里写图片描述"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> Bitmap <span class="title">drawRadiusBitmap</span><span class="params">(Bitmap bg, Bitmap fg, Rect rect, RectF rectF)</span> </span>&#123;</div><div class="line">    Bitmap output = Bitmap.createBitmap(rect.width(), rect.height(), Bitmap.Config.ARGB_8888);</div><div class="line">    Canvas canvas = <span class="keyword">new</span> Canvas(output);</div><div class="line">    <span class="keyword">int</span> color = <span class="number">0xff424242</span>;</div><div class="line">    Paint paint = <span class="keyword">new</span> Paint();</div><div class="line">    paint.setAntiAlias(<span class="keyword">true</span>);</div><div class="line">    canvas.drawARGB(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</div><div class="line">    paint.setColor(color);</div><div class="line"></div><div class="line">    canvas.drawRoundRect(rectF, buttonRadius, buttonRadius, paint);</div><div class="line">    paint.setXfermode(<span class="keyword">new</span> PorterDuffXfermode(PorterDuff.Mode.SRC_IN));</div><div class="line">    canvas.drawBitmap(bg, rect, rect, paint);</div><div class="line">    <span class="keyword">if</span>(fg != <span class="keyword">null</span>) &#123;</div><div class="line">        Rect fgRect = <span class="keyword">new</span> Rect(rect.left, rect.top, rect.left + (<span class="keyword">int</span>) (rect.width() * progress / <span class="number">100.0f</span>), rect.bottom);</div><div class="line">        canvas.drawBitmap(fg, fgRect, fgRect, paint);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> output;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>支持定制属性：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">declare-styleable</span> <span class="attr">name</span>=<span class="string">"ProgressActionButton"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"initBg"</span> <span class="attr">format</span>=<span class="string">"reference"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"successBg"</span> <span class="attr">format</span>=<span class="string">"reference"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"failBg"</span> <span class="attr">format</span>=<span class="string">"reference"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"progressBg"</span> <span class="attr">format</span>=<span class="string">"reference"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"progressFg"</span> <span class="attr">format</span>=<span class="string">"reference"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"disableBg"</span> <span class="attr">format</span>=<span class="string">"reference"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"buttonRadius"</span> <span class="attr">format</span>=<span class="string">"dimension"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">declare-styleable</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>用法：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">com.trendit.progressactionbutton.ProgressActionButton</span></span></div><div class="line">    <span class="attr">android:id</span>=<span class="string">"@id/progress_bar"</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"@dimen/progress_action_button_height"</span></div><div class="line">    <span class="attr">android:textSize</span>=<span class="string">"@dimen/progress_action_button_text_size"</span></div><div class="line">    <span class="attr">android:textColor</span>=<span class="string">"#DEFFFFFF"</span></div><div class="line">    <span class="attr">app:initBg</span>=<span class="string">"@drawable/default_progress_bg"</span></div><div class="line">    /&gt;</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -452,7 +432,7 @@
     </li>
     <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="http://www.yinlijun.com/2016/11/09/windows配置mongdb记录/" title="windows配置mongdb记录">http://www.yinlijun.com/2016/11/09/windows配置mongdb记录/</a>
+      <a href="http://www.yinlijun.com/2018/04/20/progress-action-button-tutorial/" title="带进度条按钮的实现">http://www.yinlijun.com/2018/04/20/progress-action-button-tutorial/</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明： </strong>
@@ -468,9 +448,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/windows/" rel="tag"># windows</a>
+            <a href="/tags/android/" rel="tag"># android</a>
           
-            <a href="/tags/mongodb/" rel="tag"># mongodb</a>
+            <a href="/tags/button/" rel="tag"># button</a>
+          
+            <a href="/tags/progressbar/" rel="tag"># progressbar</a>
           
         </div>
       
@@ -483,8 +465,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/08/windows下文件路径太深，无法删除解决办法/" rel="next" title="windows下文件路径太深，无法删除解决办法">
-                <i class="fa fa-chevron-left"></i> windows下文件路径太深，无法删除解决办法
+              <a href="/2018/04/19/my-ota-tutorial-5/" rel="next" title="从零搭建Android OTA系统——用户管理规则实现">
+                <i class="fa fa-chevron-left"></i> 从零搭建Android OTA系统——用户管理规则实现
               </a>
             
           </div>
@@ -492,10 +474,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/11/15/git配置user-name和user-email/" rel="prev" title="git配置user.name和user.email">
-                git配置user.name和user.email <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
