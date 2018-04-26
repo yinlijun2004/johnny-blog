@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.yinlijun.com/"/>
-  <updated>2018-04-20T11:48:06.059Z</updated>
+  <updated>2018-04-26T10:35:41.522Z</updated>
   <id>http://www.yinlijun.com/</id>
   
   <author>
@@ -14,6 +14,115 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>android native代码debug开关</title>
+    <link href="http://www.yinlijun.com/2018/04/26/switch-native-debug-on-off/"/>
+    <id>http://www.yinlijun.com/2018/04/26/switch-native-debug-on-off/</id>
+    <published>2018-04-26T10:06:18.000Z</published>
+    <updated>2018-04-26T10:35:41.522Z</updated>
+    
+    <content type="html"><![CDATA[<p>调试本地代码的时候，有时候要加上一些log，特别是一些关键路径，但是生产的时候又不需要打印，有几个办法。</p>
+<h3 id="宏定义实现"><a href="#宏定义实现" class="headerlink" title="宏定义实现"></a>宏定义实现</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> DEBUG</span></div><div class="line">LOGD(<span class="string">"i am a log"</span>);</div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div></pre></td></tr></table></figure>
+<p>这种方法有个不好的地方是，程序一旦编译完了，就不能加修改了，特别是user版本出了状况，因为system分区是只读的。</p>
+<a id="more"></a>
+<h3 id="用动态开关"><a href="#用动态开关" class="headerlink" title="用动态开关"></a>用动态开关</h3><p>用动态开关量，也有两种方法，一种是给出接口，给上一级打开或者关闭这个开关。</p>
+<h4 id="提供开关接口"><a href="#提供开关接口" class="headerlink" title="提供开关接口"></a>提供开关接口</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="keyword">int</span> enable_log = <span class="number">0</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">set_enable_log</span><span class="params">(<span class="keyword">int</span> enable)</span> </span>&#123;</div><div class="line">    enable_log = enable;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">is_log_enable</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> enable_log;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在需要加log的地方写：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(is_log_enable()) &#123;</div><div class="line">    LOGD(<span class="string">"i am a log"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这种方法，适用于上层控制开关的方式，比如说只有经过远程授权才允许打印的log。</p>
+<h4 id="android的属性控制开关"><a href="#android的属性控制开关" class="headerlink" title="android的属性控制开关"></a>android的属性控制开关</h4><p>利用属性来控制log开关时，最好可以在user版本的shell下使用，这对属性名称有讲究。</p>
+<p>查看系统代码 system/core/init/property_service.c，有关属性权限的限制。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> &#123;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *prefix;</div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> uid;</div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> gid;</div><div class="line">&#125; property_perms[] = &#123;</div><div class="line">    ...</div><div class="line">    &#123;<span class="string">"debug."</span>,  AID_SHELL,  <span class="number">0</span>&#125;,</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>可以看出， adb shell只能对debug.开始的属性有读写权限，所以属性名不能随意写。</p>
+<p>设置完属性之后，可以在代码里面读取该属性值。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">define</span> DEBUG_PROP_NAME <span class="meta-string">"debug.log_switch"</span></span></div><div class="line"></div><div class="line"><span class="keyword">char</span> debug_info[PROPERTY_VALUE_MAX];</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">is_log_enable</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="built_in">memset</span>(debug_info, <span class="number">0</span>, PROPERTY_VALUE_MAX);</div><div class="line">    propery_get(DEBUG_PROP_NAME, debug_info);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> !<span class="built_in">strcmp</span>(debug_info, <span class="string">"on"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>然后在需要打log的地方写<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(is_log_enable()) &#123;</div><div class="line">    LOGD(<span class="string">"i am a log"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>以上代码纯手打，没有经过编译，可能会有编译错误，仅提供一种log开关的思路。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;调试本地代码的时候，有时候要加上一些log，特别是一些关键路径，但是生产的时候又不需要打印，有几个办法。&lt;/p&gt;
+&lt;h3 id=&quot;宏定义实现&quot;&gt;&lt;a href=&quot;#宏定义实现&quot; class=&quot;headerlink&quot; title=&quot;宏定义实现&quot;&gt;&lt;/a&gt;宏定义实现&lt;/h3&gt;&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#&lt;span class=&quot;meta-keyword&quot;&gt;ifdef&lt;/span&gt; DEBUG&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;LOGD(&lt;span class=&quot;string&quot;&gt;&quot;i am a log&quot;&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#&lt;span class=&quot;meta-keyword&quot;&gt;endif&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这种方法有个不好的地方是，程序一旦编译完了，就不能加修改了，特别是user版本出了状况，因为system分区是只读的。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="android" scheme="http://www.yinlijun.com/tags/android/"/>
+    
+      <category term="debug" scheme="http://www.yinlijun.com/tags/debug/"/>
+    
+      <category term="c/c++" scheme="http://www.yinlijun.com/tags/c-c/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ubuntu 16.04 编译android填坑记录</title>
+    <link href="http://www.yinlijun.com/2018/04/26/ubuntu-16-04-android-compile/"/>
+    <id>http://www.yinlijun.com/2018/04/26/ubuntu-16-04-android-compile/</id>
+    <published>2018-04-26T09:05:30.000Z</published>
+    <updated>2018-04-26T10:36:02.419Z</updated>
+    
+    <content type="html"><![CDATA[<p>实在受不了ubuntu 12.04了，于是更新到了16.04，但是重新编译android ASOP的时候出了一些状况，在此记录一下。</p>
+<h4 id="java丢失"><a href="#java丢失" class="headerlink" title="java丢失"></a>java丢失</h4><p>重新安装openJDK 8</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install openjdk-8-jre</div><div class="line">sudo apt-get install openjdk-8-jdk-headless</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>不要安装openJDK 9，会报错。</p>
+<h4 id="make版本变成了4-1"><a href="#make版本变成了4-1" class="headerlink" title="make版本变成了4.1"></a>make版本变成了4.1</h4><p>编译的时候报错:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">build/core/prebuilt.mk:91: *** recipe commences before first target. Stop.</div></pre></td></tr></table></figure></p>
+<p>这是因为make版本错误，下载make v3.81代码编译。打开 <a href="http://ftp.gnu.org/gnu/make/" target="_blank" rel="external">http://ftp.gnu.org/gnu/make/</a></p>
+<p>选择make-3.81.tar.gz下载，执行解压、编译、安装步骤：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">tar zxvf make-3.81.tar.gz</div><div class="line">cd make-3.81</div><div class="line">sudo ./configure </div><div class="line">sudo make </div><div class="line">sudo make install</div></pre></td></tr></table></figure></p>
+<p>执行完以后，重新开一个终端，检查make版本。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">make -v</div></pre></td></tr></table></figure></p>
+<p>成功就会提示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">GNU Make 3.81</div><div class="line">Copyright (C) 2006  Free Software Foundation, Inc.</div><div class="line">This is free software; see the source for copying conditions.</div><div class="line">There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A</div><div class="line">PARTICULAR PURPOSE.</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;实在受不了ubuntu 12.04了，于是更新到了16.04，但是重新编译android ASOP的时候出了一些状况，在此记录一下。&lt;/p&gt;
+&lt;h4 id=&quot;java丢失&quot;&gt;&lt;a href=&quot;#java丢失&quot; class=&quot;headerlink&quot; title=&quot;java丢失&quot;&gt;&lt;/a&gt;java丢失&lt;/h4&gt;&lt;p&gt;重新安装openJDK 8&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;sudo apt-get install openjdk-8-jre&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;sudo apt-get install openjdk-8-jdk-headless&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+    
+      <category term="android" scheme="http://www.yinlijun.com/tags/android/"/>
+    
+      <category term="ubuntu" scheme="http://www.yinlijun.com/tags/ubuntu/"/>
+    
+      <category term="jdk" scheme="http://www.yinlijun.com/tags/jdk/"/>
+    
+      <category term="make" scheme="http://www.yinlijun.com/tags/make/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>通过IP地址访问nginx服务</title>
+    <link href="http://www.yinlijun.com/2018/04/25/nginx-access-ip/"/>
+    <id>http://www.yinlijun.com/2018/04/25/nginx-access-ip/</id>
+    <published>2018-04-25T07:29:24.000Z</published>
+    <updated>2018-04-25T07:35:42.654Z</updated>
+    
+    <content type="html"><![CDATA[<p>使用nginx设置反向代理的时候，如果没有域名，可以通过如下方式设置。</p>
+<h4 id="删除默认站点"><a href="#删除默认站点" class="headerlink" title="删除默认站点"></a>删除默认站点</h4><p>将/etc/nginx/sites-available/default的内容注释掉。</p>
+<p>将/etc/nginx/sites-enabled/default的内容注释掉。</p>
+<h3 id="添加站点"><a href="#添加站点" class="headerlink" title="添加站点"></a>添加站点</h3><p>在/etc/nginx/conf.d/下创建一个配置，比如ota.conf，内容如下：<br><a id="more"></a></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">upstream ota_server &#123;</div><div class="line">  server 127.0.0.1:3020;</div><div class="line">&#125;</div><div class="line"></div><div class="line">server &#123;</div><div class="line">  listen 80 default_server;</div><div class="line">  listen [::]:80 default_server;</div><div class="line">  access_log /var/log/nginx/ota_server.log;</div><div class="line"></div><div class="line">  location / &#123;</div><div class="line">    proxy_pass http://127.0.0.1:3020;</div><div class="line">    proxy_http_version 1.1;</div><div class="line">    root /home/otaserver/project/ota_sever/public;</div><div class="line">    index index.html;</div><div class="line">    proxy_set_header Host $http_host;</div><div class="line">    proxy_set_header X-Forwarded-For $remote_addr;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样，就能通过ip访问到ota_server这个服务了。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;使用nginx设置反向代理的时候，如果没有域名，可以通过如下方式设置。&lt;/p&gt;
+&lt;h4 id=&quot;删除默认站点&quot;&gt;&lt;a href=&quot;#删除默认站点&quot; class=&quot;headerlink&quot; title=&quot;删除默认站点&quot;&gt;&lt;/a&gt;删除默认站点&lt;/h4&gt;&lt;p&gt;将/etc/nginx/sites-available/default的内容注释掉。&lt;/p&gt;
+&lt;p&gt;将/etc/nginx/sites-enabled/default的内容注释掉。&lt;/p&gt;
+&lt;h3 id=&quot;添加站点&quot;&gt;&lt;a href=&quot;#添加站点&quot; class=&quot;headerlink&quot; title=&quot;添加站点&quot;&gt;&lt;/a&gt;添加站点&lt;/h3&gt;&lt;p&gt;在/etc/nginx/conf.d/下创建一个配置，比如ota.conf，内容如下：&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="nodejs" scheme="http://www.yinlijun.com/tags/nodejs/"/>
+    
+      <category term="nginx" scheme="http://www.yinlijun.com/tags/nginx/"/>
+    
+  </entry>
   
   <entry>
     <title>带进度条按钮的实现</title>
@@ -1062,150 +1171,6 @@
       <category term="java" scheme="http://www.yinlijun.com/tags/java/"/>
     
       <category term="kotlin" scheme="http://www.yinlijun.com/tags/kotlin/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>NavigationPrompt-react router 4.0.0 api中文文档</title>
-    <link href="http://www.yinlijun.com/2016/12/02/react-router-4-0-0-api-NavigationPrompt/"/>
-    <id>http://www.yinlijun.com/2016/12/02/react-router-4-0-0-api-NavigationPrompt/</id>
-    <published>2016-12-02T11:16:00.000Z</published>
-    <updated>2017-05-25T03:41:18.236Z</updated>
-    
-    <content type="html"><![CDATA[<font size="6em">&lt;NavigationPrompt&gt;</font>
-
-<p>当你的应用进入一个状态，但是需要防止用户从当前状态离开时（比如填了一半的表单），渲染出一个导航确认（NavigationPrompt）。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;formIsHalfFilledOut &amp;&amp; (</div><div class="line">  &lt;NavigationPrompt message=&quot;Are you sure you want to leave?&quot;/&gt;</div><div class="line">)&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="message-string"><a href="#message-string" class="headerlink" title="message: string"></a><font color="red">message: string</font></h3><a id="more"></a>
-<p>当用户试图从当前状态离开时显示的信息。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;NavigationPrompt message=&quot;Are you sure you want to leave?&quot;/&gt;</div></pre></td></tr></table></figure></p>
-<h3 id="message-func"><a href="#message-func" class="headerlink" title="message: func"></a><font color="red">message: func</font></h3><p>这个函数返回一个提示用户跳转的信息，如果返回true，则允许跳转，函数的参数是用户将要跳转的下一个链接，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;NavigationPrompt message=&#123;(location) =&gt; (</div><div class="line">  `Are you sure you want to go to $&#123;location.pathname&#125;?`</div><div class="line">)&#125;/&gt;</div></pre></td></tr></table></figure></p>
-<h3 id="when-bool"><a href="#when-bool" class="headerlink" title="when: bool"></a><font color="red">when: bool</font></h3><p>when是一个逻辑变量，为true时，将显示message内容的弹窗，为false时，直接跳转。</p>
-<p><navigationprompt when="{formIsHalfFilledOut}" message="Are you sure?"></navigationprompt></p>
-<font size="6em">&lt;/NavigationPrompt&gt;</font>
-
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;font size=&quot;6em&quot;&gt;&amp;lt;NavigationPrompt&amp;gt;&lt;/font&gt;
-
-&lt;p&gt;当你的应用进入一个状态，但是需要防止用户从当前状态离开时（比如填了一半的表单），渲染出一个导航确认（NavigationPrompt）。&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&amp;#123;formIsHalfFilledOut &amp;amp;&amp;amp; (&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &amp;lt;NavigationPrompt message=&amp;quot;Are you sure you want to leave?&amp;quot;/&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;)&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;h3 id=&quot;message-string&quot;&gt;&lt;a href=&quot;#message-string&quot; class=&quot;headerlink&quot; title=&quot;message: string&quot;&gt;&lt;/a&gt;&lt;font color=&quot;red&quot;&gt;message: string&lt;/font&gt;&lt;/h3&gt;
-    
-    </summary>
-    
-      <category term="react router 4.0.0 api中文文档" scheme="http://www.yinlijun.com/categories/react-router-4-0-0-api%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3/"/>
-    
-    
-      <category term="react" scheme="http://www.yinlijun.com/tags/react/"/>
-    
-      <category term="react-router" scheme="http://www.yinlijun.com/tags/react-router/"/>
-    
-      <category term="翻译文档" scheme="http://www.yinlijun.com/tags/%E7%BF%BB%E8%AF%91%E6%96%87%E6%A1%A3/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Link-react router 4.0.0 api中文文档</title>
-    <link href="http://www.yinlijun.com/2016/11/29/react-router-4-0-0-api-Link/"/>
-    <id>http://www.yinlijun.com/2016/11/29/react-router-4-0-0-api-Link/</id>
-    <published>2016-11-29T06:18:08.000Z</published>
-    <updated>2017-05-25T03:41:18.235Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="https://react-router.now.sh/Link" target="_blank" rel="external">原文链接</a></p>
-<font size="6em">&lt;Link&gt;</font>
-
-<p>为你的应用提供可以声明的，可访问的导航功能。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;Link to=<span class="string">"/about"</span> activeClassName=<span class="string">"active"</span>&gt;</div><div class="line">  About</div><div class="line">&lt;<span class="regexp">/Link&gt;</span></div></pre></td></tr></table></figure></p>
-<font color="red">children: node | func</font>
-
-<p>Link组件可以接受一个函数作为子控件，使得允许你使用自定义的组件渲染Link对象。</p>
-<a id="more"></a>
-<p>子控件函数的参数是一个对象，包含如下属性：</p>
-<ul>
-<li>isActive: (bool) 当前链接是否激活</li>
-<li>location: 传递给Link的链接</li>
-<li>href: (string) 路由的url</li>
-<li>onClick: (func) dom的onClick处理函数</li>
-<li>transition: (func) 它是router.transitionTo的快捷方式，代表Link对象的to属性。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;Link to=<span class="string">"/courses"</span>&gt;&#123;</div><div class="line">  (&#123;isActive, location, href, onClick, transition&#125;) =&gt; </div><div class="line">    <span class="xml"><span class="tag">&lt;<span class="name">RaisedButton</span> <span class="attr">label</span>=<span class="string">"Courses"</span> <span class="attr">onClick</span>=<span class="string">&#123;onClick&#125;</span> <span class="attr">primary</span>=<span class="string">&#123;isActive&#125;</span> <span class="attr">href</span>=<span class="string">&#123;href&#125;</span> /&gt;</span></span></div><div class="line">&#125;<span class="tag">&lt;/<span class="name">Link</span>&gt;</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<font color="red">to: string | object</font>
-
-<p>链接的描述。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;Link to=&quot;/courses&quot;/&gt;</div><div class="line">&lt;Link to=&#123;&#123;</div><div class="line">  pathname: &apos;/courses&apos;,</div><div class="line">  query: &#123; sort: &apos;name&apos; &#125;,</div><div class="line">  state: &#123; fromDashboard: true &#125;</div><div class="line">&#125;&#125;/&gt;</div></pre></td></tr></table></figure></p>
-<font color="red">activeStyle: object</font>
-
-<p>当链接匹配到<font color="grey" size="5em"><strong>to</strong></font>属性时的样式对象。它会和tyle对象合并之后生效。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;Link</div><div class="line">  to=&quot;/courses&quot;</div><div class="line">  style=&#123;&#123; color: &apos;blue&apos;, background: &apos;gray&apos; &#125;&#125;</div><div class="line">  activeStyle=&#123;&#123; color: &apos;red&apos; &#125;&#125;</div><div class="line">/&gt;</div><div class="line">// 总是有灰色背景</div><div class="line">// 链接为/foo时字体为blue</div><div class="line">// 为/courses为red(激活状态)</div></pre></td></tr></table></figure></p>
-<font color="red">activeClassName: string</font>
-
-<p>当匹配到链接时，生效的className。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;Link</div><div class="line">  to=<span class="string">"/courses"</span></div><div class="line">  className=<span class="string">"course-link"</span></div><div class="line">  activeClassName=<span class="string">"active"</span></div><div class="line">/&gt;</div><div class="line"><span class="comment">// will always have "course-link"</span></div><div class="line"><span class="comment">// at /courses it will be "course-link active"</span></div></pre></td></tr></table></figure></p>
-<font color="red">activeOnlyWhenExact: bool</font>
-
-<p>为true时, 只有当严格匹配，activeClassName和activeStyle才会生效。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;Link to=&quot;/courses&quot; activeOnlyWhenExact activeClassName=&quot;active&quot;/&gt;</div><div class="line">// /courses 被激活</div><div class="line">// /courses/123 不被激活</div></pre></td></tr></table></figure>
-<font color="red">isActive: func</font>
-
-<p>允许自定义当前链接是否被激活，激活时返回true，否则返回false。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&lt;Link</div><div class="line">  to=<span class="string">"/"</span></div><div class="line">  activeStyle=&#123;&#123; color: <span class="string">'red'</span> &#125;&#125;</div><div class="line">  isActive=&#123;(location) =&gt; (</div><div class="line">    <span class="comment">// 只有当没有query字段时被激活</span></div><div class="line">    !<span class="built_in">Object</span>.keys(location.query).length</div><div class="line">  )&#125;</div><div class="line">/&gt;</div><div class="line"></div><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">Link</span></span></span></div><div class="line">  <span class="attr">to</span>=<span class="string">"/courses"</span></div><div class="line">  <span class="attr">activeStyle</span>=<span class="string">&#123;&#123;</span> <span class="attr">color:</span> '<span class="attr">red</span>' &#125;&#125;</div><div class="line">  <span class="attr">isActive</span>=<span class="string">&#123;(location,</span> <span class="attr">props</span>) =&gt; (</div><div class="line">    // 匹配到"/courses" 或者 "/course/123"被激活</div><div class="line">    // 尽管这不是真正意义上的被激活, it is</div><div class="line">    // theoretically for the sake of a navigation menu</div><div class="line">    location.pathname.match(/course(s)?/)</div><div class="line">  )&#125;</div><div class="line">/&gt;</div></pre></td></tr></table></figure></p>
-<font color="red">location</font>
-
-<p>如果你不想使用上下文中的location, 可以传递一个location的属性作为替代，这在链接比较深的redux应用中很有用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;Match pattern=&quot;/foo&quot; location=&#123;this.props.location&#125;/&gt;</div></pre></td></tr></table></figure></p>
-<font size="6em">&lt;/Link&gt;</font>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;a href=&quot;https://react-router.now.sh/Link&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;原文链接&lt;/a&gt;&lt;/p&gt;
-&lt;font size=&quot;6em&quot;&gt;&amp;lt;Link&amp;gt;&lt;/font&gt;
-
-&lt;p&gt;为你的应用提供可以声明的，可访问的导航功能。&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;Link to=&lt;span class=&quot;string&quot;&gt;&quot;/about&quot;&lt;/span&gt; activeClassName=&lt;span class=&quot;string&quot;&gt;&quot;active&quot;&lt;/span&gt;&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  About&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;&lt;span class=&quot;regexp&quot;&gt;/Link&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;font color=&quot;red&quot;&gt;children: node | func&lt;/font&gt;
-
-&lt;p&gt;Link组件可以接受一个函数作为子控件，使得允许你使用自定义的组件渲染Link对象。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="react router 4.0.0 api中文文档" scheme="http://www.yinlijun.com/categories/react-router-4-0-0-api%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3/"/>
-    
-    
-      <category term="react" scheme="http://www.yinlijun.com/tags/react/"/>
-    
-      <category term="react-router" scheme="http://www.yinlijun.com/tags/react-router/"/>
-    
-      <category term="翻译文档" scheme="http://www.yinlijun.com/tags/%E7%BF%BB%E8%AF%91%E6%96%87%E6%A1%A3/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Miss-react router 4.0.0 api中文文档</title>
-    <link href="http://www.yinlijun.com/2016/11/29/react-router-4-0-0-api-Miss/"/>
-    <id>http://www.yinlijun.com/2016/11/29/react-router-4-0-0-api-Miss/</id>
-    <published>2016-11-29T05:55:49.000Z</published>
-    <updated>2017-05-25T03:41:18.236Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="https://react-router.now.sh/Miss" target="_blank" rel="external">原文链接</a></p>
-<font size="6em">&lt;Miss&gt;</font>
-
-<p>当没有匹配到当前的地址时，将会渲染Miss。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> App = () =&gt; (</div><div class="line">  &lt;Router&gt;</div><div class="line">    &lt;Match pattern="/foo"/&gt;</div><div class="line">    &lt;Match pattern="/bar"/&gt;</div><div class="line">    &lt;Miss component=&#123;NoMatch&#125;/&gt;</div><div class="line">  &lt;/Router&gt;</div><div class="line">)</div><div class="line"></div><div class="line">const NoMatch = (&#123; location &#125;) =&gt; (</div><div class="line">  &lt;div&gt;Nothing matched &#123;location.pathname&#125;.&lt;/div&gt;</div><div class="line">)</div></pre></td></tr></table></figure></p>
-<a id="more"></a>
-<h3 id="component"><a href="#component" class="headerlink" title="component"></a><font color="red">component</font></h3><p>跟Match一样的，表示将要渲染的组建，但是不同的是只有location一个prop传进去。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;Miss component=&#123;NoMatch&#125;/&gt;</div></pre></td></tr></table></figure></p>
-<h3 id="render-func"><a href="#render-func" class="headerlink" title="render: func"></a><font color="red">render: func</font></h3><p>跟Match一样的，可以提供一个渲染函数，同样，也只有location一个prop传进去。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;Miss render=&#123;(&#123; location &#125;) =&gt; (</div><div class="line">  &lt;div&gt;Nothing matched &#123;location.pathname&#125;.&lt;/div&gt;</div><div class="line">)&#125;/&gt;</div></pre></td></tr></table></figure></p>
-<p><font size="6em">&lt;/Miss&gt;<font></font></font></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;a href=&quot;https://react-router.now.sh/Miss&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;原文链接&lt;/a&gt;&lt;/p&gt;
-&lt;font size=&quot;6em&quot;&gt;&amp;lt;Miss&amp;gt;&lt;/font&gt;
-
-&lt;p&gt;当没有匹配到当前的地址时，将会渲染Miss。&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; App = () =&amp;gt; (&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &amp;lt;Router&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;lt;Match pattern=&quot;/foo&quot;/&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;lt;Match pattern=&quot;/bar&quot;/&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;lt;Miss component=&amp;#123;NoMatch&amp;#125;/&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &amp;lt;/Router&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;const NoMatch = (&amp;#123; location &amp;#125;) =&amp;gt; (&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &amp;lt;div&amp;gt;Nothing matched &amp;#123;location.pathname&amp;#125;.&amp;lt;/div&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;)&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="react router 4.0.0 api中文文档" scheme="http://www.yinlijun.com/categories/react-router-4-0-0-api%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3/"/>
-    
-    
-      <category term="react" scheme="http://www.yinlijun.com/tags/react/"/>
-    
-      <category term="react-router" scheme="http://www.yinlijun.com/tags/react-router/"/>
-    
-      <category term="翻译文档" scheme="http://www.yinlijun.com/tags/%E7%BF%BB%E8%AF%91%E6%96%87%E6%A1%A3/"/>
     
   </entry>
   

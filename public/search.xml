@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[android native代码debug开关]]></title>
+    <url>%2F2018%2F04%2F26%2Fswitch-native-debug-on-off%2F</url>
+    <content type="text"><![CDATA[调试本地代码的时候，有时候要加上一些log，特别是一些关键路径，但是生产的时候又不需要打印，有几个办法。 宏定义实现123#ifdef DEBUGLOGD("i am a log");#endif 这种方法有个不好的地方是，程序一旦编译完了，就不能加修改了，特别是user版本出了状况，因为system分区是只读的。 用动态开关用动态开关量，也有两种方法，一种是给出接口，给上一级打开或者关闭这个开关。 提供开关接口123456789static int enable_log = 0;void set_enable_log(int enable) &#123; enable_log = enable;&#125;int is_log_enable() &#123; return enable_log;&#125; 在需要加log的地方写：123if(is_log_enable()) &#123; LOGD("i am a log");&#125; 这种方法，适用于上层控制开关的方式，比如说只有经过远程授权才允许打印的log。 android的属性控制开关利用属性来控制log开关时，最好可以在user版本的shell下使用，这对属性名称有讲究。 查看系统代码 system/core/init/property_service.c，有关属性权限的限制。123456789struct &#123; const char *prefix; unsigned int uid; unsigned int gid;&#125; property_perms[] = &#123; ... &#123;"debug.", AID_SHELL, 0&#125;, ...&#125; 可以看出， adb shell只能对debug.开始的属性有读写权限，所以属性名不能随意写。 设置完属性之后，可以在代码里面读取该属性值。12345678910#define DEBUG_PROP_NAME "debug.log_switch"char debug_info[PROPERTY_VALUE_MAX];int is_log_enable() &#123; memset(debug_info, 0, PROPERTY_VALUE_MAX); propery_get(DEBUG_PROP_NAME, debug_info); return !strcmp(debug_info, "on");&#125; 然后在需要打log的地方写123if(is_log_enable()) &#123; LOGD("i am a log");&#125; 以上代码纯手打，没有经过编译，可能会有编译错误，仅提供一种log开关的思路。]]></content>
+      <tags>
+        <tag>android</tag>
+        <tag>debug</tag>
+        <tag>c/c++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[ubuntu 16.04 编译android填坑记录]]></title>
+    <url>%2F2018%2F04%2F26%2Fubuntu-16-04-android-compile%2F</url>
+    <content type="text"><![CDATA[实在受不了ubuntu 12.04了，于是更新到了16.04，但是重新编译android ASOP的时候出了一些状况，在此记录一下。 java丢失重新安装openJDK 8 12sudo apt-get install openjdk-8-jresudo apt-get install openjdk-8-jdk-headless 不要安装openJDK 9，会报错。 make版本变成了4.1编译的时候报错:1build/core/prebuilt.mk:91: *** recipe commences before first target. Stop. 这是因为make版本错误，下载make v3.81代码编译。打开 http://ftp.gnu.org/gnu/make/ 选择make-3.81.tar.gz下载，执行解压、编译、安装步骤：12345tar zxvf make-3.81.tar.gzcd make-3.81sudo ./configure sudo make sudo make install 执行完以后，重新开一个终端，检查make版本。1make -v 成功就会提示12345GNU Make 3.81Copyright (C) 2006 Free Software Foundation, Inc.This is free software; see the source for copying conditions.There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR APARTICULAR PURPOSE.]]></content>
+      <tags>
+        <tag>android</tag>
+        <tag>ubuntu</tag>
+        <tag>jdk</tag>
+        <tag>make</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[通过IP地址访问nginx服务]]></title>
+    <url>%2F2018%2F04%2F25%2Fnginx-access-ip%2F</url>
+    <content type="text"><![CDATA[使用nginx设置反向代理的时候，如果没有域名，可以通过如下方式设置。 删除默认站点将/etc/nginx/sites-available/default的内容注释掉。 将/etc/nginx/sites-enabled/default的内容注释掉。 添加站点在/etc/nginx/conf.d/下创建一个配置，比如ota.conf，内容如下： 123456789101112131415161718upstream ota_server &#123; server 127.0.0.1:3020;&#125;server &#123; listen 80 default_server; listen [::]:80 default_server; access_log /var/log/nginx/ota_server.log; location / &#123; proxy_pass http://127.0.0.1:3020; proxy_http_version 1.1; root /home/otaserver/project/ota_sever/public; index index.html; proxy_set_header Host $http_host; proxy_set_header X-Forwarded-For $remote_addr; &#125;&#125; 这样，就能通过ip访问到ota_server这个服务了。]]></content>
+      <tags>
+        <tag>nodejs</tag>
+        <tag>nginx</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[带进度条按钮的实现]]></title>
     <url>%2F2018%2F04%2F20%2Fprogress-action-button-tutorial%2F</url>
     <content type="text"><![CDATA[写一个带进度条的按钮：ProgressActionButton，支持外观定制。 可以当单纯的进度条使用，也可以当单纯的按钮使用，还可以当带进度的按钮使用。 主要难点就是实现椭圆按钮的绘制，思路就是，先绘制背景图片，再绘制前景图片，然后剪切一个圆角矩形出来。 12345678910111213141516171819private Bitmap drawRadiusBitmap(Bitmap bg, Bitmap fg, Rect rect, RectF rectF) &#123; Bitmap output = Bitmap.createBitmap(rect.width(), rect.height(), Bitmap.Config.ARGB_8888); Canvas canvas = new Canvas(output); int color = 0xff424242; Paint paint = new Paint(); paint.setAntiAlias(true); canvas.drawARGB(0, 0, 0, 0); paint.setColor(color); canvas.drawRoundRect(rectF, buttonRadius, buttonRadius, paint); paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN)); canvas.drawBitmap(bg, rect, rect, paint); if(fg != null) &#123; Rect fgRect = new Rect(rect.left, rect.top, rect.left + (int) (rect.width() * progress / 100.0f), rect.bottom); canvas.drawBitmap(fg, fgRect, fgRect, paint); &#125; return output;&#125; 支持定制属性： 123456789&lt;declare-styleable name="ProgressActionButton"&gt; &lt;attr name="initBg" format="reference" /&gt; &lt;attr name="successBg" format="reference" /&gt; &lt;attr name="failBg" format="reference"/&gt; &lt;attr name="progressBg" format="reference"/&gt; &lt;attr name="progressFg" format="reference"/&gt; &lt;attr name="disableBg" format="reference"/&gt; &lt;attr name="buttonRadius" format="dimension"/&gt;&lt;/declare-styleable&gt; 用法：12345678&lt;com.trendit.progressactionbutton.ProgressActionButton android:id="@id/progress_bar" android:layout_width="match_parent" android:layout_height="@dimen/progress_action_button_height" android:textSize="@dimen/progress_action_button_text_size" android:textColor="#DEFFFFFF" app:initBg="@drawable/default_progress_bg" /&gt;]]></content>
@@ -263,11 +293,8 @@
   </entry>
   <entry>
     <title><![CDATA[BrowserRouter-react router 4.0.0 api中文文档]]></title>
-    <url>%2F2016%2F11%2F24%2Freact-router-4-0-0-api-BrowserRouter%2F</url>
+    <url>%2F2016%2F11%2F24%2Freact-router-4-0-0-api%2F</url>
     <content type="text"><![CDATA[原文链接 &lt;BrowserRouter&gt; 保持你的界面与浏览器历史记录保持同步。123&lt;BrowserRouter&gt; &lt;App/&gt;&lt;/BrowserRouter&gt; basename 所有路由的根URL，如果你的应用处于服务端的子目录, 你可以设置这个值为该子目录。 123456&lt;BrowserRouter basename=&quot;/calendar&quot; /&gt;// 假设Link标签如下所示：&lt;Link to=&quot;/today&quot;/&gt;// 那么超链接指向 &quot;/calendar/today&quot;&lt;/BrowserRouter&gt; &lt;/BrowserRouter&gt;]]></content>
-      <categories>
-        <category>react router 4.0.0 api中文文档</category>
-      </categories>
       <tags>
         <tag>react</tag>
         <tag>react-router</tag>
@@ -276,8 +303,11 @@
   </entry>
   <entry>
     <title><![CDATA[BrowserRouter-react router 4.0.0 api中文文档]]></title>
-    <url>%2F2016%2F11%2F24%2Freact-router-4-0-0-api%2F</url>
+    <url>%2F2016%2F11%2F24%2Freact-router-4-0-0-api-BrowserRouter%2F</url>
     <content type="text"><![CDATA[原文链接 &lt;BrowserRouter&gt; 保持你的界面与浏览器历史记录保持同步。123&lt;BrowserRouter&gt; &lt;App/&gt;&lt;/BrowserRouter&gt; basename 所有路由的根URL，如果你的应用处于服务端的子目录, 你可以设置这个值为该子目录。 123456&lt;BrowserRouter basename=&quot;/calendar&quot; /&gt;// 假设Link标签如下所示：&lt;Link to=&quot;/today&quot;/&gt;// 那么超链接指向 &quot;/calendar/today&quot;&lt;/BrowserRouter&gt; &lt;/BrowserRouter&gt;]]></content>
+      <categories>
+        <category>react router 4.0.0 api中文文档</category>
+      </categories>
       <tags>
         <tag>react</tag>
         <tag>react-router</tag>
