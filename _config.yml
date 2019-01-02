@@ -4,11 +4,11 @@
 
 # Site
 title: 尹莉军
-subtitle: 个人博客
-description: 好记性不如烂笔头。
-author: 尹莉军 <yinlijun2004@gmail.com>
-language: zh-Hans
-timezone:
+subtitle: 所爱隔山海，山海不可平
+description: 
+author: 尹莉军<yinlijun2004@gmail.com>
+language: zh-CN
+timezone: Asia/Shanghai
 avatar: http://tva3.sinaimg.cn/crop.0.0.180.180.180/7d92e765jw1e8qgp5bmzyj2050050aa8.jpg
 
 # URL
@@ -35,7 +35,7 @@ titlecase: false # Transform title into titlecase
 external_link: true # Open external links in new tab
 filename_case: 0
 render_drafts: false
-post_asset_folder: false
+post_asset_folder: true
 relative_link: false
 future: true
 highlight:
@@ -63,11 +63,25 @@ pagination_dir: page
 
 # Extensions
 ## Plugins: https://hexo.io/plugins/
+plugins: hexo-generate-feed
+
 ## Themes: https://hexo.io/themes/
 theme: next
 
 swiftype_key: bing
 
+search:
+    path: search.xml
+    field: post
+    format: html
+    limit: 10000
+
+symbols_count_time:
+  symbols: true
+  time: true
+  total_symbols: true
+  total_time: true
+    
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
