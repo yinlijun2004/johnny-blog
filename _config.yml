@@ -7,7 +7,7 @@ title: 尹莉军
 subtitle: 所爱隔山海，山海不可平
 description: 
 author: 尹莉军<yinlijun2004@gmail.com>
-language: zh-CN
+language: zh-Hans
 timezone: Asia/Shanghai
 avatar: http://tva3.sinaimg.cn/crop.0.0.180.180.180/7d92e765jw1e8qgp5bmzyj2050050aa8.jpg
 
@@ -43,7 +43,16 @@ highlight:
   line_number: true
   auto_detect: false
   tab_replace:
-
+  
+# Home page setting
+# path: Root path for your blogs index page. (default = '')
+# per_page: Posts displayed per page. (0 = disable pagination)
+# order_by: Posts order. (Order by date descending by default)
+index_generator:
+  path: ''
+  per_page: 10
+  order_by: -date
+  
 # Category & Tag
 default_category: uncategorized
 category_map:
@@ -63,25 +72,15 @@ pagination_dir: page
 
 # Extensions
 ## Plugins: https://hexo.io/plugins/
-plugins: hexo-generate-feed
-
 ## Themes: https://hexo.io/themes/
-theme: next
-
-swiftype_key: bing
+theme: next 
 
 search:
-    path: search.xml
-    field: post
-    format: html
-    limit: 10000
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
 
-symbols_count_time:
-  symbols: true
-  time: true
-  total_symbols: true
-  total_time: true
-    
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
