@@ -106,6 +106,7 @@ public class UserOrder implements Serializable {
 
 @Enumerated有两种保存方式，
 - ORDINAL 保存序号，如果往中间插入枚举值的话，会引起乱序问题。
-保存的是索引值， 
-- STRING 会增加数据量。
+- STRING 会增加数据量，而且如果发现枚举值拼写错了，也不好改正。
+
+
 
