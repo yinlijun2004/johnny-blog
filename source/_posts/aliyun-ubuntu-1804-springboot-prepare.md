@@ -1,8 +1,62 @@
 ---
-title: AWS Ubuntu 18.04准备Spring Boot运行环境。
-date: 2019-06-21 20:03:44
-tags: [AWS, Linux, Spring Boot]
+title: 阿里云ECS 运行springboot准备
+date: 2019-09-19 16:25:49
+tags: [ECS, Linux, Spring Boot]
 ---
+
+系统环境：ubuntu 18.04
+
+为了防止收到攻击，现在ECS采取的措施如下：
+- 不采用口令登录，而采用RSA秘钥登录
+- 不开放数据库端口（如mysql的3306）端口
+- 22端口只开放给有限的IP地址访问
+
+创建阿里云ECS时，就可以选择秘钥方式登录，然后在安全组里创建入站规则。
+
+采用如下指令登录
+```
+ssh -i path-to-key.pem root@remote_ip
+```
+登录之后默认是root用户，先创建用户，用户名为ubuntu
+```
+sudo useradd -m ubuntu -d /home/ubuntu -s /bin/bash
+```
+设置密码
+```
+sudo passwd ubuntu
+```
+修改用户的权限：（ /etc/sudoers文件只有r权限，在改动前需要增加w权限，改动后，再去掉w权限 ）
+(1)为sudoers增加写入权限
+```
+sudo chmod +w /etc/sudoers
+sudo vim /etc/sudoers
+```
+(2)为用户XXX添加读写权限
+```
+# User privilege specification 
+root　ALL=(ALL:ALL) ALL
+ubuntu ALL=(ALL:ALL) ALL    // 这一行为新添加的代码
+```
+(3)将sudoers文件的操作权限改为只读模式
+```
+sudo chmod -w /etc/sudoers
+```
+
+为了能让ssh已ubuntu用户名登录，把/root/.ssh/authorized_keys拷贝到ubuntu的home目录下:
+```
+cp /root/.ssh/ /home/ubuntu/
+```
+同时修改其所用户和组
+```
+chown -R ubuntu:ubuntu /home/ubuntu/.ssh
+```
+这样就能通过ubuntu登录了
+```
+ssh -i path-to-key.pem ubuntu@remote_ip
+```
+
+
+接下来进行软件安装：
 
 安装nginx软件包:
 ```bash
@@ -47,10 +101,61 @@ collation_server=utf8_general_ci
 ```bash
 sudo apt-get install redis-server
 ```
-检查安装结果:
-```bash
-ps -aux|grep redis
+
+这是会显示启动失败：
 ```
+Errors were encountered while processing:
+ redis-server
+ redis
+E: Sub-process /usr/bin/dpkg returned an error code (1)
+W: Operation was interrupted before it could finish
+root@iZ2zeiudkwjc07o9jfa4fgZ:/var/log/nginx# systemctl status redis-server.service
+● redis-server.service - Advanced key-value store
+   Loaded: loaded (/lib/systemd/system/redis-server.service; disabled; vendor preset: enabled)
+   Active: activating (start) since Fri 2019-01-25 15:15:44 CST; 20s ago
+     Docs: http://redis.io/documentation,
+           man:redis-server(1)
+  Process: 28248 ExecStart=/usr/bin/redis-server /etc/redis/redis.conf (code=exited, status=0/SUCCESS)
+    Tasks: 0 (limit: 2325)
+   CGroup: /system.slice/redis-server.service
+
+Jan 25 15:15:44 iZ2zeiudkwjc07o9jfa4fgZ systemd[1]: Starting Advanced key-value store...
+Jan 25 15:15:44 iZ2zeiudkwjc07o9jfa4fgZ systemd[1]: redis-server.service: Can't open PID file /var/run/redis/redis-server.pid (yet?) after start: No such file or directory
+```
+查看日志信息
+```
+cat /var/log/redis/redis-server.log
+#提示
+ Creating Server TCP listening socket ::1:6379: bind: Cannot assign requested address
+ oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+```
+主机上禁用了IPv6，而Ubuntu的redis-server软件包（版本5：4.0.9-1）附带了：绑定127.0.0.1 :: 1
+
+因此，修改redis配置文件中的 bind 地址；注释 bind 地址或将 bind 地址修改为 0.0.0.0
+```
+vim /etc/redis/redis.conf
+
+# 注释bind地址
+#bind 127.0.0.1 ::1
+# 或修改bind地址-并允许其开放访问
+bind 0.0.0.0
+
+```
+
+重新启动redis
+```
+service redis-server start
+```
+检查服务及端口
+```
+systemctl status redis-server
+
+netstat -ntpl | grep 6379
+```
+
+
+
+
 
 安装jdk
 ```bash
