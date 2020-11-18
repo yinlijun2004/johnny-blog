@@ -130,6 +130,7 @@ public class OuterBootstrapRunner implements ApplicationListener<ContextClosedEv
                         @Override
                         public void channelUnregistered(ChannelHandlerContext ctx) {
                             outerMessageService.removeInnerChannel(ctx);
+                            innerMessageService.removeInnerChannel(ctx);
                         }
                     });
                     pipeline.addLast(new WebSocketServerCompressionHandler());
@@ -244,6 +245,11 @@ public class OuterMessageHandler extends SimpleChannelInboundHandler<BinaryWebSo
     }
 
     @Override
+    public void channelInactive(ChannelHandlerContext ctx) {
+        log.info("{} outer 断开连接", ctx.channel().remoteAddress());
+    }
+
+    @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         cause.printStackTrace();
     }
@@ -324,6 +330,18 @@ public class InnerMessageServiceImpl implements InnerMessageService {
             ctx.channel().close();
         }
     }
+
+    @Override
+    public void removeInnerChannel(ChannelHandlerContext ctx) {
+        TypeChannelId typeChannelId = NettyUtils.getTypeChannelId(ctx);
+        String clientKey = typeChannelId.toString();
+        InnerMessageClient client = clientMap.get(clientKey);
+        if(client == null) {
+            //快速返回
+            return;
+        }
+        client.interrupt();
+    }
 }
 ```
 
@@ -385,7 +403,7 @@ public class InnerMessageClient extends Thread {
             ChannelFuture f = b.connect(host, port).sync();
             f.channel().closeFuture().sync();
         } catch (InterruptedException e) {
-            log.error("内部通信客户端被打断", e);
+            log.error("{} inner 客户端被断开", this.typeChannelId.toString());
         } finally {
             this.clientMap.remove(this.clientKey);
             workerGroup.shutdownGracefully();
@@ -467,7 +485,7 @@ public class OuterMessageServiceImpl implements OuterMessageService {
     }
 
     @Override
-    public void removeInnerChannel(ChannelHandlerContext ctx) {
+    public void removeOuterChannel(ChannelHandlerContext ctx) {
         TypeChannelId typeChannelId = NettyUtils.getTypeChannelId(ctx);
         String channelId = typeChannelId.getChannelId();
         switch (typeChannelId.getType()) {
@@ -478,7 +496,6 @@ public class OuterMessageServiceImpl implements OuterMessageService {
                 webChannel.remove(channelId);
                 break;
         }
-        log.info("{} outer 断开连接", typeChannelId.toString());
     }
 }
 
@@ -498,6 +515,11 @@ public class InnerMessageHandler extends SimpleChannelInboundHandler<InnerMessag
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, InnerMessage msg) {
         outerMessageService.onInnerMessage(msg);
+    }
+
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) {
+        log.info("{} inner 断开连接", ctx.channel().remoteAddress());
     }
 
     @Override
