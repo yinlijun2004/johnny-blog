@@ -245,13 +245,13 @@ public class KafkaServiceImpl implements KafkaService, ApplicationRunner {
     @Override
     public void unsubscribe(String topic) {
         topics.remove(topic);
-        topicChanges.set(true);
+        topicChanges.compareAndSet(false, true);
     }
 
     @Override
     public void subscribe(String topic) {
         topics.add(topic);
-        topicChanges.set(true);
+        topicChanges.compareAndSet(false, true);
     }
 
     private void reSubscribe() {
@@ -265,9 +265,8 @@ public class KafkaServiceImpl implements KafkaService, ApplicationRunner {
                 ThreadUtil.sleep(50);
                 continue;
             }
-            if(topicChanges.get()) {
+            if(!topicChanges.getAndSet(true)) {
                 reSubscribe();
-                topicChanges.set(false);
             }
             ConsumerRecords<String, ByteBuffer> records = kafkaConsumer.poll(Duration.ofMillis(100));
             long timeStamp = System.currentTimeMillis();
