@@ -11,13 +11,12 @@ tags: [netty, websocket spring boot]
 首先把架构画出来。
 ![架构](netty-p2p-cluster/frame.jpg)
 
-* websocket客户端创链接，连接到外部服务，是个websocket服务。
-* websocket客户端会带上Type和Channel Id两个字段，这俩字段可以匹配唯一一台内部服务器ID。
-* 外部服务将这个ID，跟自己的IP端口，注册到redis.
-* 然后根据这个ID，推断出对端的服务器ID，通过这个ID，在redis上查找出对方的IP和端口。
+* websocket客户端连接到外部服务。。
+* websocket客户端会带上Type和Channel Id两个字段，我这里业务需求是这样的，你可以把type理解为用户ID,Channel ID理解为房间ID。这俩字段组合成一个<b>用户通道ID</b>
+* <b>内部服务</b>已<b>用户通道ID</b>为key，已自己的IP端口为value，注册到redis.
+* 外部服务这个<b>用户通道ID</b>，推断出对端的<b>用户通道ID</b>，在redis上查找出对方内部服务的IP端口。
 * 如果没有查到，表示对端未连接，否则，起一个netty客户端，与对方的内部服务进行连接。
-* 收到数据后，交给netty客户端转发。
-* 对端的服务器收到消息后，根据Channel Id查找出对应的websocket连接，并往该websocket发数据。
+* 对端的内部消息服务收到消息后，根据消息里的Channel Id字段找到链接到外部服务的websocket连接，并转发数据。
 * 对端websocket客户端的连接过程也是一样。
 
 下面直接上代码。
@@ -715,6 +714,9 @@ ws.onmessage = function(evt){
 ```
 ### 测试截图
 ![架构](netty-p2p-cluster/test.jpg)
+
+### 结论
+这种netty转发的方式，比之前用kafka方式实现的率高很多（ {% post_link kafka-dynamic Kafka动态操作初探 %} ），消息收发很流畅，没有任何卡顿情况。
 
 ### 参考
 https://github.com/lightningMan/simple-message-push

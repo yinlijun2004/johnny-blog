@@ -5,7 +5,7 @@ tags: [CocosCreator, bash]
 categories: CocosCreator
 ---
 
-最近一段实践接触过CoCosCreator，经过一段时间的熟悉，总结出三个方面的时间：多环境构建、多语言支持、Protobuf支持，在此做个总结。
+最近一段实践接触过CocosCreator，经过一段时间的熟悉，总结出三个方面的实践：多环境构建、多语言支持、protobuf支持，在此做个总结。
 
 ### 多环境构建
 
