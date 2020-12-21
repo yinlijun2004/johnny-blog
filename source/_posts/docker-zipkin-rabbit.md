@@ -1,5 +1,5 @@
 ---
-title: 利用docker搭建基于sleuth、zipkin、rabbitmq的链路追踪。
+title: 利用docker搭建基于sleuth、zipkin、rabbitmq的链路追踪
 date: 2020-12-15 22:23:48
 tags: [docker, sleuth, zipkin, rabbitmq]
 ---
